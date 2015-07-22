@@ -6,14 +6,21 @@
 package gui;
 
 import static gui.Desktop.rancho;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author angelesygil
  */
-public class Catalogos extends javax.swing.JFrame {
+public class Catalogos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Catalogos
@@ -23,13 +30,24 @@ public class Catalogos extends javax.swing.JFrame {
         initComponents();
         parent = aParent;
 
+        setClosable(true);
+
+        this.pack();
+/*
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
+        setFrameIcon((Icon) i);
+  */      
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
+        /*
+         URL url = new URL(getClass().getResource("/resources/logo tru-test.png"));
+         ImageIcon icon = new ImageIcon(url);
+         setFrameIcon(icon);
+         */
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        setLocationRelativeTo(null);
-        jPanel2.setLocation((jPanel1.getWidth()/2) - (jPanel2.getWidth()/2), (jPanel1.getHeight()/2) - (jPanel2.getHeight()/2));
+        //   setLocationRelativeTo(null);
+        jPanel2.setLocation((jPanel1.getWidth() / 2) - (jPanel2.getWidth() / 2), (jPanel1.getHeight() / 2) - (jPanel2.getHeight() / 2));
         fondo1.cargar(this.getSize());
     }
 
@@ -51,13 +69,7 @@ public class Catalogos extends javax.swing.JFrame {
         btn_MedicamentosTratamientos = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Catalogos");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,31 +137,27 @@ public class Catalogos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
-
     private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
         catalogoCliente = new CatalogoCliente(parent);
-        this.setVisible(false);
+        // this.setVisible(false);
         catalogoCliente.setVisible(true);
     }//GEN-LAST:event_btn_ClienteActionPerformed
 
     private void btn_ProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProveedorActionPerformed
         catalogoProveedor = new CatalogoProveedor(parent);
-        this.setVisible(false);
+        // this.setVisible(false);
         catalogoProveedor.setVisible(true);
     }//GEN-LAST:event_btn_ProveedorActionPerformed
 
     private void btn_RazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RazasActionPerformed
         catalogoRaza = new CatalogoRaza(parent);
-        this.setVisible(false);
+        // this.setVisible(false);
         catalogoRaza.setVisible(true);
     }//GEN-LAST:event_btn_RazasActionPerformed
 
     private void btn_MedicamentosTratamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MedicamentosTratamientosActionPerformed
         administracionMedicamentos = new AdministracionMedicamentos(parent);
-        this.setVisible(false);
+        // this.setVisible(false);
         administracionMedicamentos.setVisible(true);
     }//GEN-LAST:event_btn_MedicamentosTratamientosActionPerformed
 

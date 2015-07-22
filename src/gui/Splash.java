@@ -118,7 +118,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         jProgressBar1.setMaximum(10000);
         jProgressBar1.setValue(50);
         jPanel1.add(jProgressBar1);
-        jProgressBar1.setBounds(10, 124, 470, 16);
+        jProgressBar1.setBounds(10, 124, 470, 14);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
@@ -131,7 +131,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         jl_Licencia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jl_Licencia.setText("Licencia: DR-564-88764");
         jPanel1.add(jl_Licencia);
-        jl_Licencia.setBounds(370, 170, 110, 11);
+        jl_Licencia.setBounds(90, 170, 390, 11);
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1);

@@ -439,6 +439,51 @@ public class Excel {
         sheet.addMergedRegion(CellRangeAddress.valueOf("A1:N1"));
     }
 
+     public void graficar(short columna_inicial, Integer fila_inicial, short columna_final, Integer fila_final){
+       
+        final BufferedImage buffer = grafica.createBufferedImage(600, 200);        
+
+        ByteArrayOutputStream img_bytes = new ByteArrayOutputStream();
+        try {
+            
+            ImageIO.write(buffer, "png", img_bytes);
+            img_bytes.flush();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Excel.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, (short) columna_inicial, fila_inicial, (short) columna_final, fila_final);
+        int index = wb.addPicture(img_bytes.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG);
+        Drawing patriarch = sheet.createDrawingPatriarch();
+        patriarch.createPicture(anchor, index);
+         /**/
+        /*
+         Drawing drawing = sheet.createDrawingPatriarch();
+         XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0, 0, 0, (short) 2, 6, (short) 9, 26);
+         Chart chart = drawing.createChart(anchor);
+         ChartLegend legend = chart.getOrCreateLegend();
+         legend.setPosition(LegendPosition.RIGHT);
+         chart.getOrCreateLegend();
+
+         ScatterChartData data = chart.getChartDataFactory().createScatterChartData();
+
+         ValueAxis bottomAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.BOTTOM);
+         ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
+         leftAxis.setCrosses(AxisCrosses.AUTO_ZERO);
+
+         ChartDataSource<String> xs = DataSources.fromStringCellRange(sheet, new CellRangeAddress(6, fila_final, 0, 0));
+         ChartDataSource<Number> ys1 = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(6, fila_final, 1, 1));
+         //ChartDataSource<Number> ys2 = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(2, 2, 0, NUM_OF_COLUMNS - 1));
+
+         data.addSerie(xs, ys1);
+
+         //data.addSerie(xs, ys2);
+         chart.plot(data, bottomAxis, leftAxis);
+         */
+    }
+    
     private void crearExcel() {
 
         FileOutputStream out;
@@ -1079,6 +1124,8 @@ public class Excel {
                 + " Peso Actual: " + animal.peso_actual);
         sheet.getRow(4).getCell(0).setCellStyle(styleCenter);
 
+        graficar((short)2,6,(short)9,26);
+        
         /**/
         final BufferedImage buffer = grafica.createBufferedImage(600, 200);
         //final FileOutputStream file = new FileOutputStream("ExcelPOIGrafica.xls");
@@ -1409,28 +1456,9 @@ public class Excel {
          */
         combinarRango("I6:M6");
 
-        final BufferedImage buffer = grafica.createBufferedImage(600, 200);
-        //final FileOutputStream file = new FileOutputStream("ExcelPOIGrafica.xls");
-
-        ByteArrayOutputStream img_bytes = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(buffer, "png", img_bytes);
-            img_bytes.flush();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Excel.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-
-        HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, (short) 8, 6, (short) 13, 18);
-
-        int index = wb.addPicture(img_bytes.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG);
-        // HSSFSheet sheet = wb.getSheet(SHEET_NAME);
-        Drawing patriarch = sheet.createDrawingPatriarch();
-        patriarch.createPicture(anchor, index);
-
+        graficar((short)8,6,(short)13,18);
     }
-
+   
     public void reporteSalida(Table aTabla) {
 
         t_tabla = aTabla;
@@ -1522,28 +1550,7 @@ public class Excel {
         tamañoColumna(5, 18);
         tamañoColumna(6, 17);
         tamañoColumna(7, 11);
-        /*
-         SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
-         //Condition 1: Cell Value Is   greater than  70   (Blue Fill)
-         ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
-         PatternFormatting fill1 = rule1.createPatternFormatting();
-         fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
-         fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
-
-         ConditionalFormattingRule rule2 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.LT, "50");
-         PatternFormatting fill2 = rule2.createPatternFormatting();
-         fill2.setFillBackgroundColor(IndexedColors.BLUE.index);
-         fill2.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
-
-         FontFormatting font = rule1.createFontFormatting();
-         font.setFontStyle(false, true);
-         font.setFontColorIndex(IndexedColors.WHITE.index);
-
-         CellRangeAddress[] regions = {CellRangeAddress.valueOf("A6:H6")};
-
-         sheetCF.addConditionalFormatting(regions, rule1, rule2);
-         */
         relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
@@ -1613,6 +1620,4 @@ public class Excel {
         }
         return false;
     }
-
-    
 }

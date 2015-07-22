@@ -8,8 +8,11 @@ package gui;
 import domain.ManejadorBD;
 import domain.Rancho;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import java.io.IOException;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -29,6 +32,9 @@ public class Desktop extends javax.swing.JFrame {
         cargarcomponentes();
 
         rancho = new Rancho();
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
     }
 
     public void cargarcomponentes() {
@@ -307,10 +313,36 @@ public class Desktop extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_ayudaActionPerformed
 
+    public boolean estacerrado(Object obj) {
+
+        JInternalFrame[] activos = jDesktopPane1.getAllFrames();
+        boolean cerrado = true;
+        int i = 0;
+        while (i < activos.length && cerrado) {
+            if (activos[i] == obj) {
+                cerrado = false;
+            }
+            i++;
+        }
+        return cerrado;
+    }
+
+
     private void btn_catalogosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_catalogosActionPerformed
-        catalogos = new Catalogos(this);
-        this.setVisible(false);
-        catalogos.setVisible(true);
+
+        if (catalogos == null) {
+            catalogos = new Catalogos(this);
+        }
+
+        if (estacerrado(catalogos)) {
+            // catalogos.setVisible(true);
+            this.jDesktopPane1.add(catalogos);
+            Dimension desktopSize = jDesktopPane1.getSize();
+            Dimension FrameSize = catalogos.getSize();
+            catalogos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            catalogos.moveToFront();
+            catalogos.show();
+        }
     }//GEN-LAST:event_btn_catalogosActionPerformed
 
     private void btn_administracionGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administracionGruposActionPerformed
