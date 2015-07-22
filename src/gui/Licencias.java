@@ -33,8 +33,10 @@ public class Licencias extends javax.swing.JDialog {
     /**
      * Creates new form Licencias
      */
-    public Licencias(java.awt.Frame parent) {
+    public Licencias(java.awt.Frame parent, boolean Modal) {
         super(parent);
+        this.setModal(Modal);
+
         initComponents();
 
         Image i = null;
@@ -42,6 +44,8 @@ public class Licencias extends javax.swing.JDialog {
         setIconImage(i);
 
         fondo1.cargar(this.getSize());
+
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -59,7 +63,7 @@ public class Licencias extends javax.swing.JDialog {
         etiqueta1 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -264,7 +268,7 @@ public class Licencias extends javax.swing.JDialog {
             System.out.println(archivoProperties + ".properties no puede ser borrado");
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Boton bnt_crearArchivo;
     private abstractt.Boton btn_cargarArchivo;
