@@ -73,8 +73,9 @@ public class Splash extends javax.swing.JFrame implements Runnable {
 
         this.jProgressBar1.setMaximum(maxProgressBar);
 
+        JOptionPane.showMessageDialog(this, "Mensaje de Prueba de FeedLOT PC Gilberto HOME");
+        
         this.setVisible(true);
-
     }
 
     /**
