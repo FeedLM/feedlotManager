@@ -6,7 +6,7 @@
 package domain;
 
 import abstractt.Table;
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDateTime;
 import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
 import java.text.ParseException;

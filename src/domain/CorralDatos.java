@@ -5,7 +5,7 @@
  */
 package domain;
 
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDateTime;
 import static gui.Desktop.manejadorBD;
 import java.text.ParseException;
 import java.util.Date;

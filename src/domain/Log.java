@@ -5,8 +5,8 @@
  */
 package domain;
 
-import static gui.Login.formatoDate;
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDate;
+import static gui.Splash.formatoDateTime;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -8,7 +8,7 @@ package domain;
 import abstractt.Table;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDateTime;
 import static gui.Login.gs_mensaje;
 import java.text.ParseException;
 import java.util.ArrayList;

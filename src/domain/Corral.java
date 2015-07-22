@@ -37,6 +37,12 @@ public class Corral {
     public Double alimento_ingresado;
     public Double peso_ganancia;
     public String observaciones;
+    public Double total_kilos_inicial;
+    public Double total_costo_medicina;
+
+    public Double ganancia_precio_carne;
+    public Double costo_alimento;
+    public Double utilidad_s_gastos;
 
     //public CorralDatos corralDatos;
     public Corral() {
@@ -61,7 +67,6 @@ public class Corral {
 
             manejadorBD.setConsultaSP();
             manejadorBD.asignarTable(tabla);
-            
         } catch (SQLException ex) {
 
             Logger.getLogger(Corral.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +115,8 @@ public class Corral {
                 + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
                 + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
-                + "         IFNULL(observaciones,'')\n"
+                + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
+                + "         COALESCE(total_costo_medicina,0.0)\n"
                 + "FROM     corral \n"
                 + "WHERE    status = 'S' \n"
                 + "AND      id_corral = '" + id_corral + "' \n "
@@ -133,7 +139,8 @@ public class Corral {
                 + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
                 + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
-                + "         IFNULL(observaciones,'')\n"
+                + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
+                + "         COALESCE(total_costo_medicina,0.0)\n"
                 + "FROM     corral "
                 + "WHERE    status = 'S' "
                 + "AND      nombre = '" + nombre + "' \n "
@@ -156,7 +163,8 @@ public class Corral {
                 + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
                 + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
-                + "         IFNULL(observaciones,'')\n"
+                + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
+                + "         COALESCE(total_costo_medicina,0.0)\n"
                 + "FROM     corral "
                 + "WHERE    status = 'S' "
                 + "AND      nombre = '" + nombre + "' \n "
@@ -179,7 +187,8 @@ public class Corral {
                 + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
                 + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
-                + "         IFNULL(observaciones,'')\n"
+                + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
+                + "         COALESCE(total_costo_medicina,0.0)\n"
                 + "FROM     corral, corral_animal "
                 + "WHERE    status = 'S' "
                 + "AND      corral.id_corral = corral_animal.id_corral "
@@ -215,10 +224,26 @@ public class Corral {
         alimento_ingresado = manejadorBD.getValorDouble(0, 12);
         peso_ganancia = manejadorBD.getValorDouble(0, 13);
         observaciones = manejadorBD.getValorString(0, 14);
+        total_kilos_inicial = manejadorBD.getValorDouble(0, 15);
+        total_costo_medicina = manejadorBD.getValorDouble(0, 16);
+
         sexo.cargarPorId(id_sexo);
 
         raza.cargarPorId(id_raza);
         // corralDatos.cargarPorId(id_corral);
+
+        calculosTotales();
+    }
+
+    private void calculosTotales() {
+
+        Configuracion configuracion ;
+        configuracion = new Configuracion();
+        configuracion.cargarConfiguracion();
+
+        ganancia_precio_carne = configuracion.precio_carne * peso_ganancia;
+        costo_alimento = configuracion.costo_alimento * alimento_ingresado;
+        utilidad_s_gastos = ganancia_precio_carne - (costo_alimento + total_costo_medicina);
     }
 
     public static ArrayList cargarCorrales() {
@@ -351,7 +376,7 @@ public class Corral {
         manejadorBD.parametrosSP = new ParametrosSP();
 
         manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(id_corral, "varIdCorral", "STRING", "IN");       
+        manejadorBD.parametrosSP.agregarParametro(id_corral, "varIdCorral", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call eliminarCorral(?,?) }") == 0) {
             return true;

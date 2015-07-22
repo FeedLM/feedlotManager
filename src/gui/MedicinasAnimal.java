@@ -9,7 +9,7 @@ import domain.ParametrosSP;
 import domain.Tratamiento;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDateTime;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
 import java.awt.Toolkit;

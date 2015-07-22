@@ -11,6 +11,7 @@ import static domain.Log.Log;
 import domain.ManejadorBD;
 import domain.Usuario;
 import static gui.Desktop.manejadorBD;
+import static gui.Splash.formatoDateTime;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -46,8 +47,8 @@ public class Login extends javax.swing.JFrame {
     private Date fecha_instalacion;
     private Date fecha_limite;
     private Integer dias_vigencia;
-    public static SimpleDateFormat formatoDateTime;
-    public static SimpleDateFormat formatoDate;
+   // public static SimpleDateFormat formatoDateTime;
+   // public static SimpleDateFormat formatoDate;
     Cifrado cifrado;
 
     /**
@@ -69,7 +70,7 @@ public class Login extends javax.swing.JFrame {
         InputStream input = null;
 
         formatoDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        formatoDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
 
         cifrado = new Cifrado("feedLotManager");
 

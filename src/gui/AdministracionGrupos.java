@@ -1075,7 +1075,7 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 
         excel = new Excel();
 
-        excel.reporteCorral(corral);
+        excel.reporteCorral(corral, Grafica);
     }//GEN-LAST:event_btn_reporteCorralActionPerformed
 
     private void btn_cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarArchivoActionPerformed

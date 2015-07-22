@@ -6,8 +6,8 @@
 
 package domain;
 
-import static gui.Login.formatoDate;
-import static gui.Login.formatoDateTime;
+import static gui.Splash.formatoDate;
+import static gui.Splash.formatoDateTime;
 import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
 import java.util.LinkedList;
