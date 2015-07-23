@@ -164,12 +164,6 @@ public class Excel {
             }
 
             reg_Sesion_import.close();
-            /*
-             for (RegistroSesion us : regSesion) {
-
-             System.out.println(us.toString());
-             } 
-             */
 
         } catch (FileNotFoundException e) {
 
@@ -400,9 +394,61 @@ public class Excel {
 
         Cell cell;
         cell = agregarValor(fila, columna, valor);
-        cell.setCellStyle(style);
+        asignarEstilo(fila, columna, style);
+    }
+    
+    public Cell agregarValor(Integer fila, Integer columna, Integer valor) {
+
+        Row row;
+        Cell cell;
+
+        row = sheet.getRow(fila);
+
+        if (row == null) {
+
+            row = sheet.createRow(fila);
+        }
+
+        cell = row.getCell(columna);
+
+        if (cell == null) {
+
+            cell = row.createCell(columna);
+        }
+
+        cell.setCellValue(valor);
+        return cell;
+    }
+    
+    public void agregarValor(Integer fila, Integer columna, Integer valor, HSSFCellStyle style) {
+
+        Cell cell;
+        cell = agregarValor(fila, columna, valor);
+        asignarEstilo(fila, columna, style);
     }
 
+    public void asignarEstilo(Integer fila, Integer columna, HSSFCellStyle style){
+      
+        Row row;
+        Cell cell;
+
+        row = sheet.getRow(fila);
+
+        if (row == null) {
+
+            row = sheet.createRow(fila);
+        }
+
+        cell = row.getCell(columna);
+
+        if (cell == null) {
+
+            cell = row.createCell(columna);
+        }
+
+        cell.setCellStyle(style);
+    }
+    
     public void bordes(String rango, short borde) {
 
         HSSFRegionUtil.setBorderTop(borde, CellRangeAddress.valueOf(rango), (HSSFSheet) sheet, wb);
@@ -439,13 +485,13 @@ public class Excel {
         sheet.addMergedRegion(CellRangeAddress.valueOf("A1:N1"));
     }
 
-     public void graficar(short columna_inicial, Integer fila_inicial, short columna_final, Integer fila_final){
-       
-        final BufferedImage buffer = grafica.createBufferedImage(600, 200);        
+    public void graficar(short columna_inicial, Integer fila_inicial, short columna_final, Integer fila_final) {
+
+        final BufferedImage buffer = grafica.createBufferedImage(600, 200);
 
         ByteArrayOutputStream img_bytes = new ByteArrayOutputStream();
         try {
-            
+
             ImageIO.write(buffer, "png", img_bytes);
             img_bytes.flush();
 
@@ -458,7 +504,7 @@ public class Excel {
         int index = wb.addPicture(img_bytes.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG);
         Drawing patriarch = sheet.createDrawingPatriarch();
         patriarch.createPicture(anchor, index);
-         /**/
+        /**/
         /*
          Drawing drawing = sheet.createDrawingPatriarch();
          XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0, 0, 0, (short) 2, 6, (short) 9, 26);
@@ -483,7 +529,7 @@ public class Excel {
          chart.plot(data, bottomAxis, leftAxis);
          */
     }
-    
+
     private void crearExcel() {
 
         FileOutputStream out;
@@ -698,10 +744,6 @@ public class Excel {
 
     private void reporteTraspasos(Integer tipo, Date fecha) {
 
-        Integer Unidad = 275;
-        //   SimpleDateFormat formatoDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
-//        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
-
         cargarLogo();
 
         combinarRango("A1:H1");
@@ -743,14 +785,18 @@ public class Excel {
             //sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
             //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
             //for (int j = 0; j < 5; j++) {
-                for (int j = 1; j < 5; j++) {
-                agregarValor(fila_inicial + i, j, "Arete Visual");
+            for (int j = 0; j < 5; j++) {
+                //agregarValor(fila_inicial + i, j, "Arete Visual");                
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(), styleCenter);                
                 //sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
                 //sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
+            
+            asignarEstilo(fila_inicial + i, 3, styleleft);
+            asignarEstilo(fila_inicial + i, 4, styleleft);
 
-            sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleleft);
-            sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
+            //sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleleft);
+            //sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
         }
     }
 
@@ -779,30 +825,40 @@ public class Excel {
     }
 
     private void reporteAnimalesHospital() {
-       
+
         cargarLogo();
 
         combinarRango("A1:H1");
         combinarRango("A2:H2");
         combinarRango("A3:H4");
 
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("REPORTE DE ANIMALES EN HOSPITAL");
-        cell.setCellStyle(styleNameReport);
+        agregarValor(0, 0, "REPORTE DE ANIMALES EN HOSPITAL", styleNameReport);
+        /*
+         Row row = sheet.createRow(0);
+         Cell cell = row.createCell(0);
+         cell.setCellValue("REPORTE DE ANIMALES EN HOSPITAL");
+         cell.setCellStyle(styleNameReport);
+         */
+        agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
+        /*
+         row = sheet.createRow(1);
+         cell = row.createCell(0);
+         cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
+         cell.setCellStyle(styleDateReport);
+         */
 
-        row = sheet.createRow(1);
-        cell = row.createCell(0);
-        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
-        cell.setCellStyle(styleDateReport);
-
-        sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
-        sheet.getRow(5).createCell(1).setCellValue("Fecha Entrada");
-        sheet.getRow(5).createCell(2).setCellValue("Dias en Hospital");
-        sheet.getRow(5).createCell(3).setCellValue("Causa Entrada");
-        sheet.getRow(5).createCell(4).setCellValue("Observaciones");
-        sheet.getRow(5).createCell(5).setCellValue("");
-        sheet.getRow(5).createCell(6).setCellValue("");
+        agregarValor(5, 0, "Arete Visual");
+        agregarValor(5, 1, "Fecha Entrada");
+        agregarValor(5, 2, "Dias en Hospital");
+        agregarValor(5, 3, "Causa Entrada");
+        agregarValor(5, 4, "Observaciones");
+        /*
+         sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
+         sheet.getRow(5).createCell(1).setCellValue("Fecha Entrada");
+         sheet.getRow(5).createCell(2).setCellValue("Dias en Hospital");
+         sheet.getRow(5).createCell(3).setCellValue("Causa Entrada");
+         sheet.getRow(5).createCell(4).setCellValue("Observaciones");
+         */
 
         tamañoColumna(0, 13);
         tamañoColumna(1, 14);
@@ -816,16 +872,22 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            //sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
+            //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
 
-            for (int j = 1; j < 5; j++) {
-                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
-                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+            //for (int j = 1; j < 5; j++) {
+            for (int j = 0; j < 5; j++) {
+
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(), styleCenter);
+                //sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
+                //sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
-
-            sheet.getRow(fila_inicial + i).getCell(2).setCellValue(Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));
-
+            
+            agregarValor(fila_inicial + i , 2,Integer.parseInt(t_tabla.getValueAt(i, 3).toString()) );
+            
+            //sheet.getRow(fila_inicial + i).getCell(2).setCellValue(Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));
+            
+            
             sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleleft);
             sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
         }
@@ -1026,13 +1088,13 @@ public class Excel {
         combinarRango("A1:I1");
         combinarRango("A2:I2");
         combinarRango("A3:I4");
-        combinarRango("A5:I5");            
+        combinarRango("A5:I5");
 
         Row row = sheet.createRow(0);
         Cell cell = row.createCell(0);
         cell.setCellValue("REPORTE DE ANIMAL");
         cell.setCellStyle(styleNameReport);
-  
+
         row = sheet.createRow(1);
         cell = row.createCell(0);
         cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
@@ -1048,7 +1110,7 @@ public class Excel {
         cell.setCellStyle(styleDateReport);
 
         Integer fila_encabezado = 5;
-        
+
         //  sheet.createRow(0).createCell(2).setCellValue("REPORTE DE SALIDA");
         //sheet.createRow(0).getCell(2).setCellStyle(estiloCelda);
         // sheet.getRow(0).getCell(2).setCellStyle(new CellStyle("CENTER"));
@@ -1124,8 +1186,8 @@ public class Excel {
                 + " Peso Actual: " + animal.peso_actual);
         sheet.getRow(4).getCell(0).setCellStyle(styleCenter);
 
-        graficar((short)2,6,(short)9,26);
-        
+        graficar((short) 2, 6, (short) 9, 26);
+
         /**/
         final BufferedImage buffer = grafica.createBufferedImage(600, 200);
         //final FileOutputStream file = new FileOutputStream("ExcelPOIGrafica.xls");
@@ -1456,9 +1518,9 @@ public class Excel {
          */
         combinarRango("I6:M6");
 
-        graficar((short)8,6,(short)13,18);
+        graficar((short) 8, 6, (short) 13, 18);
     }
-   
+
     public void reporteSalida(Table aTabla) {
 
         t_tabla = aTabla;
