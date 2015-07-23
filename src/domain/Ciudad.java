@@ -5,7 +5,6 @@
  */
 package domain;
 
-import gui.DialogoCiudadSelector;
 import static gui.Desktop.manejadorBD;
 import java.util.ArrayList;
 

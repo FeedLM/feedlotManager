@@ -337,54 +337,10 @@ public class Excel {
         styleEtiquetaTabla.setFont(FontEtiquetaTabla);
     }
 
-    public void reporteSesiones(Table TTabla1, Table TTabla2, Integer ITipo, Date DFechaIni, Date DFechaFin, Animal AAnimal) {
-
-        t_tabla = TTabla1;
-        t_tabla2 = TTabla2;
-
-        animal = AAnimal;
-        tipo = ITipo;
-        this.fecha_ini = DFechaIni;
-        this.fecha_fin = DFechaFin;
-
-        if (t_tabla.getRowCount() <= 0 && t_tabla2.getRowCount() <= 0) {
-
-            JOptionPane.showMessageDialog(null, "No hay datos, para exportar", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        if (!showOpenFileDialog()) {
-            return;
-        }
-
-        wb = new HSSFWorkbook();
-        sheet = wb.createSheet("REPORTE DE SESIONES");
-
-        styles();
-
-        reporteSesiones();
-
-        crearExcel();
-    }
-
     public Cell agregarValor(Integer fila, Integer columna, String valor) {
 
-        Row row;
-        Cell cell;
-
-        row = sheet.getRow(fila);
-
-        if (row == null) {
-
-            row = sheet.createRow(fila);
-        }
-
-        cell = row.getCell(columna);
-
-        if (cell == null) {
-
-            cell = row.createCell(columna);
-        }
+        Row row = recuperarFila(fila);
+        Cell cell = recuperarCelda(row, columna);
 
         cell.setCellValue(valor);
         return cell;
@@ -396,30 +352,16 @@ public class Excel {
         cell = agregarValor(fila, columna, valor);
         asignarEstilo(fila, columna, style);
     }
-    
+
     public Cell agregarValor(Integer fila, Integer columna, Integer valor) {
 
-        Row row;
-        Cell cell;
-
-        row = sheet.getRow(fila);
-
-        if (row == null) {
-
-            row = sheet.createRow(fila);
-        }
-
-        cell = row.getCell(columna);
-
-        if (cell == null) {
-
-            cell = row.createCell(columna);
-        }
+        Row row = recuperarFila(fila);
+        Cell cell = recuperarCelda(row, columna);
 
         cell.setCellValue(valor);
         return cell;
     }
-    
+
     public void agregarValor(Integer fila, Integer columna, Integer valor, HSSFCellStyle style) {
 
         Cell cell;
@@ -427,10 +369,17 @@ public class Excel {
         asignarEstilo(fila, columna, style);
     }
 
-    public void asignarEstilo(Integer fila, Integer columna, HSSFCellStyle style){
-      
+    public void asignarEstilo(Integer fila, Integer columna, HSSFCellStyle style) {
+
+        Row row = recuperarFila(fila);
+        Cell cell = recuperarCelda(row, columna);
+
+        cell.setCellStyle(style);
+    }
+
+    public Row recuperarFila(Integer fila) {
+
         Row row;
-        Cell cell;
 
         row = sheet.getRow(fila);
 
@@ -439,6 +388,13 @@ public class Excel {
             row = sheet.createRow(fila);
         }
 
+        return row;
+    }
+
+    public Cell recuperarCelda(Row row, Integer columna) {
+
+        Cell cell;
+
         cell = row.getCell(columna);
 
         if (cell == null) {
@@ -446,9 +402,9 @@ public class Excel {
             cell = row.createCell(columna);
         }
 
-        cell.setCellStyle(style);
+        return cell;
     }
-    
+
     public void bordes(String rango, short borde) {
 
         HSSFRegionUtil.setBorderTop(borde, CellRangeAddress.valueOf(rango), (HSSFSheet) sheet, wb);
@@ -482,7 +438,7 @@ public class Excel {
 
     private void combinarRango(String rango) {
 
-        sheet.addMergedRegion(CellRangeAddress.valueOf("A1:N1"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf(rango));
     }
 
     public void graficar(short columna_inicial, Integer fila_inicial, short columna_final, Integer fila_final) {
@@ -548,6 +504,36 @@ public class Excel {
             Logger.getLogger(Excel.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void reporteSesiones(Table TTabla1, Table TTabla2, Integer ITipo, Date DFechaIni, Date DFechaFin, Animal AAnimal) {
+
+        t_tabla = TTabla1;
+        t_tabla2 = TTabla2;
+
+        animal = AAnimal;
+        tipo = ITipo;
+        this.fecha_ini = DFechaIni;
+        this.fecha_fin = DFechaFin;
+
+        if (t_tabla.getRowCount() <= 0 && t_tabla2.getRowCount() <= 0) {
+
+            JOptionPane.showMessageDialog(null, "No hay datos, para exportar", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (!showOpenFileDialog()) {
+            return;
+        }
+
+        wb = new HSSFWorkbook();
+        sheet = wb.createSheet("REPORTE DE SESIONES");
+
+        styles();
+
+        reporteSesiones();
+
+        crearExcel();
     }
 
     private void reporteSesiones() {
@@ -744,11 +730,10 @@ public class Excel {
 
     private void reporteTraspasos(Integer tipo, Date fecha) {
 
-        cargarLogo();
-
-        combinarRango("A1:H1");
-        combinarRango("A2:H2");
-        combinarRango("A3:H4");
+       // cargarLogo();
+        combinarRango("A1:E1");
+        combinarRango("A2:E2");
+        combinarRango("A3:E4");
 
         agregarValor(0, 0, "REPORTE DE TRASPASOS", styleNameReport);
         agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
@@ -770,13 +755,13 @@ public class Excel {
         agregarValor(5, 4, "Grupo Destino");
 
         tamañoColumna(0, 13);
-        tamañoColumna(1, 14);
+        tamañoColumna(1, 16);
         tamañoColumna(2, 20);
         //tamañoColumna(3, 15);
         tamañoColumna(3, 27);
-        tamañoColumna(4, 14);
+        tamañoColumna(4, 27);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:E6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -787,14 +772,13 @@ public class Excel {
             //for (int j = 0; j < 5; j++) {
             for (int j = 0; j < 5; j++) {
                 //agregarValor(fila_inicial + i, j, "Arete Visual");                
-                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(), styleCenter);                
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1 ).toString(), styleCenter);
                 //sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
                 //sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
-            
-            asignarEstilo(fila_inicial + i, 3, styleleft);
-            asignarEstilo(fila_inicial + i, 4, styleleft);
 
+           // asignarEstilo(fila_inicial + i, 3, styleleft);
+            // asignarEstilo(fila_inicial + i, 4, styleleft);
             //sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleleft);
             //sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
         }
@@ -874,7 +858,6 @@ public class Excel {
 
             //sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
             //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
-
             //for (int j = 1; j < 5; j++) {
             for (int j = 0; j < 5; j++) {
 
@@ -882,12 +865,10 @@ public class Excel {
                 //sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
                 //sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
-            
-            agregarValor(fila_inicial + i , 2,Integer.parseInt(t_tabla.getValueAt(i, 3).toString()) );
-            
+
+            agregarValor(fila_inicial + i, 2, Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));
+
             //sheet.getRow(fila_inicial + i).getCell(2).setCellValue(Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));
-            
-            
             sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleleft);
             sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
         }
