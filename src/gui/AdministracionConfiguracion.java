@@ -105,8 +105,8 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         fondo5 = new abstractt.fondo();
-        fondo1 = new abstractt.fondo();
         btn_grabar = new abstractt.Boton();
+        fondo1 = new abstractt.fondo();
 
         fondo4.setText("fondo4");
 
@@ -232,9 +232,6 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
 
         jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 290));
 
-        fondo1.setText("fondo1");
-        jPanel2.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         btn_grabar.setText("Grabar");
         btn_grabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +239,9 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
             }
         });
         jPanel2.add(btn_grabar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 100, 30));
+
+        fondo1.setText("fondo1");
+        jPanel2.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 350));
 
