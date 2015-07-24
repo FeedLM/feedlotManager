@@ -1286,12 +1286,11 @@ public class Excel {
             agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
 
             for (int j = 1; j < 13; j++) {
-                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString());
-                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(),styleCenter);
             }
 
-            sheet.getRow(fila_inicial + i).getCell(11).setCellStyle(styleRight);
-            sheet.getRow(fila_inicial + i).getCell(12).setCellStyle(styleRight);
+            asignarEstilo(fila_inicial + i,11,styleRight);
+            asignarEstilo(fila_inicial + i,12,styleRight);            
         }
     }
 
