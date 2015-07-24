@@ -294,7 +294,7 @@ public class Excel {
         FontNameReport.setFontName("Calibri");
         FontNameReport.setFontHeightInPoints((short) 16);
         FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
+        FontNameReport.setColor(HSSFColor.BROWN.index);
 
         styleNameReport = wb.createCellStyle();
         styleNameReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -533,6 +533,11 @@ public class Excel {
     }
 
     private void cargarLogo() {
+
+        cargarLogo1(0, 0, 0.22);
+    }
+
+    private void cargarLogo1(Integer fila, Integer columna, Double resize) {
         InputStream inputStream;
         try {
 
@@ -545,11 +550,39 @@ public class Excel {
             Drawing drawing = sheet.createDrawingPatriarch();
             ClientAnchor anchor = helper.createClientAnchor();
             //set top-left corner for the image
-            anchor.setCol1(0);
-            anchor.setRow1(0);
+            anchor.setCol1(columna);
+            anchor.setRow1(fila);
             Picture pict = drawing.createPicture(anchor, pictureIdx);
             //Reset the image to the original size
-            pict.resize(0.22);
+            pict.resize(resize);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Excel.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Excel.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void cargarLogo2(Integer fila, Integer columna, Double resize) {
+        InputStream inputStream;
+        try {
+
+            inputStream = getClass().getResourceAsStream("/resources/LOGO.png");//Tru-Test.jpg");
+
+            byte[] bytes = IOUtils.toByteArray(inputStream);
+            int pictureIdx = wb.addPicture(bytes, wb.PICTURE_TYPE_PNG);
+            inputStream.close();
+            CreationHelper helper = wb.getCreationHelper();
+            Drawing drawing = sheet.createDrawingPatriarch();
+            ClientAnchor anchor = helper.createClientAnchor();
+            //set top-left corner for the image
+            anchor.setCol1(columna);
+            anchor.setRow1(fila);
+            Picture pict = drawing.createPicture(anchor, pictureIdx);
+            //Reset the image to the original size
+            pict.resize(resize);
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Excel.class
@@ -816,7 +849,8 @@ public class Excel {
             case 1:
                 etiqueta_parametro = "Todos los traspasos";
                 break;
-            case 2: case 3:
+            case 2:
+            case 3:
                 etiqueta_parametro = "Traspasos del día " + formatoDate.format(fecha_ini);
                 break;
 //            case 3: 4:
@@ -1295,11 +1329,14 @@ public class Excel {
 
         Integer fila_encabezado = 18;
 
-        cargarLogo();
+        //cargarLogo();
+        cargarLogo2(1, 0, 1.0);
 
-        combinarRango("A1:I1");
-        combinarRango("A2:I2");
-        combinarRango("A3:I4");
+        cargarLogo1(1, 11, 0.22);
+
+        combinarRango("A1:M4");
+        //combinarRango("A2:M2");
+        //combinarRango("A3:M4");
 
         agregarValor(0, 0, "REPORTE DE INVENTARIO", styleNameReport);
 
@@ -1418,12 +1455,18 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
+            if (i % 2 > 0) {
 
+                relleno("A" + (fila_encabezado + 2 + i) + ":N" + (fila_encabezado + 2 + i), IndexedColors.LIGHT_GREEN.index, IndexedColors.BLACK.index);
+            }
+
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
+            agregarValor(fila_inicial + i, 3, "");
             //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(bordes(cell.getCellStyle(), HSSFCellStyle.BORDER_THIN));
             for (int j = 1; j < 12; j++) {
                 /// System.out.println(i + "," + j); 
                 columna = j;
+
                 if (j > 2) {
                     columna = j + 1;
                 }
@@ -1435,14 +1478,18 @@ public class Excel {
             asignarEstilo(fila_inicial + i, 12, styleRight);
         }
 
-        agregarValor(5, 8, "GRAFICA DE GANANCIA DE PESO", styleNameReport);
+        agregarValor(fila_tablas, 8, "GRAFICA DE GANANCIA DE PESO", styleCenter);
+        relleno("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+        bordes("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+        
+        bordes("I" + (fila_tablas + 2) + ":M" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
 
         /**
          * GRAFICA /*
          */
-        combinarRango("I6:M6");
+        combinarRango("I8:M8");
 
-        graficar((short) 8, 7, (short) 13, 17);
+        graficar((short) 8, 8, (short) 13, 17);
     }
 
     public void reporteSalida(Table aTabla) {

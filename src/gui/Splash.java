@@ -16,6 +16,8 @@ import static domain.Seguridad.fecha_ultima_corrida;
 import static domain.Seguridad.licencia;
 import static domain.Seguridad.validaUltimaCorrida;
 import static domain.Seguridad.validar_fecha_ultima_corrida_periodo_prueba;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -80,7 +82,13 @@ public class Splash extends javax.swing.JFrame implements Runnable {
 
         this.jProgressBar1.setMaximum(maxProgressBar);        
         
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
+        
         this.setVisible(true);
+        
+        
     }
 
     /**
