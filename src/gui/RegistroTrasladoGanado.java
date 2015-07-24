@@ -6,10 +6,13 @@
 package gui;
 
 import abstractt.Table;
+import domain.Corral;
+import static domain.Corral.cargarCorrales;
 import domain.Excel;
 import static domain.Movimiento.cargarTraspasos;
 import static gui.Desktop.rancho;
 import java.util.Date;
+import javax.swing.JTable;
 
 /**
  *
@@ -26,16 +29,20 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        cargarTabla();
-
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(jrb_todo);
         this.buttonGroup1.add(jrb_otra_fecha);
-
+        this.buttonGroup1.add(jrb_entre_fechas);
+        validarRadioButtons();
+        tipo = 1;
+        fecha_ini = new Date();
+        fecha_fin = new Date();
+        corralSelector1.addArray(cargarCorrales());
+        cargarTabla();
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        
+
         this.setResizable(false);
-        
+
         fondo1.cargar(getSize());
 
     }
@@ -43,8 +50,10 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
     Table reporte;
 
     private void cargarTabla() {
-
-        cargarTraspasos(table1, 1, null);
+        corral = new Corral();
+        corral.cargarPorNombre(corralSelector1.getText(), rancho);
+        cargarTraspasos(t_traslados, tipo, fecha_ini, fecha_fin, corral);
+        t_traslados.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
 
     /**
@@ -58,14 +67,21 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        table1 = new abstractt.Table();
         jPanel3 = new javax.swing.JPanel();
+        btn_visualizar = new abstractt.Boton();
+        jPanel2 = new javax.swing.JPanel();
         jrb_todo = new javax.swing.JRadioButton();
         jrb_hoy = new javax.swing.JRadioButton();
         jrb_otra_fecha = new javax.swing.JRadioButton();
-        btn_reporte = new abstractt.Boton();
         calendar1 = new abstractt.Calendar();
+        jrb_entre_fechas = new javax.swing.JRadioButton();
+        calendar2 = new abstractt.Calendar();
+        calendar3 = new abstractt.Calendar();
+        lb_corralSelector = new abstractt.Etiqueta();
+        corralSelector1 = new domain.CorralSelector();
+        boton1 = new abstractt.Boton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        t_traslados = new abstractt.Table();
         etiqueta1 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
@@ -81,24 +97,24 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table1.setForeground(new java.awt.Color(230, 225, 195));
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
-            }
-        ));
-        table1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane2.setViewportView(table1);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 780, 300));
-
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_visualizar.setText("Visualizar");
+        btn_visualizar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        btn_visualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_visualizarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_visualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 130, 30));
+
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jrb_todo.setBackground(new java.awt.Color(255, 255, 255));
+        jrb_todo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrb_todo.setForeground(new java.awt.Color(95, 84, 88));
         jrb_todo.setSelected(true);
         jrb_todo.setText("Todo");
         jrb_todo.setOpaque(false);
@@ -107,9 +123,11 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
                 jrb_todoActionPerformed(evt);
             }
         });
-        jPanel3.add(jrb_todo);
+        jPanel2.add(jrb_todo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 20));
 
         jrb_hoy.setBackground(new java.awt.Color(255, 255, 255));
+        jrb_hoy.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrb_hoy.setForeground(new java.awt.Color(95, 84, 88));
         jrb_hoy.setText("Hoy");
         jrb_hoy.setOpaque(false);
         jrb_hoy.addActionListener(new java.awt.event.ActionListener() {
@@ -117,9 +135,11 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
                 jrb_hoyActionPerformed(evt);
             }
         });
-        jPanel3.add(jrb_hoy);
+        jPanel2.add(jrb_hoy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 20));
 
         jrb_otra_fecha.setBackground(new java.awt.Color(255, 255, 255));
+        jrb_otra_fecha.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrb_otra_fecha.setForeground(new java.awt.Color(95, 84, 88));
         jrb_otra_fecha.setText("Otra Fecha");
         jrb_otra_fecha.setOpaque(false);
         jrb_otra_fecha.addActionListener(new java.awt.event.ActionListener() {
@@ -127,24 +147,58 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
                 jrb_otra_fechaActionPerformed(evt);
             }
         });
-        jPanel3.add(jrb_otra_fecha);
-
-        btn_reporte.setText("Generar Reportes");
-        btn_reporte.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        btn_reporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_reporteActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_reporte);
+        jPanel2.add(jrb_otra_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 100, 20));
 
         calendar1.setEnabled(false);
         calendar1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         calendar1.setMinimumSize(new java.awt.Dimension(100, 30));
         calendar1.setPreferredSize(new java.awt.Dimension(120, 20));
-        jPanel3.add(calendar1);
+        jPanel2.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 130, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 425, 800, 75));
+        jrb_entre_fechas.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrb_entre_fechas.setForeground(new java.awt.Color(95, 84, 88));
+        jrb_entre_fechas.setText("Entre Fechas");
+        jrb_entre_fechas.setOpaque(false);
+        jrb_entre_fechas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrb_entre_fechasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jrb_entre_fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 100, 20));
+        jPanel2.add(calendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 130, 20));
+        jPanel2.add(calendar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 130, 20));
+
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
+
+        lb_corralSelector.setText("Selecciona Corral");
+        lb_corralSelector.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        jPanel3.add(lb_corralSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 20));
+        jPanel3.add(corralSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, 20));
+
+        boton1.setText("Reporte");
+        boton1.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        boton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 130, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 800, -1));
+
+        t_traslados.setForeground(new java.awt.Color(230, 225, 195));
+        t_traslados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+            }
+        ));
+        t_traslados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(t_traslados);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 780, 300));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -165,7 +219,7 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -186,62 +240,96 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         validarRadioButtons();
     }//GEN-LAST:event_jrb_otra_fechaActionPerformed
 
-    private void btn_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reporteActionPerformed
+    private void btn_visualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_visualizarActionPerformed
 
-        generarReporte();
+        visualizar();
 
-    }//GEN-LAST:event_btn_reporteActionPerformed
+    }//GEN-LAST:event_btn_visualizarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
+    private void jrb_entre_fechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_entre_fechasActionPerformed
+        validarRadioButtons();
+    }//GEN-LAST:event_jrb_entre_fechasActionPerformed
+
+    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+        generarReporte();
+    }//GEN-LAST:event_boton1ActionPerformed
+
     private void generarReporte() {
-
-        Date fecha = new Date();
         Excel excel = new Excel();
-        Integer tipo = 0;
+        excel.reporteTraspasos(t_traslados, tipo, fecha_ini, fecha_fin, corral);
+    }
 
+    private void visualizar() {
+        tipo = 1;
+        validarRadioButtons();
         if (jrb_todo.isSelected()) {
             tipo = 1;
             //cargarTraspasos(reporte, 1, null);
         }
         if (jrb_hoy.isSelected()) {
             tipo = 2;
+            fecha_ini = this.calendar1.getDate();
+            fecha_fin = this.calendar1.getDate();
             //cargarTraspasos(reporte, 2, fecha);
         }
         if (jrb_otra_fecha.isSelected()) {
             tipo = 3;
-            fecha = this.calendar1.getDate();
+            fecha_ini = this.calendar1.getDate();
+            fecha_fin = this.calendar1.getDate();
             //cargarTraspasos(reporte, 3, fecha);
         }
+        if (jrb_entre_fechas.isSelected()) {
+            tipo = 4;
+            fecha_ini = this.calendar2.getDate();
+            fecha_fin = this.calendar3.getDate();
+        }
 
-        reporte = cargarTraspasos(reporte, tipo, fecha);
-        excel.reporteTraspasos(reporte, tipo, fecha);
-
+        cargarTabla();
     }
 
     private void validarRadioButtons() {
 
         calendar1.setEnabled(false);
+        calendar2.setEnabled(false);
+        calendar3.setEnabled(false);
 
         if (jrb_otra_fecha.isSelected()) {
             calendar1.setEnabled(true);
         }
+        if (jrb_entre_fechas.isSelected()) {
+            calendar2.setEnabled(true);
+            calendar3.setEnabled(true);
+        }
     }
     Desktop parent;
+    Integer tipo;
+    private Date fecha_ini;
+    private Date fecha_fin;
+    private Corral corral;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton btn_reporte;
+    private abstractt.Boton boton1;
+    private abstractt.Boton btn_visualizar;
     private javax.swing.ButtonGroup buttonGroup1;
     private abstractt.Calendar calendar1;
+    private abstractt.Calendar calendar2;
+    private abstractt.Calendar calendar3;
+    private domain.CorralSelector corralSelector1;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton jrb_entre_fechas;
     private javax.swing.JRadioButton jrb_hoy;
     private javax.swing.JRadioButton jrb_otra_fecha;
     private javax.swing.JRadioButton jrb_todo;
-    private abstractt.Table table1;
+    private abstractt.Etiqueta lb_corralSelector;
+    private abstractt.Table t_traslados;
     // End of variables declaration//GEN-END:variables
+
 }

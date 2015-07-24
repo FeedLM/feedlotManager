@@ -776,7 +776,7 @@ public class Excel {
         }
     }
 
-    public void reporteTraspasos(Table aTabla, Integer tipo, Date fecha) {
+    public void reporteTraspasos(Table aTabla, Integer tipo, Date fecha_ini, Date fecha_fin, Corral corral) {
 
         t_tabla = aTabla;
 
@@ -795,12 +795,12 @@ public class Excel {
 
         styles();
 
-        reporteTraspasos(tipo, fecha);
+        reporteTraspasos(tipo, fecha_ini, fecha_fin, corral);
 
         crearExcel();
     }
 
-    private void reporteTraspasos(Integer tipo, Date fecha) {
+    private void reporteTraspasos(Integer tipo, Date fecha_ini, Date fecha_fin, Corral corral) {
 
         cargarLogo();
         combinarRango("A1:E1");
@@ -812,11 +812,27 @@ public class Excel {
 
         String etiqueta_parametro = "";
 
-        etiqueta_parametro = "Traspasos del dia " + formatoDate.format(fecha);
-        if (tipo == 1) {
-
-            etiqueta_parametro = "Todos los traspasos";
+        switch (tipo) {
+            case 1:
+                etiqueta_parametro = "Todos los traspasos";
+                break;
+            case 2: case 3:
+                etiqueta_parametro = "Traspasos del día " + formatoDate.format(fecha_ini);
+                break;
+//            case 3: 4:
+//                etiqueta_parametro = "Traspasos del día " + formatoDate.format(fecha_ini);
+//                break;
+            case 4:
+                etiqueta_parametro = "Traspasos del día " + formatoDate.format(fecha_ini) + " al " + formatoDate.format(fecha_fin);
+                break;
         }
+        etiqueta_parametro += " del corral " + corral.nombre;
+//        etiqueta_parametro = "Traspasos del dia " + formatoDate.format(fecha_ini);
+//        if (tipo == 1) {
+//
+//            etiqueta_parametro = "Todos los traspasos";
+//        }
+//        if (tipo == 3)
 
         agregarValor(2, 0, etiqueta_parametro, styleParamReport);
 
@@ -1290,34 +1306,34 @@ public class Excel {
         /**
          * Tabla Datos informativos /*
          */
-        Integer fila_tablas = 7;        
-        
-        combinarRango("A"+(fila_tablas + 1)+":C"+(fila_tablas + 1));
-        relleno("A"+(fila_tablas + 1)+":C"+(fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
-                
-        agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
-        agregarValor(fila_tablas+1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
-        agregarValor(fila_tablas+2, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas+3, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(fila_tablas+4, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas+5, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas+6, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas+7, 0, "PESO MAXIMO", styleEtiquetaTabla);
-        agregarValor(fila_tablas+8, 0, "PESO MINIMO", styleEtiquetaTabla);
-        agregarValor(fila_tablas+9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
+        Integer fila_tablas = 7;
 
-        agregarValor(fila_tablas+1, 2, formatoDateTime.format(new Date()), styleCenter);
-        agregarValor(fila_tablas+2, 2, corral.nombre, styleCenter);
-        agregarValor(fila_tablas+3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
-        agregarValor(fila_tablas+4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
-        agregarValor(fila_tablas+5, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
-        agregarValor(fila_tablas+6, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
-        agregarValor(fila_tablas+7, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
-        agregarValor(fila_tablas+8, 2, new FormatoNumero(corral.peso_minimo.toString()).convierte(corral.peso_minimo), styleRight);
-        agregarValor(fila_tablas+9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
+        combinarRango("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1));
+        relleno("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+
+        agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
+        agregarValor(fila_tablas + 1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 0, "PESO MAXIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 0, "PESO MINIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
+
+        agregarValor(fila_tablas + 1, 2, formatoDateTime.format(new Date()), styleCenter);
+        agregarValor(fila_tablas + 2, 2, corral.nombre, styleCenter);
+        agregarValor(fila_tablas + 3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
+        agregarValor(fila_tablas + 4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
+        agregarValor(fila_tablas + 5, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
+        agregarValor(fila_tablas + 6, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
+        agregarValor(fila_tablas + 7, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
+        agregarValor(fila_tablas + 8, 2, new FormatoNumero(corral.peso_minimo.toString()).convierte(corral.peso_minimo), styleRight);
+        agregarValor(fila_tablas + 9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
 
         String rango;
-        for (int i = fila_tablas+2; i <= 17; i++) {
+        for (int i = fila_tablas + 2; i <= 17; i++) {
 
             rango = "A" + i + ":B" + i;
 
@@ -1326,32 +1342,32 @@ public class Excel {
             this.bordes("C" + i + ":C" + i, CellStyle.BORDER_THIN);
         }
 
-        this.bordes("A"+ (fila_tablas + 1 )+":C"+ (fila_tablas + 1 ), CellStyle.BORDER_MEDIUM);
-        this.bordes("A"+ (fila_tablas + 1 )+":C"+ (fila_tablas + 10 ), CellStyle.BORDER_MEDIUM);
+        this.bordes("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+        this.bordes("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
 
         /**
          * Tabla Resultados y Rendimientos
          */
-        combinarRango("E"+(fila_tablas + 1)+":H"+(fila_tablas + 1));
-        relleno("E"+(fila_tablas + 1)+":H"+(fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
-                       
+        combinarRango("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1));
+        relleno("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+
         agregarValor(fila_tablas, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
-        agregarValor(fila_tablas+1, 4, "GANANCIA DE PESO X precio DE CARNE", styleEtiquetaTabla);
-        agregarValor(fila_tablas+2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas+3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(fila_tablas+4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
-        agregarValor(fila_tablas+5, 4, "SUELDOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas+6, 4, "GASTOS FIJOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas+7, 4, "GASTOS VARIOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas+8, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 1, 4, "GANANCIA DE PESO X precio DE CARNE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 4, "SUELDOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 4, "GASTOS FIJOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 4, "GASTOS VARIOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
         //agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
 
-        agregarValor(fila_tablas+1, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
-        agregarValor(fila_tablas+2, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
-        agregarValor(fila_tablas+3, 7, new FormatoNumero(corral.costo_alimento.toString()).convierte(corral.costo_alimento), styleRight);
-        agregarValor(fila_tablas+4, 7, new FormatoNumero(corral.utilidad_s_gastos.toString()).convierte(corral.utilidad_s_gastos), styleRight);
-        
-        for (int i = fila_tablas+2; i <= 17; i++) {
+        agregarValor(fila_tablas + 1, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
+        agregarValor(fila_tablas + 2, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
+        agregarValor(fila_tablas + 3, 7, new FormatoNumero(corral.costo_alimento.toString()).convierte(corral.costo_alimento), styleRight);
+        agregarValor(fila_tablas + 4, 7, new FormatoNumero(corral.utilidad_s_gastos.toString()).convierte(corral.utilidad_s_gastos), styleRight);
+
+        for (int i = fila_tablas + 2; i <= 17; i++) {
 
             rango = "E" + i + ":G" + i;
 
@@ -1360,8 +1376,8 @@ public class Excel {
             this.bordes("H" + i + ":H" + i, CellStyle.BORDER_THIN);
         }
 
-        this.bordes("E"+ (fila_tablas + 1 )+":H"+ (fila_tablas + 1 ), CellStyle.BORDER_MEDIUM);
-        this.bordes("E"+ (fila_tablas + 1 )+":H"+ (fila_tablas + 10 ), CellStyle.BORDER_MEDIUM);
+        this.bordes("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+        this.bordes("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
 
         agregarValor(fila_encabezado, 0, "ID Visual", styleCenter);
         agregarValor(fila_encabezado, 1, "ID Electronico", styleCenter);

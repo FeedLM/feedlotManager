@@ -11,7 +11,6 @@ import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
 import java.util.Date;
 
-
 /**
  *
  * @author Developer GAGS
@@ -83,7 +82,7 @@ public class Movimiento {
         return tabla;
     }
 
-        public static Table cargarTratamientos(Table tabla, Integer tipo, Date fecha_ini, Date fecha_fin, Animal animal, Corral corral) {
+    public static Table cargarTratamientos(Table tabla, Integer tipo, Date fecha_ini, Date fecha_fin, Animal animal, Corral corral) {
 
         tabla = crearTablaMedicinas(tabla);
 
@@ -148,7 +147,6 @@ public class Movimiento {
         return tabla;
     }
 
-    
     public static Table crearTablaMedicinas(Table tabla) {
 
         if (tabla == null) {
@@ -355,7 +353,7 @@ public class Movimiento {
      *
      * @param tabla
      */
-    public static Table cargarTraspasos(Table tabla, Integer tipo, Date fecha) {
+    public static Table cargarTraspasos(Table tabla, Integer tipo, Date fecha_ini, Date fecha_fin, Corral corral) {
 
         tabla = crearTablaTraspasos(tabla);
         // SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
@@ -377,12 +375,25 @@ public class Movimiento {
                 + "AND   a.status = 'A' \n"
                 + "AND    m.id_corral_origen  <> r.id_corral_hospital \n"
                 + "AND    m.id_corral_destino <> r.id_corral_hospital \n"
-                + "AND    m.id_rancho     = '" + rancho.id_rancho + "' \n";
+                + "AND    m.id_rancho     = '" + rancho.id_rancho + "' \n"
+                + "AND (origen.nombre = '"+ corral.nombre +"' \n"
+                +" OR destino.nombre = '" + corral.nombre + "') \n";
 
-        if (tipo == 2 || tipo == 3) {
-
-            consulta += "AND    m.fecha between '" + formatoDate.format(fecha) + " 00:00' \n"
-                    + "AND  '" + formatoDate.format(fecha) + " 23:59' \n";
+        switch (tipo) {
+            case 1://Todo
+                break;
+            case 2://Hoy
+                consulta += "AND    m.fecha between '" + formatoDate.format(fecha_ini) + " 00:00' "
+                        + "AND  '" + formatoDate.format(fecha_fin) + " 23:59' ";
+                break;
+            case 3://otra fecha
+                consulta += "AND    m.fecha between '" + formatoDate.format(fecha_ini) + " 00:00' "
+                        + "AND  '" + formatoDate.format(fecha_fin) + " 23:59' ";
+                break;
+            case 4://entre fechas
+                consulta += "AND    m.fecha between '" + formatoDate.format(fecha_ini) + " 00:00' "
+                        + "AND  '" + formatoDate.format(fecha_fin) + " 23:59' ";
+                break;
         }
 
         consulta += "ORDER BY fecha";
@@ -393,7 +404,7 @@ public class Movimiento {
 
             manejadorBD.asignarTable(tabla);
         }
-        
+
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         int[] tamaños = new int[6];
@@ -586,7 +597,7 @@ public class Movimiento {
                 + "       round(a.temperatura,2)\n"
                 + "FROM   animal a LEFT OUTER JOIN proveedor p ON a.id_proveedor = p.id_proveedor\n"
                 + "                LEFT OUTER JOIN sexo s      ON a.id_sexo      = s.id_sexo,\n"
-                + "       corral c,   corral_animal ca\n"                
+                + "       corral c,   corral_animal ca\n"
                 + "WHERE  a.id_animal = ca.id_animal \n"
                 + "AND    c.id_corral = ca.id_corral \n"
                 + "AND    a.status    =   'A' \n"

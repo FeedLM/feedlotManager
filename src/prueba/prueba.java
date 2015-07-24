@@ -36,7 +36,7 @@ public class prueba {
 
         String secuencia;
         String letras = "disco_duro=A001-1889\n"
-                + "database=praderash\n"
+                + "database=feedlotmanager\n"
                 + "muestraSQL=S\n"
                 // + "dias_vigencia=999\n"
                 // + "fecha_instalacion=2015-06-07 22:09\n"
