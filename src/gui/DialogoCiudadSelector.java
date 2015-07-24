@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package gui;
 
+import domain.Ciudad;
+import domain.Ciudad;
 import domain.Estado;
-import domain.Proveedor;
+import domain.Estado;
 import static gui.Desktop.rancho;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,22 +17,25 @@ import java.awt.Toolkit;
  *
  * @author sperez
  */
-public class DialogoEstadoSelector extends javax.swing.JDialog {
+public class DialogoCiudadSelector extends javax.swing.JFrame {
 
+    Ciudad ciudad;
     Estado estado;
 
     /**
      * Creates new form DialogoProveedorSelector
      */
-    public DialogoEstadoSelector(java.awt.Frame parent, boolean modal, Estado aEstado) {
-        super(parent, modal);
+    public DialogoCiudadSelector(java.awt.Frame parent, Estado aEstado, Ciudad aCiudad) {
+//        super(parent, modal);
         initComponents();
-        
-        this.estadoSelector1.cargar();
         estado = new Estado();
-        estadoSelector1.setSelectedItem(aEstado.descripcion);
-        setEstado = false;
-        
+        estado.cargarPorDescripcion(aEstado.descripcion);
+
+        this.ciudadSelector1.cargar(estado);
+        ciudad = new Ciudad();
+        ciudadSelector1.setSelectedItem(aCiudad.descripcion);
+        setCiudad = false;
+
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
@@ -49,16 +54,16 @@ public class DialogoEstadoSelector extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        estadoSelector1 = new domain.EstadoSelector();
+        ciudadSelector1 = new domain.CiudadSelector();
 
-        setTitle("Selecciona Estado");
+        setTitle("Selecciona Ciudad");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        estadoSelector1.addActionListener(new java.awt.event.ActionListener() {
+        ciudadSelector1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoSelector1ActionPerformed(evt);
+                ciudadSelector1ActionPerformed(evt);
             }
         });
 
@@ -66,13 +71,13 @@ public class DialogoEstadoSelector extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(estadoSelector1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(ciudadSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(estadoSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(ciudadSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,36 +88,35 @@ public class DialogoEstadoSelector extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setEstado(Estado estado) {
-        setEstado = true;
-        this.estadoSelector1.setSelectedItem(estado.descripcion);
-        setEstado = false;
+    public void setCiudad(Ciudad ciudad) {
+        setCiudad = true;
+        this.ciudadSelector1.setSelectedItem(ciudad.descripcion);
+        setCiudad = false;
     }
 
-    
-    public Estado getEstado(){
-        
-        return estadoSelector1.getEstado();
+    public Ciudad getCiudad() {
+
+        return ciudadSelector1.getCiudad();
     }
 
-    private void estadoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoSelector1ActionPerformed
+    private void ciudadSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadSelector1ActionPerformed
 
-        if (!setEstado) {
-            
+        if (!setCiudad) {
+
             this.setVisible(false);
         }
-    }//GEN-LAST:event_estadoSelector1ActionPerformed
+    }//GEN-LAST:event_ciudadSelector1ActionPerformed
 
-    boolean setEstado;
-    
+    boolean setCiudad;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private domain.EstadoSelector estadoSelector1;
+    private domain.CiudadSelector ciudadSelector1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

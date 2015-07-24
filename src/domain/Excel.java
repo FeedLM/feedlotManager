@@ -87,6 +87,7 @@ import com.csvreader.CsvReader;
 import static domain.CorralAnimal.cargarAnimalesCorral_;
 import static domain.Movimiento.cargarMovimientosSalida;
 import static gui.Login.gs_mensaje;
+import static gui.Splash.formatoDateTime_11;
 import static gui.Splash.formatoDateTime_2;
 import org.apache.poi.hssf.util.HSSFRegionUtil;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -261,17 +262,26 @@ public class Excel {
 
     public void styles() {
 
+        /*ETIQUETA TABLA */
+        HSSFFont FontNormal = wb.createFont();
+        FontNormal.setFontName("Calibri");
+        FontNormal.setFontHeightInPoints((short) 8);
+        FontNormal.setColor(HSSFColor.BLACK.index);
+
         styleCenter = wb.createCellStyle();
         styleCenter.setAlignment(HSSFCellStyle.ALIGN_CENTER);
         styleCenter.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleCenter.setFont(FontNormal);
 
         styleRight = wb.createCellStyle();
         styleRight.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
         styleRight.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleRight.setFont(FontNormal);
 
         styleleft = wb.createCellStyle();
         styleleft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
         styleleft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleleft.setFont(FontNormal);
 
         styleBorderCompletoMedio = wb.createCellStyle();
         styleBorderCompletoMedio.setBorderBottom(HSSFCellStyle.BORDER_MEDIUM);
@@ -281,7 +291,7 @@ public class Excel {
 
         /*Name REPORT*/
         HSSFFont FontNameReport = wb.createFont();
-        FontNameReport.setFontName("Arial");
+        FontNameReport.setFontName("Calibri");
         FontNameReport.setFontHeightInPoints((short) 16);
         FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
@@ -293,7 +303,7 @@ public class Excel {
 
         /*DATE REPORT*/
         HSSFFont FontDateReport = wb.createFont();
-        FontDateReport.setFontName("Arial");
+        FontDateReport.setFontName("Calibri");
         FontDateReport.setFontHeightInPoints((short) 8);
         FontDateReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         FontDateReport.setColor(HSSFColor.BLACK.index);
@@ -305,7 +315,7 @@ public class Excel {
 
         //Etiqueta parametro
         HSSFFont FontParametroReport = wb.createFont();
-        FontParametroReport.setFontName("Arial");
+        FontParametroReport.setFontName("Calibri");
         FontParametroReport.setFontHeightInPoints((short) 8);
         FontParametroReport.setColor(HSSFColor.BLACK.index);
 
@@ -315,7 +325,7 @@ public class Excel {
 
         /*TITULO TABLA */
         HSSFFont FontTituloTabla = wb.createFont();
-        FontDateReport.setFontName("Arial");
+        FontDateReport.setFontName("Calibri");
         FontDateReport.setFontHeightInPoints((short) 8);
         FontDateReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         FontDateReport.setColor(HSSFColor.BLACK.index);
@@ -327,7 +337,7 @@ public class Excel {
 
         /*ETIQUETA TABLA */
         HSSFFont FontEtiquetaTabla = wb.createFont();
-        FontEtiquetaTabla.setFontName("Arial");
+        FontEtiquetaTabla.setFontName("Calibri");
         FontEtiquetaTabla.setFontHeightInPoints((short) 8);
         FontEtiquetaTabla.setColor(HSSFColor.BLACK.index);
 
@@ -363,6 +373,22 @@ public class Excel {
     }
 
     public void agregarValor(Integer fila, Integer columna, Integer valor, HSSFCellStyle style) {
+
+        Cell cell;
+        cell = agregarValor(fila, columna, valor);
+        asignarEstilo(fila, columna, style);
+    }
+
+    public Cell agregarValor(Integer fila, Integer columna, Double valor) {
+
+        Row row = recuperarFila(fila);
+        Cell cell = recuperarCelda(row, columna);
+
+        cell.setCellValue(valor);
+        return cell;
+    }
+
+    public void agregarValor(Integer fila, Integer columna, Double valor, HSSFCellStyle style) {
 
         Cell cell;
         cell = agregarValor(fila, columna, valor);
@@ -505,7 +531,7 @@ public class Excel {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void cargarLogo() {
         InputStream inputStream;
         try {
@@ -552,7 +578,7 @@ public class Excel {
         }
         return false;
     }
-    
+
     public void reporteSesiones(Table TTabla1, Table TTabla2, Integer ITipo, Date DFechaIni, Date DFechaFin, Animal AAnimal) {
 
         t_tabla = TTabla1;
@@ -692,7 +718,6 @@ public class Excel {
         reporteMuertes();
 
         crearExcel();
-
     }
 
     private void reporteMuertes() {
@@ -814,8 +839,8 @@ public class Excel {
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
             for (int j = 0; j < 5; j++) {
-                
-                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1 ).toString(), styleCenter);
+
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1).toString(), styleCenter);
             }
         }
     }
@@ -853,9 +878,9 @@ public class Excel {
         combinarRango("A3:H4");
 
         agregarValor(0, 0, "REPORTE DE ANIMALES EN HOSPITAL", styleNameReport);
-  
+
         agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
-  
+
         agregarValor(5, 0, "Arete Visual");
         agregarValor(5, 1, "Fecha Entrada");
         agregarValor(5, 2, "Dias en Hospital");
@@ -879,9 +904,9 @@ public class Excel {
                 agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(), styleCenter);
             }
 
-            agregarValor(fila_inicial + i, 2, Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));            
+            agregarValor(fila_inicial + i, 2, Integer.parseInt(t_tabla.getValueAt(i, 3).toString()));
             asignarEstilo(fila_inicial + i, 3, styleleft);
-            asignarEstilo(fila_inicial + i, 4, styleleft);                        
+            asignarEstilo(fila_inicial + i, 4, styleleft);
         }
     }
 
@@ -917,15 +942,15 @@ public class Excel {
         combinarRango("A2:H2");
         //combinarRango("A3:H4");
 
-        agregarValor(0, 0, "REPORTE DE HISTORICO DE HOSPITAL",styleNameReport);
-        agregarValor(1,0,"FECHA DE REPORTE: " + formatoDateTime.format(new Date()),styleDateReport);
+        agregarValor(0, 0, "REPORTE DE HISTORICO DE HOSPITAL", styleNameReport);
+        agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
 
-        agregarValor(5,0,"Arete Visual");
-        agregarValor(5,1,"Fecha Entrada");
-        agregarValor(5,2,"Fecha de Salida");
-        agregarValor(5,3,"Dias en Hospital");
-        agregarValor(5,4,"Causa Entrada");
-        agregarValor(5,5,"Observaciones");        
+        agregarValor(5, 0, "Arete Visual");
+        agregarValor(5, 1, "Fecha Entrada");
+        agregarValor(5, 2, "Fecha de Salida");
+        agregarValor(5, 3, "Dias en Hospital");
+        agregarValor(5, 4, "Causa Entrada");
+        agregarValor(5, 5, "Observaciones");
 
         tamañoColumna(0, 13);
         tamañoColumna(1, 14);
@@ -943,17 +968,25 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 1).toString(), styleCenter);
 
+            // sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
+            // sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
             for (int j = 1; j < 6; j++) {
-                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
-                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1).toString(), styleCenter);
+
+                //sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
+                //sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
 
-            sheet.getRow(fila_inicial + i).getCell(3).setCellValue(Integer.parseInt(t_tabla.getValueAt(i, 4).toString()));
-            sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
-            sheet.getRow(fila_inicial + i).getCell(5).setCellStyle(styleleft);
+            agregarValor(fila_inicial + i, 3, Integer.parseInt(t_tabla.getValueAt(i, 4).toString()));
+            asignarEstilo(fila_inicial + i, 3, styleleft);
+            asignarEstilo(fila_inicial + i, 5, styleleft);
+
+            //sheet.getRow(fila_inicial + i).getCell(3).setCellValue(Integer.parseInt(t_tabla.getValueAt(i, 4).toString()));
+            //sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleleft);
+            //sheet.getRow(fila_inicial + i).getCell(5).setCellStyle(styleleft);
         }
     }
 
@@ -1017,18 +1050,20 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 1).toString());
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 1).toString(), styleCenter);
+            //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
 
             for (int j = 1; j < 7; j++) {
                 agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1).toString(), styleCenter);
             }
 
             agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 5).toString(), styleRight);
+            asignarEstilo(fila_inicial + i, 5, styleRight);
+            asignarEstilo(fila_inicial + i, 6, styleRight);
 
-            sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleRight);
-            sheet.getRow(fila_inicial + i).getCell(5).setCellStyle(styleRight);
-            sheet.getRow(fila_inicial + i).getCell(6).setCellStyle(styleRight);
+            //sheet.getRow(fila_inicial + i).getCell(4).setCellStyle(styleRight);
+            //sheet.getRow(fila_inicial + i).getCell(5).setCellStyle(styleRight);
+            //sheet.getRow(fila_inicial + i).getCell(6).setCellStyle(styleRight);
         }
     }
 
@@ -1061,10 +1096,6 @@ public class Excel {
 
     private void reporteAnimalGraficaCrear() {
 
-        SimpleDateFormat formatoDateTime = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
-        SimpleDateFormat formatoDate = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat formatoDate1 = new SimpleDateFormat("yyyy-MM-dd");
-
         cargarLogo();
 
         combinarRango("A1:I1");
@@ -1072,39 +1103,22 @@ public class Excel {
         combinarRango("A3:I4");
         combinarRango("A5:I5");
 
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("REPORTE DE ANIMAL");
-        cell.setCellStyle(styleNameReport);
+        agregarValor(0, 0, "REPORTE DE ANIMAL", styleNameReport);
 
-        row = sheet.createRow(1);
-        cell = row.createCell(0);
-        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
-        cell.setCellStyle(styleDateReport);
+        agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
 
-        row = sheet.createRow(2);
-        cell = row.createCell(0);
-        cell.setCellStyle(styleDateReport);
+        agregarValor(2, 0, "Arete Visual: " + animal.arete_visual + " Proveedor: " + animal.proveedor.descripcion
+                + " Corral: " + animal.corral.nombre + " Fecha de Compra: " + formatoDate.format(animal.fecha_compra)
+                + " Numero de Lote: " + animal.numero_lote, styleCenter);
 
-        /*Etiqueta parametro2*/
-        row = sheet.createRow(3);
-        cell = row.createCell(0);
-        cell.setCellStyle(styleDateReport);
+        //sheet.createRow(4).createCell(0);
+        agregarValor(4, 0, "Arete Electronico: " + animal.arete_electronico + " ID SINIIGA: " + animal.arete_siniiga
+                + " Peso Actual: " + animal.peso_actual, styleCenter);
 
         Integer fila_encabezado = 5;
 
-        //  sheet.createRow(0).createCell(2).setCellValue("REPORTE DE SALIDA");
-        //sheet.createRow(0).getCell(2).setCellStyle(estiloCelda);
-        // sheet.getRow(0).getCell(2).setCellStyle(new CellStyle("CENTER"));
-        sheet.createRow(5).createCell(0).setCellValue("Fecha");
-        sheet.getRow(5).createCell(1).setCellValue("Peso");
-        sheet.getRow(5).createCell(2).setCellValue("");
-        sheet.getRow(5).createCell(3).setCellValue("");
-        sheet.getRow(5).createCell(4).setCellValue("");
-        sheet.getRow(5).createCell(5).setCellValue("");
-        sheet.getRow(5).createCell(6).setCellValue("");
-        sheet.getRow(5).createCell(7).setCellValue("");
-        sheet.getRow(5).createCell(8).setCellValue("");
+        agregarValor(5, 0, "Fecha");
+        agregarValor(5, 1, "Peso");
 
         tamañoColumna(0, 18);
         tamañoColumna(1, 8);
@@ -1115,20 +1129,7 @@ public class Excel {
         tamañoColumna(6, 11);
         tamañoColumna(8, 11);
 
-        SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
-
-        ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
-        PatternFormatting fill1 = rule1.createPatternFormatting();
-        fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
-        fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
-
-        FontFormatting font = rule1.createFontFormatting();
-        font.setFontStyle(false, true);
-        font.setFontColorIndex(IndexedColors.WHITE.index);
-
-        CellRangeAddress[] regions2 = {CellRangeAddress.valueOf("A6:I6")};
-
-        sheetCF.addConditionalFormatting(regions2, rule1, rule1);
+        relleno("A6:I6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = fila_encabezado + 1;
         Double peso;
@@ -1140,36 +1141,23 @@ public class Excel {
             peso = Double.parseDouble(t_tabla.getValueAt(i, 1).toString().substring(0, t_tabla.getValueAt(i, 1).toString().length() - 2));
 
             try {
-                fecha = formatoDate1.parse(t_tabla.getValueAt(i, 0).toString().substring(0, 11));
+                fecha = formatoDate.parse(t_tabla.getValueAt(i, 0).toString().substring(0, 11));
 
             } catch (ParseException ex) {
                 Logger.getLogger(Excel.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(formatoDate.format(fecha));
-            sheet.getRow(fila_inicial + i).createCell(1).setCellValue(peso);
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
-            sheet.getRow(fila_inicial + i).getCell(1).setCellStyle(styleRight);
+            agregarValor(fila_inicial + i, 0, formatoDate.format(fecha), styleCenter);
+            //sheet.createRow(fila_inicial + i).createCell(0).setCellValue(formatoDate.format(fecha));
+            agregarValor(fila_inicial + i, 1, peso, styleRight);
+            //sheet.getRow(fila_inicial + i).createCell(1).setCellValue(peso);
+            // sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            //sheet.getRow(fila_inicial + i).getCell(1).setCellStyle(styleRight);
             fila_final = fila_inicial + i;
         }
 
-        sheet.createRow(2).createCell(0);
-        System.out.println(animal.toString());
-        sheet.getRow(2).createCell(0).setCellValue(
-                "Arete Visual: " + animal.arete_visual + " Proveedor: " + animal.proveedor.descripcion//+ animal.categoria
-                + " Corral: " + animal.corral.nombre + " Fecha de Compra: " + formatoDate.format(animal.fecha_compra)
-                + " Numero de Lote: " + animal.numero_lote);
-        sheet.getRow(2).getCell(0).setCellStyle(styleCenter);
-
-        sheet.createRow(4).createCell(0);
-        sheet.getRow(4).createCell(0).setCellValue(
-                "Arete Electronico: " + animal.arete_electronico + " ID SINIIGA: " + animal.arete_siniiga
-                + " Peso Actual: " + animal.peso_actual);
-        sheet.getRow(4).getCell(0).setCellStyle(styleCenter);
-
         graficar((short) 2, 6, (short) 9, 26);
-
     }
 
     public void reporteEntrada(Date afecha) {
@@ -1200,43 +1188,29 @@ public class Excel {
 
     private void reporteEntradaCrear() {
 
-        SimpleDateFormat formatoDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
-        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
-
         cargarLogo();
 
         combinarRango("A1:H1");
         combinarRango("A2:H2");
         combinarRango("A3:H4");
 
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("REPORTE DE ENTRADA");
-        cell.setCellStyle(styleNameReport);
+        agregarValor(0, 0, "REPORTE DE ENTRADA", styleNameReport);
+        agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime_11.format(new Date()), styleDateReport);
+        agregarValor(2, 0, "Fecha de Entrada de Animales: " + formatoDate.format(this.fecha_ini), styleDateReport);
 
-        row = sheet.createRow(1);
-        cell = row.createCell(0);
-        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
-        cell.setCellStyle(styleDateReport);
-
-        row = sheet.createRow(2);
-        cell = row.createCell(0);
-        cell.setCellValue("Fecha de Entrada de Animales: " + formatoDate.format(this.fecha_ini));
-        cell.setCellStyle(styleDateReport);
-
-        sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
-        sheet.getRow(5).createCell(1).setCellValue("Arete Electronico");
-        sheet.getRow(5).createCell(2).setCellValue("Corral");
-        sheet.getRow(5).createCell(3).setCellValue("Proveedor");
-        sheet.getRow(5).createCell(4).setCellValue("Fecha de Compra");
-        sheet.getRow(5).createCell(5).setCellValue("Arete Siniiga");
-        sheet.getRow(5).createCell(6).setCellValue("Arete Campaña");
-        sheet.getRow(5).createCell(7).setCellValue("Sexo");
-        sheet.getRow(5).createCell(8).setCellValue("Fecha de Manejo");
-        sheet.getRow(5).createCell(9).setCellValue("Numero de Lote");
-        sheet.getRow(5).createCell(10).setCellValue("Compra");
-        sheet.getRow(5).createCell(11).setCellValue("Peso Actual (Kg)");
-        sheet.getRow(5).createCell(12).setCellValue("Peso de Compra");
+        agregarValor(5, 0, "Arete Visual");
+        agregarValor(5, 1, "Arete Electronico");
+        agregarValor(5, 2, "Corral");
+        agregarValor(5, 3, "Proveedor");
+        agregarValor(5, 4, "Fecha de Compra");
+        agregarValor(5, 5, "Arete Siniiga");
+        agregarValor(5, 6, "Arete Campaña");
+        agregarValor(5, 7, "Sexo");
+        agregarValor(5, 8, "Fecha de Manejo");
+        agregarValor(5, 9, "Numero de Lote");
+        agregarValor(5, 10, "Compra");
+        agregarValor(5, 11, "Peso Actual (Kg)");
+        agregarValor(5, 12, "Peso de Compra");
 
         tamañoColumna(0, 10);
         tamañoColumna(1, 14);
@@ -1259,11 +1233,10 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 0).toString());
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
 
             for (int j = 1; j < 13; j++) {
-                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j).toString());
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString());
                 sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
             }
 
@@ -1304,7 +1277,7 @@ public class Excel {
         Double total_kilos, peso_minimo, peso_maximo,
                 peso_promedio, alimento_ingresado, peso_ganancia;
 
-        Integer fila_encabezado = 19;
+        Integer fila_encabezado = 18;
 
         cargarLogo();
 
@@ -1317,109 +1290,110 @@ public class Excel {
         /**
          * Tabla Datos informativos /*
          */
-        combinarRango("A6:C6");
+        Integer fila_tablas = 7;        
+        
+        combinarRango("A"+(fila_tablas + 1)+":C"+(fila_tablas + 1));
+        relleno("A"+(fila_tablas + 1)+":C"+(fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+                
+        agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
+        agregarValor(fila_tablas+1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas+2, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas+3, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas+4, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas+5, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas+6, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas+7, 0, "PESO MAXIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas+8, 0, "PESO MINIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas+9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
 
-        agregarValor(5, 0, "DATOS INFORMATIVOS", styleTituloTabla);
-        agregarValor(6, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
-        agregarValor(7, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(8, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(9, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
-        agregarValor(10, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
-        agregarValor(11, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(12, 0, "PESO MAXIMO", styleEtiquetaTabla);
-        agregarValor(13, 0, "PESO MINIMO", styleEtiquetaTabla);
-        agregarValor(14, 0, "PESO PROMEDIO", styleEtiquetaTabla);
-
-        agregarValor(6, 2, formatoDateTime.format(new Date()), styleCenter);
-        agregarValor(7, 2, corral.nombre, styleCenter);
-        agregarValor(8, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
-        agregarValor(9, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
-        agregarValor(10, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
-        agregarValor(11, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
-        agregarValor(12, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
-        agregarValor(13, 2, new FormatoNumero(corral.peso_minimo.toString()).convierte(corral.peso_minimo), styleRight);
-        agregarValor(14, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
+        agregarValor(fila_tablas+1, 2, formatoDateTime.format(new Date()), styleCenter);
+        agregarValor(fila_tablas+2, 2, corral.nombre, styleCenter);
+        agregarValor(fila_tablas+3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
+        agregarValor(fila_tablas+4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
+        agregarValor(fila_tablas+5, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
+        agregarValor(fila_tablas+6, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
+        agregarValor(fila_tablas+7, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
+        agregarValor(fila_tablas+8, 2, new FormatoNumero(corral.peso_minimo.toString()).convierte(corral.peso_minimo), styleRight);
+        agregarValor(fila_tablas+9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
 
         String rango;
-        for (int i = 7; i < 16; i++) {
+        for (int i = fila_tablas+2; i <= 17; i++) {
 
             rango = "A" + i + ":B" + i;
 
             combinarRango(rango);
             this.bordes(rango, CellStyle.BORDER_THIN);
-
             this.bordes("C" + i + ":C" + i, CellStyle.BORDER_THIN);
         }
 
-        this.bordes("A6:C6", CellStyle.BORDER_MEDIUM);
-        this.bordes("A6:C15", CellStyle.BORDER_MEDIUM);
+        this.bordes("A"+ (fila_tablas + 1 )+":C"+ (fila_tablas + 1 ), CellStyle.BORDER_MEDIUM);
+        this.bordes("A"+ (fila_tablas + 1 )+":C"+ (fila_tablas + 10 ), CellStyle.BORDER_MEDIUM);
 
         /**
          * Tabla Resultados y Rendimientos
          */
-        combinarRango("E6:H6");
-
-        agregarValor(5, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
-        agregarValor(6, 4, "GANANCIA DE PESO X precio DE CARNE", styleEtiquetaTabla);
-        agregarValor(7, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
-        agregarValor(8, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(9, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
-        agregarValor(10, 4, "SUELDOS", styleEtiquetaTabla);
-        agregarValor(11, 4, "GASTOS FIJOS", styleEtiquetaTabla);
-        agregarValor(12, 4, "GASTOS VARIOS", styleEtiquetaTabla);
-        agregarValor(13, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
+        combinarRango("E"+(fila_tablas + 1)+":H"+(fila_tablas + 1));
+        relleno("E"+(fila_tablas + 1)+":H"+(fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+                       
+        agregarValor(fila_tablas, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
+        agregarValor(fila_tablas+1, 4, "GANANCIA DE PESO X precio DE CARNE", styleEtiquetaTabla);
+        agregarValor(fila_tablas+2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas+3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas+4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas+5, 4, "SUELDOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas+6, 4, "GASTOS FIJOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas+7, 4, "GASTOS VARIOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas+8, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
         //agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
 
-        agregarValor(6, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
-        agregarValor(7, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
-        agregarValor(8, 7, new FormatoNumero(corral.costo_alimento.toString()).convierte(corral.costo_alimento), styleRight);
-        agregarValor(9, 7, new FormatoNumero(corral.utilidad_s_gastos.toString()).convierte(corral.utilidad_s_gastos), styleRight);
-
-        for (int i = 7; i < 16; i++) {
+        agregarValor(fila_tablas+1, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
+        agregarValor(fila_tablas+2, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
+        agregarValor(fila_tablas+3, 7, new FormatoNumero(corral.costo_alimento.toString()).convierte(corral.costo_alimento), styleRight);
+        agregarValor(fila_tablas+4, 7, new FormatoNumero(corral.utilidad_s_gastos.toString()).convierte(corral.utilidad_s_gastos), styleRight);
+        
+        for (int i = fila_tablas+2; i <= 17; i++) {
 
             rango = "E" + i + ":G" + i;
 
             combinarRango(rango);
             this.bordes(rango, CellStyle.BORDER_THIN);
-
             this.bordes("H" + i + ":H" + i, CellStyle.BORDER_THIN);
-
         }
-        this.bordes("E6:H6", CellStyle.BORDER_MEDIUM);
-        this.bordes("E6:H15", CellStyle.BORDER_MEDIUM);
 
-        sheet.createRow(fila_encabezado).createCell(0).setCellValue("ID Visual");
-        sheet.getRow(fila_encabezado).createCell(1).setCellValue("ID Electronico");
-        sheet.getRow(fila_encabezado).createCell(2).setCellValue("Corral");
-        sheet.getRow(fila_encabezado).createCell(3).setCellValue(""); // Espacio
-        sheet.getRow(fila_encabezado).createCell(4).setCellValue("Proveedor");
-        sheet.getRow(fila_encabezado).createCell(5).setCellValue("Fecha de Compra");
-        sheet.getRow(fila_encabezado).createCell(6).setCellValue("ID Siniiga");
-        sheet.getRow(fila_encabezado).createCell(7).setCellValue("ID Campaña");
+        this.bordes("E"+ (fila_tablas + 1 )+":H"+ (fila_tablas + 1 ), CellStyle.BORDER_MEDIUM);
+        this.bordes("E"+ (fila_tablas + 1 )+":H"+ (fila_tablas + 10 ), CellStyle.BORDER_MEDIUM);
 
-        sheet.getRow(fila_encabezado).createCell(8).setCellValue("Sexo");
-        sheet.getRow(fila_encabezado).createCell(9).setCellValue("Ingreso");
-        sheet.getRow(fila_encabezado).createCell(10).setCellValue("# Lote");
-        sheet.getRow(fila_encabezado).createCell(11).setCellValue("Compra");
+        agregarValor(fila_encabezado, 0, "ID Visual", styleCenter);
+        agregarValor(fila_encabezado, 1, "ID Electronico", styleCenter);
+        agregarValor(fila_encabezado, 2, "Proveedor", styleCenter);
+        //agregarValor(fila_encabezado, 2, "Corral");
+        agregarValor(fila_encabezado, 3, ""); // Espacio
 
-        sheet.getRow(fila_encabezado).createCell(12).setCellValue("Peso Actual (Kg)");
-        sheet.getRow(fila_encabezado).createCell(13).setCellValue("Peso de Compra");
+        agregarValor(fila_encabezado, 4, "Compra", styleCenter);
+        agregarValor(fila_encabezado, 5, "ID Siniiga", styleCenter);
+        agregarValor(fila_encabezado, 6, "ID Campaña", styleCenter);
 
-        tamañoColumna(0, 15);
-        tamañoColumna(1, 15);
-        tamañoColumna(2, 18);
-        tamañoColumna(3, 1);// Espacio
-        tamañoColumna(4, 19);
-        tamañoColumna(5, 17);
-        tamañoColumna(6, 14);
-        tamañoColumna(7, 21);
-        tamañoColumna(8, 15);
-        tamañoColumna(9, 9);
-        tamañoColumna(10, 19);
-        tamañoColumna(11, 16);
-        tamañoColumna(12, 10);
-        tamañoColumna(13, 17);
-        tamañoColumna(14, 15);
+        agregarValor(fila_encabezado, 7, "Sexo", styleCenter);
+        agregarValor(fila_encabezado, 8, "Ingreso", styleCenter);
+        agregarValor(fila_encabezado, 9, "# Lote", styleCenter);
+        agregarValor(fila_encabezado, 10, "Compra", styleCenter);
+
+        agregarValor(fila_encabezado, 11, "Peso Actual (Kg)", styleCenter);
+        agregarValor(fila_encabezado, 12, "Peso de Compra", styleCenter);
+
+        tamañoColumna(0, 9);//A
+        tamañoColumna(1, 15);//B
+        tamañoColumna(2, 14);//C
+        tamañoColumna(3, 1);// Espacio D
+        tamañoColumna(4, 13);//E        
+        tamañoColumna(5, 8);//F
+        tamañoColumna(6, 10);//G
+        tamañoColumna(7, 8);//H
+        tamañoColumna(8, 8);//I
+        tamañoColumna(9, 5);//J
+        tamañoColumna(10, 7);//K
+        tamañoColumna(11, 14);//L
+        tamañoColumna(12, 10);//M
 
         relleno("A" + (fila_encabezado + 1) + ":N" + (fila_encabezado + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
 
@@ -1428,34 +1402,31 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 0).toString());
-
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
 
             //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(bordes(cell.getCellStyle(), HSSFCellStyle.BORDER_THIN));
-            for (int j = 1; j < 13; j++) {
+            for (int j = 1; j < 12; j++) {
                 /// System.out.println(i + "," + j); 
                 columna = j;
                 if (j > 2) {
                     columna = j + 1;
                 }
 
-                sheet.getRow(fila_inicial + i).createCell(columna).setCellValue(t_tabla.getValueAt(i, j).toString());
-                sheet.getRow(fila_inicial + i).getCell(columna).setCellStyle(styleCenter);
+                agregarValor(fila_inicial + i, columna, t_tabla.getValueAt(i, j).toString(), styleCenter);
             }
 
-            sheet.getRow(fila_inicial + i).getCell(12).setCellStyle(styleRight);
-            sheet.getRow(fila_inicial + i).getCell(13).setCellStyle(styleRight);
+            asignarEstilo(fila_inicial + i, 11, styleRight);
+            asignarEstilo(fila_inicial + i, 12, styleRight);
         }
 
         agregarValor(5, 8, "GRAFICA DE GANANCIA DE PESO", styleNameReport);
 
         /**
-         * Tabla Datos informativos /*
+         * GRAFICA /*
          */
         combinarRango("I6:M6");
 
-        graficar((short) 8, 6, (short) 13, 18);
+        graficar((short) 8, 7, (short) 13, 17);
     }
 
     public void reporteSalida(Table aTabla) {
@@ -1504,42 +1475,29 @@ public class Excel {
 
     private void reporteSalidaCrear() {
 
-        SimpleDateFormat formatoDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
-        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
-
         cargarLogo();
 
         combinarRango("A1:H1");
         combinarRango("A2:H2");
         combinarRango("A3:H4");
 
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("REPORTE DE SALIDA");
-        cell.setCellStyle(styleNameReport);
+        agregarValor(0, 0, "REPORTE DE SALIDA", styleNameReport);
 
-        row = sheet.createRow(1);
-        cell = row.createCell(0);
-        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
-        cell.setCellStyle(styleDateReport);
-
-        row = sheet.createRow(2);
-        cell = row.createCell(0);
+        agregarValor(1, 0, "FECHA DE REPORTE: " + formatoDateTime.format(new Date()), styleDateReport);
 
         if (this.fecha_ini != null) {
 
-            cell.setCellValue("Fecha de Salida de Animales: " + formatoDate.format(this.fecha_ini));
+            agregarValor(2, 0, "Fecha de Salida de Animales: " + formatoDate.format(this.fecha_ini), styleDateReport);
         }
-        cell.setCellStyle(styleDateReport);
 
-        sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
-        sheet.getRow(5).createCell(1).setCellValue("Arete Electronico");
-        sheet.getRow(5).createCell(2).setCellValue("Arete Siniiga");
-        sheet.getRow(5).createCell(3).setCellValue("Fecha de Movimiento");
-        sheet.getRow(5).createCell(4).setCellValue("Clase de Movimiento");
-        sheet.getRow(5).createCell(5).setCellValue("Numero de Pedido");
-        sheet.getRow(5).createCell(6).setCellValue("Grupo de Origen");
-        sheet.getRow(5).createCell(7).setCellValue("Peso (kg)");
+        agregarValor(5, 0, "Arete Visual");
+        agregarValor(5, 1, "Arete Electronico");
+        agregarValor(5, 2, "Arete Siniiga");
+        agregarValor(5, 3, "Fecha de Movimiento");
+        agregarValor(5, 4, "Clase de Movimiento");
+        agregarValor(5, 5, "Numero de Pedido");
+        agregarValor(5, 6, "Grupo de Origen");
+        agregarValor(5, 7, "Peso (kg)");
 
         tamañoColumna(0, 19);
         tamañoColumna(1, 15);
@@ -1556,20 +1514,20 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 0).toString());
-            sheet.getRow(fila_inicial + i).createCell(1).setCellValue(t_tabla.getValueAt(i, 1).toString());
-            sheet.getRow(fila_inicial + i).createCell(2).setCellValue(t_tabla.getValueAt(i, 2).toString());
-            sheet.getRow(fila_inicial + i).createCell(3).setCellValue(t_tabla.getValueAt(i, 3).toString());
-            sheet.getRow(fila_inicial + i).createCell(4).setCellValue(t_tabla.getValueAt(i, 4).toString());
-            sheet.getRow(fila_inicial + i).createCell(5).setCellValue(t_tabla.getValueAt(i, 5).toString());
-            sheet.getRow(fila_inicial + i).createCell(6).setCellValue(t_tabla.getValueAt(i, 6).toString());
-            sheet.getRow(fila_inicial + i).createCell(7).setCellValue(t_tabla.getValueAt(i, 7).toString());
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString());
+            agregarValor(fila_inicial + i, 1, t_tabla.getValueAt(i, 1).toString());
+            agregarValor(fila_inicial + i, 2, t_tabla.getValueAt(i, 2).toString());
+            agregarValor(fila_inicial + i, 3, t_tabla.getValueAt(i, 3).toString());
+            agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 4).toString());
+            agregarValor(fila_inicial + i, 5, t_tabla.getValueAt(i, 5).toString());
+            agregarValor(fila_inicial + i, 6, t_tabla.getValueAt(i, 6).toString());
+            agregarValor(fila_inicial + i, 7, t_tabla.getValueAt(i, 7).toString());
 
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
-            sheet.getRow(fila_inicial + i).getCell(1).setCellStyle(styleCenter);
-            sheet.getRow(fila_inicial + i).getCell(2).setCellStyle(styleCenter);
-            sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleCenter);
-            sheet.getRow(fila_inicial + i).getCell(7).setCellStyle(styleRight);
+            asignarEstilo(fila_inicial + i, 0, styleCenter);
+            asignarEstilo(fila_inicial + i, 1, styleCenter);
+            asignarEstilo(fila_inicial + i, 2, styleCenter);
+            asignarEstilo(fila_inicial + i, 3, styleCenter);
+            asignarEstilo(fila_inicial + i, 7, styleRight);
         }
     }
 }

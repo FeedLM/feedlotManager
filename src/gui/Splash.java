@@ -37,8 +37,10 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     private static Integer maxProgressBar;
     public static SimpleDateFormat formatoDateTime;
     public static SimpleDateFormat formatoDateTime_1;
+    public static SimpleDateFormat formatoDateTime_11;
     public static SimpleDateFormat formatoDateTime_2;
     public static SimpleDateFormat formatoDateTime_21;
+    public static SimpleDateFormat formatoDateTime3;
     public static SimpleDateFormat formatoDate;
 
     public static Integer valorProgressBar;
@@ -60,8 +62,13 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         this.setVisible(true);
         formatoDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         formatoDateTime_1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        formatoDateTime_11 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
+        
         formatoDateTime_2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         formatoDateTime_21 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        formatoDateTime3 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa"); 
+        
+        
         formatoDate = new SimpleDateFormat("yyyy-MM-dd");
 
         if (aplicacion_corriendo("feedlot_manager.exe")) {
@@ -451,3 +458,4 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     }
 
 }
+

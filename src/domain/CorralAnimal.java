@@ -20,18 +20,17 @@ public class CorralAnimal {
 
     public static Table cargarAnimalesCorral_(String id_corral) {
 
-        Table tabla = crearTablaEntrada();
-
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Table tabla = crearTablaAnimalesCorral();
 
         manejadorBD.consulta(""
                 + "SELECT a.arete_visual,                a.arete_electronico,\n"
-                + "       c.nombre as corral,            COALESCE(p.descripcion,''),\n"
-                + "       cast(a.fecha_ingreso as Date), a.arete_siniiga,\n"
+                + "       COALESCE(p.descripcion,''),\n"
+                + "       COALESCE(DATE_FORMAT(a.fecha_ingreso, '%d/%m/%Y'), '00/00/0000'), \n"
+                + "       a.arete_siniiga,\n"
                 + "       a.arete_campaña,               COALESCE(s.descripcion,''),\n"
                 //+ "       cast(a.fecha_compra as Date), "
-                +" COALESCE(DATE_FORMAT(fecha_compra, '%d/%m/%Y'), '00/00/0000'), \n"
-                + " a.numero_lote,\n"
+                +"        COALESCE(DATE_FORMAT(fecha_compra, '%d/%m/%Y'), '00/00/0000'), \n"
+                + "       a.numero_lote,\n"
                 + "	  a.compra,                      round(a.peso_actual,2),\n"
                 + "       round(a.temperatura,2)\n"
                 + "FROM   animal a LEFT OUTER JOIN  proveedor p ON a.id_proveedor    =   p.id_proveedor\n"
@@ -46,6 +45,36 @@ public class CorralAnimal {
         }
 
         return tabla;
+    }
+    
+    public static Table crearTablaAnimalesCorral() {
+
+        Table t_Salidas;
+
+        t_Salidas = new Table();
+
+        String titulos[] = {
+            "Arete Visual", "Arete Electronico", 
+            "Proveedor", "Fecha de Ingreso", "Arete Siniiga",
+            "Arete Campaña", "Sexo", "Fecha de Compra",
+            "Numero de Lote", "Compra", "Peso Actual (kg)",
+            "Temperatura"};
+
+        t_Salidas.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                titulos
+        ));
+
+        t_Salidas.setTitulos(titulos);
+        t_Salidas.cambiarTitulos();
+        t_Salidas.setFormato(new int[]{
+            Table.letra, Table.letra,
+            Table.letra, Table.fecha, Table.letra,
+            Table.letra, Table.letra, Table.fecha,
+            Table.letra, Table.letra, Table.numero_double,
+            Table.numero_double});
+
+        return t_Salidas;
     }
 
     public static ArrayList cargarAnimalesCorral(String corral) {

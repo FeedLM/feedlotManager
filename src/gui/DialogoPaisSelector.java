@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package gui;
 
-import domain.Ciudad;
-import domain.Estado;
+import domain.Pais;
+import domain.Pais;
 import static gui.Desktop.rancho;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,25 +15,22 @@ import java.awt.Toolkit;
  *
  * @author sperez
  */
-public class DialogoCiudadSelector extends javax.swing.JFrame {
+public class DialogoPaisSelector extends javax.swing.JFrame {
 
-    Ciudad ciudad;
-    Estado estado;
+    Pais pais;
 
     /**
      * Creates new form DialogoProveedorSelector
      */
-    public DialogoCiudadSelector(java.awt.Frame parent, Estado aEstado, Ciudad aCiudad) {
+    public DialogoPaisSelector(java.awt.Frame parent, Pais aPais) {
 //        super(parent, modal);
         initComponents();
-        estado = new Estado();
-        estado.cargarPorDescripcion(aEstado.descripcion);
-
-        this.ciudadSelector1.cargar(estado);
-        ciudad = new Ciudad();
-        ciudadSelector1.setSelectedItem(aCiudad.descripcion);
-        setCiudad = false;
-
+        
+        this.paisSelector1.cargar();
+        pais = new Pais();
+        paisSelector1.setSelectedItem(aPais.descripcion);
+        setPais = false;
+        
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
@@ -52,16 +49,16 @@ public class DialogoCiudadSelector extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        ciudadSelector1 = new domain.CiudadSelector();
+        paisSelector1 = new domain.PaisSelector();
 
-        setTitle("Selecciona Ciudad");
+        setTitle("Selecciona Pais");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        ciudadSelector1.addActionListener(new java.awt.event.ActionListener() {
+        paisSelector1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ciudadSelector1ActionPerformed(evt);
+                paisSelector1ActionPerformed(evt);
             }
         });
 
@@ -70,12 +67,14 @@ public class DialogoCiudadSelector extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(ciudadSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paisSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ciudadSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(paisSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,35 +85,35 @@ public class DialogoCiudadSelector extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setCiudad(Ciudad ciudad) {
-        setCiudad = true;
-        this.ciudadSelector1.setSelectedItem(ciudad.descripcion);
-        setCiudad = false;
+    public void setPais(Pais pais) {
+        setPais = true;
+        this.paisSelector1.setSelectedItem(pais.descripcion);
+        setPais = false;
     }
 
-    public Ciudad getCiudad() {
-
-        return ciudadSelector1.getCiudad();
+    
+    public Pais getPais(){
+        
+        return paisSelector1.getPais();
     }
 
-    private void ciudadSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadSelector1ActionPerformed
-
-        if (!setCiudad) {
-
+    private void paisSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisSelector1ActionPerformed
+        if (!setPais) {
+            
             this.setVisible(false);
         }
-    }//GEN-LAST:event_ciudadSelector1ActionPerformed
+    }//GEN-LAST:event_paisSelector1ActionPerformed
 
-    boolean setCiudad;
-
+    boolean setPais;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private domain.CiudadSelector ciudadSelector1;
     private javax.swing.JPanel jPanel1;
+    private domain.PaisSelector paisSelector1;
     // End of variables declaration//GEN-END:variables
 }
