@@ -661,7 +661,6 @@ public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
         if (automatico) {
             this.stick.setSeguir(false);
         }
-        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void btn_quitarPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quitarPesoActionPerformed

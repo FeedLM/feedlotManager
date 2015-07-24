@@ -11,6 +11,7 @@ import static domain.Animal.cargararete_visualsMuertos;
 import domain.Excel;
 import static domain.Movimiento.cargarMuertes;
 import static gui.Desktop.rancho;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -29,6 +30,9 @@ public class VisualizacionMuertes extends javax.swing.JFrame {
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         tagIdSelector.addArray(cargararete_visualsMuertos());
 
         this.buttonGroup1.add(jrb_hoy);
@@ -43,9 +47,9 @@ public class VisualizacionMuertes extends javax.swing.JFrame {
         cargarTablaMuertes();
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        
+
         setResizable(false);
-        
+
         fondo1.cargar(this.getSize());
     }
 

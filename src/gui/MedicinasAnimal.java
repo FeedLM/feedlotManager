@@ -12,6 +12,7 @@ import static gui.Desktop.rancho;
 import static gui.Splash.formatoDateTime;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +33,9 @@ public class MedicinasAnimal extends javax.swing.JFrame {
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         animal = aAnimal;
 
         Dimension d;

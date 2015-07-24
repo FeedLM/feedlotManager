@@ -13,6 +13,7 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,6 +36,9 @@ public class BajasMuerte extends javax.swing.JFrame {
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
 
         //id_animal = animal;
         animal = aAnimal;
@@ -257,7 +261,7 @@ public class BajasMuerte extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_IngresarActionPerformed
 
     private void btn_HistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HistoricoActionPerformed
-        visualizacionMuertes = new VisualizacionMuertes((Desktop)parent);
+        visualizacionMuertes = new VisualizacionMuertes((Desktop) parent);
         this.setVisible(false);
         visualizacionMuertes.setVisible(true);
     }//GEN-LAST:event_btn_HistoricoActionPerformed

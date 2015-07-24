@@ -843,8 +843,6 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
         this.tf_PesoActual.setDouble(new Double(0.0));
         this.tf_Eid.setText("");
 
-        this.dispose();
-
     }//GEN-LAST:event_tf_EidFocusLost
 
     private void tf_PesoActualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_PesoActualFocusGained

@@ -14,6 +14,7 @@ import static domain.Movimiento.cargarMedicinas;
 import static domain.Movimiento.cargarPesos;
 import static gui.Desktop.rancho;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -34,6 +35,9 @@ public class ReporteSesiones extends javax.swing.JFrame {
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         tagIdSelector.addArray(cargararete_visuals());
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(this.jrb_fecha);
@@ -46,7 +50,7 @@ public class ReporteSesiones extends javax.swing.JFrame {
         cargarTablas();
         corralSelector1.addArray(cargarCorrales());
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension pantallaTamano = tk.getScreenSize();
         setResizable(false);
@@ -60,10 +64,10 @@ public class ReporteSesiones extends javax.swing.JFrame {
         corral.cargarPorNombre(corralSelector1.getText(), rancho);
         cargarPesos(t_pesos, tipo, fecha_ini, fecha_fin, animal, corral);
         cargarMedicinas(t_medicinas, tipo, fecha_ini, fecha_fin, animal, corral);
-        
+
         t_pesos.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         t_medicinas.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        
+
         btn_Reporte.setEnabled(false);
 
         if (t_pesos.getRowCount() > 0 || t_medicinas.getRowCount() > 0) {

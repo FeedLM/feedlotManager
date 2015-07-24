@@ -5,13 +5,14 @@
  */
 package gui;
 
-
 import domain.Ciudad;
 import domain.Estado;
 import domain.ParametrosSP;
 import domain.Usuario;
 import static gui.Desktop.manejadorBD;
 import static gui.Login.gs_mensaje;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +27,9 @@ public class CrearUsuario extends javax.swing.JFrame {
     public CrearUsuario(java.awt.Frame parent) {
         this.parent = parent;
         initComponents();
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         usuario = new Usuario();
         estado = new Estado();
         ciudad = new Ciudad();
@@ -63,7 +67,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                     manejadorBD.parametrosSP.agregarParametro(usuario.getTelefono(), "varTelefono", "STRING", "IN");
                     if (manejadorBD.ejecutarSP("{ call agregarUsuario(?,?,?,?,?,?,?,?,?) }") == 0) {
 
-                        JOptionPane.showMessageDialog(this, "Se creó el usuario" + usuario.getLog() +" correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Se creó el usuario" + usuario.getLog() + " correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     } else {
 

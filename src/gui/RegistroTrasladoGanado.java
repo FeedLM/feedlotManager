@@ -11,6 +11,8 @@ import static domain.Corral.cargarCorrales;
 import domain.Excel;
 import static domain.Movimiento.cargarTraspasos;
 import static gui.Desktop.rancho;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.JTable;
 
@@ -28,7 +30,9 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
-
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(jrb_todo);
         this.buttonGroup1.add(jrb_otra_fecha);
@@ -198,7 +202,7 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         t_traslados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(t_traslados);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 780, 300));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 780, 300));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -219,7 +223,7 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

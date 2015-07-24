@@ -22,6 +22,7 @@ public class AdministracionAnimales extends javax.swing.JFrame {
     public AdministracionAnimales(Desktop parent) {
         this.parent = parent;
         initComponents();
+        setLocationRelativeTo(null);
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
@@ -136,8 +137,6 @@ public class AdministracionAnimales extends javax.swing.JFrame {
         
         parent.especificacionesAnimal.cargarStick();
         
-        this.setVisible(false);
-        
         parent.especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_automaticoActionPerformed
 
@@ -149,7 +148,7 @@ public class AdministracionAnimales extends javax.swing.JFrame {
         }
         
         parent.especificacionesAnimal = new EspecificacionesAnimal(parent);
-        this.setVisible(false);
+
         parent.especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_manualActionPerformed
 

@@ -13,6 +13,7 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,10 +36,11 @@ public class VisualizacionHospital extends javax.swing.JFrame {
 //        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         cargarInicio();
         ListSelectionModel lsm = this.t_animalesHospital.getSelectionModel();
-
         lsm.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 selectAnimal();
@@ -48,7 +50,7 @@ public class VisualizacionHospital extends javax.swing.JFrame {
         corralSelector1.cargar();
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension TamanoPantalla = tk.getScreenSize();
         fondo1.cargar(TamanoPantalla);
@@ -404,21 +406,21 @@ public class VisualizacionHospital extends javax.swing.JFrame {
     }//GEN-LAST:event_tbn_reporte1ActionPerformed
 
     private void tbn_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_reporteActionPerformed
-        
+
         reporteHistorico();
-        
+
     }//GEN-LAST:event_tbn_reporteActionPerformed
 
     private void corralSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corralSelector1ActionPerformed
-        
+
         ObtenerCorralDestino();
-        
+
     }//GEN-LAST:event_corralSelector1ActionPerformed
 
     private void btn_salidaHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salidaHospitalActionPerformed
-        
+
         generarSalida();
-        
+
     }//GEN-LAST:event_btn_salidaHospitalActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

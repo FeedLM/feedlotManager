@@ -9,6 +9,7 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -21,6 +22,9 @@ public class AdministracionRanchos extends javax.swing.JFrame {
         initComponents();
         this.parent = parent;
         setLocationRelativeTo(null);
+        Image i = null;
+        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+        setIconImage(i);
         ListSelectionModel lsm = this.t_ranchos.getSelectionModel();
         lsm.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -332,7 +336,7 @@ public class AdministracionRanchos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al crear el Rancho\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void estadoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoSelector1ActionPerformed
 
         //if (!selectRancho) {

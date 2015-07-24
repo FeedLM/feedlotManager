@@ -339,7 +339,6 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
 
             especificacionesAnimal.setId_animal(animal.id_animal);
         }
-        this.setVisible(false);
         especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_detallesActionPerformed
 

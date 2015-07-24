@@ -284,7 +284,7 @@ public class Sementales extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_EidFocusLost
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
+        parent.administracionAnimales.setVisible(true);
         this.stick.setSeguir(false);
     }//GEN-LAST:event_formWindowClosing
 

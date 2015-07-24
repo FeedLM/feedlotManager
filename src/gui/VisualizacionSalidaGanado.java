@@ -273,8 +273,7 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         btn_Reporte.setBackground(new java.awt.Color(64, 37, 4));
         btn_Reporte.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_Reporte.setForeground(new java.awt.Color(230, 225, 195));
-        btn_Reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/excel_exports.png"))); // NOI18N
-        btn_Reporte.setText("         Reporte        ");
+        btn_Reporte.setText("Reporte");
         btn_Reporte.setContentAreaFilled(false);
         btn_Reporte.setEnabled(false);
         btn_Reporte.setOpaque(true);
@@ -288,8 +287,7 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         btn_visualiza.setBackground(new java.awt.Color(64, 37, 4));
         btn_visualiza.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_visualiza.setForeground(new java.awt.Color(230, 225, 195));
-        btn_visualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/page_find_24x24.png"))); // NOI18N
-        btn_visualiza.setText("         Visualizar      ");
+        btn_visualiza.setText("Visualizar      ");
         btn_visualiza.setContentAreaFilled(false);
         btn_visualiza.setOpaque(true);
         btn_visualiza.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +321,6 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         btn_detalles.setBackground(new java.awt.Color(64, 37, 4));
         btn_detalles.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_detalles.setForeground(new java.awt.Color(230, 225, 195));
-        btn_detalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/define_name.png"))); // NOI18N
         btn_detalles.setMnemonic('t');
         btn_detalles.setText("Detalles");
         btn_detalles.setToolTipText("");
