@@ -760,7 +760,7 @@ public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
 
                 if (!animal2.id_animal.equals("")) {
 
-                    JOptionPane.showMessageDialog(this, "El codigo que intenta guardar ya existe", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El código IDV que intenta guardar ya existe", gs_mensaje, JOptionPane.ERROR_MESSAGE);
 
                     btn_BajasMuerte.setEnabled(false);
                     btn_Hospital.setEnabled(false);

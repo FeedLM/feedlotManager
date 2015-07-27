@@ -1345,7 +1345,7 @@ public class Excel {
         Integer fila_tablas = 7;
 
         combinarRango("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1));
-        relleno("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+        relleno("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
         agregarValor(fila_tablas + 1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
@@ -1385,10 +1385,10 @@ public class Excel {
          * Tabla Resultados y Rendimientos
          */
         combinarRango("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1));
-        relleno("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+        relleno("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         agregarValor(fila_tablas, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
-        agregarValor(fila_tablas + 1, 4, "GANANCIA DE PESO X precio DE CARNE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 1, 4, "GANANCIA DE PESO X PRECIO DE CARNE", styleEtiquetaTabla);
         agregarValor(fila_tablas + 2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
         agregarValor(fila_tablas + 3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
         agregarValor(fila_tablas + 4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
@@ -1447,7 +1447,7 @@ public class Excel {
         tamañoColumna(11, 14);//L
         tamañoColumna(12, 10);//M
 
-        relleno("A" + (fila_encabezado + 1) + ":N" + (fila_encabezado + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+        relleno("A" + (fila_encabezado + 1) + ":N" + (fila_encabezado + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = fila_encabezado + 1;
         Integer columna;
@@ -1478,7 +1478,7 @@ public class Excel {
         }
 
         agregarValor(fila_tablas, 8, "GRAFICA DE GANANCIA DE PESO", styleCenter);
-        relleno("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), IndexedColors.BROWN.index, IndexedColors.WHITE.index);
+        relleno("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
         bordes("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
         
         bordes("I" + (fila_tablas + 2) + ":M" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);

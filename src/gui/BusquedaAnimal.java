@@ -47,15 +47,7 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
         animal = new Animal();
 
         this.tagIdSelector.addArray(cargararete_visuals());
-        /*
-         String titulos[] = {"TagId", "EiD", "Arete Siniiga", "Fecha de Salida",
-         "Clase de Movimiento", "Numero de Pedido", "Grupo de Origen",
-         "Peso (kg)"};
 
-         t_movimientoSalida.setTitulos(titulos);
-         t_movimientoSalida.cambiarTitulos();
-         t_movimientoSalida.setFormato(new int[]{0, 0, 0, 3, 0, 0, 0, 1});
-         */
         cargarPuertos();
 
         stick = new SR232(puertoStick, 1, parent, 7);
@@ -66,26 +58,13 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
         tagIdSelector.ActionTranferfocus = false;
 
         cargarAnimales();
-        /*
-         int[] tamaños = new int[8];
-         tamaños[0] = 80;//id Animal
-         tamaños[1] = 100;//EID
-         tamaños[2] = 80;//Arete Siniiga
-         tamaños[3] = 120;//Fecha Salida
-         tamaños[4] = 140;//Clase de Movimiento
-         tamaños[5] = 120; //Numero de Pedido
-         tamaños[6] = 120;//Grupo de Origen
-         tamaños[7] = 80;//Peso (kg)
-
-         t_movimientoSalida.tamañoColumna(tamaños);
-         */
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        
+
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
-        
+
         fondo1.cargar(getSize());
     }
 
@@ -112,7 +91,7 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
         t_animales = animalTodos(t_animales);
 
         if (t_animales.getRowCount() > 0) {
-            
+
             btn_detalles.setEnabled(true);
         }
     }
@@ -297,7 +276,7 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
     private void tf_EidFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_EidFocusLost
 
         if (true) {
-
+            
             return;
         }
         eid = tf_Eid.getText();
@@ -305,7 +284,6 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
     }//GEN-LAST:event_tf_EidFocusLost
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
         this.stick.setSeguir(false);
     }//GEN-LAST:event_formWindowClosing
 

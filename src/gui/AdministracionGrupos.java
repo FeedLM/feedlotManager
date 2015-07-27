@@ -904,9 +904,9 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 
             especificacionesAnimal.setId_animal(id_animal);
         }
-        this.setVisible(false);
+
         especificacionesAnimal.setVisible(true);
-        //  this.dispose();
+
     }//GEN-LAST:event_btn_detallesActionPerformed
 
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
@@ -941,7 +941,7 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 
     private void btn_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_busquedaActionPerformed
         busquedaAnimal = new BusquedaAnimal(parent);
-        this.setVisible(false);
+//        this.dispose();
         busquedaAnimal.setVisible(true);
     }//GEN-LAST:event_btn_busquedaActionPerformed
 

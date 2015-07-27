@@ -199,6 +199,7 @@ public class Sementales extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1000, 90));
 
+        t_animales.setForeground(new java.awt.Color(230, 225, 195));
         t_animales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -149,6 +149,7 @@ public class Partos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        t_Parto.setForeground(new java.awt.Color(230, 225, 195));
         t_Parto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
