@@ -9,6 +9,7 @@ import gui.Desktop;
 import static gui.Desktop.rancho;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,12 +23,10 @@ public class AdministracionAnimales extends javax.swing.JFrame {
     public AdministracionAnimales(Desktop parent) {
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
+//        this.pack();
+//        this.setClosable(true);
+//        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        this.setResizable(false);
         fondo1.cargar(this.jPanel6.getSize());
     }
 
@@ -177,9 +176,7 @@ public class AdministracionAnimales extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_sementalesActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
-
     /**
      * @param args the command line arguments //
      */

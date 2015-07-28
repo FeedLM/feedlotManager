@@ -10,6 +10,7 @@ import static domain.Medicina.cargarCodigoMedicinas;
 import static domain.UnidadMedida.cargarUnidades;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,12 +21,16 @@ public class Compras extends javax.swing.JInternalFrame {
     /**
      * Creates new form IngresoMedicamento
      */
-    public Compras() {
-
+    public Compras(Desktop parent) {
+        this.parent = parent;
         initComponents();
-        setTitle(this.getTitle() + " " + rancho.descripcion);
-        setResizable(false);
+        this.setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
+        setTitle(this.getTitle() + " " + rancho.descripcion);
+        fondo1.cargar(jPanel1.getSize());
+        
         String titulos[] = {"Partida", "Código", "Medicina", "Cantidad", "Precio Unitario", "Importe"};
 
         t_medicina.setTitulos(titulos);
@@ -41,6 +46,8 @@ public class Compras extends javax.swing.JInternalFrame {
         medicinaSelector1.cargar();
         codigoSelector.addArray(cargarCodigoMedicinas());
         UnidadSelector.addArray(cargarUnidades());
+
+        cargarMedicina();
     }
 
     private void cargarMedicina() {
@@ -94,6 +101,9 @@ public class Compras extends javax.swing.JInternalFrame {
         tf_precioUnitario = new abstractt.TextFieldMoneda();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_medicina = new abstractt.Table();
+        fondo1 = new abstractt.fondo();
+        btn_guardar = new abstractt.Boton();
+        btn_nuevo = new abstractt.Boton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -161,26 +171,36 @@ public class Compras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(t_medicina);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 800, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 800, 300));
+
+        fondo1.setText("fondo1");
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        btn_guardar.setText("Generar Compra");
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 130, 30));
+
+        btn_nuevo.setText("Nueva Compra");
+        jPanel1.add(btn_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 130, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.ComboBox UnidadSelector;
+    private abstractt.Boton btn_guardar;
+    private abstractt.Boton btn_nuevo;
     private abstractt.ComboBox codigoSelector;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
@@ -191,6 +211,7 @@ public class Compras extends javax.swing.JInternalFrame {
     private abstractt.Etiqueta etiqueta8;
     private abstractt.Etiqueta etiqueta9;
     private domain.Fecha fecha1;
+    private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
