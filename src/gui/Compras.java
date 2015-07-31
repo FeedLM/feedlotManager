@@ -21,7 +21,7 @@ public class Compras extends javax.swing.JInternalFrame {
     /**
      * Creates new form IngresoMedicamento
      */
-    public Compras(Desktop parent) {
+    public Compras() {
         this.parent = parent;
         initComponents();
         this.setClosable(true);
@@ -45,12 +45,12 @@ public class Compras extends javax.swing.JInternalFrame {
         proveedorSelector1.cargar();
         medicinaSelector1.cargar();
         codigoSelector.addArray(cargarCodigoMedicinas());
-        UnidadSelector.addArray(cargarUnidades());
+        
 
-        cargarMedicina();
+        cargarMedicinaCompra();
     }
 
-    private void cargarMedicina() {
+    private void cargarMedicinaCompra() {
 
         ManejadorBD mbd = manejadorBD.nuevaConexion();
 
@@ -62,11 +62,40 @@ public class Compras extends javax.swing.JInternalFrame {
 
         this.t_medicina.setModel(mbd);
         if (mbd.getRowCount() > 0) {
-
             t_medicina.setRowSelectionInterval(0, 0);
         }
 
-//        t_medicina.ocultarcolumna(0);
+    }
+        public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Compras().setVisible(true);
+            }
+        });
     }
 
     /**
@@ -89,74 +118,119 @@ public class Compras extends javax.swing.JInternalFrame {
         proveedorSelector1 = new domain.ProveedorSelector();
         selectorFecha1 = new gui.SelectorFecha();
         jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         etiqueta5 = new abstractt.Etiqueta();
-        medicinaSelector1 = new domain.MedicinaSelector();
         etiqueta6 = new abstractt.Etiqueta();
-        codigoSelector = new abstractt.ComboBox();
         etiqueta7 = new abstractt.Etiqueta();
         etiqueta8 = new abstractt.Etiqueta();
         etiqueta9 = new abstractt.Etiqueta();
+        jPanel5 = new javax.swing.JPanel();
+        medicinaSelector1 = new domain.MedicinaSelector();
+        codigoSelector = new abstractt.ComboBox();
         tf_cantidadIngresada = new abstractt.TextField();
-        UnidadSelector = new abstractt.ComboBox();
+        textField1 = new abstractt.TextField();
         tf_precioUnitario = new abstractt.TextFieldMoneda();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_medicina = new abstractt.Table();
         fondo1 = new abstractt.fondo();
-        btn_guardar = new abstractt.Boton();
-        btn_nuevo = new abstractt.Boton();
+        btn_agregarCompra = new abstractt.Boton();
+        btn_nuevaCompra = new abstractt.Boton();
+        jPanel6 = new javax.swing.JPanel();
+        etiqueta3 = new abstractt.Etiqueta();
+        etiqueta10 = new abstractt.Etiqueta();
+        etiqueta11 = new abstractt.Etiqueta();
+        textFieldMoneda3 = new abstractt.TextFieldMoneda();
+        textFieldMoneda2 = new abstractt.TextFieldMoneda();
+        textFieldMoneda1 = new abstractt.TextFieldMoneda();
+        btn_agregarMedicina = new abstractt.Boton();
+        btn_eliminarMedicina = new abstractt.Boton();
+        etiqueta12 = new abstractt.Etiqueta();
+        btn_generarReporte = new abstractt.Boton();
+        btn_Catalogos = new abstractt.Boton();
+
+        setPreferredSize(new java.awt.Dimension(850, 650));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(64, 37, 4))); // NOI18N
+        jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta1.setText("Número de Factura");
-        jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, 20));
+        jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 20));
 
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta2.setText("Proveedor");
-        jPanel2.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
+        jPanel2.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 35, 130, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta4.setText("Orden de Compra");
-        jPanel2.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 130, 20));
-        jPanel2.add(tf_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 130, 20));
-        jPanel2.add(tf_ordenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 130, 20));
-        jPanel2.add(proveedorSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 130, 20));
-        jPanel2.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, 60));
+        jPanel2.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
+        jPanel2.add(tf_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 130, 20));
+        jPanel2.add(tf_ordenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 130, 20));
+        jPanel2.add(proveedorSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 35, 130, 20));
+        jPanel2.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 350, 200));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 550, 90));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Medicina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(64, 37, 4))); // NOI18N
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta5.setText("Medicamento:");
-        jPanel4.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, 20));
-        jPanel4.add(medicinaSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 130, 20));
+        etiqueta5.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel3.add(etiqueta5);
 
-        etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta6.setText("Código:");
-        jPanel4.add(etiqueta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
-        jPanel4.add(codigoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 130, 20));
+        etiqueta6.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel3.add(etiqueta6);
 
-        etiqueta7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        etiqueta7.setText("Cantidad ingresada:");
-        jPanel4.add(etiqueta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 130, 20));
+        etiqueta7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiqueta7.setText("Cantidad:");
+        etiqueta7.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel3.add(etiqueta7);
 
-        etiqueta8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta8.setText("Unidad de Medida:");
-        jPanel4.add(etiqueta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, 20));
+        etiqueta8.setPreferredSize(new java.awt.Dimension(120, 20));
+        etiqueta8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(etiqueta8);
 
-        etiqueta9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta9.setText("Precio Unitario:");
-        jPanel4.add(etiqueta9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 20));
-        jPanel4.add(tf_cantidadIngresada, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 130, 20));
-        jPanel4.add(UnidadSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 130, 20));
-        jPanel4.add(tf_precioUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 130, 20));
+        etiqueta9.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel3.add(etiqueta9);
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 350, 200));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 650, 30));
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        medicinaSelector1.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(medicinaSelector1);
+
+        codigoSelector.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(codigoSelector);
+
+        tf_cantidadIngresada.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(tf_cantidadIngresada);
+
+        textField1.setEditable(false);
+        textField1.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(textField1);
+
+        tf_precioUnitario.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(tf_precioUnitario);
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 650, 30));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 670, 80));
 
         t_medicina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,39 +245,97 @@ public class Compras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(t_medicina);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 800, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 800, 250));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        btn_guardar.setText("Generar Compra");
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 130, 30));
+        btn_agregarCompra.setText("Agregar Compra");
+        jPanel1.add(btn_agregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 150, 25));
 
-        btn_nuevo.setText("Nueva Compra");
-        jPanel1.add(btn_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 130, 30));
+        btn_nuevaCompra.setText("Nueva Compra");
+        jPanel1.add(btn_nuevaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 150, 25));
+
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta3.setText("Subtotal:");
+        jPanel6.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 20));
+
+        etiqueta10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta10.setText("I.V.A.:");
+        jPanel6.add(etiqueta10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, 50, 20));
+
+        etiqueta11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta11.setText("Total:");
+        jPanel6.add(etiqueta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 50, 20));
+
+        textFieldMoneda3.setEditable(false);
+        jPanel6.add(textFieldMoneda3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 20));
+        jPanel6.add(textFieldMoneda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 80, 20));
+        jPanel6.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 80, 20));
+
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, -1, -1));
+
+        btn_agregarMedicina.setText("Agregar");
+        jPanel1.add(btn_agregarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 80, 25));
+
+        btn_eliminarMedicina.setText("Eliminar");
+        jPanel1.add(btn_eliminarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 80, 25));
+
+        etiqueta12.setBackground(new java.awt.Color(95, 84, 88));
+        etiqueta12.setForeground(new java.awt.Color(230, 225, 195));
+        etiqueta12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiqueta12.setText("Compra");
+        etiqueta12.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
+        etiqueta12.setOpaque(true);
+        jPanel1.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 70));
+
+        btn_generarReporte.setText("Generar Reporte");
+        jPanel1.add(btn_generarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 150, 30));
+
+        btn_Catalogos.setText("Ir a Catalogos");
+        btn_Catalogos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CatalogosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_Catalogos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_CatalogosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CatalogosActionPerformed
+        catalogos = new Catalogos(parent);
+        Catalogos.setDefaultLocale(null);
+    }//GEN-LAST:event_btn_CatalogosActionPerformed
+    Catalogos catalogos;
     Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.ComboBox UnidadSelector;
-    private abstractt.Boton btn_guardar;
-    private abstractt.Boton btn_nuevo;
+    private abstractt.Boton btn_Catalogos;
+    private abstractt.Boton btn_agregarCompra;
+    private abstractt.Boton btn_agregarMedicina;
+    private abstractt.Boton btn_eliminarMedicina;
+    private abstractt.Boton btn_generarReporte;
+    private abstractt.Boton btn_nuevaCompra;
     private abstractt.ComboBox codigoSelector;
     private abstractt.Etiqueta etiqueta1;
+    private abstractt.Etiqueta etiqueta10;
+    private abstractt.Etiqueta etiqueta11;
+    private abstractt.Etiqueta etiqueta12;
     private abstractt.Etiqueta etiqueta2;
+    private abstractt.Etiqueta etiqueta3;
     private abstractt.Etiqueta etiqueta4;
     private abstractt.Etiqueta etiqueta5;
     private abstractt.Etiqueta etiqueta6;
@@ -214,12 +346,19 @@ public class Compras extends javax.swing.JInternalFrame {
     private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private domain.MedicinaSelector medicinaSelector1;
     private domain.ProveedorSelector proveedorSelector1;
     private gui.SelectorFecha selectorFecha1;
     private abstractt.Table t_medicina;
+    private abstractt.TextField textField1;
+    private abstractt.TextFieldMoneda textFieldMoneda1;
+    private abstractt.TextFieldMoneda textFieldMoneda2;
+    private abstractt.TextFieldMoneda textFieldMoneda3;
     private abstractt.TextField tf_cantidadIngresada;
     private abstractt.TextField tf_factura;
     private abstractt.TextField tf_ordenCompra;
