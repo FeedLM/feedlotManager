@@ -623,7 +623,7 @@ public class CatalogoProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_estadoSelector1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
+//        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
