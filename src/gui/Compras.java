@@ -5,37 +5,41 @@
  */
 package gui;
 
-import domain.ManejadorBD;
+import domain.Compra;
+import domain.Medicina;
 import static domain.Medicina.cargarCodigoMedicinas;
-import static domain.UnidadMedida.cargarUnidades;
+import domain.ParametrosSP;
+import domain.Proveedor;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
-import javax.swing.ImageIcon;
+import static gui.Login.gs_mensaje;
+import static gui.Splash.formatoDateTime;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Home
  */
-public class Compras extends javax.swing.JInternalFrame {
+public class Compras extends javax.swing.JDialog {
 
     /**
      * Creates new form IngresoMedicamento
      */
-    public Compras() {
+    public Compras(Desktop parent) {
         this.parent = parent;
         initComponents();
-        this.setClosable(true);
-        this.pack();
-        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
+//        this.setClosable(true);
+//        this.pack();
+//        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         setTitle(this.getTitle() + " " + rancho.descripcion);
         fondo1.cargar(jPanel1.getSize());
-        
-        String titulos[] = {"Partida", "Código", "Medicina", "Cantidad", "Precio Unitario", "Importe"};
+
+        String titulos[] = {"Código", "Medicina", "Cantidad", "Precio Unitario", "Importe"};
 
         t_medicina.setTitulos(titulos);
         t_medicina.cambiarTitulos();
-        t_medicina.setFormato(new int[]{4, 4, 0, 4, 2, 2});
+        t_medicina.setFormato(new int[]{4, 0, 4, 2, 2});
         t_medicina.centrar();
 
         tf_factura.textFieldSoloNumerosYLetras();
@@ -45,57 +49,6 @@ public class Compras extends javax.swing.JInternalFrame {
         proveedorSelector1.cargar();
         medicinaSelector1.cargar();
         codigoSelector.addArray(cargarCodigoMedicinas());
-        
-
-        cargarMedicinaCompra();
-    }
-
-    private void cargarMedicinaCompra() {
-
-        ManejadorBD mbd = manejadorBD.nuevaConexion();
-
-        mbd.consulta(""
-                + "SELECT 	m.codigo, m.nombre, cd.cantidad, 	cd.precio_unitario, cd.importe"
-                + "FROM 	compras as c, compra_detalle as cd, 	medicina as m"
-                + "WHERE 	cd.id_medicina = m.id_medicina"
-                + "AND		cd.id_compra = c.id_compras;");
-
-        this.t_medicina.setModel(mbd);
-        if (mbd.getRowCount() > 0) {
-            t_medicina.setRowSelectionInterval(0, 0);
-        }
-
-    }
-        public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Compras().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -128,25 +81,25 @@ public class Compras extends javax.swing.JInternalFrame {
         medicinaSelector1 = new domain.MedicinaSelector();
         codigoSelector = new abstractt.ComboBox();
         tf_cantidadIngresada = new abstractt.TextField();
-        textField1 = new abstractt.TextField();
+        tf_unidadMedida = new abstractt.TextField();
         tf_precioUnitario = new abstractt.TextFieldMoneda();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_medicina = new abstractt.Table();
         fondo1 = new abstractt.fondo();
         btn_agregarCompra = new abstractt.Boton();
-        btn_nuevaCompra = new abstractt.Boton();
         jPanel6 = new javax.swing.JPanel();
         etiqueta3 = new abstractt.Etiqueta();
         etiqueta10 = new abstractt.Etiqueta();
         etiqueta11 = new abstractt.Etiqueta();
-        textFieldMoneda3 = new abstractt.TextFieldMoneda();
-        textFieldMoneda2 = new abstractt.TextFieldMoneda();
-        textFieldMoneda1 = new abstractt.TextFieldMoneda();
+        tf_total = new abstractt.TextFieldMoneda();
+        tf_iva = new abstractt.TextFieldMoneda();
+        tf_subtotal = new abstractt.TextFieldMoneda();
         btn_agregarMedicina = new abstractt.Boton();
         btn_eliminarMedicina = new abstractt.Boton();
         etiqueta12 = new abstractt.Etiqueta();
-        btn_generarReporte = new abstractt.Boton();
-        btn_Catalogos = new abstractt.Boton();
+        btn_proveedor = new abstractt.Boton();
+        btn_medicamentos = new abstractt.Boton();
+        textField2 = new abstractt.TextField();
 
         setPreferredSize(new java.awt.Dimension(850, 650));
 
@@ -213,17 +166,27 @@ public class Compras extends javax.swing.JInternalFrame {
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
 
         medicinaSelector1.setPreferredSize(new java.awt.Dimension(120, 20));
+        medicinaSelector1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medicinaSelector1ActionPerformed(evt);
+            }
+        });
         jPanel5.add(medicinaSelector1);
 
         codigoSelector.setPreferredSize(new java.awt.Dimension(120, 20));
+        codigoSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoSelectorActionPerformed(evt);
+            }
+        });
         jPanel5.add(codigoSelector);
 
         tf_cantidadIngresada.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel5.add(tf_cantidadIngresada);
 
-        textField1.setEditable(false);
-        textField1.setPreferredSize(new java.awt.Dimension(120, 20));
-        jPanel5.add(textField1);
+        tf_unidadMedida.setEditable(false);
+        tf_unidadMedida.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(tf_unidadMedida);
 
         tf_precioUnitario.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel5.add(tf_precioUnitario);
@@ -251,10 +214,12 @@ public class Compras extends javax.swing.JInternalFrame {
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         btn_agregarCompra.setText("Agregar Compra");
-        jPanel1.add(btn_agregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 150, 25));
-
-        btn_nuevaCompra.setText("Nueva Compra");
-        jPanel1.add(btn_nuevaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 150, 25));
+        btn_agregarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarCompraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_agregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 150, 30));
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -270,14 +235,19 @@ public class Compras extends javax.swing.JInternalFrame {
         etiqueta11.setText("Total:");
         jPanel6.add(etiqueta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 50, 20));
 
-        textFieldMoneda3.setEditable(false);
-        jPanel6.add(textFieldMoneda3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 20));
-        jPanel6.add(textFieldMoneda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 80, 20));
-        jPanel6.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 80, 20));
+        tf_total.setEditable(false);
+        jPanel6.add(tf_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 20));
+        jPanel6.add(tf_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 80, 20));
+        jPanel6.add(tf_subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 80, 20));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, -1, -1));
 
         btn_agregarMedicina.setText("Agregar");
+        btn_agregarMedicina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarMedicinaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_agregarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 80, 25));
 
         btn_eliminarMedicina.setText("Eliminar");
@@ -291,16 +261,24 @@ public class Compras extends javax.swing.JInternalFrame {
         etiqueta12.setOpaque(true);
         jPanel1.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 70));
 
-        btn_generarReporte.setText("Generar Reporte");
-        jPanel1.add(btn_generarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 150, 30));
-
-        btn_Catalogos.setText("Ir a Catalogos");
-        btn_Catalogos.addActionListener(new java.awt.event.ActionListener() {
+        btn_proveedor.setText("Catalogo de Proveedor");
+        btn_proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CatalogosActionPerformed(evt);
+                btn_proveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Catalogos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 150, 30));
+        jPanel1.add(btn_proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 170, 30));
+
+        btn_medicamentos.setText("Catalogo de Medicina");
+        btn_medicamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_medicamentosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_medicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 170, 30));
+
+        textField2.setText("Cero 00/100 M.N.");
+        jPanel1.add(textField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 430, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,19 +294,147 @@ public class Compras extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_CatalogosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CatalogosActionPerformed
-        catalogos = new Catalogos(parent);
-        Catalogos.setDefaultLocale(null);
-    }//GEN-LAST:event_btn_CatalogosActionPerformed
-    Catalogos catalogos;
+    private void btn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proveedorActionPerformed
+        catalogoProveedor = new CatalogoProveedor(parent);
+        catalogoProveedor.setVisible(true);
+    }//GEN-LAST:event_btn_proveedorActionPerformed
+
+    private void btn_medicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicamentosActionPerformed
+        administracionMedicamentos = new AdministracionMedicamentos(parent);
+        administracionMedicamentos.setVisible(true);
+    }//GEN-LAST:event_btn_medicamentosActionPerformed
+
+    private void btn_agregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarCompraActionPerformed
+        compra.setId_rancho(rancho.id_rancho);
+        proveedor.cargarPorDescripcion(proveedorSelector1.getText());
+        compra.setId_proveedor(proveedor);
+
+        compra.setFecha(selectorFecha1.getFecha());
+
+        compra.setFactura(tf_factura.getText());
+        compra.setOrden(tf_ordenCompra.getText());
+        compra.setSubtotal(tf_subtotal.getDouble());
+        compra.setIva(tf_iva.getDouble());
+        compra.setTotal(tf_total.getDouble());
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
+        manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varRancho", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.id_proveedor.id_proveedor, "varproveedor", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(compra.getFecha()), "varfecha", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.factura, "varfactura", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.orden, "varorden", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getSubtotal()), "varsubtotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getIva()), "variva", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getTotal()), "vartotal", "DOUBLE", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
+
+            JOptionPane.showMessageDialog(this, "Se guardó la Compra Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            agregarDetallesCompra();
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btn_agregarCompraActionPerformed
+
+    private void agregarDetallesCompra() {
+        manejadorBD.parametrosSP = new ParametrosSP();
+        //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
+        for (int i = 0; i < t_medicina.getRowCount(); i++) {
+            manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varCantidad", "INT", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
+        }
+    }
+
+    private void btn_agregarMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarMedicinaActionPerformed
+
+        int fila = t_medicina.getRowCount();
+
+        cantidad = this.tf_cantidadIngresada.getInt();
+        precioUnitario = this.tf_precioUnitario.getDouble();
+        importe = cantidad * precioUnitario;
+
+        t_medicina.setValueAt(medicina.codigo, fila, 0);
+        t_medicina.setValueAt(medicina.nombre, fila, 1);
+        t_medicina.setValueAt(cantidad, fila, 2);
+        t_medicina.setValueAt(precioUnitario, fila, 3);
+        t_medicina.setValueAt(importe, fila, 4);
+
+        cargarTotales();
+
+        limpiarMedicina();
+    }//GEN-LAST:event_btn_agregarMedicinaActionPerformed
+
+    private void medicinaSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicinaSelector1ActionPerformed
+        if (!medicinaSelector1.equals("")) {
+            medicina = medicinaSelector1.getMedicnaNombre();
+            this.codigoSelector.setSelectedItem(medicina.codigo);
+            tf_unidadMedida.setText(medicina.unidadMedida.descripcion);
+        }
+    }//GEN-LAST:event_medicinaSelector1ActionPerformed
+
+    private void codigoSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoSelectorActionPerformed
+        String codigo;
+
+        codigo = codigoSelector.getSelectedItem().toString();
+
+        if (!codigo.equals("")) {
+
+            medicina.codigo = Integer.parseInt(codigo);
+
+            manejadorBD.consulta(""
+                    + "SELECT id_medicina, nombre "
+                    + "FROM   medicina "
+                    + "WHERE  codigo = " + medicina.codigo + " "
+                    + "AND    status = 'S'");
+
+            if (manejadorBD.getRowCount() > 0) {
+                medicina.cargarPorNombre(manejadorBD.getValorString(0, 1));
+                medicinaSelector1.setSelectedItem(medicina.nombre);
+                tf_unidadMedida.setText(medicina.unidadMedida.descripcion);
+            }
+        }
+    }//GEN-LAST:event_codigoSelectorActionPerformed
+
+    private void cargarTotales() {
+        for (int i = 0; i < (t_medicina.getRowCount() - 1); i++) {
+            subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 4)));
+        }
+        total = subtotal * iva;
+        this.tf_subtotal.setText(String.valueOf(subtotal));
+        this.tf_iva.setText((iva * 100) + "%");
+        this.tf_total.setText(String.valueOf(total));
+    }
+
+    private void limpiarMedicina() {
+        tf_factura.setText("");
+        tf_ordenCompra.setText("");
+        this.proveedorSelector1.setSelectedItem("");
+    }
+
+    int cantidad;
+    double precioUnitario;
+    double importe;
+    double subtotal = 0;
+    double iva = 0.16;
+    double total = 0;
+    Compra compra;
+    Proveedor proveedor;
+    Medicina medicina;
+    CatalogoProveedor catalogoProveedor;
+    AdministracionMedicamentos administracionMedicamentos;
     Desktop parent;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton btn_Catalogos;
     private abstractt.Boton btn_agregarCompra;
     private abstractt.Boton btn_agregarMedicina;
     private abstractt.Boton btn_eliminarMedicina;
-    private abstractt.Boton btn_generarReporte;
-    private abstractt.Boton btn_nuevaCompra;
+    private abstractt.Boton btn_medicamentos;
+    private abstractt.Boton btn_proveedor;
     private abstractt.ComboBox codigoSelector;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta10;
@@ -355,13 +461,14 @@ public class Compras extends javax.swing.JInternalFrame {
     private domain.ProveedorSelector proveedorSelector1;
     private gui.SelectorFecha selectorFecha1;
     private abstractt.Table t_medicina;
-    private abstractt.TextField textField1;
-    private abstractt.TextFieldMoneda textFieldMoneda1;
-    private abstractt.TextFieldMoneda textFieldMoneda2;
-    private abstractt.TextFieldMoneda textFieldMoneda3;
+    private abstractt.TextField textField2;
     private abstractt.TextField tf_cantidadIngresada;
     private abstractt.TextField tf_factura;
+    private abstractt.TextFieldMoneda tf_iva;
     private abstractt.TextField tf_ordenCompra;
     private abstractt.TextFieldMoneda tf_precioUnitario;
+    private abstractt.TextFieldMoneda tf_subtotal;
+    private abstractt.TextFieldMoneda tf_total;
+    private abstractt.TextField tf_unidadMedida;
     // End of variables declaration//GEN-END:variables
 }

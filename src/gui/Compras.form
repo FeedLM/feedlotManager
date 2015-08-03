@@ -231,6 +231,9 @@
                       <Dimension value="[120, 20]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medicinaSelector1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="abstractt.ComboBox" name="codigoSelector">
                   <Properties>
@@ -238,6 +241,9 @@
                       <Dimension value="[120, 20]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codigoSelectorActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="abstractt.TextField" name="tf_cantidadIngresada">
                   <Properties>
@@ -246,7 +252,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="abstractt.TextField" name="textField1">
+                <Component class="abstractt.TextField" name="tf_unidadMedida">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -305,19 +311,12 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Compra"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregarCompraActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="600" y="90" width="150" height="25"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="abstractt.Boton" name="btn_nuevaCompra">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nueva Compra"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="600" y="120" width="150" height="25"/>
+              <AbsoluteConstraints x="40" y="530" width="150" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -365,7 +364,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="abstractt.TextFieldMoneda" name="textFieldMoneda3">
+            <Component class="abstractt.TextFieldMoneda" name="tf_total">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -375,14 +374,14 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="abstractt.TextFieldMoneda" name="textFieldMoneda2">
+            <Component class="abstractt.TextFieldMoneda" name="tf_iva">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="70" y="25" width="80" height="20"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="abstractt.TextFieldMoneda" name="textFieldMoneda1">
+            <Component class="abstractt.TextFieldMoneda" name="tf_subtotal">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="70" y="0" width="80" height="20"/>
@@ -395,6 +394,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregarMedicinaActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="700" y="180" width="80" height="25"/>
@@ -432,26 +434,39 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="abstractt.Boton" name="btn_generarReporte">
+        <Component class="abstractt.Boton" name="btn_proveedor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Generar Reporte"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="530" width="150" height="30"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="abstractt.Boton" name="btn_Catalogos">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ir a Catalogos"/>
+            <Property name="text" type="java.lang.String" value="Catalogo de Proveedor"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CatalogosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_proveedorActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="280" y="530" width="150" height="30"/>
+              <AbsoluteConstraints x="590" y="90" width="170" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="abstractt.Boton" name="btn_medicamentos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Catalogo de Medicina"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_medicamentosActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="590" y="130" width="170" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="abstractt.TextField" name="textField2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cero 00/100 M.N."/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="210" y="530" width="430" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
