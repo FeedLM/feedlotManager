@@ -24,6 +24,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -31,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author Home
  */
-public class SalidaGanadoGrupo extends javax.swing.JFrame {
+public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form SalidaGanadoGrupos
@@ -40,7 +41,13 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
         //  super(parent, modal);
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         animal = new Animal();
         reporteSalidas = new ReporteSalidas();
 
@@ -49,17 +56,7 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
         destinoSelector1.cargar();
 
         this.tf_pesoActual.textFieldDouble();
-        /*
-         String titulos[] = {"TagId", "EiD", "Arete Siniiga", "Fecha de Salida",
-         "Clase de Movimiento", "Numero de Pedido", "Grupo de Origen",
-         "Peso (kg)"};
-         */
-        /*
-         t_movimientoSalida.setTitulos(titulos);
-         t_movimientoSalida.cambiarTitulos();
-         t_movimientoSalida.setFormato(new int[]{0, 0, 0, 3, 0, 0, 0, 1});
-         */
-        //
+
         cargarSalidas();
 
         cargarPuertos();
@@ -69,28 +66,12 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
         stick.setTf_Peso(tf_pesoActual);
         stick.start();
 
-        //   tagIdSelector.ActionTranferfocus = false;
-        /*int[] tamaños = new int[8];
-         tamaños[0] = 80;//id Animal
-         tamaños[1] = 100;//EID
-         tamaños[2] = 80;//Arete Siniiga
-         tamaños[3] = 120;//Fecha Salida
-         tamaños[4] = 140;//Clase de Movimiento
-         tamaños[5] = 120; //Numero de Pedido
-         tamaños[6] = 120;//Grupo de Origen
-         tamaños[7] = 80;//Peso (kg)
-         */
-        // t_movimientoSalida.tamañoColumna(tamaños);
         cargarGrupoAnimalUsuario();
         animalesSeleccionados1.setParent(parent);
         animalesSeleccionados1.reordenar();
         animalesSeleccionados1.setTipo(2);
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
 
         cargarComponentes();
     }
@@ -129,12 +110,7 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Salida de Ganado");
         setBackground(new java.awt.Color(255, 255, 255));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -370,9 +346,7 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
     public void cargarDatosEid() {
 
         animal.cargarPorEid(this.tf_Eid.getText());
-        //   tagIdSelector.setSelectedItem(animal.arete_visual);
-        //  tf_corral.setText(animal.corral.nombre);        
-        //  tf_areteSiniiga.setText(animal.arete_siniiga);
+
     }
 
     private void cargarComponentes() {
@@ -380,8 +354,7 @@ public class SalidaGanadoGrupo extends javax.swing.JFrame {
         Dimension pantallaTamano = tk.getScreenSize();
         setResizable(false);
         setSize(pantallaTamano);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        plecaSuperior1.cargar();
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         fondo1.cargar(pantallaTamano);
     }
 

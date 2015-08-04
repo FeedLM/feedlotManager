@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  *
  * @author Home
  */
-public class AdministracionAnimales extends javax.swing.JFrame {
+public class AdministracionAnimales extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CreacionAnimales
@@ -23,9 +23,9 @@ public class AdministracionAnimales extends javax.swing.JFrame {
     public AdministracionAnimales(Desktop parent) {
         this.parent = parent;
         initComponents();
-//        this.pack();
-//        this.setClosable(true);
-//        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
+        this.pack();
+        this.setClosable(true);
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         fondo1.cargar(this.jPanel6.getSize());
     }
@@ -50,11 +50,7 @@ public class AdministracionAnimales extends javax.swing.JFrame {
         fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -171,8 +167,6 @@ public class AdministracionAnimales extends javax.swing.JFrame {
     private void btn_sementalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sementalesActionPerformed
         sementales = new Sementales(parent);
         sementales.setVisible(true);
-        setVisible(false);
-
     }//GEN-LAST:event_btn_sementalesActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

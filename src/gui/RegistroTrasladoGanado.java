@@ -14,13 +14,14 @@ import static gui.Desktop.rancho;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
 /**
  *
  * @author angelesygil
  */
-public class RegistroTrasladoGanado extends javax.swing.JFrame {
+public class RegistroTrasladoGanado extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TrasladoGanado
@@ -29,10 +30,13 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
 //        super(parent, modal);
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
+//        setLocationRelativeTo(null);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(jrb_todo);
         this.buttonGroup1.add(jrb_otra_fecha);
@@ -91,11 +95,7 @@ public class RegistroTrasladoGanado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reporte de Traslados");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);

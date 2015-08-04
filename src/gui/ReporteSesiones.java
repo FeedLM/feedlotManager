@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
@@ -25,7 +26,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author angelesygil
  */
-public class ReporteSesiones extends javax.swing.JFrame {
+public class ReporteSesiones extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form reporteSesiones
@@ -34,11 +35,15 @@ public class ReporteSesiones extends javax.swing.JFrame {
 //        super(parent, modal);
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
-        tagIdSelector.addArray(cargararete_visuals());
+//        setLocationRelativeTo(null);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
+        
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));        tagIdSelector.addArray(cargararete_visuals());
+        
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(this.jrb_fecha);
         this.buttonGroup1.add(this.jrb_entre_fechas);
@@ -55,7 +60,7 @@ public class ReporteSesiones extends javax.swing.JFrame {
         Dimension pantallaTamano = tk.getScreenSize();
         setResizable(false);
         setSize(pantallaTamano);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         fondo1.cargar(pantallaTamano);
     }
 
@@ -123,11 +128,7 @@ public class ReporteSesiones extends javax.swing.JFrame {
         fondo1 = new abstractt.fondo();
 
         setTitle("Reporte de Sesiones");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);

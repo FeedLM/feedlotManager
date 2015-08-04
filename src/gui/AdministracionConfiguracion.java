@@ -11,13 +11,14 @@ import static domain.SR232.cargarPuertosSerie;
 import static gui.Desktop.manejadorBD;
 import static gui.Login.gs_mensaje;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author angelesygil
  */
-public class AdministracionConfiguracion extends javax.swing.JDialog {
+public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Configuracion
@@ -26,7 +27,10 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
 //        super(parent, modal);
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
+
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         configuracion = new Configuracion();
 
@@ -41,7 +45,7 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
         fondo2.cargar(this.getSize());
         fondo3.cargar(this.getSize());
         fondo5.cargar(this.getSize());
-        
+
     }
 
     private void asignarValores() {
@@ -112,11 +116,7 @@ public class AdministracionConfiguracion extends javax.swing.JDialog {
 
         setTitle("Configuración");
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

@@ -14,13 +14,14 @@ import static gui.Desktop.rancho;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
  *
  * @author angelesygil
  */
-public class VisualizacionMuertes extends javax.swing.JFrame {
+public class VisualizacionMuertes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VisualizacionMuertes
@@ -29,11 +30,13 @@ public class VisualizacionMuertes extends javax.swing.JFrame {
 //        super(parent);
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
-        tagIdSelector.addArray(cargararete_visualsMuertos());
+//        setLocationRelativeTo(null);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));        tagIdSelector.addArray(cargararete_visualsMuertos());
 
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(this.jrb_fecha);
@@ -96,11 +99,7 @@ public class VisualizacionMuertes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Muertes");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -17,6 +17,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -26,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Home
  */
-public class VisualizacionHospital extends javax.swing.JFrame {
+public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VisualizacionHospitals
@@ -35,10 +36,13 @@ public class VisualizacionHospital extends javax.swing.JFrame {
         this.parent = parent;
 //        super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
+//        setLocationRelativeTo(null);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         cargarInicio();
         ListSelectionModel lsm = this.t_animalesHospital.getSelectionModel();
         lsm.addListSelectionListener(new ListSelectionListener() {
@@ -244,11 +248,7 @@ public class VisualizacionHospital extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualización Hospital");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -43,7 +44,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Gilberto Adan González Silva
  */
-public class Traslados extends javax.swing.JFrame{
+public class Traslados extends javax.swing.JInternalFrame{
 
     private SR232 stick;
     private String puertoStick;
@@ -55,7 +56,9 @@ public class Traslados extends javax.swing.JFrame{
     public Traslados(Desktop parent) {
         this.parent = parent;
         initComponents();
-        setLocationRelativeTo(null);
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         ListSelectionModel lsm = JL_Corrales.getSelectionModel();
 
@@ -92,10 +95,6 @@ public class Traslados extends javax.swing.JFrame{
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         ranchoSelector1.cargar();
         ranchoSelector1.setSelectedItem(rancho.descripcion);
-        
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
         
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanoPantalla = tk.getScreenSize();
@@ -262,11 +261,7 @@ public class Traslados extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupos");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -19,8 +19,10 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -33,7 +35,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Gilberto Adan González Silva
  */
-public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
+public class AdministracionGrupos extends javax.swing.JInternalFrame {//JDialog { //
 
     private String id_animal;
     private SR232 stick;
@@ -46,7 +48,11 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 //         super(aparent, modal);
         this.parent = aparent;
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
+        
+        setClosable(true);
+        this.pack();
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         cargarPuertos();
 
@@ -54,8 +60,9 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 
         corralSelector.valor_nuevo = true;
         razaSelector.valor_nuevo = true;
-
-        reporteEntradas = new ReporteEntradas(this);
+        
+        Frame F = JOptionPane.getFrameForComponent(this);
+        reporteEntradas = new ReporteEntradas(F);
 
         String titulos[] = {
             "Id Animal", "id Animal", "Arete Electronico",
@@ -127,9 +134,9 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 
         graficar();
 
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setIconImage(i);
+//        Image i = null;
+//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+//        setIconImage(i);
 
         this.t_alimentoIngresado.textFieldDouble();
         this.t_pesoMaximo.textFieldDouble();
@@ -277,22 +284,7 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración de Grupos");
         setResizable(false);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1124,7 +1116,7 @@ public class AdministracionGrupos extends javax.swing.JFrame {//JDialog { //
 //        plecaSuperior1.cargar();
         fondo1.cargar(pantallaTamano);
 //        jPanel1.setLocation((pantallaTamano.width / 2) - (jPanel1.getWidth() / 2), (pantallaTamano.height / 2) - (jPanel1.getHeight() / 2));
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
     }
 
