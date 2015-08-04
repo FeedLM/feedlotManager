@@ -68,13 +68,16 @@ public class ReporteSesiones extends javax.swing.JFrame {
         t_pesos.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         t_medicinas.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
-        btn_Reporte.setEnabled(false);
-
-        if (t_pesos.getRowCount() > 0 || t_medicinas.getRowCount() > 0) {
-
-            btn_Reporte.setEnabled(true);
+        btn_ReporteMedicamento.setEnabled(false);
+        btn_ReportePesos.setEnabled(false);
+        
+        if (t_pesos.getRowCount() > 0) {
+            btn_ReportePesos.setEnabled(true);
         }
-
+        
+        if (t_medicinas.getRowCount() > 0) {
+            btn_ReporteMedicamento.setEnabled(true);
+        }
         JTableHeader header = t_pesos.getTableHeader();
         //   header.setBackground(Color.BLUE);
 //        header.setForeground(Color.white);
@@ -112,7 +115,8 @@ public class ReporteSesiones extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         btn_visualiza = new abstractt.Boton();
-        btn_Reporte = new abstractt.Boton();
+        btn_ReportePesos = new abstractt.Boton();
+        btn_ReporteMedicamento = new abstractt.Boton();
         etiqueta3 = new abstractt.Etiqueta();
         corralSelector1 = new domain.CorralSelector();
         etiqueta4 = new abstractt.Etiqueta();
@@ -255,7 +259,7 @@ public class ReporteSesiones extends javax.swing.JFrame {
         jTextPane1.setText("Nota: Primero visualizar la informacion y luego  dar clic en generar el reporte");
         jScrollPane3.setViewportView(jTextPane1);
 
-        botones.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 210, -1));
+        botones.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
         btn_visualiza.setText("Visualizar");
         btn_visualiza.addActionListener(new java.awt.event.ActionListener() {
@@ -263,15 +267,23 @@ public class ReporteSesiones extends javax.swing.JFrame {
                 btn_visualizaActionPerformed(evt);
             }
         });
-        botones.add(btn_visualiza, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 200, 30));
+        botones.add(btn_visualiza, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 30));
 
-        btn_Reporte.setText("Reporte");
-        btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
+        btn_ReportePesos.setText("Reporte de Pesajes");
+        btn_ReportePesos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ReporteActionPerformed(evt);
+                btn_ReportePesosActionPerformed(evt);
             }
         });
-        botones.add(btn_Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 200, 30));
+        botones.add(btn_ReportePesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 200, 30));
+
+        btn_ReporteMedicamento.setText("Reporte de Medicamentos");
+        btn_ReporteMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReporteMedicamentoActionPerformed(evt);
+            }
+        });
+        botones.add(btn_ReporteMedicamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 200, 30));
 
         jPanel1.add(botones, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 100, -1, -1));
 
@@ -357,19 +369,31 @@ public class ReporteSesiones extends javax.swing.JFrame {
         visualizarDatos();
     }//GEN-LAST:event_btn_visualizaActionPerformed
 
-    private void btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReporteActionPerformed
-        generarReporte();
-    }//GEN-LAST:event_btn_ReporteActionPerformed
+    private void btn_ReportePesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportePesosActionPerformed
+        generarReportePesos();
+    }//GEN-LAST:event_btn_ReportePesosActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void generarReporte() {
+    private void btn_ReporteMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReporteMedicamentoActionPerformed
+        generarReporteMedicamento();
+    }//GEN-LAST:event_btn_ReporteMedicamentoActionPerformed
+
+    private void generarReportePesos() {
 
         Excel excel = new Excel();
+        excel.reporteSesionesPeso(t_pesos, tipo, fecha_ini, fecha_ini, animal);
+//        excel.reporteSesionesMedicina(t_medicinas, tipo, fecha_ini, fecha_ini, animal);
 
-        excel.reporteSesiones(this.t_pesos, this.t_medicinas, tipo, fecha_ini, fecha_fin, animal);
+    }
+
+    private void generarReporteMedicamento() {
+
+        Excel excel = new Excel();
+//        excel.reporteSesionesPeso(t_pesos, tipo, fecha_ini, fecha_ini, animal);
+        excel.reporteSesionesMedicina(t_medicinas, tipo, fecha_ini, fecha_ini, animal);
 
     }
 
@@ -401,7 +425,8 @@ public class ReporteSesiones extends javax.swing.JFrame {
     private Corral corral;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
-    private abstractt.Boton btn_Reporte;
+    private abstractt.Boton btn_ReporteMedicamento;
+    private abstractt.Boton btn_ReportePesos;
     private abstractt.Boton btn_visualiza;
     private javax.swing.ButtonGroup buttonGroup1;
     private abstractt.Calendar calendar1;

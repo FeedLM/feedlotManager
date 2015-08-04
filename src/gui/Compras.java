@@ -15,6 +15,7 @@ import static gui.Desktop.rancho;
 import domain.Rancho;
 import static gui.Login.gs_mensaje;
 import static gui.Splash.formatoDateTime;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,10 +52,11 @@ public class Compras extends javax.swing.JDialog {
         proveedorSelector1.cargar();
         medicinaSelector1.cargar();
         codigoSelector.addArray(cargarCodigoMedicinas());
-        
+
         this.rancho = parent.rancho;
-        
+
         System.out.println("rancho: " + rancho.descripcion);
+        dec = new DecimalFormat("0.00");
     }
 
     /**
@@ -326,7 +328,6 @@ public class Compras extends javax.swing.JDialog {
         compra.setSubtotal(tf_subtotal.getDouble());
         compra.setIva(tf_iva.getDouble());
         compra.setTotal(tf_total.getDouble());
-
         manejadorBD.parametrosSP = new ParametrosSP();
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varRancho", "STRING", "IN");
@@ -334,9 +335,9 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(compra.getFecha()), "varfecha", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra.factura, "varfactura", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra.orden, "varorden", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getSubtotal()), "varsubtotal", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getIva()), "variva", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(Double.toString(compra.getTotal()), "vartotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varsubtotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "variva", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "vartotal", "DOUBLE", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
 
@@ -350,13 +351,14 @@ public class Compras extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_agregarCompraActionPerformed
 
     private void agregarDetallesCompra() {
+
         manejadorBD.parametrosSP = new ParametrosSP();
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varCantidad", "INT", "IN");
-            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
+            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
         }
         if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
 
@@ -428,21 +430,20 @@ public class Compras extends javax.swing.JDialog {
         limpiarMedicina();
     }//GEN-LAST:event_btn_eliminarMedicinaActionPerformed
 
-    int fila;
-
-    private void seleccionaFila() {
-        fila = t_medicina.getSelectedRow();
-    }
-
     private void cargarTotales() {
+        subtotal = 0;
+        iva = 0;
+        total = 0;
+        
         for (int i = 0; i < (t_medicina.getRowCount()); i++) {
             subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 4)));
         }
+        
         iva = subtotal * 0.16;
         total = subtotal + iva;
-        this.tf_subtotal.setText(String.valueOf(subtotal));
-        this.tf_iva.setText(String.valueOf(iva));
-        this.tf_total.setText(String.valueOf(total));
+        this.tf_subtotal.setText(dec.format(subtotal));
+        this.tf_iva.setText(dec.format(iva));
+        this.tf_total.setText(dec.format(total));
     }
 
     private void limpiarMedicina() {
@@ -450,16 +451,15 @@ public class Compras extends javax.swing.JDialog {
         this.codigoSelector.setSelectedItem("");
         this.tf_cantidadIngresada.setText("");
         this.tf_unidadMedida.setText("");
-        this.tf_precioUnitario.setText("$0.0");
+        this.tf_precioUnitario.setText("$ 0.0");
     }
-    
-    
+    DecimalFormat dec;
     int cantidad;
     double precioUnitario;
     double importe;
-    double subtotal = 0;
-    double iva = 0;
-    double total = 0;
+    double subtotal;
+    double iva;
+    double total;
     Rancho rancho;
     Compra compra;
     Proveedor proveedor;

@@ -642,7 +642,321 @@ public class Excel {
         crearExcel();
     }
 
-    private void reporteSesiones() {
+    public void reporteSesionesPeso(Table TTabla1, Integer ITipo, Date DFechaIni, Date DFechaFin, Animal AAnimal) {
+
+        t_tabla = TTabla1;
+
+        animal = AAnimal;
+        tipo = ITipo;
+        this.fecha_ini = DFechaIni;
+        this.fecha_fin = DFechaFin;
+
+        if (t_tabla.getRowCount() <= 0) {
+
+            JOptionPane.showMessageDialog(null, "No hay datos, para exportar", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (!showOpenFileDialog()) {
+            return;
+        }
+
+        wb = new HSSFWorkbook();
+        sheet = wb.createSheet("REPORTE DE SESIONES POR PESO");
+
+        styles();
+
+        reporteSesionPeso();
+
+        crearExcel();
+    }
+
+    public void reporteSesionPeso() {
+//        cargarLogo();
+
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A1:E1"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A2:E2"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A3:E4"));
+
+        /*Name REPORT*/
+        HSSFFont FontNameReport = wb.createFont();
+        FontNameReport.setFontName("Calibri");
+        FontNameReport.setFontHeightInPoints((short) 11);
+        FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
+
+        HSSFCellStyle styleNameReport = wb.createCellStyle();
+        styleNameReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleNameReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleNameReport.setFont(FontNameReport);
+
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
+        cell.setCellValue("REPORTE DE SESIONES POR PESOS");
+        cell.setCellStyle(styleNameReport);
+        /**/
+
+        /*DATE REPORT*/
+        HSSFFont FontDateReport = wb.createFont();
+        FontDateReport.setFontName("Calibri");
+        FontDateReport.setFontHeightInPoints((short) 10);
+        FontDateReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        FontDateReport.setColor(HSSFColor.BLACK.index);
+
+        HSSFCellStyle styleDateReport = wb.createCellStyle();
+        styleDateReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleDateReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleDateReport.setFont(FontDateReport);
+
+        row = sheet.createRow(1);
+        cell = row.createCell(0);
+        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
+        cell.setCellStyle(styleDateReport);
+
+        /*Etiqueta parametro*/
+        HSSFFont FontParametroReport = wb.createFont();
+        FontParametroReport.setFontName("Calibri");
+        FontParametroReport.setFontHeightInPoints((short) 9);
+        FontParametroReport.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+        FontParametroReport.setColor(HSSFColor.BLACK.index);
+
+        HSSFCellStyle styleParamReport = wb.createCellStyle();
+        styleParamReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleParamReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleParamReport.setFont(FontParametroReport);
+
+        row = sheet.createRow(2);
+        cell = row.createCell(0);
+        String etiqueta_parametro = "";
+
+        switch (tipo) {
+            case 1:
+                etiqueta_parametro = "Sesion de dia " + formatoDate.format(fecha_ini);
+                break;
+            case 2:
+                etiqueta_parametro = "Sesiones del " + formatoDate.format(fecha_ini) + " al " + formatoDate.format(fecha_fin);
+                break;
+            case 3:
+                etiqueta_parametro = "Sesiones del animal " + animal.arete_visual;
+                break;
+        }
+
+        cell.setCellValue(etiqueta_parametro);
+        cell.setCellStyle(styleParamReport);
+
+        /**/
+        sheet.createRow(5).createCell(0).setCellValue("Id Animal");
+        sheet.getRow(5).createCell(1).setCellValue("Arete Electronico");
+        sheet.getRow(5).createCell(2).setCellValue("Fecha");
+        sheet.getRow(5).createCell(3).setCellValue("Peso");
+        sheet.getRow(5).createCell(4).setCellValue("Corral");
+
+        sheet.setColumnWidth(0, 28 * Unidad);
+        sheet.setColumnWidth(1, 29 * Unidad);
+        sheet.setColumnWidth(2, 27 * Unidad);
+        sheet.setColumnWidth(3, 25 * Unidad);
+        sheet.setColumnWidth(4, 29 * Unidad);
+
+        SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
+
+        //Condition 1: Cell Value Is   greater than  70   (Blue Fill)
+        ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
+        PatternFormatting fill1 = rule1.createPatternFormatting();
+        fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
+
+        //Condition 2: Cell Value Is  less than      50   (Green Fill)
+        ConditionalFormattingRule rule2 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.LT, "50");
+        PatternFormatting fill2 = rule2.createPatternFormatting();
+        fill2.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill2.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
+
+        FontFormatting font = rule1.createFontFormatting();
+        font.setFontStyle(false, true);
+        font.setFontColorIndex(IndexedColors.WHITE.index);
+
+        CellRangeAddress[] regions = {CellRangeAddress.valueOf("A6:E6")};
+
+        sheetCF.addConditionalFormatting(regions, rule1, rule2);
+
+        Integer fila_inicial = 6;
+
+        for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
+
+            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
+            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+
+            for (int j = 1; j < 5; j++) {
+                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
+                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+            }
+
+            sheet.getRow(fila_inicial + i).getCell(3).setCellValue(Double.parseDouble(t_tabla.getValueAt(i, 4).toString()));
+            sheet.getRow(fila_inicial + i).getCell(3).setCellStyle(styleRight);
+
+        }
+        cargarLogo();
+    }
+
+    public void reporteSesionesMedicina(Table TTabla1, Integer ITipo, Date DFechaIni, Date DFechaFin, Animal AAnimal) {
+
+        t_tabla = TTabla1;
+
+        animal = AAnimal;
+        tipo = ITipo;
+        this.fecha_ini = DFechaIni;
+        this.fecha_fin = DFechaFin;
+
+        if (t_tabla.getRowCount() <= 0) {
+
+            JOptionPane.showMessageDialog(null, "No hay datos, para exportar", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (!showOpenFileDialog()) {
+            return;
+        }
+
+        wb = new HSSFWorkbook();
+        sheet = wb.createSheet("REPORTE DE SESIONES POR MEDICAMENTOS");
+
+        styles();
+
+        reporteSesionMedicina();
+
+        crearExcel();
+    }
+
+    private void reporteSesionMedicina() {
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A1:I1"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A2:I2"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("A3:I4"));
+
+        /*Name REPORT*/
+        HSSFFont FontNameReport = wb.createFont();
+        FontNameReport.setFontName("Calibri");
+        FontNameReport.setFontHeightInPoints((short) 11);
+        FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
+
+        HSSFCellStyle styleNameReport = wb.createCellStyle();
+        styleNameReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleNameReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleNameReport.setFont(FontNameReport);
+
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
+        cell.setCellValue("REPORTE DE SESIONES POR MEDICAMENTOS");
+        cell.setCellStyle(styleNameReport);
+        /**/
+
+        /*DATE REPORT*/
+        HSSFFont FontDateReport = wb.createFont();
+        FontDateReport.setFontName("Calibri");
+        FontDateReport.setFontHeightInPoints((short) 10);
+        FontDateReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        FontDateReport.setColor(HSSFColor.BLACK.index);
+
+        HSSFCellStyle styleDateReport = wb.createCellStyle();
+        styleDateReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleDateReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleDateReport.setFont(FontDateReport);
+
+        row = sheet.createRow(1);
+        cell = row.createCell(0);
+        cell.setCellValue("FECHA DE REPORTE: " + formatoDateTime.format(new Date()));
+        cell.setCellStyle(styleDateReport);
+
+        /*Etiqueta parametro*/
+        HSSFFont FontParametroReport = wb.createFont();
+        FontParametroReport.setFontName("Calibri");
+        FontParametroReport.setFontHeightInPoints((short) 9);
+        FontParametroReport.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+        FontParametroReport.setColor(HSSFColor.BLACK.index);
+
+        HSSFCellStyle styleParamReport = wb.createCellStyle();
+        styleParamReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        styleParamReport.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleParamReport.setFont(FontParametroReport);
+
+        row = sheet.createRow(2);
+        cell = row.createCell(0);
+        String etiqueta_parametro = "";
+
+        switch (tipo) {
+            case 1:
+                etiqueta_parametro = "Sesion de dia " + formatoDate.format(fecha_ini);
+                break;
+            case 2:
+                etiqueta_parametro = "Sesiones del " + formatoDate.format(fecha_ini) + " al " + formatoDate.format(fecha_fin);
+                break;
+            case 3:
+                etiqueta_parametro = "Sesiones del animal " + animal.arete_visual;
+                break;
+        }
+
+        cell.setCellValue(etiqueta_parametro);
+        cell.setCellStyle(styleParamReport);
+
+        /**/
+        sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
+        sheet.getRow(5).createCell(1).setCellValue("Arete Electronico");
+        sheet.getRow(5).createCell(2).setCellValue("Codigo");
+        sheet.getRow(5).createCell(3).setCellValue("Medicamento");
+        sheet.getRow(5).createCell(4).setCellValue("Fecha");
+        sheet.getRow(5).createCell(5).setCellValue("Corral");
+        sheet.getRow(5).createCell(6).setCellValue("Dosis");
+        sheet.getRow(5).createCell(7).setCellValue("Costo");
+        sheet.getRow(5).createCell(8).setCellValue("Importe");
+
+        sheet.setColumnWidth(0, 15 * Unidad);
+        sheet.setColumnWidth(1, 20 * Unidad);
+        sheet.setColumnWidth(2, 15 * Unidad);
+        sheet.setColumnWidth(3, 20 * Unidad);
+        sheet.setColumnWidth(4, 20 * Unidad);
+        sheet.setColumnWidth(5, 20 * Unidad);
+        sheet.setColumnWidth(6, 15 * Unidad);
+        sheet.setColumnWidth(7, 15 * Unidad);
+        sheet.setColumnWidth(8, 15 * Unidad);
+
+        SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
+
+        //Condition 1: Cell Value Is   greater than  70   (Blue Fill)
+        ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
+        PatternFormatting fill1 = rule1.createPatternFormatting();
+        fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
+
+        //Condition 2: Cell Value Is  less than      50   (Green Fill)
+        ConditionalFormattingRule rule2 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.LT, "50");
+        PatternFormatting fill2 = rule2.createPatternFormatting();
+        fill2.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill2.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
+
+        FontFormatting font = rule1.createFontFormatting();
+        font.setFontStyle(false, true);
+        font.setFontColorIndex(IndexedColors.WHITE.index);
+
+        CellRangeAddress[] regions = {CellRangeAddress.valueOf("A6:I6")};
+
+        sheetCF.addConditionalFormatting(regions, rule1, rule2);
+
+        Integer fila_inicial = 6;
+
+        for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
+
+            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
+            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+
+            for (int j = 0; j < 9; j++) {
+                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
+                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+            }
+        }
+        cargarLogo();
+    }
+    
+private void reporteSesiones() {
 
         cargarLogo();
 
@@ -1193,9 +1507,12 @@ public class Excel {
             try {
                 fecha = formatoDate.parse(t_tabla.getValueAt(i, 0).toString().substring(0, 11));
 
-            } catch (ParseException ex) {
-                Logger.getLogger(Excel.class
-                        .getName()).log(Level.SEVERE, null, ex);
+            
+
+} catch (ParseException ex) {
+                Logger.getLogger(Excel.class  
+
+.getName()).log(Level.SEVERE, null, ex);
             }
 
             agregarValor(fila_inicial + i, 0, formatoDate.format(fecha), styleCenter);
@@ -1286,11 +1603,11 @@ public class Excel {
             agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
 
             for (int j = 1; j < 13; j++) {
-                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(),styleCenter);
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j).toString(), styleCenter);
             }
 
-            asignarEstilo(fila_inicial + i,11,styleRight);
-            asignarEstilo(fila_inicial + i,12,styleRight);            
+            asignarEstilo(fila_inicial + i, 11, styleRight);
+            asignarEstilo(fila_inicial + i, 12, styleRight);
         }
     }
 
@@ -1480,7 +1797,7 @@ public class Excel {
         agregarValor(fila_tablas, 8, "GRAFICA DE GANANCIA DE PESO", styleCenter);
         relleno("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
         bordes("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
-        
+
         bordes("I" + (fila_tablas + 2) + ":M" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
 
         /**
