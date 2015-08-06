@@ -317,6 +317,7 @@ public class Compras extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_medicamentosActionPerformed
 
     private void btn_agregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarCompraActionPerformed
+
         compra = new Compra();
         compra.setId_rancho(rancho.id_rancho);
         proveedor = new Proveedor();
@@ -343,7 +344,6 @@ public class Compras extends javax.swing.JDialog {
 
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
 
-//            JOptionPane.showMessageDialog(this, "Se guardó la Compra Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
             agregarDetallesCompra();
         } else {
 
@@ -364,13 +364,33 @@ public class Compras extends javax.swing.JDialog {
         }
         if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
 
-            JOptionPane.showMessageDialog(this, "Se guardó la Compra Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
-            agregarDetallesCompra();
+            incrementarExistencias();
         } else {
 
             JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void incrementarExistencias() {
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
+        for (int i = 0; i < t_medicina.getRowCount(); i++) {
+            manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
+        }
+        if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
+
+            JOptionPane.showMessageDialog(this, "Proceso concluido con normalidad", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
 
     private void btn_agregarMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarMedicinaActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) t_medicina.getModel();
@@ -381,11 +401,6 @@ public class Compras extends javax.swing.JDialog {
 
         modelo.addRow(new Object[]{medicina.codigo, medicina.nombre, cantidad, precioUnitario, importe});
 
-//        t_medicina.setValueAt(medicina.codigo, fila, 0);
-//        t_medicina.setValueAt(medicina.nombre, fila, 1);
-//        t_medicina.setValueAt(cantidad, fila, 2);
-//        t_medicina.setValueAt(precioUnitario, fila, 3);
-//        t_medicina.setValueAt(importe, fila, 4);
         cargarTotales();
 
         limpiarMedicina();
@@ -436,11 +451,11 @@ public class Compras extends javax.swing.JDialog {
         subtotal = 0;
         iva = 0;
         total = 0;
-        
+
         for (int i = 0; i < (t_medicina.getRowCount()); i++) {
             subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 4)));
         }
-        
+
         iva = subtotal * 0.16;
         total = subtotal + iva;
         this.tf_subtotal.setText(dec.format(subtotal));

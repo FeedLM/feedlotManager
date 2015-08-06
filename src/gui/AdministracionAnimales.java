@@ -27,7 +27,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         this.setClosable(true);
         this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-        fondo1.cargar(this.jPanel6.getSize());
+        fondo1.cargar(this.getSize());
     }
 
     /**
