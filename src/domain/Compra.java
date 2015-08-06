@@ -33,7 +33,7 @@ public class Compra {
         iva = 0.0;
         total = 0.0;
     }
-    
+
     public String getId_compra() {
         return id_compra;
     }
@@ -53,13 +53,9 @@ public class Compra {
     public void setId_proveedor(Proveedor id_proveedor) {
         this.id_proveedor = id_proveedor;
     }
-    
-    
-    
-    public Calendar getFecha() {
-        Calendar fech = null;
-        fech.setTime(this.fecha);
-        return fech;
+
+    public Date getFecha() {
+        return fecha;
     }
 
     public void setFecha(Date fecha) {

@@ -317,7 +317,9 @@ public class Compras extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_medicamentosActionPerformed
 
     private void btn_agregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarCompraActionPerformed
+        compra = new Compra();
         compra.setId_rancho(rancho.id_rancho);
+        proveedor = new Proveedor();
         proveedor.cargarPorDescripcion(proveedorSelector1.getText());
         compra.setId_proveedor(proveedor);
 
@@ -333,7 +335,7 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varRancho", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra.id_proveedor.id_proveedor, "varproveedor", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(compra.getFecha()), "varfecha", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(compra.factura, "varfactura", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.factura, "varFactura", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra.orden, "varorden", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varsubtotal", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "variva", "DOUBLE", "IN");
@@ -357,7 +359,7 @@ public class Compras extends javax.swing.JDialog {
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
-            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varCantidad", "INT", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
             manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
         }
         if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
