@@ -367,6 +367,7 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES ('95b52ca0-3dec-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:42:45','896','874',309.0000,49.4400,358.4400),('d5b2c439-3ded-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:51:56','845','865',27.0000,4.3200,31.3200);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -893,12 +894,13 @@ DROP TABLE IF EXISTS `detalle_compra`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_compra` (
   `id_detalle` char(255) NOT NULL,
+  `id_rancho` char(255) NOT NULL,
   `id_compra` char(255) NOT NULL,
   `id_medicina` char(255) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `precio_unitario` decimal(20,4) DEFAULT NULL,
   `importe` decimal(20,4) DEFAULT NULL,
-  PRIMARY KEY (`id_detalle`,`id_medicina`,`id_compra`)
+  PRIMARY KEY (`id_detalle`,`id_compra`,`id_medicina`,`id_rancho`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -3848,53 +3850,21 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarDetalleCompra`(
-varid_compra char(255), varid_medicina char(255), 
-varcantidad int(11), varprecio_unitario decimal(20,4)
+varid_rancho CHAR(255), varid_compra CHAR(255), varid_medicina CHAR(255), 
+varcantidad INT(11), varprecio_unitario DECIMAL(20,4), varImporte DECIMAL(20,4)
 )
 BEGIN
-	declare varImporte decimal(20,4);
-    declare varid_detalle CHAR(36);
-
-	select varcantidad * varprecio_unitario
-    into varImporte;
+    DECLARE varid_detalle CHAR(255);
     
     SELECT	UUID()
 	INTO	varid_detalle;
     
     
-    Insert detalle_compra(id_detalle, id_compra, id_medicina, 
+    INSERT detalle_compra(id_detalle, id_rancho, id_compra, id_medicina, 
     cantidad, precio_unitario, importe)
-    select (varid_detalle, varid_compra, varid_medicina, 
+    SELECT (varid_detalle, varid_rancho, varid_compra, varid_medicina, 
     varcantidad, varprecio_unitario, varimporte);
     
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `agregarExistencias` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarExistencias`(
-varid_medicamento CHAR(255), varid_rancho CHAR(255), 
-varexistencias INT(11))
-BEGIN
-
-	INSERT INTO existencia
-	
-    (id_medicamento, 	id_rancho, 	existencia)
-	
-    SELECT 
-	
-    varid_medicamento, 	varid_rancho, 	varexistencia;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5692,4 +5662,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-06 12:30:27
+-- Dump completed on 2015-08-08 11:57:30

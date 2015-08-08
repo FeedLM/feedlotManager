@@ -354,41 +354,21 @@ public class Compras extends javax.swing.JDialog {
 
     private void agregarDetallesCompra() {
 
-        manejadorBD.parametrosSP = new ParametrosSP();
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
+            manejadorBD.parametrosSP = new ParametrosSP();
+            manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
             manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
+            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 4)), "varImporte", "DOUBLE", "IN");
+            if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?) }") == 0) {
+                System.out.println("Agregado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, WIDTH);
+            }
         }
-        if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
-
-            incrementarExistencias();
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void incrementarExistencias() {
-
-        manejadorBD.parametrosSP = new ParametrosSP();
-        //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
-        for (int i = 0; i < t_medicina.getRowCount(); i++) {
-            manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
-            manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
-            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
-        }
-        if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?,?) }") == 0) {
-
-            JOptionPane.showMessageDialog(this, "Proceso concluido con normalidad", gs_mensaje, JOptionPane.ERROR_MESSAGE);
-
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
-        }
-
     }
 
 
