@@ -367,7 +367,7 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
-INSERT INTO `compra` VALUES ('95b52ca0-3dec-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:42:45','896','874',309.0000,49.4400,358.4400),('d5b2c439-3ded-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:51:56','845','865',27.0000,4.3200,31.3200);
+INSERT INTO `compra` VALUES ('95b52ca0-3dec-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:42:45','896','874',309.0000,49.4400,358.4400),('b107645e-3df5-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','8bc2f67a-1e71-11e5-93cc-0023187ffb93','2015-08-08 12:47:55','9652','4723',487.2900,77.9700,565.2600),('d5b2c439-3ded-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-08 11:51:56','845','865',27.0000,4.3200,31.3200);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -910,6 +910,7 @@ CREATE TABLE `detalle_compra` (
 
 LOCK TABLES `detalle_compra` WRITE;
 /*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
+INSERT INTO `detalle_compra` VALUES ('b1122e6e-3df5-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','','',84,1.8500,155.4000),('b11c7251-3df5-11e5-a45b-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','','',299,1.1100,331.8900);
 /*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3862,8 +3863,8 @@ BEGIN
     
     INSERT detalle_compra(id_detalle, id_rancho, id_compra, id_medicina, 
     cantidad, precio_unitario, importe)
-    SELECT (varid_detalle, varid_rancho, varid_compra, varid_medicina, 
-    varcantidad, varprecio_unitario, varimporte);
+    SELECT varid_detalle, varid_rancho, varid_compra, varid_medicina, 
+    varcantidad, varprecio_unitario, varimporte;
     
 END ;;
 DELIMITER ;
@@ -5662,4 +5663,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-08 11:57:30
+-- Dump completed on 2015-08-08 13:25:23
