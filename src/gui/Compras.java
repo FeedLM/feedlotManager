@@ -366,7 +366,7 @@ public class Compras extends javax.swing.JDialog {
             if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?) }") == 0) {
                 System.out.println("Agregado correctamente");
             } else {
-                JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, WIDTH);
+                JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             }
         }
     }
