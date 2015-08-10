@@ -341,10 +341,11 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varsubtotal", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "variva", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "vartotal", "DOUBLE", "IN");
-
+        
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
 
             agregarDetallesCompra();
+
         } else {
 
             JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
@@ -359,6 +360,7 @@ public class Compras extends javax.swing.JDialog {
             manejadorBD.parametrosSP = new ParametrosSP();
             manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
+            medicina.cargarPorNombre(String.valueOf(t_medicina.getValueAt(i, 1)));
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
             manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
@@ -367,6 +369,9 @@ public class Compras extends javax.swing.JDialog {
                 System.out.println("Agregado correctamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                manejadorBD.consulta("DELETE FROM compras "
+                        + "WHERE factura = '" + compra.factura + "'"
+                        + "AND orden = '" + compra.orden + "' ;");
             }
         }
     }

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Home
  */
 public class Compra {
-
+    ManejadorBD manejadorBD;
     public String id_compra;
     public String id_rancho;
     public Proveedor id_proveedor;
@@ -35,6 +35,7 @@ public class Compra {
     }
 
     public String getId_compra() {
+        
         return id_compra;
     }
 
@@ -101,5 +102,4 @@ public class Compra {
     public void setTotal(double total) {
         this.total = total;
     }
-
 }
