@@ -5,7 +5,7 @@
  */
 package domain;
 
-import java.util.Calendar;
+import static gui.Desktop.manejadorBD;
 import java.util.Date;
 
 /**
@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Home
  */
 public class Compra {
-    ManejadorBD manejadorBD;
+    
     public String id_compra;
     public String id_rancho;
     public Proveedor id_proveedor;
@@ -34,9 +34,14 @@ public class Compra {
         total = 0.0;
     }
 
-    public String getId_compra() {
-        
-        return id_compra;
+    public void cargarPorFacturaYOrden(String factura, String orden) {
+        manejadorBD.consulta("SELECT id_compra  "
+                + "FROM compra     "
+                + "WHERE   factura = '" + factura + "' "
+                + "AND orden = '" + orden + "' ;");
+        if (manejadorBD.getRowCount() > 0) {
+            id_compra = manejadorBD.getValorString(0, 0);
+        }
     }
 
     public String getId_rancho() {

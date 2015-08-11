@@ -325,7 +325,7 @@ public class Compras extends javax.swing.JDialog {
         compra.setId_proveedor(proveedor);
 
         compra.setFecha(selectorFecha1.getFecha());
-
+        
         compra.setFactura(tf_factura.getText());
         compra.setOrden(tf_ordenCompra.getText());
         compra.setSubtotal(tf_subtotal.getDouble());
@@ -343,9 +343,9 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "vartotal", "DOUBLE", "IN");
         
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
-
+            compra.cargarPorFacturaYOrden(compra.factura, compra.orden);
             agregarDetallesCompra();
-
+            
         } else {
 
             JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
@@ -359,6 +359,7 @@ public class Compras extends javax.swing.JDialog {
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP = new ParametrosSP();
             manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
+            
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
             medicina.cargarPorNombre(String.valueOf(t_medicina.getValueAt(i, 1)));
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
