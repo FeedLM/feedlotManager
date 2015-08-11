@@ -5,6 +5,7 @@
  */
 package gui;
 
+import abstractt.ConversorMoneda;
 import domain.Compra;
 import domain.Medicina;
 import static domain.Medicina.cargarCodigoMedicinas;
@@ -325,12 +326,13 @@ public class Compras extends javax.swing.JDialog {
         compra.setId_proveedor(proveedor);
 
         compra.setFecha(selectorFecha1.getFecha());
-        
+
         compra.setFactura(tf_factura.getText());
         compra.setOrden(tf_ordenCompra.getText());
         compra.setSubtotal(tf_subtotal.getDouble());
         compra.setIva(tf_iva.getDouble());
         compra.setTotal(tf_total.getDouble());
+
         manejadorBD.parametrosSP = new ParametrosSP();
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varRancho", "STRING", "IN");
@@ -341,11 +343,11 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varsubtotal", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "variva", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "vartotal", "DOUBLE", "IN");
-        
+
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
             compra.cargarPorFacturaYOrden(compra.factura, compra.orden);
             agregarDetallesCompra();
-            
+            JOptionPane.showMessageDialog(this, "Proceso terminado con éxito.");
         } else {
 
             JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
@@ -359,7 +361,7 @@ public class Compras extends javax.swing.JDialog {
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP = new ParametrosSP();
             manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
-            
+
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
             medicina.cargarPorNombre(String.valueOf(t_medicina.getValueAt(i, 1)));
             manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
@@ -434,6 +436,7 @@ public class Compras extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_eliminarMedicinaActionPerformed
 
     private void cargarTotales() {
+        conversorMoneda = new ConversorMoneda();
         subtotal = 0;
         iva = 0;
         total = 0;
@@ -444,9 +447,10 @@ public class Compras extends javax.swing.JDialog {
 
         iva = subtotal * 0.16;
         total = subtotal + iva;
-        this.tf_subtotal.setText(dec.format(subtotal));
-        this.tf_iva.setText(dec.format(iva));
-        this.tf_total.setText(dec.format(total));
+        tf_subtotal.setDouble(subtotal);
+        tf_iva.setDouble(iva);
+        tf_total.setDouble(total);
+        tf_letras.setText(conversorMoneda.moneda(tf_total.getText()));
     }
 
     private void limpiarMedicina() {
@@ -456,7 +460,9 @@ public class Compras extends javax.swing.JDialog {
         this.tf_unidadMedida.setText("");
         this.tf_precioUnitario.setText("$ 0.0");
     }
+
     DecimalFormat dec;
+    ConversorMoneda conversorMoneda;
     int cantidad;
     double precioUnitario;
     double importe;
@@ -514,11 +520,4 @@ public class Compras extends javax.swing.JDialog {
     private abstractt.TextField tf_unidadMedida;
     // End of variables declaration//GEN-END:variables
 
-    private String convertir(String numero) {
-        String[] numeros = numero.split(".");
-        switch (numeros[1].charAt(0)) {
-
-        }
-        return numero;
-    }
 }

@@ -157,7 +157,6 @@ public class Catalogos extends javax.swing.JInternalFrame {
 
     private void btn_MedicamentosTratamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MedicamentosTratamientosActionPerformed
         administracionMedicamentos = new AdministracionMedicamentos(parent);
-        // this.setVisible(false);
         administracionMedicamentos.setVisible(true);
     }//GEN-LAST:event_btn_MedicamentosTratamientosActionPerformed
 

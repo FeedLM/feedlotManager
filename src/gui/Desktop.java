@@ -99,7 +99,6 @@ public class Desktop extends javax.swing.JFrame {
         btn_configuracion = new abstractt.Boton();
         jLabel1 = new javax.swing.JLabel();
         plecaInferior2 = new abstractt.PlecaInferior();
-        boton1 = new abstractt.Boton();
         fondo21 = new abstractt.Fondo2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -268,16 +267,6 @@ public class Desktop extends javax.swing.JFrame {
         plecaInferior2.setText("plecaInferior2");
         jDesktopPane1.add(plecaInferior2);
         plecaInferior2.setBounds(10, 300, 1050, 50);
-
-        boton1.setText("Compra de Medicamento");
-        boton1.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
-        boton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton1ActionPerformed(evt);
-            }
-        });
-        jDesktopPane1.add(boton1);
-        boton1.setBounds(260, 80, 180, 30);
 
         fondo21.setText("fondo21");
         jDesktopPane1.add(fondo21);
@@ -493,24 +482,6 @@ public class Desktop extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btn_ingresoAnimalesActionPerformed
 
-    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
-//        if (compras == null) {
-//        compras = new Compras(this);
-//        }
-//
-//        if (estacerrado(compras)) {
-//            // catalogos.setVisible(true);
-//            this.jDesktopPane1.add(compras);
-//            Dimension desktopSize = jDesktopPane1.getSize();
-//            Dimension FrameSize = compras.getSize();
-//            compras.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-//            compras.moveToFront();
-//            compras.show();
-//        }
-        compras = new Compras(this);
-        compras.setVisible(true);
-    }//GEN-LAST:event_boton1ActionPerformed
-
     public ManejadorBD getManejador() {
         return manejadorBD;
     }
@@ -545,7 +516,6 @@ public class Desktop extends javax.swing.JFrame {
     private ReporteSesiones reporteSesiones;
     private Compras compras;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton boton1;
     private abstractt.Boton btn_Hospital;
     private abstractt.Boton btn_Muertes;
     private abstractt.Boton btn_ReporteTraslados;
