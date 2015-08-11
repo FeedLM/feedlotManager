@@ -219,6 +219,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         btn_aplicacionMasiva = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
+        boton1 = new abstractt.Boton();
         pn_tratamientos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -447,6 +448,14 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
         fondo1.setText("fondo1");
         pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
+
+        boton1.setText("Compra de Medicamentos");
+        boton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton1ActionPerformed(evt);
+            }
+        });
+        pn_medicamentos.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
 
         jTabbedPane1.addTab(" M e d i c a m e n t o s ", pn_medicamentos);
 
@@ -965,6 +974,11 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 //        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
+    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+        compras = new Compras(parent);
+        compras.setVisible(true);
+    }//GEN-LAST:event_boton1ActionPerformed
+
     private boolean validarCodigo() {
 
         String Scodigo = tf_Codigo.getText();
@@ -1016,7 +1030,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private String id_tratamiento;
     private Medicina medicinaTratamiento;
     private MedicinasAnimalGrupo medicinaAnimalGrupo;
+    private Compras compras;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.Boton boton1;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
     private abstractt.Boton btn_agregarMedicamento;
