@@ -120,7 +120,7 @@ public class Rancho {
 
         ArrayList array = new ArrayList();
 
-        array.add("");
+        //array.add("");
         manejadorBD.consulta(""
                 + "SELECT descripcion \n"
                 + "FROM rancho \n"

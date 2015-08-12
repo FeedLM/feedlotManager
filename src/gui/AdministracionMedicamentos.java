@@ -208,8 +208,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         btn_guardar = new abstractt.Boton();
         btn_aplicacionMasiva = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
-        fondo1 = new abstractt.fondo();
         boton1 = new abstractt.Boton();
+        fondo1 = new abstractt.fondo();
         pn_tratamientos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -399,9 +399,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         etiqueta2.setOpaque(true);
         pn_medicamentos.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 60));
 
-        fondo1.setText("fondo1");
-        pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
-
         boton1.setText("Compra de Medicamentos");
         boton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,6 +406,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
             }
         });
         pn_medicamentos.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
+
+        fondo1.setText("fondo1");
+        pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
 
         jTabbedPane1.addTab(" M e d i c a m e n t o s ", pn_medicamentos);
 

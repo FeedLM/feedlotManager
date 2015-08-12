@@ -328,6 +328,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usuario.setText("admin");
         usuario.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +361,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 100, 30));
 
         contraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contraseña.setText("admin");
         contraseña.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

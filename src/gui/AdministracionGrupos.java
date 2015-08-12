@@ -35,7 +35,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Gilberto Adan González Silva
  */
-public class AdministracionGrupos extends javax.swing.JInternalFrame {//JDialog { //
+public class AdministracionGrupos extends javax.swing.JInternalFrame { // {
 
     private String id_animal;
     private SR232 stick;

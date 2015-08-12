@@ -32,6 +32,8 @@ public class Compras extends javax.swing.JDialog {
     public Compras(Desktop parent) {
         this.parent = parent;
         initComponents();
+        
+        setLocationRelativeTo(null);
 //        this.setClosable(true);
 //        this.pack();
 //        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
@@ -39,16 +41,17 @@ public class Compras extends javax.swing.JDialog {
         setTitle(this.getTitle() + " " + parent.rancho.descripcion);
         fondo1.cargar(jPanel1.getSize());
 
-        String titulos[] = {"Código", "Medicina", "Cantidad", "Precio Unitario", "Importe"};
+        String titulos[] = {"Código", "Medicina", "Cantidad", "Presentacion","Precio Unitario", "Importe"};
 
         t_medicina.setTitulos(titulos);
         t_medicina.cambiarTitulos();
-        t_medicina.setFormato(new int[]{4, 0, 4, 2, 2});
+        t_medicina.setFormato(new int[]{4, 0, 4, 2,2, 2});
         t_medicina.centrar();
 
         tf_factura.textFieldSoloNumerosYLetras();
         tf_ordenCompra.textFieldSoloNumeros();
         tf_cantidadIngresada.textFieldSoloNumeros();
+        tf_presentacion.textFieldSoloNumeros();
 
         proveedorSelector1.cargar();
         medicinaSelector1.cargar();
@@ -84,12 +87,14 @@ public class Compras extends javax.swing.JDialog {
         etiqueta5 = new abstractt.Etiqueta();
         etiqueta6 = new abstractt.Etiqueta();
         etiqueta7 = new abstractt.Etiqueta();
+        etiqueta13 = new abstractt.Etiqueta();
         etiqueta8 = new abstractt.Etiqueta();
         etiqueta9 = new abstractt.Etiqueta();
         jPanel5 = new javax.swing.JPanel();
         medicinaSelector1 = new domain.MedicinaSelector();
         codigoSelector = new abstractt.ComboBox();
         tf_cantidadIngresada = new abstractt.TextField();
+        tf_presentacion = new abstractt.TextField();
         tf_unidadMedida = new abstractt.TextField();
         tf_precioUnitario = new abstractt.TextFieldMoneda();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -110,7 +115,7 @@ public class Compras extends javax.swing.JDialog {
         tf_letras = new abstractt.TextField();
         fondo1 = new abstractt.fondo();
 
-        setPreferredSize(new java.awt.Dimension(850, 650));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -141,7 +146,6 @@ public class Compras extends javax.swing.JDialog {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
 
         etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta5.setText("Medicamento:");
@@ -158,6 +162,11 @@ public class Compras extends javax.swing.JDialog {
         etiqueta7.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel3.add(etiqueta7);
 
+        etiqueta13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiqueta13.setText("Presentación");
+        etiqueta13.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel3.add(etiqueta13);
+
         etiqueta8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta8.setText("Unidad de Medida:");
         etiqueta8.setPreferredSize(new java.awt.Dimension(120, 20));
@@ -169,7 +178,7 @@ public class Compras extends javax.swing.JDialog {
         etiqueta9.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel3.add(etiqueta9);
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 650, 30));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 30));
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
@@ -193,6 +202,9 @@ public class Compras extends javax.swing.JDialog {
         tf_cantidadIngresada.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel5.add(tf_cantidadIngresada);
 
+        tf_presentacion.setPreferredSize(new java.awt.Dimension(120, 20));
+        jPanel5.add(tf_presentacion);
+
         tf_unidadMedida.setEditable(false);
         tf_unidadMedida.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel5.add(tf_unidadMedida);
@@ -200,9 +212,9 @@ public class Compras extends javax.swing.JDialog {
         tf_precioUnitario.setPreferredSize(new java.awt.Dimension(120, 20));
         jPanel5.add(tf_precioUnitario);
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 650, 30));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 780, 50));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 670, 80));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 790, 80));
 
         t_medicina.setForeground(new java.awt.Color(230, 225, 190));
         t_medicina.setModel(new javax.swing.table.DefaultTableModel(
@@ -210,12 +222,12 @@ public class Compras extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
         jScrollPane1.setViewportView(t_medicina);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 800, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 910, 250));
 
         btn_agregarCompra.setText("Agregar Compra");
         btn_agregarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -241,11 +253,11 @@ public class Compras extends javax.swing.JDialog {
         jPanel6.add(etiqueta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 50, 20));
 
         tf_total.setEditable(false);
-        jPanel6.add(tf_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 20));
-        jPanel6.add(tf_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 80, 20));
-        jPanel6.add(tf_subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 80, 20));
+        jPanel6.add(tf_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 120, 20));
+        jPanel6.add(tf_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 120, 20));
+        jPanel6.add(tf_subtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 120, 20));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, -1, -1));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, 190, -1));
 
         btn_agregarMedicina.setText("Agregar");
         btn_agregarMedicina.addActionListener(new java.awt.event.ActionListener() {
@@ -253,7 +265,7 @@ public class Compras extends javax.swing.JDialog {
                 btn_agregarMedicinaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 80, 25));
+        jPanel1.add(btn_agregarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 80, 25));
 
         btn_eliminarMedicina.setText("Eliminar");
         btn_eliminarMedicina.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +273,7 @@ public class Compras extends javax.swing.JDialog {
                 btn_eliminarMedicinaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_eliminarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 80, 25));
+        jPanel1.add(btn_eliminarMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 210, 80, 25));
 
         etiqueta12.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta12.setForeground(new java.awt.Color(230, 225, 195));
@@ -269,7 +281,7 @@ public class Compras extends javax.swing.JDialog {
         etiqueta12.setText("Compra");
         etiqueta12.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta12.setOpaque(true);
-        jPanel1.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 70));
+        jPanel1.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 70));
 
         btn_proveedor.setText("Catalogo de Proveedor");
         btn_proveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -293,26 +305,19 @@ public class Compras extends javax.swing.JDialog {
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proveedorActionPerformed
+        
         catalogoProveedor = new CatalogoProveedor(parent);
         catalogoProveedor.setVisible(true);
     }//GEN-LAST:event_btn_proveedorActionPerformed
 
     private void btn_medicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicamentosActionPerformed
+        
         administracionMedicamentos = new AdministracionMedicamentos(parent);
         administracionMedicamentos.setVisible(true);
     }//GEN-LAST:event_btn_medicamentosActionPerformed
@@ -324,9 +329,7 @@ public class Compras extends javax.swing.JDialog {
         proveedor = new Proveedor();
         proveedor.cargarPorDescripcion(proveedorSelector1.getText());
         compra.setId_proveedor(proveedor);
-
         compra.setFecha(selectorFecha1.getFecha());
-
         compra.setFactura(tf_factura.getText());
         compra.setOrden(tf_ordenCompra.getText());
         compra.setSubtotal(tf_subtotal.getDouble());
@@ -335,16 +338,17 @@ public class Compras extends javax.swing.JDialog {
 
         manejadorBD.parametrosSP = new ParametrosSP();
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
-        manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varRancho", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(compra.id_proveedor.id_proveedor, "varproveedor", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(compra.getFecha()), "varfecha", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varIdRancho", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.id_proveedor.id_proveedor, "varIdProveedor", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(compra.getFecha()), "varFecha", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra.factura, "varFactura", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(compra.orden, "varorden", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varsubtotal", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "variva", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "vartotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(compra.orden, "varOrden", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.subtotal), "varSubtotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.iva), "varIva", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "varTotal", "DOUBLE", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
+            
             compra.cargarPorFacturaYOrden(compra.factura, compra.orden);
             agregarDetallesCompra();
             JOptionPane.showMessageDialog(this, "Proceso terminado con éxito.");
@@ -352,7 +356,6 @@ public class Compras extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this, "Error al guardar la Compra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btn_agregarCompraActionPerformed
 
     private void agregarDetallesCompra() {
@@ -360,17 +363,21 @@ public class Compras extends javax.swing.JDialog {
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP = new ParametrosSP();
-            manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varid_rancho", "STRING", "IN");
-
-            manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varid_compra", "STRING", "IN");
+            
+            manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varIdRancho", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varIdCompra", "STRING", "IN");
             medicina.cargarPorNombre(String.valueOf(t_medicina.getValueAt(i, 1)));
-            manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varid_medicina", "STRING", "IN");
-            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varcantidad", "INT", "IN");
-            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 3)), "varprecio_unitario", "DOUBLE", "IN");
-            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 4)), "varImporte", "DOUBLE", "IN");
-            if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?) }") == 0) {
+            manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varIdMedicina", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 2)), "varCantidad", "INT", "IN");
+            manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 3)), "varPresentacion", "INT", "IN");
+            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 4)), "varPrecioUnitario", "DOUBLE", "IN");
+            manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 5)), "varImporte", "DOUBLE", "IN");
+            
+            if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?) }") == 0) {
+                
                 System.out.println("Agregado correctamente");
             } else {
+                
                 JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 manejadorBD.consulta("DELETE FROM compras "
                         + "WHERE factura = '" + compra.factura + "'"
@@ -379,15 +386,15 @@ public class Compras extends javax.swing.JDialog {
         }
     }
 
-
     private void btn_agregarMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarMedicinaActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) t_medicina.getModel();
 
         cantidad = this.tf_cantidadIngresada.getInt();
         precioUnitario = this.tf_precioUnitario.obtenerValor();
         importe = cantidad * precioUnitario;
+        presentacion = this.tf_presentacion.getInt();
 
-        modelo.addRow(new Object[]{medicina.codigo, medicina.nombre, cantidad, precioUnitario, importe});
+        modelo.addRow(new Object[]{medicina.codigo, medicina.nombre, cantidad, presentacion, precioUnitario, importe});
 
         cargarTotales();
 
@@ -456,7 +463,8 @@ public class Compras extends javax.swing.JDialog {
     private void limpiarMedicina() {
         this.medicinaSelector1.setSelectedItem("");
         this.codigoSelector.setSelectedItem("");
-        this.tf_cantidadIngresada.setText("");
+        this.tf_cantidadIngresada.setText("0");
+        this.tf_presentacion.setText("0");
         this.tf_unidadMedida.setText("");
         this.tf_precioUnitario.setText("$ 0.0");
     }
@@ -464,6 +472,7 @@ public class Compras extends javax.swing.JDialog {
     DecimalFormat dec;
     ConversorMoneda conversorMoneda;
     int cantidad;
+    int presentacion;
     double precioUnitario;
     double importe;
     double subtotal;
@@ -488,6 +497,7 @@ public class Compras extends javax.swing.JDialog {
     private abstractt.Etiqueta etiqueta10;
     private abstractt.Etiqueta etiqueta11;
     private abstractt.Etiqueta etiqueta12;
+    private abstractt.Etiqueta etiqueta13;
     private abstractt.Etiqueta etiqueta2;
     private abstractt.Etiqueta etiqueta3;
     private abstractt.Etiqueta etiqueta4;
@@ -515,6 +525,7 @@ public class Compras extends javax.swing.JDialog {
     private abstractt.TextField tf_letras;
     private abstractt.TextField tf_ordenCompra;
     private abstractt.TextFieldMoneda tf_precioUnitario;
+    private abstractt.TextField tf_presentacion;
     private abstractt.TextFieldMoneda tf_subtotal;
     private abstractt.TextFieldMoneda tf_total;
     private abstractt.TextField tf_unidadMedida;
