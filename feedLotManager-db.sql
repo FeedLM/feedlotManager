@@ -4,7 +4,7 @@ USE `feedlotmanager`;
 --
 -- Host: localhost    Database: feedlotmanager
 -- ------------------------------------------------------
--- Server version	5.6.22-log
+-- Server version	5.5.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -348,16 +348,16 @@ DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `compra` (
-  `id_compra` char(255) NOT NULL,
-  `id_Rancho` char(255) NOT NULL,
-  `id_proveedor` char(255) NOT NULL,
+  `id_rancho` char(36) NOT NULL,
+  `id_compra` char(36) NOT NULL,
+  `id_proveedor` char(36) NOT NULL,
   `fecha` datetime DEFAULT NULL,
   `factura` varchar(45) DEFAULT NULL,
   `orden` varchar(45) DEFAULT NULL,
   `subtotal` decimal(20,4) DEFAULT NULL,
   `iva` decimal(20,4) DEFAULT NULL,
   `total` decimal(20,4) DEFAULT NULL,
-  PRIMARY KEY (`id_compra`,`id_Rancho`,`id_proveedor`)
+  PRIMARY KEY (`id_rancho`,`id_compra`,`id_proveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -367,7 +367,6 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
-INSERT INTO `compra` VALUES ('6f68d3a1-403a-11e5-9fca-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','a232e5e0-27d9-11e5-bb57-0023187ffb93','2015-08-11 10:05:14','20150811','2015',114.7500,18.3600,133.1100),('b2bb0bd2-404c-11e5-9fca-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','31b4be8d-cc37-11e4-ad51-3860779bbc63','2015-08-11 12:07:43','st1208','38',1253.1000,200.5000,1453.6000);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -893,14 +892,15 @@ DROP TABLE IF EXISTS `detalle_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_compra` (
-  `id_detalle` char(255) NOT NULL,
-  `id_rancho` char(255) NOT NULL,
-  `id_compra` char(255) NOT NULL,
-  `id_medicina` char(255) NOT NULL,
+  `id_rancho` char(36) NOT NULL,
+  `id_compra` char(36) NOT NULL,
+  `id_medicina` char(36) NOT NULL,
+  `id_detalle` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
+  `presentacion` decimal(20,4) DEFAULT NULL,
   `precio_unitario` decimal(20,4) DEFAULT NULL,
   `importe` decimal(20,4) DEFAULT NULL,
-  PRIMARY KEY (`id_detalle`,`id_compra`,`id_medicina`,`id_rancho`)
+  PRIMARY KEY (`id_rancho`,`id_compra`,`id_medicina`,`id_detalle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -910,7 +910,6 @@ CREATE TABLE `detalle_compra` (
 
 LOCK TABLES `detalle_compra` WRITE;
 /*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
-INSERT INTO `detalle_compra` VALUES ('6f743914-403a-11e5-9fca-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','6f68d3a1-403a-11e5-9fca-005056c00001','d11e5ae1-0683-11e5-90ca-a4db30742c49',85,1.3500,114.7500),('b2c25508-404c-11e5-9fca-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','b2bb0bd2-404c-11e5-9fca-005056c00001','d11e5ae1-0683-11e5-90ca-a4db30742c49',10,3.9100,39.1000),('b2d3d343-404c-11e5-9fca-005056c00001','de44fb3d-0552-11e5-be6c-a4db30742c49','b2bb0bd2-404c-11e5-9fca-005056c00001','b4714c40-0683-11e5-90ca-a4db30742c49',50,24.2800,1214.0000);
 /*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -925,30 +924,29 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `feedlotmanager`.`detalle_compra_AFTER_INSERT` 
 AFTER INSERT ON `detalle_compra` 
 FOR EACH ROW
+BEGIN
+	
+	DECLARE varConteo INT(11);
+	
+	SELECT	COUNT(*) INTO varConteo
+	FROM	rancho_medicina
+	WHERE	id_rancho	=	NEW.id_rancho
+	AND		id_medicina	=	NEW.id_medicina;
+	
+	IF varConteo > 0 THEN 
 
-BEGIN 
-
-DECLARE varConteo INT(11);
-
-SELECT COUNT(*) INTO varConteo
-FROM existencias
-WHERE id_medicina = NEW.id_medicina
-AND id_rancho = NEW.id_rancho;
-
-IF varConteo > 0 THEN 
-
-UPDATE existencias
-SET existencia = existencia + NEW.cantidad
-WHERE NEW.id_medicina = id_medicina
-AND NEW.id_rancho = id_rancho;
-
-ELSE
-
-INSERT INTO existencias(id_medicina, id_rancho, existencia) 
-SELECT NEW.id_medicina, NEW.id_rancho, NEW.cantidad;
-
-END IF;
-
+		UPDATE	rancho_medicina
+		SET		existencia = existencia + NEW.cantidad
+		WHERE	NEW.id_medicina = id_medicina
+		AND		NEW.id_rancho = id_rancho;
+	ELSE
+		
+		INSERT INTO rancho_medicina(
+			id_rancho,		id_medicina,  		existencia,		existencia_inicial) 
+		SELECT	
+			NEW.id_rancho, 	NEW.id_medicina,	NEW.cantidad,	0;
+        
+	END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1111,31 +1109,6 @@ LOCK TABLES `estado` WRITE;
 /*!40000 ALTER TABLE `estado` DISABLE KEYS */;
 INSERT INTO `estado` VALUES ('1','1','Aguascalientes'),('10','1','Durango'),('11','1','Guanajuato'),('12','1','Guerrero'),('13','1','Hidalgo'),('14','1','Jalisco'),('15','1','México'),('16','1','Michoacán de Ocampo'),('17','1','Morelos'),('18','1','Nayarit'),('19','1','Nuevo León'),('2','1','Baja California'),('20','1','Oaxaca'),('21','1','Puebla'),('22','1','Querétaro'),('23','1','Quintana Roo'),('24','1','San Luis Potosí'),('25','1','Sinaloa'),('26','1','Sonora'),('27','1','Tabasco'),('28','1','Tamaulipas'),('29','1','Tlaxcala'),('3','1','Baja California Sur'),('30','1','Veracruz de Ignacio de la llave'),('31','1','Yucatán'),('32','1','Zacatecas'),('4','1','Campeche'),('5','1','Coahuila de Zaragoza'),('6','1','Colima'),('7','1','Chiapas'),('8','1','Chihuahua'),('9','1','Distrito Federal');
 /*!40000 ALTER TABLE `estado` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `existencias`
---
-
-DROP TABLE IF EXISTS `existencias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `existencias` (
-  `id_medicina` char(255) NOT NULL,
-  `id_rancho` char(255) NOT NULL,
-  `existencia` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_medicina`,`id_rancho`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `existencias`
---
-
-LOCK TABLES `existencias` WRITE;
-/*!40000 ALTER TABLE `existencias` DISABLE KEYS */;
-INSERT INTO `existencias` VALUES ('b4714c40-0683-11e5-90ca-a4db30742c49','de44fb3d-0552-11e5-be6c-a4db30742c49',50),('d11e5ae1-0683-11e5-90ca-a4db30742c49','de44fb3d-0552-11e5-be6c-a4db30742c49',95);
-/*!40000 ALTER TABLE `existencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1782,6 +1755,35 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `rancho_medicina`
+--
+
+DROP TABLE IF EXISTS `rancho_medicina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rancho_medicina` (
+  `id_rancho` char(36) NOT NULL,
+  `id_medicina` char(36) NOT NULL,
+  `existencia_inicial` int(11) DEFAULT NULL,
+  `existencia` int(11) DEFAULT NULL,
+  `costo_promedio` decimal(20,4) DEFAULT NULL,
+  `ultimo_costo` decimal(20,4) DEFAULT NULL,
+  `ultima_compra` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_rancho`,`id_medicina`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rancho_medicina`
+--
+
+LOCK TABLES `rancho_medicina` WRITE;
+/*!40000 ALTER TABLE `rancho_medicina` DISABLE KEYS */;
+INSERT INTO `rancho_medicina` VALUES ('b4714c40-0683-11e5-90ca-a4db30742c49','de44fb3d-0552-11e5-be6c-a4db30742c49',NULL,50,NULL,NULL,NULL),('d11e5ae1-0683-11e5-90ca-a4db30742c49','de44fb3d-0552-11e5-be6c-a4db30742c49',NULL,95,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `rancho_medicina` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `raza`
@@ -3762,21 +3764,23 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarCompra`(	
-varRancho CHAR(255), varproveedor CHAR(255), varfecha DATETIME, varFactura VARCHAR(45), varorden VARCHAR(45),
-varsubtotal DECIMAL(20,4), variva DECIMAL(20,4), vartotal DECIMAL(20,4)
-)
+	varIdRancho	CHAR(36),		varIdProveedor	CHAR(36),		varFecha	DATETIME,
+    varFactura	VARCHAR(45), 	varOrden		VARCHAR(45),	varSubtotal	DECIMAL(20,4),
+    varIva		DECIMAL(20,4),	varTotal		DECIMAL(20,4)	)
 BEGIN
 
-	DECLARE	varid_compra CHAR(36);
+	DECLARE	varIdCompra CHAR(36);
 
 	SELECT	UUID()
-	INTO	varid_compra;
+	INTO	varIdCompra;
 
 	INSERT	compra
-		(	id_compra,	id_rancho,	id_proveedor,	fecha,		
-			factura,	orden, subtotal, iva, total)
-	SELECT	varid_compra,	varRancho, varproveedor,	varfecha,	
-			varFactura,	varorden, varsubtotal, variva, vartotal;
+		(	id_compra,		id_rancho,		id_proveedor,	fecha,		
+			factura,		orden, 			subtotal, 		iva, 
+            total)
+	SELECT	varidCompra,	varIdRancho,	varIdProveedor,	varFecha,	
+			varFactura,		varOrden,		varSubtotal,	varIva,
+            varTotal;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3894,21 +3898,25 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarDetalleCompra`(
-varid_rancho CHAR(255), varid_compra CHAR(255), varid_medicina CHAR(255), 
-varcantidad INT(11), varprecio_unitario DECIMAL(20,4), varImporte DECIMAL(20,4)
+	varIdRancho	CHAR(36),	varIdCompra			CHAR(36),		varIdMedicina	CHAR(36), 
+	varCantidad	INT(11),	varPrecioUnitario	DECIMAL(20,4),	varImporte		DECIMAL(20,4)
 )
 BEGIN
-    DECLARE varid_detalle CHAR(255);
-    
-    SELECT	UUID()
-	INTO	varid_detalle;
-    
-    
-    INSERT detalle_compra(id_detalle, id_rancho, id_compra, id_medicina, 
-    cantidad, precio_unitario, importe)
-    SELECT varid_detalle, varid_rancho, varid_compra, varid_medicina, 
-    varcantidad, varprecio_unitario, varimporte;
-    
+
+    DECLARE varIdDetalle INT(11);
+ 
+    SELECT	COUNT(*) + 1
+	INTO	varIdDetalle
+	FROM	detalle_compra
+	WHERE	id_rancho		=	varIdRancho
+	AND		id_compra		=	varIdCompra;	
+        
+    INSERT detalle_compra(
+		id_detalle,		id_rancho,			id_compra,		id_medicina, 
+		cantidad,		precio_unitario,	importe)
+    SELECT
+		varIdDetalle,	varIdRancho,		varIdCompra,	varIdMedicina, 
+		varCantidad,	varPrecioUnitario,	varImporte;    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4461,6 +4469,32 @@ BEGIN
     UPDATE	corral
     SET		peso_ganancia		=	CASE WHEN peso_ganancia < 0 THEN 0 ELSE peso_ganancia END
     WHERE	corral.id_corral	=	varIdCorral;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `calcula_existencias_costos_medicna` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `calcula_existencias_costos_medicna`(
+	varIdRancho	CHAR(36),	varIdMedicina	CHAR(36)	)
+BEGIN
+	
+    -- Obtiene Existencia Inicial
+	-- Suma Cantidades en Compras
+    -- Suma Cantidades en Aplicaciones
+	-- (	Existencia Inicial + Compras	)	-	Aplicaciones
+    
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5706,4 +5740,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-11 16:39:34
+-- Dump completed on 2015-08-12 17:47:33
