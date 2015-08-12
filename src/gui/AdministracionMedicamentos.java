@@ -35,7 +35,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        String titulos[] = {"Codigo", "Nombre", "Unidades", "Costo", "Presentacion", "Costo Unitario"};
+        String titulos[] = {"Codigo", "Nombre", "Unidad de Medida", "Costo", "Presentacion", "Costo Unitario"};
 
         t_medicinas.setTitulos(titulos);
         t_medicinas.cambiarTitulos();
@@ -44,7 +44,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         t_medicinas.centrar();
 
         this.tf_Codigo.textFieldSoloNumeros();
-        this.tf_Presentacion.textFieldSoloNumeros();
         unidadSelector.addArray(cargarUnidades());
 
         ListSelectionModel lsm = this.t_medicinas.getSelectionModel();
@@ -78,9 +77,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private void limpiarMedicina() {
         tf_Codigo.setText("");
         tf_Nombre.setText("");
-        tf_Costo.setText("$ 0.00");
-        this.tf_CostoUnitario.setText("$ 0.00");
-        this.tf_Presentacion.setText("0.0");
         this.unidadSelector.setSelectedItem("");
     }
 
@@ -101,10 +97,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
             tf_Codigo.setText(codigo.toString());
             tf_Nombre.setText(nombre);
-            tf_Costo.setText("$ " + costo.toString());
-            this.tf_Presentacion.setText(presentacion.toString());
-            this.tf_CostoUnitario.setText("$ " + costo_unitario.toString());
-
             this.unidadSelector.setSelectedItem(unidad);
             this.codigoOriginal = codigo;
             cambioCodigo = false;
@@ -200,17 +192,15 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lbl_unidades = new javax.swing.JLabel();
-        lbl_costo = new javax.swing.JLabel();
         lbl_nombre = new javax.swing.JLabel();
         lbl_codigo = new javax.swing.JLabel();
         unidadSelector = new abstractt.ComboBox();
-        jLabel7 = new javax.swing.JLabel();
-        tf_CostoUnitario = new abstractt.TextFieldMoneda();
-        tf_Presentacion = new abstractt.TextField();
-        jLabel6 = new javax.swing.JLabel();
-        tf_Costo = new abstractt.TextFieldMoneda();
         tf_Nombre = new abstractt.TextField();
         tf_Codigo = new abstractt.TextField();
+        etiqueta3 = new abstractt.Etiqueta();
+        etiqueta4 = new abstractt.Etiqueta();
+        textField1 = new abstractt.TextField();
+        textFieldMoneda1 = new abstractt.TextFieldMoneda();
         jScrollPane2 = new javax.swing.JScrollPane();
         t_medicinas = new abstractt.Table();
         btn_agregar = new abstractt.Boton();
@@ -275,30 +265,23 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         lbl_unidades.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         lbl_unidades.setForeground(new java.awt.Color(95, 84, 88));
         lbl_unidades.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_unidades.setText("Unidades");
+        lbl_unidades.setText("Unidad de Medida:");
         lbl_unidades.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(lbl_unidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 100, 20));
-
-        lbl_costo.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lbl_costo.setForeground(new java.awt.Color(95, 84, 88));
-        lbl_costo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_costo.setText("Costo:");
-        lbl_costo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(lbl_costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 100, 20));
+        jPanel1.add(lbl_unidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, 20));
 
         lbl_nombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         lbl_nombre.setForeground(new java.awt.Color(95, 84, 88));
         lbl_nombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_nombre.setText("Nombre:");
         lbl_nombre.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 20));
+        jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 20));
 
         lbl_codigo.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         lbl_codigo.setForeground(new java.awt.Color(95, 84, 88));
         lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_codigo.setText("Codigo:");
         lbl_codigo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(lbl_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 20));
+        jPanel1.add(lbl_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 20));
 
         unidadSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,46 +289,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(unidadSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 200, 20));
-
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(95, 84, 88));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Costo Unitario:");
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 100, 20));
-
-        tf_CostoUnitario.setEditable(false);
-        tf_CostoUnitario.setEnabled(false);
-        tf_CostoUnitario.setFocusable(false);
-        tf_CostoUnitario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_CostoUnitarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(tf_CostoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 20));
-
-        tf_Presentacion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tf_Presentacion.setText("0.0");
-        tf_Presentacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_PresentacionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(tf_Presentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
-
-        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(95, 84, 88));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Presentacion:");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 100, 20));
-
-        tf_Costo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_CostoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(tf_Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
 
         tf_Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -367,6 +310,16 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(tf_Codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 200, 20));
+
+        etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta3.setText("Existencias :");
+        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
+
+        etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta4.setText("Precio por Dosis: ");
+        jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 120, 20));
+        jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
+        jPanel1.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
 
         pn_medicamentos.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
@@ -812,9 +765,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         }
 
         codigo = Integer.parseInt(tf_Codigo.getText());
-        costo = tf_Costo.obtenerValor();
         nombre = tf_Nombre.getText();
-        presentacion = this.tf_Presentacion.getDouble();
         //        costo_unitario = this.tf_CostoUnitario.obtenerValor();
 
         manejadorBD.parametrosSP = new ParametrosSP();
@@ -860,9 +811,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
         if (tf_Codigo.getText().length() != 0 && tf_Nombre.getText().length() != 0) {
             codigo = Integer.parseInt(tf_Codigo.getText());
-            costo = tf_Costo.obtenerValor();
             nombre = tf_Nombre.getText();
-            presentacion = this.tf_Presentacion.getDouble();
             //  costo_unitario = this.tf_CostoUnitario.obtenerValor();
 
             if (id_unidad.equals("")) {
@@ -917,37 +866,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
         nombre = tf_Nombre.getText();
     }//GEN-LAST:event_tf_NombreActionPerformed
-
-    private void tf_CostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_CostoActionPerformed
-        costo = tf_Costo.getDouble();
-
-        presentacion = this.tf_Presentacion.getDouble();
-
-        if (presentacion.equals(0)) {
-
-            tf_CostoUnitario.setDouble(costo);
-        } else {
-            tf_CostoUnitario.setDouble(costo / presentacion);
-        }
-    }//GEN-LAST:event_tf_CostoActionPerformed
-
-    private void tf_PresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_PresentacionActionPerformed
-
-        costo = tf_Costo.obtenerValor();
-
-        presentacion = this.tf_Presentacion.getDouble();
-
-        if (presentacion.equals(0)) {
-
-            tf_CostoUnitario.setDouble(costo);
-        } else {
-            tf_CostoUnitario.setDouble(costo / presentacion);
-        }
-    }//GEN-LAST:event_tf_PresentacionActionPerformed
-
-    private void tf_CostoUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_CostoUnitarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_CostoUnitarioActionPerformed
 
     private void unidadSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadSelectorActionPerformed
 
@@ -1044,6 +962,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private abstractt.Boton btn_guardar;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
+    private abstractt.Etiqueta etiqueta3;
+    private abstractt.Etiqueta etiqueta4;
     private abstractt.fondo fondo1;
     private abstractt.fondo fondo2;
     private abstractt.fondo fondo3;
@@ -1051,8 +971,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1063,7 +981,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_codigo;
-    private javax.swing.JLabel lbl_costo;
     private javax.swing.JLabel lbl_nombre;
     private javax.swing.JLabel lbl_unidades;
     private domain.MedicinaSelector medicinaSelector;
@@ -1071,13 +988,12 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private javax.swing.JPanel pn_tratamientos;
     private abstractt.Table t_medicinas;
     private abstractt.Table t_medicinasTratamientos;
+    private abstractt.TextField textField1;
+    private abstractt.TextFieldMoneda textFieldMoneda1;
     private abstractt.TextField tf_Codigo;
-    private abstractt.TextFieldMoneda tf_Costo;
     private abstractt.TextFieldMoneda tf_CostoTratamiento;
-    private abstractt.TextFieldMoneda tf_CostoUnitario;
     private abstractt.TextField tf_DosisTratamiento;
     private abstractt.TextField tf_Nombre;
-    private abstractt.TextField tf_Presentacion;
     private domain.TratamientoSelector tratamientoSelectorCodigo;
     private domain.TratamientoSelector tratamientoSelectorNombre;
     private abstractt.ComboBox unidadSelector;
