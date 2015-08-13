@@ -25,7 +25,8 @@ public class Medicina {
     //public Integer id_unidad;
     public Double presentacion;
     public Double costo_unitario;
-    public String status;
+    public String status;  
+    public Date ultima_compra;    
 
     public Medicina() {
 

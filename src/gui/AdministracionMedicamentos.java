@@ -201,6 +201,10 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         etiqueta4 = new abstractt.Etiqueta();
         textField1 = new abstractt.TextField();
         textFieldMoneda1 = new abstractt.TextFieldMoneda();
+        etiqueta5 = new abstractt.Etiqueta();
+        textFieldMoneda2 = new abstractt.TextFieldMoneda();
+        etiqueta6 = new abstractt.Etiqueta();
+        calendar1 = new abstractt.Calendar();
         jScrollPane2 = new javax.swing.JScrollPane();
         t_medicinas = new abstractt.Table();
         btn_agregar = new abstractt.Boton();
@@ -312,16 +316,37 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel1.add(tf_Codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 200, 20));
 
         etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        etiqueta3.setText("Existencias :");
-        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
+        etiqueta3.setText("Existencia:");
+        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 120, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        etiqueta4.setText("Precio por Dosis: ");
-        jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 120, 20));
-        jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
-        jPanel1.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
+        etiqueta4.setText("Costo Promedio:");
+        jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
 
-        pn_medicamentos.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
+        textField1.setEditable(false);
+        textField1.setEnabled(false);
+        jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
+
+        textFieldMoneda1.setEditable(false);
+        textFieldMoneda1.setEnabled(false);
+        jPanel1.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
+
+        etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta5.setText("Ultimo Compra:");
+        jPanel1.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, 20));
+
+        textFieldMoneda2.setEditable(false);
+        textFieldMoneda2.setEnabled(false);
+        jPanel1.add(textFieldMoneda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 20));
+
+        etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta6.setText("Ultimo Costo:");
+        jPanel1.add(etiqueta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 120, 20));
+
+        calendar1.setEnabled(false);
+        jPanel1.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, -1));
+
+        pn_medicamentos.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 370, 210));
 
         t_medicinas.setForeground(new java.awt.Color(230, 225, 195));
         t_medicinas.setModel(new javax.swing.table.DefaultTableModel(
@@ -960,10 +985,13 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private abstractt.Boton btn_eliminarMedicamento;
     private abstractt.Boton btn_eliminarTratamiento;
     private abstractt.Boton btn_guardar;
+    private abstractt.Calendar calendar1;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
     private abstractt.Etiqueta etiqueta3;
     private abstractt.Etiqueta etiqueta4;
+    private abstractt.Etiqueta etiqueta5;
+    private abstractt.Etiqueta etiqueta6;
     private abstractt.fondo fondo1;
     private abstractt.fondo fondo2;
     private abstractt.fondo fondo3;
@@ -990,6 +1018,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private abstractt.Table t_medicinasTratamientos;
     private abstractt.TextField textField1;
     private abstractt.TextFieldMoneda textFieldMoneda1;
+    private abstractt.TextFieldMoneda textFieldMoneda2;
     private abstractt.TextField tf_Codigo;
     private abstractt.TextFieldMoneda tf_CostoTratamiento;
     private abstractt.TextField tf_DosisTratamiento;

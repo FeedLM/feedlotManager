@@ -299,6 +299,7 @@ public class Compras extends javax.swing.JDialog {
         });
         jPanel1.add(btn_medicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 170, 30));
 
+        tf_letras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_letras.setText("Cero 00/100 M.N.");
         jPanel1.add(tf_letras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 430, 30));
 
@@ -444,12 +445,13 @@ public class Compras extends javax.swing.JDialog {
 
     private void cargarTotales() {
         conversorMoneda = new ConversorMoneda();
-        subtotal = 0;
-        iva = 0;
-        total = 0;
+        subtotal = 0.0;
+        iva = 0.0;
+        total = 0.0;
 
         for (int i = 0; i < (t_medicina.getRowCount()); i++) {
-            subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 4)));
+            
+            subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 5)));
         }
 
         iva = subtotal * 0.16;
@@ -457,7 +459,8 @@ public class Compras extends javax.swing.JDialog {
         tf_subtotal.setDouble(subtotal);
         tf_iva.setDouble(iva);
         tf_total.setDouble(total);
-        tf_letras.setText(conversorMoneda.moneda(tf_total.getText()));
+        //tf_letras.setText(conversorMoneda.moneda(tf_total.getText()));
+        tf_letras.setText(conversorMoneda.moneda(total.toString()));
     }
 
     private void limpiarMedicina() {
@@ -471,13 +474,13 @@ public class Compras extends javax.swing.JDialog {
 
     DecimalFormat dec;
     ConversorMoneda conversorMoneda;
-    int cantidad;
-    int presentacion;
-    double precioUnitario;
-    double importe;
-    double subtotal;
-    double iva;
-    double total;
+    Integer cantidad;
+    Integer presentacion;
+    Double precioUnitario;
+    Double importe;
+    Double subtotal;
+    Double iva;
+    Double total;
     Rancho rancho;
     Compra compra;
     Proveedor proveedor;
