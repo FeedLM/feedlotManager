@@ -309,12 +309,19 @@ public class MedicinasAnimal extends javax.swing.JFrame {
     public void cargarMedicinaAnimal() {
 
         leerMedicinaAnimal(t_MedicinaAnimal, animal);
-
+/*
         manejadorBD.consulta(""
                 + "SELECT round(ifnull(sum(round(costo_unitario,2) * dosis),0.00),2) "
                 + "FROM  medicina_animal ma, medicina m "
                 + "WHERE ma.id_medicina	=	m.id_medicina "
                 + "AND   id_rancho	=	'" + rancho.id_rancho + "' "
+                + "AND   id_animal	=	'" + animal.id_animal + "'");
+        
+  */      
+        manejadorBD.consulta(""
+                + "SELECT round(ifnull(sum(round(costo,2) * dosis),0.00),2) \n"
+                + "FROM  medicina_animal ma \n"
+                + "WHERE id_rancho	=	'" + rancho.id_rancho + "' "
                 + "AND   id_animal	=	'" + animal.id_animal + "'");
 
         costo = manejadorBD.getValorDouble(0, 0);

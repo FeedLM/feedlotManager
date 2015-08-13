@@ -174,7 +174,7 @@ public class Medicina {
     public static void leerMedicinaAnimal(Table tabla, Animal animal) {
 
         crearTablaMedicinaAnimal(tabla);
-
+/*
         manejadorBD.consulta(""
                 + "SELECT   ma.id_medicina_animal, m.codigo,                   m.nombre,\n"
                 + "         um.descripcion,             cast(fecha as Date),\n"
@@ -185,6 +185,18 @@ public class Medicina {
                 + "AND      m.id_unidad     =   um.id_unidad "
                 + "AND      ma.id_rancho    =   '" + rancho.id_rancho + "' "
                 + "AND      ma.id_animal    =   '" + animal.id_animal + "' ");
+  */      
+        manejadorBD.consulta(""
+                + "SELECT   ma.id_medicina_animal, m.codigo,                   m.nombre,\n"
+                + "         um.descripcion,             cast(fecha as Date),\n"
+                + "         round(m.costo,2),  round(ma.dosis,2),\n"
+                + "         round(round(m.costo,2) * ma.dosis,2)  "
+                + "FROM     medicina_animal ma, medicina m, unidades_de_medida um "
+                + "WHERE    ma.id_medicina  =   m.id_medicina "
+                + "AND      m.id_unidad     =   um.id_unidad "
+                + "AND      ma.id_rancho    =   '" + rancho.id_rancho + "' "
+                + "AND      ma.id_animal    =   '" + animal.id_animal + "' ");
+        
 
         if (manejadorBD.getRowCount() > 0) {
 
