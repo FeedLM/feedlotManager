@@ -35,7 +35,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Gilberto Adan González Silva
  */
-public class AdministracionGrupos extends javax.swing.JDialog { // {
+public class AdministracionGrupos extends javax.swing.JFrame { // {
 
     private String id_animal;
     private SR232 stick;
@@ -45,7 +45,7 @@ public class AdministracionGrupos extends javax.swing.JDialog { // {
      * Creates new form AdministracionGrupos
      */
     public AdministracionGrupos(Desktop aparent) {
-         super(aparent, true);
+//         super(aparent, true);
         this.parent = aparent;
         initComponents();
         setLocationRelativeTo(null);
@@ -284,7 +284,11 @@ public class AdministracionGrupos extends javax.swing.JDialog { // {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración de Grupos");
         setResizable(false);
-        
+		addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });        
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -846,7 +850,7 @@ public class AdministracionGrupos extends javax.swing.JDialog { // {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.stick.setSeguir(false);
-        parent.setVisible(true);
+
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
