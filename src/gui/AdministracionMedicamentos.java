@@ -5,8 +5,10 @@
  */
 package gui;
 
+import abstractt.Table;
 import domain.ManejadorBD;
 import domain.Medicina;
+import static domain.Medicina.leerMedicina;
 import static domain.Medicina.leerMedicinaCodigo;
 import domain.ParametrosSP;
 import domain.Tratamiento;
@@ -35,11 +37,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        String titulos[] = {"Codigo", "Nombre", "Unidad de Medida", "Costo", "Presentacion", "Costo Unitario"};
-
-        t_medicinas.setTitulos(titulos);
-        t_medicinas.cambiarTitulos();
-        t_medicinas.setFormato(new int[]{4, 4, 0, 1, 4, 1, 1, 1});
         cargarMedicinas();
         t_medicinas.centrar();
 
@@ -86,6 +83,10 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
         if (fila >= 0) {
 
+            medicina = new Medicina();
+            
+            medicina.cargarPorId(t_medicinas.getValueAt(fila, 0).toString());
+            /*
             id_medicina = t_medicinas.getValueAt(fila, 0).toString();
             codigo = Integer.parseInt(t_medicinas.getValueAt(fila, 1).toString());
             nombre = t_medicinas.getValueAt(fila, 2).toString();
@@ -94,11 +95,15 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
             presentacion = Double.parseDouble(t_medicinas.getValueAt(fila, 5).toString());
             costo_unitario = Double.parseDouble(t_medicinas.getValueAt(fila, 6).toString());
             id_unidad = t_medicinas.getValueAt(fila, 7).toString();
-
-            tf_Codigo.setText(codigo.toString());
-            tf_Nombre.setText(nombre);
-            this.unidadSelector.setSelectedItem(unidad);
-            this.codigoOriginal = codigo;
+*/
+            tf_Codigo.setText(medicina.codigo.toString());
+            tf_Nombre.setText(medicina.nombre);
+            this.unidadSelector.setSelectedItem(medicina.unidadMedida.descripcion);
+            this.codigoOriginal = medicina.codigo;
+            this.tf_Existencias.setText(medicina.existencia.toString());
+            this.tf_CostoPromedio.setDouble(medicina.costo_promedio);
+            this.tf_UltimoCosto.setDouble(medicina.ultimo_costo);
+            UltimaCompra.setDate(medicina.ultima_compra);
             cambioCodigo = false;
 
         } else {
@@ -107,25 +112,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     }
 
     private void cargarMedicinas() {
-
-        ManejadorBD mbd = manejadorBD.nuevaConexion();
-
-        mbd.consulta(""
-                + "SELECT   id_medicina,                    codigo,             ifnull(nombre,'') nombre,  \n"
-                + "         unidades_de_medida.descripcion, costo,              presentacion, \n"
-                + "         costo_unitario,                 medicina.id_unidad  \n"
-                + "FROM     medicina, unidades_de_medida \n"
-                + "WHERE    medicina.id_unidad =   unidades_de_medida.id_unidad \n"
-                + "AND status  =   'S'");
-
-        this.t_medicinas.setModel(mbd);
-        if (mbd.getRowCount() > 0) {
-
-            t_medicinas.setRowSelectionInterval(0, 0);
-        }
-
-        t_medicinas.ocultarcolumna(0);
-        t_medicinas.ocultarcolumna(7);
+        
+        leerMedicina(t_medicinas);
+        
 
     }
     /*Limpiar componentes de Tratamiento*/
@@ -199,12 +188,12 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         tf_Codigo = new abstractt.TextField();
         etiqueta3 = new abstractt.Etiqueta();
         etiqueta4 = new abstractt.Etiqueta();
-        textField1 = new abstractt.TextField();
-        textFieldMoneda1 = new abstractt.TextFieldMoneda();
+        tf_Existencias = new abstractt.TextField();
+        tf_CostoPromedio = new abstractt.TextFieldMoneda();
         etiqueta5 = new abstractt.Etiqueta();
-        textFieldMoneda2 = new abstractt.TextFieldMoneda();
+        tf_UltimoCosto = new abstractt.TextFieldMoneda();
         etiqueta6 = new abstractt.Etiqueta();
-        calendar1 = new abstractt.Calendar();
+        UltimaCompra = new abstractt.Calendar();
         jScrollPane2 = new javax.swing.JScrollPane();
         t_medicinas = new abstractt.Table();
         btn_agregar = new abstractt.Boton();
@@ -323,28 +312,31 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         etiqueta4.setText("Costo Promedio:");
         jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
 
-        textField1.setEditable(false);
-        textField1.setEnabled(false);
-        jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
+        tf_Existencias.setEditable(false);
+        tf_Existencias.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_Existencias.setEnabled(false);
+        jPanel1.add(tf_Existencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
 
-        textFieldMoneda1.setEditable(false);
-        textFieldMoneda1.setEnabled(false);
-        jPanel1.add(textFieldMoneda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
+        tf_CostoPromedio.setEditable(false);
+        tf_CostoPromedio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_CostoPromedio.setEnabled(false);
+        jPanel1.add(tf_CostoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
 
         etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta5.setText("Ultimo Compra:");
         jPanel1.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, 20));
 
-        textFieldMoneda2.setEditable(false);
-        textFieldMoneda2.setEnabled(false);
-        jPanel1.add(textFieldMoneda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 20));
+        tf_UltimoCosto.setEditable(false);
+        tf_UltimoCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_UltimoCosto.setEnabled(false);
+        jPanel1.add(tf_UltimoCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 20));
 
         etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta6.setText("Ultimo Costo:");
         jPanel1.add(etiqueta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 120, 20));
 
-        calendar1.setEnabled(false);
-        jPanel1.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, -1));
+        UltimaCompra.setEnabled(false);
+        jPanel1.add(UltimaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, -1));
 
         pn_medicamentos.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 370, 210));
 
@@ -974,7 +966,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private Medicina medicinaTratamiento;
     private MedicinasAnimalGrupo medicinaAnimalGrupo;
     private Compras compras;
+    private Medicina medicina;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.Calendar UltimaCompra;
     private abstractt.Boton boton1;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
@@ -985,7 +979,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private abstractt.Boton btn_eliminarMedicamento;
     private abstractt.Boton btn_eliminarTratamiento;
     private abstractt.Boton btn_guardar;
-    private abstractt.Calendar calendar1;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
     private abstractt.Etiqueta etiqueta3;
@@ -1016,13 +1009,13 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private javax.swing.JPanel pn_tratamientos;
     private abstractt.Table t_medicinas;
     private abstractt.Table t_medicinasTratamientos;
-    private abstractt.TextField textField1;
-    private abstractt.TextFieldMoneda textFieldMoneda1;
-    private abstractt.TextFieldMoneda textFieldMoneda2;
     private abstractt.TextField tf_Codigo;
+    private abstractt.TextFieldMoneda tf_CostoPromedio;
     private abstractt.TextFieldMoneda tf_CostoTratamiento;
     private abstractt.TextField tf_DosisTratamiento;
+    private abstractt.TextField tf_Existencias;
     private abstractt.TextField tf_Nombre;
+    private abstractt.TextFieldMoneda tf_UltimoCosto;
     private domain.TratamientoSelector tratamientoSelectorCodigo;
     private domain.TratamientoSelector tratamientoSelectorNombre;
     private abstractt.ComboBox unidadSelector;

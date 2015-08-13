@@ -218,9 +218,10 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="abstractt.TextField" name="textField1">
+                    <Component class="abstractt.TextField" name="tf_Existencias">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -229,9 +230,10 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="abstractt.TextFieldMoneda" name="textFieldMoneda1">
+                    <Component class="abstractt.TextFieldMoneda" name="tf_CostoPromedio">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -251,9 +253,10 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="abstractt.TextFieldMoneda" name="textFieldMoneda2">
+                    <Component class="abstractt.TextFieldMoneda" name="tf_UltimoCosto">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -273,7 +276,7 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="abstractt.Calendar" name="calendar1">
+                    <Component class="abstractt.Calendar" name="UltimaCompra">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>

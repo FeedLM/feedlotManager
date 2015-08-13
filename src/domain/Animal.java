@@ -64,19 +64,19 @@ public class Animal {
     public void cargarPorId(String sId_animal) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
+                + "SELECT animal.id_animal,                             arete_visual, \n"
                 + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
+                + "       arete_siniiga,                                arete_campaña, \n"
+                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote, \n"
+                + "       compra,                                       id_proveedor, \n"
                 + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
+                + "       COALESCE(peso_compra,0),                      status, \n"
                 + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
-                + "FROM  animal, corral_animal  \n"
-                + "WHERE animal.id_animal = '" + sId_animal + "' \n"
-                + "AND      animal.id_animal    =   corral_animal.id_animal \n"
-                + "AND      corral_animal.id_rancho = '" + rancho.id_rancho + "'");
+                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'') \n "
+                + "FROM   animal, corral_animal \n"
+                + "WHERE  animal.id_animal        = '" + sId_animal + "' \n"
+                + "AND    animal.id_animal        = corral_animal.id_animal \n"
+                + "AND    corral_animal.id_rancho = '" + rancho.id_rancho + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 

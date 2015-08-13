@@ -8,8 +8,12 @@ package domain;
 import abstractt.Table;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
+import static gui.Splash.formatoDateTime;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,8 +29,11 @@ public class Medicina {
     //public Integer id_unidad;
     public Double presentacion;
     public Double costo_unitario;
-    public String status;  
-    public Date ultima_compra;    
+    public String status;
+    public Date ultima_compra;
+    public Double costo_promedio;
+    public Double ultimo_costo;
+    public Integer existencia;
 
     public Medicina() {
 
@@ -43,11 +50,16 @@ public class Medicina {
     public void cargarPorId(String id_medicina) {
 
         manejadorBD.consulta(""
-                + "SELECT   id_medicina,    codigo,         nombre, costo,  \n"
-                + "         id_unidad,      presentacion,   costo_unitario, \n"
-                + "         status                                          \n"
-                + "FROM     medicina                                        \n"
-                + "WHERE    medicina.id_medicina = '" + id_medicina + "'");
+                + "SELECT m.id_medicina,                m.codigo,\n"
+                + "       m.nombre,                     costo,\n"
+                + "       m.id_unidad,                  m.presentacion,\n"
+                + "       m.costo_unitario,             m.status,\n"
+                + "       COALESCE(rm.existencia,0),       COALESCE(rm.ultima_compra,'1900-01-01 00:00:00'),\n"
+                + "       COALESCE(rm.costo_promedio,0.0), COALESCE(rm.ultimo_costo,0.0)\n "
+                + "FROM   medicina m LEFT OUTER JOIN rancho_medicina rm ON \n"
+                + "         m.id_medicina = rm.id_medicina \n"
+                + "       AND rm.id_rancho = '" + rancho.id_rancho + "' \n"
+                + "WHERE  m.id_medicina = '" + id_medicina + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -58,18 +70,23 @@ public class Medicina {
     public void cargarPorNombre(String nombre) {
 
         manejadorBD.consulta(""
-                + "SELECT   id_medicina,    codigo,         nombre, costo,  \n"
-                + "         id_unidad,      presentacion,   costo_unitario, \n"
-                + "         status                                          \n"
-                + "FROM     medicina                                        \n"
-                + "WHERE    medicina.nombre = '" + nombre + "'");
+                + "SELECT m.id_medicina,                   m.codigo,\n"
+                + "       m.nombre,                        costo,\n"
+                + "       m.id_unidad,                     m.presentacion,\n"
+                + "       m.costo_unitario,                m.status,\n"
+                + "       COALESCE(rm.existencia,0),       COALESCE(rm.ultima_compra,'1900-01-01 00:00:00'),\n"
+                + "       COALESCE(rm.costo_promedio,0.0), COALESCE(rm.ultimo_costo,0.0)\n "
+                + "FROM     medicina m LEFT OUTER JOIN rancho_medicina rm ON \n"
+                + "             m.id_medicina = rm.id_medicina \n"
+                + "         AND rm.id_rancho = '" + rancho.id_rancho + "' \n"
+                + "WHERE    m.nombre = '" + nombre + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
             asignarValores();
         }
     }
-    
+
     public void asignarValores() {
 
         Date fecha = null;
@@ -80,11 +97,23 @@ public class Medicina {
         nombre = manejadorBD.getValorString(0, 2);
         costo = manejadorBD.getValorDouble(0, 3);
         id_unidad = (String) manejadorBD.getValorString(0, 4);
-        presentacion    =   manejadorBD.getValorDouble(0, 5);
-        costo_unitario  =   manejadorBD.getValorDouble(0, 6);
+        presentacion = manejadorBD.getValorDouble(0, 5);
+        costo_unitario = manejadorBD.getValorDouble(0, 6);
         status = manejadorBD.getValorString(0, 7);
+        existencia = manejadorBD.getValorInt(0, 8);
 
-        unidadMedida.cargarPorId(id_unidad);        
+        try {
+
+            ultima_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 9));
+        } catch (ParseException ex) {
+
+            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        costo_promedio = manejadorBD.getValorDouble(0, 10);
+        ultimo_costo = manejadorBD.getValorDouble(0, 11);
+
+        unidadMedida.cargarPorId(id_unidad);
     }
 
     public static ArrayList cargarCodigoMedicinas() {
@@ -138,12 +167,12 @@ public class Medicina {
 
             array.add(manejadorBD.getValueAt(i, 0).toString());
         }
-        
+
         return array;
     }
 
-   public static void leerMedicinaAnimal(Table tabla, Animal animal) {
-                
+    public static void leerMedicinaAnimal(Table tabla, Animal animal) {
+
         crearTablaMedicinaAnimal(tabla);
 
         manejadorBD.consulta(""
@@ -155,7 +184,7 @@ public class Medicina {
                 + "WHERE    ma.id_medicina  =   m.id_medicina "
                 + "AND      m.id_unidad     =   um.id_unidad "
                 + "AND      ma.id_rancho    =   '" + rancho.id_rancho + "' "
-                + "AND      ma.id_animal    =   '" + animal.id_animal+"' ");
+                + "AND      ma.id_animal    =   '" + animal.id_animal + "' ");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -163,7 +192,7 @@ public class Medicina {
         }
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        
+
         int[] tamaños = new int[8];
         tamaños[0] = 10;//id_medicina aniaml
         tamaños[1] = 80;//id Codigo
@@ -175,9 +204,9 @@ public class Medicina {
         tamaños[7] = 100;//importe
 
         tabla.tamañoColumna(tamaños);
-        
+
         tabla.ocultarcolumna(0);
-      //  tabla.ocultarcolumna(2);
+        //  tabla.ocultarcolumna(2);
     }
 
     public static void crearTablaMedicinaAnimal(Table tabla) {
@@ -186,7 +215,7 @@ public class Medicina {
             tabla = new Table();
         }
 
-        String titulos[] = {"id medicina animal","Codigo", "Medicinas", "U.M.", "Fecha", "Costo Unitario", "Dosis", "Importe"};
+        String titulos[] = {"id medicina animal", "Codigo", "Medicinas", "U.M.", "Fecha", "Costo Unitario", "Dosis", "Importe"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -196,6 +225,74 @@ public class Medicina {
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{0, 4, 0, 0, 3, 4, 4, 4});
+    }
+
+    public static void leerMedicina(Table tabla) {
+
+        crearTablaMedicina(tabla);
+
+        manejadorBD.consulta(""
+                + "SELECT   m.id_medicina,              m.codigo,\n"
+                + "         ifnull(m.nombre,'') nombre, um.descripcion, \n"
+                + "         COALESCE(rm.existencia,0) existencia,\n"
+                + "         COALESCE(rm.costo_promedio,0.0) costo_promedio, \n"
+                + "         COALESCE(rm.ultimo_costo,0.0) ultimo_costo, "
+                + "         COALESCE(rm.ultima_compra,'1900-01-01 00:00:00') ultima_compra \n"
+                //+ "         costo,                      m.presentacion, \n"
+                //+ "         m.costo_unitario,           m.id_unidad  \n"
+                + "FROM     medicina m LEFT OUTER JOIN rancho_medicina rm ON\n"
+                + "             m.id_medicina = rm.id_medicina \n"
+                + "         AND rm.id_rancho = '" + rancho.id_rancho + "', \n"
+                + "         unidades_de_medida um\n"
+                + "WHERE    m.id_unidad =   um.id_unidad \n"
+                + "AND      m.status  =   'S'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            manejadorBD.asignarTable(tabla);
+        }
+
+        tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+
+        int[] tamaños = new int[8];
+        tamaños[0] = 10;//id_medicina aniaml
+        tamaños[1] = 80;//id Codigo
+        tamaños[2] = 200;//nombre
+        tamaños[3] = 50;//Undad de medida
+        tamaños[4] = 80;//Existencia
+        tamaños[5] = 100; //costo promedio
+        tamaños[6] = 100;//ultimo_costo
+        tamaños[7] = 100;//ultima_compra
+
+        tabla.tamañoColumna(tamaños);
+
+        tabla.ocultarcolumna(0);
+        //  tabla.ocultarcolumna(2);
+    }
+
+    public static void crearTablaMedicina(Table tabla) {
+
+        if (tabla == null) {
+            tabla = new Table();
+        }
+
+        String titulos[] = {
+            "id_medicina", "Codigo", "Nombre", "Unidad de Medida",
+            "Existencia", "Costo Promedio", "Ultimo Costo",
+            "Ultima Compra"};
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                titulos
+        ));
+
+        tabla.setTitulos(titulos);
+        tabla.cambiarTitulos();
+
+        tabla.setFormato(new int[]{
+            Table.letra, Table.letra, Table.letra,
+            Table.numero_entero, Table.numero_double, Table.numero_double,
+            Table.fecha});
 
     }
 
