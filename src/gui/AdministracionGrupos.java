@@ -35,7 +35,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Gilberto Adan González Silva
  */
-public class AdministracionGrupos extends javax.swing.JDialog { // {
+public class AdministracionGrupos extends javax.swing.JFrame { // {
 
     private String id_animal;
     private SR232 stick;
@@ -45,7 +45,7 @@ public class AdministracionGrupos extends javax.swing.JDialog { // {
      * Creates new form AdministracionGrupos
      */
     public AdministracionGrupos(Desktop aparent) {
-         super(aparent, true);
+//         super(aparent, true);
         this.parent = aparent;
         initComponents();
         setLocationRelativeTo(null);
