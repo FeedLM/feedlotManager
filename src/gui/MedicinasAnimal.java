@@ -28,9 +28,9 @@ public class MedicinasAnimal extends javax.swing.JFrame {
     /**
      * Creates new form MedicinasAnimal
      */
-    public MedicinasAnimal(Animal aAnimal, java.awt.Frame parent) {
+    public MedicinasAnimal(Animal aAnimal) {
 //        super(parent, modal);
-        this.parent = parent;
+
         initComponents();
         setLocationRelativeTo(null);
         Image i = null;
@@ -486,7 +486,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_DosisActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
+
     }//GEN-LAST:event_formWindowClosing
 
     private void cargarComponentes() {
@@ -509,7 +509,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
     private String id_medicina_animal;
     private Animal animal;
     private Tratamiento tratamiento;
-    java.awt.Frame parent;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Boton bt_Reporte;
     private abstractt.Boton btn_Aplicar;

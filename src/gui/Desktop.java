@@ -365,19 +365,20 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_catalogosActionPerformed
 
     private void btn_administracionGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administracionGruposActionPerformed
-        if (administracionGrupos == null) {
-            administracionGrupos = new AdministracionGrupos(this);
-        }
-
-        if (estacerrado(administracionGrupos)) {
-            // catalogos.setVisible(true);
-            this.jDesktopPane1.add(administracionGrupos);
-            Dimension desktopSize = jDesktopPane1.getSize();
-            Dimension FrameSize = administracionGrupos.getSize();
-            administracionGrupos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-            administracionGrupos.moveToFront();
-            administracionGrupos.show();
-        }
+//        if (administracionGrupos == null) {
+//            administracionGrupos = new AdministracionGrupos(this);
+//        }
+//
+//        if (estacerrado(administracionGrupos)) {
+//            this.jDesktopPane1.add(administracionGrupos);
+//            Dimension desktopSize = jDesktopPane1.getSize();
+//            Dimension FrameSize = administracionGrupos.getSize();
+//            administracionGrupos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+//            administracionGrupos.moveToFront();
+//            administracionGrupos.show();
+//    }
+        administracionGrupos = new AdministracionGrupos(this);
+        administracionGrupos.setVisible(true);
     }//GEN-LAST:event_btn_administracionGruposActionPerformed
 
     private void btn_HospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HospitalActionPerformed
@@ -395,7 +396,7 @@ public class Desktop extends javax.swing.JFrame {
             visualizacionHospital.show();
         }
     }//GEN-LAST:event_btn_HospitalActionPerformed
-
+    
     private void btn_ReporteTrasladosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReporteTrasladosActionPerformed
         if (trasladoGanado == null) {
             trasladoGanado = new RegistroTrasladoGanado(this);

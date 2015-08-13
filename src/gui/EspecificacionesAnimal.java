@@ -22,6 +22,7 @@ import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -30,7 +31,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Developer GAGS
  */
-public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
+public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private SR232 stick;
     private SR232 scale;
@@ -90,6 +91,9 @@ public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
+//        this.pack();
+//        this.setClosable(true);
+//        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         this.semental.cargarTagsIdsSementales();
         this.proveedorSelector1.cargar();
@@ -208,16 +212,7 @@ public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Especificaciones del Animal");
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
-
+        
         jPanel3.setBackground(new java.awt.Color(40, 100, 80));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -702,7 +697,7 @@ public class EspecificacionesAnimal extends javax.swing.JFrame {//JDialog { //
     private void btn_medicinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicinasActionPerformed
         // TODO add your handling code here:
         if (animalDetalle != null) {
-            medicinasAnimal = new MedicinasAnimal(animalDetalle, this);
+            medicinasAnimal = new MedicinasAnimal(animalDetalle);
             this.setVisible(false);
             medicinasAnimal.setVisible(true);
         }
