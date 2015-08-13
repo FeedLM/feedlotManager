@@ -790,9 +790,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         manejadorBD.parametrosSP.agregarParametro(id_medicina, "varId_medicina", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(codigo.toString(), "varCodigo", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(nombre, "varNombre", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(costo.toString(), "varCosto", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro("0.0", "varCosto", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(id_unidad, "varId_unidad", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(presentacion.toString(), "varPresentacion", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro("0", "varPresentacion", "DOUBLE", "IN");
 
         if (manejadorBD.ejecutarSP("{ call actualizarMedicina(?,?,?,?,?,?) }") == 0) {
 
@@ -839,9 +839,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
                 manejadorBD.parametrosSP = new ParametrosSP();
                 manejadorBD.parametrosSP.agregarParametro(codigo.toString(), "varCodigo", "INT", "IN");
                 manejadorBD.parametrosSP.agregarParametro(nombre, "varNombre", "STRING", "IN");
-                manejadorBD.parametrosSP.agregarParametro(costo.toString(), "varCosto", "DOUBLE", "IN");
+                manejadorBD.parametrosSP.agregarParametro("0.0", "varCosto", "DOUBLE", "IN");
                 manejadorBD.parametrosSP.agregarParametro(id_unidad.toString(), "varId_unidad", "INT", "IN");
-                manejadorBD.parametrosSP.agregarParametro(presentacion.toString(), "varPresentacion", "DOUBLE", "IN");
+                manejadorBD.parametrosSP.agregarParametro("0", "varPresentacion", "DOUBLE", "IN");
 
                 if (manejadorBD.ejecutarSP("{ call agregarMedicina(?,?,?,?,?) }") == 0) {
 
