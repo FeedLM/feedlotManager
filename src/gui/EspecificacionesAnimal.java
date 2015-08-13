@@ -212,7 +212,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Especificaciones del Animal");
         setResizable(false);
-        
+        	addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });	
         jPanel3.setBackground(new java.awt.Color(40, 100, 80));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
