@@ -35,7 +35,7 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Gilberto Adan González Silva
  */
-public class AdministracionGrupos extends javax.swing.JInternalFrame { // {
+public class AdministracionGrupos extends javax.swing.JDialog { // {
 
     private String id_animal;
     private SR232 stick;
@@ -45,14 +45,14 @@ public class AdministracionGrupos extends javax.swing.JInternalFrame { // {
      * Creates new form AdministracionGrupos
      */
     public AdministracionGrupos(Desktop aparent) {
-//         super(aparent, modal);
+         super(aparent, true);
         this.parent = aparent;
         initComponents();
-//        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         
-        setClosable(true);
-        this.pack();
-        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
+//        setClosable(true);
+//        this.pack();
+//        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         cargarPuertos();
 
