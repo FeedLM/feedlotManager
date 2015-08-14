@@ -807,7 +807,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         manejadorBD.parametrosSP = new ParametrosSP();
 
-        manejadorBD.parametrosSP.agregarParametro(id_medicina, "varId_medicina", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varId_medicina", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call eliminarMedicina(?) }") == 0) {
 
