@@ -940,17 +940,13 @@ public class Excel {
         CellRangeAddress[] regions = {CellRangeAddress.valueOf("A6:I6")};
 
         sheetCF.addConditionalFormatting(regions, rule1, rule2);
-
         Integer fila_inicial = 6;
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
-
-            sheet.createRow(fila_inicial + i).createCell(0).setCellValue(t_tabla.getValueAt(i, 1).toString());
-            sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(styleCenter);
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 1).toString(), styleCenter);
 
             for (int j = 0; j < 9; j++) {
-                sheet.getRow(fila_inicial + i).createCell(j).setCellValue(t_tabla.getValueAt(i, j + 1).toString());
-                sheet.getRow(fila_inicial + i).getCell(j).setCellStyle(styleCenter);
+                agregarValor(fila_inicial + i, j, t_tabla.getValueAt(i, j + 1).toString(), styleCenter);
             }
         }
         cargarLogo();

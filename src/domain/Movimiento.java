@@ -22,7 +22,7 @@ public class Movimiento {
         tabla = crearTablaMedicinas(tabla);
 
         String consulta = ""
-                + "SELECT   a.id_animal, a.arete_visual, m.codigo, m.nombre, \n"
+                + "SELECT   a.id_animal, a.arete_visual, a.arete_electronico, m.codigo, m.nombre, \n"
                 + "         DATE_FORMAT(ma.fecha, '%Y/%m/%d') fecha, c.nombre, \n"
                 + "         round(ma.dosis,2) dosis , round(ma.costo,2) Costo_unitario, "
                 + "         round(ma.dosis * ma.costo ,2) importe \n"
@@ -155,7 +155,7 @@ public class Movimiento {
         }
 
         String titulos[] = {
-            "Id Animal", "arete Visual", "Codigo", "Medicina", "Fecha",
+            "Id Animal", "Arete Visual", "Arete Electronico", "Codigo", "Medicina", "Fecha",
             "Corral", "Dosis", "Costo", "Importe"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -165,7 +165,7 @@ public class Movimiento {
 
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
-        tabla.setFormato(new int[]{0, 0, 0, 0, 3, 0, 1, 1, 1});
+        tabla.setFormato(new int[]{0, 0, 0, 0, 3, 0, 3, 1, 1, 1});
 
         return tabla;
     }
