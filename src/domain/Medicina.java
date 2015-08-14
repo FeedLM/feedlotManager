@@ -189,7 +189,7 @@ public class Medicina {
         manejadorBD.consulta(""
                 + "SELECT   ma.id_medicina_animal, m.codigo,                   m.nombre,\n"
                 + "         um.descripcion,             cast(fecha as Date),\n"
-                + "         round(ma.costo,2),  round(ma.dosis,2),\n"
+                + "         round(ma.dosis,2),          round(ma.costo,2),  \n"
                 + "         round(round(ma.costo,2) * ma.dosis,2)  "
                 + "FROM     medicina_animal ma, medicina m, unidades_de_medida um "
                 + "WHERE    ma.id_medicina  =   m.id_medicina "
@@ -227,7 +227,7 @@ public class Medicina {
             tabla = new Table();
         }
 
-        String titulos[] = {"id medicina animal", "Codigo", "Medicinas", "U.M.", "Fecha", "Costo Unitario", "Dosis", "Importe"};
+        String titulos[] = {"id medicina animal", "Codigo", "Medicinas", "U.M.", "Fecha", "Dosis", "Costo Unitario",  "Importe"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
