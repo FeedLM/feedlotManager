@@ -921,7 +921,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             if (manejadorBD.actualizacion(
                     "UPDATE corral "
                     + "SET status = 'N' "
-                    + "WHERE id_corral = '" + id_corral + "'") == 0) {
+                    + "WHERE id_corral = '" + corral.id_corral + "'") == 0) {
 
                 JOptionPane.showMessageDialog(this, "Se elimino el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
                 cargarDatosIniciales();
