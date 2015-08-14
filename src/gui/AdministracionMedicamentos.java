@@ -716,7 +716,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
     private void tf_DosisTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_DosisTratamientoActionPerformed
 
-        costoTratamiento = medicinaTratamiento.costo_unitario * this.tf_DosisTratamiento.getDouble();
+        costoTratamiento = medicinaTratamiento.costo_promedio * this.tf_DosisTratamiento.getDouble();
         //  costo = tf_Costo.obtenerValor();
         presentacionTratamiento = this.tf_DosisTratamiento.getDouble();
         tf_CostoTratamiento.setDouble(costoTratamiento);
