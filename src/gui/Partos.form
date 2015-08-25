@@ -116,7 +116,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Cria">
-                  <Font PropertyName="font" name="Calibri" size="10" style="0"/>
+                  <Font PropertyName="font" name="Trebuchet MS" size="12" style="0"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -137,7 +137,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Fecha Nacimiento">
-                      <Font PropertyName="font" name="Calibri" size="10" style="0"/>
+                      <Font PropertyName="font" name="Trebuchet MS" size="12" style="0"/>
                     </TitledBorder>
                   </Border>
                 </Property>

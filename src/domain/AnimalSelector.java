@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 import abstractt.ComboBox;
@@ -13,24 +12,32 @@ import abstractt.ComboBox;
  *
  * @author Developer GAGS
  */
-public class AnimalSelector extends ComboBox{
-    
-    public AnimalSelector(){
-        
+public class AnimalSelector extends ComboBox {
+
+    Animal animal;
+
+    public AnimalSelector() {
+
     }
-    
-    public void cargararete_visuals(){
-        
-        addArray(domain.Animal.cargararete_visuals());        
+
+    public void cargararete_visuals() {
+
+        addArray(domain.Animal.cargararete_visuals());
     }
-    
-     public void cargararete_visualshembrasSinEmparejar(){
-        
-        addArray(domain.Animal.cargararete_visualshembrasSinEmparejar());        
+
+    public void cargararete_visualshembrasSinEmparejar() {
+
+        addArray(domain.Animal.cargararete_visualshembrasSinEmparejar());
     }
-    
-    public void cargarTagsIdsSementales(){
-        
+
+    public void cargarTagsIdsSementales() {
+
         addArray(domain.Animal.cargararete_visualsSementales());
+    }
+
+    public Animal getAnimal() {
+        animal = new Animal();
+        animal.cargarPorAreteVisual(this.getSelectedItem().toString(), "A");
+        return animal;
     }
 }

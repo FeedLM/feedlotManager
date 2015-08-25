@@ -6,6 +6,7 @@
 package gui;
 
 import domain.Animal;
+import domain.AnimalGrupo;
 import domain.ParametrosSP;
 import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
@@ -89,6 +90,9 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
         btn_BorrarTodos = new javax.swing.JButton();
         btn_detalles = new abstractt.Boton();
         btn_BorrarAnimal = new abstractt.Boton();
+        etiqueta1 = new abstractt.Etiqueta();
+        animalSelector1 = new domain.AnimalSelector();
+        btn_agregar = new abstractt.Boton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -135,6 +139,15 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
             }
         });
 
+        etiqueta1.setText("Introducir por ID Visual: ");
+
+        btn_agregar.setText("Agregar");
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,11 +166,25 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
                         .addGap(152, 152, 152)
                         .addComponent(btn_BorrarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(animalSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(animalSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_BorrarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,6 +246,7 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_detallesActionPerformed
 
     private void btn_BorrarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarAnimalActionPerformed
+
         int opcion;
 
         if (animal.id_animal == null) {
@@ -249,8 +277,14 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
         }
 
         cargar_tabla();
-
     }//GEN-LAST:event_btn_BorrarAnimalActionPerformed
+
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        animal = new Animal();
+        animal = animalSelector1.getAnimal();
+        animalGrupo.grabar(animal);
+        cargar_tabla();
+    }//GEN-LAST:event_btn_agregarActionPerformed
 
     public void cargar_tabla() {
 
@@ -272,11 +306,15 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
     private int Tipo;
     private String ls_tipo;
     EspecificacionesAnimal especificacionesAnimal;
+    private AnimalGrupo animalGrupo;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private domain.AnimalSelector animalSelector1;
     private abstractt.Boton btn_BorrarAnimal;
     private javax.swing.JButton btn_BorrarTodos;
+    private abstractt.Boton btn_agregar;
     private abstractt.Boton btn_detalles;
+    private abstractt.Etiqueta etiqueta1;
     private javax.swing.JScrollPane jScrollPane;
     public abstractt.Table t_animales;
     // End of variables declaration//GEN-END:variables
@@ -285,6 +323,7 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
      * @param parent the parent to set
      */
     public void setParent(Desktop parent) {
+        animalSelector1.cargararete_visuals();
         this.parent = parent;
     }
 
@@ -292,6 +331,8 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
      * @param Tipo the Tipo to set
      */
     public void setTipo(int Tipo) {
+
+        animalGrupo = new AnimalGrupo();
 
         this.Tipo = Tipo;
 
@@ -303,5 +344,8 @@ public class AnimalesSeleccionados extends javax.swing.JPanel {
                 ls_tipo = "salida";
                 break;
         }
+
+        animalGrupo.tipo = ls_tipo;
+        animalGrupo.usuario = usuario_activo;
     }
 }

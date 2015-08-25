@@ -144,7 +144,7 @@
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="11" style="0"/>
+                  <Font name="Trebuchet MS" size="12" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -467,13 +467,14 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="11" style="0"/>
+                  <Font name="Trebuchet MS" size="12" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="58" green="54" red="5f" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Es Semental:                             "/>
+                <Property name="text" type="java.lang.String" value="Es Semental:                   "/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Es Semental:                  "/>
@@ -487,7 +488,7 @@
             <Component class="domain.AnimalSelector" name="semental">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="11" style="0"/>
+                  <Font name="Trebuchet MS" size="12" style="0"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -540,6 +541,9 @@
                   <Font name="Trebuchet MS" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sexoSelector1ActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="130" y="210" width="160" height="-1"/>

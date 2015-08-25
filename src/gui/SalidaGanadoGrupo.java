@@ -8,6 +8,7 @@ package gui;
 import static abstractt.ClaseAbstracta.dialogoConfirmacionSiNo;
 import domain.Animal;
 import static domain.Animal.animalGrupo;
+import static domain.Animal.cargararete_visuals;
 import domain.AnimalGrupo;
 import static domain.ClaseMovimiento.cargarClaseMovimiento;
 import static domain.ClaseMovimiento.idClaseDescripcion;
@@ -70,7 +71,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         animalesSeleccionados1.setParent(parent);
         animalesSeleccionados1.reordenar();
         animalesSeleccionados1.setTipo(2);
-
+        tagIdSelector.addArray(cargararete_visuals());
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
         cargarComponentes();
@@ -100,17 +101,18 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         claseMovimientoSelector = new abstractt.ComboBox();
         destinoSelector1 = new domain.DestinoSelector();
         tf_pesoActual = new abstractt.TextField();
-        boton1 = new abstractt.Boton();
+        btn_salida = new abstractt.Boton();
         btn_Historico = new abstractt.Boton();
+        etiqueta7 = new abstractt.Etiqueta();
+        tagIdSelector = new abstractt.ComboBox();
         jPanel5 = new javax.swing.JPanel();
         animalesSeleccionados1 = new gui.AnimalesSeleccionados();
         tf_Eid = new abstractt.TextField();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Salida de Ganado");
         setBackground(new java.awt.Color(255, 255, 255));
-                getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setTitle("Salida de Ganado");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,15 +140,15 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
         etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta3.setText("Clase de Movimiento:  ");
-        jPanel4.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 200, 20));
+        jPanel4.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta4.setText("Número de pedido:  ");
-        jPanel4.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 20));
+        jPanel4.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 20));
 
         etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta5.setText("Destino de venta:  ");
-        jPanel4.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 200, 20));
+        jPanel4.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 20));
 
         etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta6.setText("Peso Actual (Kg):  ");
@@ -156,10 +158,10 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         jPanel4.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 200, 20));
 
         tf_numeroPedido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(tf_numeroPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 200, 20));
+        jPanel4.add(tf_numeroPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 200, 20));
 
         claseMovimientoSelector.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(claseMovimientoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 200, 20));
+        jPanel4.add(claseMovimientoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 200, 20));
 
         destinoSelector1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         destinoSelector1.addActionListener(new java.awt.event.ActionListener() {
@@ -167,21 +169,21 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
                 destinoSelector1ActionPerformed(evt);
             }
         });
-        jPanel4.add(destinoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 200, 20));
+        jPanel4.add(destinoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 200, 20));
 
         tf_pesoActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_pesoActual.setText("0.0");
         tf_pesoActual.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPanel4.add(tf_pesoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 200, 20));
 
-        boton1.setText("Salida de Animales");
-        boton1.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
-        boton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_salida.setText("Salida de Animales");
+        btn_salida.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        btn_salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton1ActionPerformed(evt);
+                btn_salidaActionPerformed(evt);
             }
         });
-        jPanel4.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 445, 150, 30));
+        jPanel4.add(btn_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 445, 150, 30));
 
         btn_Historico.setText("Historico");
         btn_Historico.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -191,6 +193,11 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
             }
         });
         jPanel4.add(btn_Historico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 445, 150, 30));
+
+        etiqueta7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta7.setText("Introducir por Arete Visual: ");
+        jPanel4.add(etiqueta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 20));
+        jPanel4.add(tagIdSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 200, 20));
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -293,11 +300,11 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         //   cargarMovimientosSalida(t_movimientoSalida);
     }
 
-    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+    private void btn_salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salidaActionPerformed
 
         agregarSalida();
 
-    }//GEN-LAST:event_boton1ActionPerformed
+    }//GEN-LAST:event_btn_salidaActionPerformed
 
     public void setEid(String eid) {
 
@@ -336,7 +343,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_HistoricoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
+//        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void destinoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoSelector1ActionPerformed
@@ -375,8 +382,8 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
     private Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.AnimalesSeleccionados animalesSeleccionados1;
-    private abstractt.Boton boton1;
     private abstractt.Boton btn_Historico;
+    private abstractt.Boton btn_salida;
     private abstractt.Calendar calendar1;
     private abstractt.ComboBox claseMovimientoSelector;
     private domain.DestinoSelector destinoSelector1;
@@ -386,12 +393,14 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
     private abstractt.Etiqueta etiqueta4;
     private abstractt.Etiqueta etiqueta5;
     private abstractt.Etiqueta etiqueta6;
+    private abstractt.Etiqueta etiqueta7;
     private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private abstractt.ComboBox tagIdSelector;
     private abstractt.TextField tf_Eid;
     private abstractt.TextField tf_numeroPedido;
     private abstractt.TextField tf_pesoActual;
