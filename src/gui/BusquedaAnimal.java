@@ -16,7 +16,6 @@ import static domain.Animal.idAnimalAreteElectronico;
 import static domain.ClaseMovimiento.cargarClaseMovimiento;
 import static domain.ClaseMovimiento.idClaseDescripcion;
 import static domain.CorralAnimal.corralAnimal;
-import static domain.DestinoVenta.idDestinoDescripcion;
 import static domain.Movimiento.cargarMovimientosSalida;
 import domain.ParametrosSP;
 import domain.SR232;

@@ -22,8 +22,8 @@ public class EditorComboBox implements ComboBoxEditor {
 
         editor = new JButton("");
         editor.setFont(FormatoControles.Fuente1);
-        editor.setBackground(FormatoControles.color1);
-        editor.setForeground(FormatoControles.color2);
+//        editor.setBackground(FormatoControles.color1);
+//        editor.setForeground(FormatoControles.color2);
 
     }
 

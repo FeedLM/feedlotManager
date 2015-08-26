@@ -47,8 +47,8 @@ public class TextField extends javax.swing.JTextField {
         });
 
         setFont(FormatoControles.Fuente1);
-        setBackground(FormatoControles.color3);
-        setForeground(FormatoControles.color2);
+//        setBackground(FormatoControles.color3);
+//        setForeground(FormatoControles.color2);
 
         //     setContentAreaFilled(false);
 //        this.setOpaque(true);
