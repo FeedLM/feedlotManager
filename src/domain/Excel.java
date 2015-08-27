@@ -1892,11 +1892,11 @@ private void reporteSesiones() {
             agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString());
             agregarValor(fila_inicial + i, 1, t_tabla.getValueAt(i, 1).toString());
             agregarValor(fila_inicial + i, 2, t_tabla.getValueAt(i, 2).toString());
-            agregarValor(fila_inicial + i, 3, t_tabla.getValueAt(i, 3).toString());
-            agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 4).toString());
-            agregarValor(fila_inicial + i, 5, t_tabla.getValueAt(i, 5).toString());
-            agregarValor(fila_inicial + i, 6, t_tabla.getValueAt(i, 6).toString());
-            agregarValor(fila_inicial + i, 7, t_tabla.getValueAt(i, 7).toString());
+            agregarValor(fila_inicial + i, 3, t_tabla.getValueAt(i, 4).toString());
+            agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 5).toString());
+            agregarValor(fila_inicial + i, 5, t_tabla.getValueAt(i, 6).toString());
+            agregarValor(fila_inicial + i, 6, t_tabla.getValueAt(i, 7).toString());
+            agregarValor(fila_inicial + i, 7, t_tabla.getValueAt(i, 8).toString());
 
             asignarEstilo(fila_inicial + i, 0, styleCenter);
             asignarEstilo(fila_inicial + i, 1, styleCenter);
