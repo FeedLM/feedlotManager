@@ -166,11 +166,12 @@ public class Tratamiento {
 
         manejadorBD.consulta(""
                 + "SELECT mt.id_tratamiento, mt.id_medicina, m.codigo,	         \n"
-                + "       m.nombre,          u.descripcion,  m.costo_unitario,   \n"
-                + "       mt.dosis,          round(mt.dosis * m.costo_unitario,2) \n"
+                + "       m.nombre,          u.descripcion,  rm.costo_promedio,   \n"
+                + "       mt.dosis,          round(mt.dosis * rm.costo_promedio,2) \n"
                 + "FROM   tratamiento t,medicina_tratamiento mt,                \n"
-                + "       medicina m,   unidades_de_medida u                    \n"
+                + "       medicina m,   unidades_de_medida u, rancho_medicina rm \n"
                 + "WHERE  t.id_tratamiento = mt.id_tratamiento                   \n"
+                + "AND    rm.id_medicina = m.id_medicina  \n"
                 + "AND	  mt.id_medicina   = m.id_medicina                       \n"
                 + "AND	  m.id_unidad	   = u.id_unidad                         \n"
                 + "AND    t.id_tratamiento = '" + tratamiento.id_tratamiento + "' ");

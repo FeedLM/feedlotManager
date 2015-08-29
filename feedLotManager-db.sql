@@ -1331,6 +1331,17 @@ DELIMITER ;;
 AFTER INSERT ON `feedlotmanager`.`medicina_animal`
 FOR EACH ROW
 BEGIN
+	DECLARE varIdCorral CHAR(36);
+    
+    SELECT ca.id_corral INTO varIdCorral
+	FROM animal AS a, medicina_animal AS ma, corral_animal AS ca
+	WHERE ma.id_animal = a.id_animal
+	AND ca.id_animal = a.id_animal
+	AND ma.id_animal = NEW.id_animal
+    LIMIT 1;
+	
+	CALL animalesPorCorral(varIdCorral);
+
  -- Envio a FTP
 	DELETE FROM repl_medicina_animal
 	WHERE	id_rancho			=	NEW.id_rancho
@@ -4618,12 +4629,14 @@ BEGIN
 										WHERE   c.id_animal	=	a.id_animal
 										AND     c.id_corral	=	corral.id_corral),
          
-		total_costo_medicina	=	(	SELECT  SUM( dosis * costo_unitario )
-										FROM 	corral_animal ca, medicina_animal ma, medicina m
+		total_costo_medicina	=	(	SELECT  SUM( ma.dosis * rm.costo_promedio)
+										FROM 	corral_animal ca, medicina_animal ma, medicina m, rancho_medicina rm
 										WHERE 	ma.id_medicina	=	m.id_medicina
-										AND		ca.id_animal	=	ma.id_animal
+                                        AND 	rm.id_medicina 	= 	m.id_medicina
+                                        AND		ca.id_animal	=	ma.id_animal
 										AND		ma.id_rancho	=	ca.id_rancho
-										AND		ca.id_rancho	=	corral.id_rancho
+										AND 	rm.id_rancho	= 	corral.id_rancho
+                                        AND		ca.id_rancho	=	corral.id_rancho
 										AND		ca.id_corral	=	corral.id_corral	)
 		
 		
@@ -5752,11 +5765,10 @@ BEGIN
     TRUNCATE TABLE corral;
     TRUNCATE TABLE corral_animal;
     TRUNCATE TABLE corral_datos;
-    TRUNCATE TABLE compras;
+    TRUNCATE TABLE compra;
     TRUNCATE TABLE cria;
     TRUNCATE TABLE detalle_compra;
     TRUNCATE TABLE detalle_movimiento;
-    TRUNCATE TABLE existencias;
     TRUNCATE TABLE medicina;
     TRUNCATE TABLE medicina_animal;
     TRUNCATE TABLE medicina_tratamiento;
@@ -5764,12 +5776,14 @@ BEGIN
     TRUNCATE TABLE movimiento_animal; 
     TRUNCATE TABLE proveedor;
     TRUNCATE TABLE rancho;
+    TRUNCATE TABLE rancho_medicina;
     TRUNCATE TABLE tratamiento;
     TRUNCATE TABLE usuario;
                 
     -- TRUNCATE TABLE repl_concepto_movimiento;
     TRUNCATE TABLE repl_animal;
     TRUNCATE TABLE repl_cliente;
+    TRUNCATE TABLE repl_conceptop_movimiento;
     TRUNCATE TABLE repl_corral;    
     TRUNCATE TABLE repl_corral_animal;
     TRUNCATE TABLE repl_corral_datos;
@@ -5904,4 +5918,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-27 13:15:17
+-- Dump completed on 2015-08-29 13:54:37

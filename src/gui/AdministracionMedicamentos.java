@@ -201,8 +201,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         btn_guardar = new abstractt.Boton();
         btn_aplicacionMasiva = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
-        boton1 = new abstractt.Boton();
+        btn_comprar = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
+        btn_actualizaMedicina = new abstractt.Boton();
         pn_tratamientos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -416,16 +417,24 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         etiqueta2.setOpaque(true);
         pn_medicamentos.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 60));
 
-        boton1.setText("Compra de Medicamentos");
-        boton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_comprar.setText("Compra de Medicamentos");
+        btn_comprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton1ActionPerformed(evt);
+                btn_comprarActionPerformed(evt);
             }
         });
-        pn_medicamentos.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
+        pn_medicamentos.add(btn_comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
 
         fondo1.setText("fondo1");
         pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
+
+        btn_actualizaMedicina.setText("Actualización del Sistema de Medicamentos");
+        btn_actualizaMedicina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizaMedicinaActionPerformed(evt);
+            }
+        });
+        pn_medicamentos.add(btn_actualizaMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
 
         jTabbedPane1.addTab(" M e d i c a m e n t o s ", pn_medicamentos);
 
@@ -909,10 +918,17 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 //        parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+    private void btn_comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comprarActionPerformed
         compras = new Compras(parent);
         compras.setVisible(true);
-    }//GEN-LAST:event_boton1ActionPerformed
+    }//GEN-LAST:event_btn_comprarActionPerformed
+
+    private void btn_actualizaMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizaMedicinaActionPerformed
+        
+        medicinaSelector.cargar();
+        medicinaSelector.actualiza(nombre);
+
+    }//GEN-LAST:event_btn_actualizaMedicinaActionPerformed
 
     private boolean validarCodigo() {
 
@@ -969,12 +985,13 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private Medicina medicina;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Calendar UltimaCompra;
-    private abstractt.Boton boton1;
+    private abstractt.Boton btn_actualizaMedicina;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
     private abstractt.Boton btn_agregarMedicamento;
     private abstractt.Boton btn_agregarTratamiento;
     private abstractt.Boton btn_aplicacionMasiva;
+    private abstractt.Boton btn_comprar;
     private abstractt.Boton btn_eliminar;
     private abstractt.Boton btn_eliminarMedicamento;
     private abstractt.Boton btn_eliminarTratamiento;
