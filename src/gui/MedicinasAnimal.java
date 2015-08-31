@@ -391,6 +391,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
              * Medicina Indivual
              */
             if (dosis > 0) {
+                
                 manejadorBD.parametrosSP = new ParametrosSP();
                 manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro(id_medicina, "varMedicina", "STRING", "IN");

@@ -77,7 +77,7 @@ public class Medicina {
                 + "       COALESCE(rm.existencia,0),       COALESCE(rm.ultima_compra,'1900-01-01 00:00:00'),\n"
                 + "       COALESCE(rm.costo_promedio,0.0), COALESCE(rm.ultimo_costo,0.0)\n "
                 + "FROM     medicina m LEFT OUTER JOIN rancho_medicina rm ON \n"
-                + "             m.id_medicina = rm.id_medicina \n"
+                + "         m.id_medicina = rm.id_medicina \n"
                 + "         AND rm.id_rancho = '" + rancho.id_rancho + "' \n"
                 + "WHERE    m.nombre = '" + nombre + "'");
 

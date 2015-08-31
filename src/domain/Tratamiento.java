@@ -174,7 +174,8 @@ public class Tratamiento {
                 + "AND    rm.id_medicina = m.id_medicina  \n"
                 + "AND	  mt.id_medicina   = m.id_medicina                       \n"
                 + "AND	  m.id_unidad	   = u.id_unidad                         \n"
-                + "AND    t.id_tratamiento = '" + tratamiento.id_tratamiento + "' ");
+                + "AND    t.id_tratamiento = '" + tratamiento.id_tratamiento + "' \n"
+                + "AND    rm.id_rancho = '" + rancho.id_rancho + "' ");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -223,7 +224,7 @@ public class Tratamiento {
     public boolean grabar() {
 
         System.out.println(toString());
-        
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(codigo.toString(), "varCodigo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(nombre, "varNombre", "STRING", "IN");
@@ -235,11 +236,11 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public boolean actualizar() {
 
         System.out.println(toString());
-        
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tratamiento, "varIdTratamiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(codigo, "varCodigo", "STRING", "IN");
@@ -252,11 +253,11 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public boolean eliminar() {
 
         System.out.println(toString());
-        
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tratamiento, "varIdTratamiento", "STRING", "IN");
 
@@ -267,12 +268,11 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public boolean agregarMedicina(Medicina medicina, Double dosis) {
 
         System.out.println(toString());
-        
-                       
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tratamiento, "varIdTratamiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varIdMedicina", "STRING", "IN");
@@ -285,12 +285,11 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public boolean eliminarMedicina(Medicina medicina) {
 
         System.out.println(toString());
-        
-                       
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tratamiento, "varIdTratamiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(medicina.id_medicina, "varIdMedicina", "STRING", "IN");
@@ -302,17 +301,17 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public boolean agregarTratamientoAnimal(Animal animal, Double dosis, Date fecha) {
 
-        System.out.println(toString());        
-                       
+        System.out.println(toString());
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(id_tratamiento, "varIdTratamiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(animal.id_animal, "varIdAnimal", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(dosis.toString(), "varDosisTratamiento", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha), "varFecha", "STRING", "IN");        
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha), "varFecha", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarTratamientoAnimal(?,?,?,?,?) }") == 0) {
 
@@ -321,11 +320,11 @@ public class Tratamiento {
 
         return false;
     }
-    
+
     public String toString() {
 
-        String salida;        
-        
+        String salida;
+
         salida = "{id_tratamiento='" + id_tratamiento
                 + "', codigo='" + codigo + "'"
                 + ", nombre='" + nombre + "'"

@@ -202,8 +202,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         btn_aplicacionMasiva = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
         btn_comprar = new abstractt.Boton();
-        fondo1 = new abstractt.fondo();
         btn_actualizaMedicina = new abstractt.Boton();
+        fondo1 = new abstractt.fondo();
         pn_tratamientos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -425,16 +425,17 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         });
         pn_medicamentos.add(btn_comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
 
-        fondo1.setText("fondo1");
-        pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
-
         btn_actualizaMedicina.setText("Actualización del Sistema de Medicamentos");
+        btn_actualizaMedicina.setEnabled(false);
         btn_actualizaMedicina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_actualizaMedicinaActionPerformed(evt);
             }
         });
         pn_medicamentos.add(btn_actualizaMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+
+        fondo1.setText("fondo1");
+        pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
 
         jTabbedPane1.addTab(" M e d i c a m e n t o s ", pn_medicamentos);
 
@@ -771,9 +772,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
     private void medicinaSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicinaSelectorActionPerformed
 
-        this.medicinaTratamiento = this.medicinaSelector.getMedicnaNombre();
+        medicinaTratamiento = this.medicinaSelector.getMedicnaNombre();
 
-        this.unidadSelectorTratamiento.setSelectedItem(medicinaTratamiento.unidadMedida.descripcion);
+        unidadSelectorTratamiento.setSelectedItem(medicinaTratamiento.unidadMedida.descripcion);
     }//GEN-LAST:event_medicinaSelectorActionPerformed
 
     private void btn_aplicacionMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aplicacionMasivaActionPerformed
@@ -926,8 +927,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private void btn_actualizaMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizaMedicinaActionPerformed
         
         medicinaSelector.cargar();
-        medicinaSelector.actualiza(nombre);
-
+       
     }//GEN-LAST:event_btn_actualizaMedicinaActionPerformed
 
     private boolean validarCodigo() {
