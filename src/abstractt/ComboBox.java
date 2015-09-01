@@ -7,6 +7,7 @@
 package abstractt;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.JComboBox;
@@ -194,7 +195,10 @@ public class ComboBox extends JComboBox {
             //back space
             case 8:
                 break;
-
+            case KeyEvent.VK_SHIFT:
+                break;
+            case KeyEvent.VK_CAPS_LOCK:
+                break;
             case 38:
                 editor.select(0, editor.getText().length());
                 break;
