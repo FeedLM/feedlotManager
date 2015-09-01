@@ -185,6 +185,7 @@
             <Component class="abstractt.Boton" name="btn_Ingresar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Registra la muerte del Animal"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="1"/>
                 </Property>
@@ -201,6 +202,7 @@
             <Component class="abstractt.Boton" name="btn_Historico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Historico"/>
+                <Property name="toolTipText" type="java.lang.String" value="Revisa los Animales que ya han muerto"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="1"/>
                 </Property>

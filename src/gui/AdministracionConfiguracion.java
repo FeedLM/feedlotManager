@@ -115,8 +115,6 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         fondo4.setText("fondo4");
 
         setTitle("Configuración");
-        setResizable(false);
-        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -233,6 +231,7 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 290));
 
         btn_grabar.setText("Grabar");
+        btn_grabar.setToolTipText("Guarda los valores");
         btn_grabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_grabarActionPerformed(evt);

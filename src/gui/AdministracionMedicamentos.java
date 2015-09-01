@@ -375,6 +375,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 975, 200));
 
         btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón agregar.png"))); // NOI18N
+        btn_agregar.setToolTipText("Agregar el medicamento");
         btn_agregar.setFont(new java.awt.Font("Castellar", 1, 12)); // NOI18N
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,6 +385,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, -1, -1));
 
         btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón eliminar.png"))); // NOI18N
+        btn_eliminar.setToolTipText("Borrar el medicamento");
         btn_eliminar.setFont(new java.awt.Font("Castellar", 1, 12)); // NOI18N
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,6 +395,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 310, -1, -1));
 
         btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón gaurdar.png"))); // NOI18N
+        btn_guardar.setToolTipText("Guardar las actualizaciones del medicamento");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
@@ -401,6 +404,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 310, -1, -1));
 
         btn_aplicacionMasiva.setText("Aplicación Masiva de Medicamentos");
+        btn_aplicacionMasiva.setToolTipText("Administra medicamentos a Animales por grupos");
         btn_aplicacionMasiva.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_aplicacionMasiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,6 +422,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         pn_medicamentos.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 60));
 
         btn_comprar.setText("Compra de Medicamentos");
+        btn_comprar.setToolTipText("Realizar compras de medicamentos");
         btn_comprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_comprarActionPerformed(evt);
@@ -532,6 +537,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.add(unidadSelectorTratamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
 
         btn_agregarMedicamento.setText("Agregar Medicamento");
+        btn_agregarMedicamento.setToolTipText("Agrega el medicamento a la lista del Tratamiento");
         btn_agregarMedicamento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_agregarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -541,6 +547,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.add(btn_agregarMedicamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
 
         btn_eliminarMedicamento.setText("Eliminar Medicamento");
+        btn_eliminarMedicamento.setToolTipText("Elimina el medicamento del Tratamiento");
         btn_eliminarMedicamento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_eliminarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -550,6 +557,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.add(btn_eliminarMedicamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
         btn_agregarTratamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón agregar.png"))); // NOI18N
+        btn_agregarTratamiento.setToolTipText("Crear un Tratamiento");
         btn_agregarTratamiento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_agregarTratamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -559,6 +567,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.add(btn_agregarTratamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 205, -1, -1));
 
         btn_actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón gaurdar.png"))); // NOI18N
+        btn_actualizar.setToolTipText("Guardar las actualizaciones del tratamiento");
         btn_actualizar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -568,6 +577,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 205, -1, -1));
 
         btn_eliminarTratamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botón eliminar.png"))); // NOI18N
+        btn_eliminarTratamiento.setToolTipText("Borrar el Tratamiento");
         btn_eliminarTratamiento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_eliminarTratamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

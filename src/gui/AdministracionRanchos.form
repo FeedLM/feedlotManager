@@ -135,6 +135,7 @@
                 <Component class="abstractt.Boton" name="btn_nuevo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="N u e v o"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Limpia los campos para dar de alta un nuevo Rancho"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="14" style="1"/>
                     </Property>
@@ -151,6 +152,7 @@
                 <Component class="abstractt.Boton" name="btn_guardar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="G u a r d a r "/>
+                    <Property name="toolTipText" type="java.lang.String" value="Guarda los datos para crear un Rancho"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="14" style="1"/>
                     </Property>
@@ -167,6 +169,7 @@
                 <Component class="abstractt.Boton" name="btn_eliminar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="E l i m i n a r"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Elimina el Rancho seleccionado"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="14" style="1"/>
                     </Property>

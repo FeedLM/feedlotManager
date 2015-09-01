@@ -281,14 +281,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         etiqueta2 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración de Grupos");
-        setResizable(false);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });        
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -403,7 +396,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel15.setForeground(new java.awt.Color(95, 84, 88));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Alimento Ingresado:");
-        datosPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 110, 22));
+        datosPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 120, 22));
 
         t_pesoPromedio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_pesoPromedio.setText("0.00");
@@ -482,6 +475,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 400, 220));
 
         btn_reporteCorral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte corral.png"))); // NOI18N
+        btn_reporteCorral.setToolTipText("Reporte de Corral");
         btn_reporteCorral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_reporteCorralActionPerformed(evt);
@@ -490,6 +484,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesHoriz.add(btn_reporteCorral);
 
         btn_reporteEntradas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte de entradas.png"))); // NOI18N
+        btn_reporteEntradas.setToolTipText("Reporte de Animales ingresados");
         btn_reporteEntradas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_reporteEntradasActionPerformed(evt);
@@ -498,6 +493,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesHoriz.add(btn_reporteEntradas);
 
         btn_cargarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono subir.png"))); // NOI18N
+        btn_cargarArchivo.setToolTipText("Cargar archivo de Excel");
         btn_cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cargarArchivoActionPerformed(evt);
@@ -506,6 +502,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesHoriz.add(btn_cargarArchivo);
 
         btn_detalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono detalles.jpg"))); // NOI18N
+        btn_detalles.setToolTipText("Especificaciones del Animal");
         btn_detalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_detallesActionPerformed(evt);
@@ -520,6 +517,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesVert.setLayout(new javax.swing.BoxLayout(botonesVert, javax.swing.BoxLayout.Y_AXIS));
 
         btn_Crear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono crear.png"))); // NOI18N
+        btn_Crear.setToolTipText("Crear un Corral");
         btn_Crear.setMaximumSize(new java.awt.Dimension(70, 50));
         btn_Crear.setMinimumSize(new java.awt.Dimension(70, 50));
         btn_Crear.setPreferredSize(new java.awt.Dimension(70, 50));
@@ -531,6 +529,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesVert.add(btn_Crear);
 
         btn_Actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono actualizar.png"))); // NOI18N
+        btn_Actualizar.setToolTipText("Actualizar el Corral");
         btn_Actualizar.setMaximumSize(new java.awt.Dimension(70, 50));
         btn_Actualizar.setMinimumSize(new java.awt.Dimension(70, 50));
         btn_Actualizar.setPreferredSize(new java.awt.Dimension(70, 50));
@@ -542,6 +541,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesVert.add(btn_Actualizar);
 
         btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono eliminar.png"))); // NOI18N
+        btn_Eliminar.setToolTipText("Borrar el Corral");
         btn_Eliminar.setMaximumSize(new java.awt.Dimension(70, 50));
         btn_Eliminar.setMinimumSize(new java.awt.Dimension(70, 50));
         btn_Eliminar.setPreferredSize(new java.awt.Dimension(70, 50));
@@ -553,6 +553,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesVert.add(btn_Eliminar);
 
         btn_Animal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono animal.png"))); // NOI18N
+        btn_Animal.setToolTipText("Borrar Animal");
         btn_Animal.setMaximumSize(new java.awt.Dimension(70, 50));
         btn_Animal.setMinimumSize(new java.awt.Dimension(70, 50));
         btn_Animal.setPreferredSize(new java.awt.Dimension(70, 50));
@@ -564,6 +565,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         botonesVert.add(btn_Animal);
 
         btn_busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono buscar.png"))); // NOI18N
+        btn_busqueda.setToolTipText("Búsqueda de animales");
         btn_busqueda.setMaximumSize(new java.awt.Dimension(60, 50));
         btn_busqueda.setPreferredSize(new java.awt.Dimension(70, 50));
         btn_busqueda.addActionListener(new java.awt.event.ActionListener() {

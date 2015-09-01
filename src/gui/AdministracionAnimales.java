@@ -49,8 +49,6 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         etiqueta1 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -60,6 +58,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
 
         btn_manual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ingreso animal ICONO.png"))); // NOI18N
+        btn_manual.setToolTipText("Ingreso de Animales Manualmente");
         btn_manual.setPreferredSize(new java.awt.Dimension(150, 120));
         btn_manual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +68,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         jPanel1.add(btn_manual);
 
         btn_automatico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono STICK READER.png"))); // NOI18N
+        btn_automatico.setToolTipText("Ingreso de Animales con Bastón Electrónico");
         btn_automatico.setPreferredSize(new java.awt.Dimension(150, 120));
         btn_automatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +78,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         jPanel1.add(btn_automatico);
 
         btn_cargarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono EXCEL.png"))); // NOI18N
+        btn_cargarArchivo.setToolTipText("Cargar un Archivo de Excel");
         btn_cargarArchivo.setPreferredSize(new java.awt.Dimension(150, 120));
         btn_cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +88,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         jPanel1.add(btn_cargarArchivo);
 
         btn_sementales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono SEMENTAL.png"))); // NOI18N
+        btn_sementales.setToolTipText("Sementales");
         btn_sementales.setPreferredSize(new java.awt.Dimension(150, 120));
         btn_sementales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +98,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
         jPanel1.add(btn_sementales);
 
         btn_partos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono PARTOS.png"))); // NOI18N
+        btn_partos.setToolTipText("Partos");
         btn_partos.setPreferredSize(new java.awt.Dimension(150, 120));
         btn_partos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

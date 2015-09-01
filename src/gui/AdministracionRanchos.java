@@ -165,6 +165,7 @@ public class AdministracionRanchos extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_nuevo.setText("N u e v o");
+        btn_nuevo.setToolTipText("Limpia los campos para dar de alta un nuevo Rancho");
         btn_nuevo.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +175,7 @@ public class AdministracionRanchos extends javax.swing.JFrame {
         jPanel3.add(btn_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 30));
 
         btn_guardar.setText("G u a r d a r ");
+        btn_guardar.setToolTipText("Guarda los datos para crear un Rancho");
         btn_guardar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +185,7 @@ public class AdministracionRanchos extends javax.swing.JFrame {
         jPanel3.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 0, 150, 30));
 
         btn_eliminar.setText("E l i m i n a r");
+        btn_eliminar.setToolTipText("Elimina el Rancho seleccionado");
         btn_eliminar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

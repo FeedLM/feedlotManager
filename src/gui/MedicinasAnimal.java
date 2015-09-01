@@ -309,15 +309,15 @@ public class MedicinasAnimal extends javax.swing.JFrame {
     public void cargarMedicinaAnimal() {
 
         leerMedicinaAnimal(t_MedicinaAnimal, animal);
-/*
-        manejadorBD.consulta(""
-                + "SELECT round(ifnull(sum(round(costo_unitario,2) * dosis),0.00),2) "
-                + "FROM  medicina_animal ma, medicina m "
-                + "WHERE ma.id_medicina	=	m.id_medicina "
-                + "AND   id_rancho	=	'" + rancho.id_rancho + "' "
-                + "AND   id_animal	=	'" + animal.id_animal + "'");
+        /*
+         manejadorBD.consulta(""
+         + "SELECT round(ifnull(sum(round(costo_unitario,2) * dosis),0.00),2) "
+         + "FROM  medicina_animal ma, medicina m "
+         + "WHERE ma.id_medicina	=	m.id_medicina "
+         + "AND   id_rancho	=	'" + rancho.id_rancho + "' "
+         + "AND   id_animal	=	'" + animal.id_animal + "'");
         
-  */      
+         */
         manejadorBD.consulta(""
                 + "SELECT round(ifnull(sum(round(costo,2) * dosis),0.00),2) \n"
                 + "FROM  medicina_animal ma \n"
@@ -391,24 +391,34 @@ public class MedicinasAnimal extends javax.swing.JFrame {
              * Medicina Indivual
              */
             if (dosis > 0) {
-                
-                manejadorBD.parametrosSP = new ParametrosSP();
-                manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
-                manejadorBD.parametrosSP.agregarParametro(id_medicina, "varMedicina", "STRING", "IN");
-                manejadorBD.parametrosSP.agregarParametro(animal.id_animal, "varIdAnimal", "STRING", "IN");
-                manejadorBD.parametrosSP.agregarParametro(dosis.toString(), "varDosis", "DOUBLE", "IN");
-                manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha), "varFecha", "STRING", "IN");
 
-                if (manejadorBD.ejecutarSP("{ call agregarMedicinaAnimal(?,?,?,?,?) }") == 0) {
+                manejadorBD.consulta("select m.id_medicina, rm.existencia\n"
+                        + "from medicina m, rancho_medicina rm\n"
+                        + "where m.id_medicina = rm.id_medicina\n"
+                        + "and rm.existencia < " + dosis + "\n"
+                        + "and rm.id_rancho = '" + rancho.id_rancho + "'\n"
+                        + "and m.id_medicina = '" + id_medicina + "';");
 
-                    JOptionPane.showMessageDialog(this, "Se agrego aplicacion de medicina en el  animal Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                if (manejadorBD.getRowCount() == 0) {
+                    manejadorBD.parametrosSP = new ParametrosSP();
+                    manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
+                    manejadorBD.parametrosSP.agregarParametro(id_medicina, "varMedicina", "STRING", "IN");
+                    manejadorBD.parametrosSP.agregarParametro(animal.id_animal, "varIdAnimal", "STRING", "IN");
+                    manejadorBD.parametrosSP.agregarParametro(dosis.toString(), "varDosis", "DOUBLE", "IN");
+                    manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha), "varFecha", "STRING", "IN");
+
+                    if (manejadorBD.ejecutarSP("{ call agregarMedicinaAnimal(?,?,?,?,?) }") == 0) {
+
+                        JOptionPane.showMessageDialog(this, "Se agrego aplicacion de medicina en el  animal Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+
+                        JOptionPane.showMessageDialog(this, "Error al agregar la aplicacion de medicina en el animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    cargarMedicinaAnimal();
                 } else {
-
-                    JOptionPane.showMessageDialog(this, "Error al agregar la aplicacion de medicina en el animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "No hay medicinas en el almacen", gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 }
-
-                cargarMedicinaAnimal();
-
             } else {
 
                 JOptionPane.showMessageDialog(this, "La Dosis del Medicamento es incorrecta\n");
@@ -419,15 +429,26 @@ public class MedicinasAnimal extends javax.swing.JFrame {
              * Tratamiento
              */
             if (dosis > 0) {
-                if (tratamiento.agregarTratamientoAnimal(animal, dosis, fecha)) {
+                manejadorBD.consulta("select t.id_tratamiento, rm.existencia\n"
+                        + "from rancho_medicina rm, tratamiento t, medicina_tratamiento mt\n"
+                        + "where rm.id_medicina = mt.id_medicina\n"
+                        + "and mt.id_tratamiento = t.id_tratamiento\n"
+                        + "and rm.existencia < mt.dosis * " + dosis + "\n"
+                        + "and rm.id_rancho = '" + rancho.id_rancho + "'\n"
+                        + "and t.id_tratamiento = '" + tratamiento.id_tratamiento + "'");
+                if (manejadorBD.getRowCount() == 0) {
+                    if (tratamiento.agregarTratamientoAnimal(animal, dosis, fecha)) {
 
-                    JOptionPane.showMessageDialog(this, "Se agrego aplicacion de Tratamiento en el animal Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Se agrego aplicacion de Tratamiento en el animal Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al agregar la aplicacion de Tratamiento en el animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                    }
+                    cargarMedicinaAnimal();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Error al agregar la aplicacion de Tratamiento en el animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "La Cantidad del tratamiento es incorrecta");
                 }
-                cargarMedicinaAnimal();
             } else {
-                JOptionPane.showMessageDialog(this, "La Cantidad del tratamiento es incorrecta");
+                JOptionPane.showMessageDialog(this, "No hay suficientes medicamentos en el almacen", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_AplicarActionPerformed

@@ -364,6 +364,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/bot&#xf3;n agregar.png"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Agregar el medicamento"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Castellar" size="12" style="1"/>
                     </Property>
@@ -382,6 +383,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/bot&#xf3;n eliminar.png"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Borrar el medicamento"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Castellar" size="12" style="1"/>
                     </Property>
@@ -400,6 +402,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/resources/bot&#xf3;n gaurdar.png"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Guardar las actualizaciones del medicamento"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_guardarActionPerformed"/>
@@ -413,6 +416,7 @@
                 <Component class="abstractt.Boton" name="btn_aplicacionMasiva">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Aplicaci&#xf3;n Masiva de Medicamentos"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Administra medicamentos a Animales por grupos"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="12" style="0"/>
                     </Property>
@@ -450,6 +454,7 @@
                 <Component class="abstractt.Boton" name="btn_comprar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Compra de Medicamentos"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Realizar compras de medicamentos"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_comprarActionPerformed"/>
@@ -717,6 +722,7 @@
                     <Component class="abstractt.Boton" name="btn_agregarMedicamento">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Agregar Medicamento"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Agrega el medicamento a la lista del Tratamiento"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>
                         </Property>
@@ -733,6 +739,7 @@
                     <Component class="abstractt.Boton" name="btn_eliminarMedicamento">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Eliminar Medicamento"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Elimina el medicamento del Tratamiento"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>
                         </Property>
@@ -751,6 +758,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/resources/bot&#xf3;n agregar.png"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Crear un Tratamiento"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>
                         </Property>
@@ -769,6 +777,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/resources/bot&#xf3;n gaurdar.png"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Guardar las actualizaciones del tratamiento"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>
                         </Property>
@@ -787,6 +796,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/resources/bot&#xf3;n eliminar.png"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Borrar el Tratamiento"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>
                         </Property>

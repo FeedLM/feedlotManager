@@ -174,6 +174,7 @@ public class BajasMuerte extends javax.swing.JFrame {
         jPanel2.add(JDCFechaMuerte, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 200, 25));
 
         btn_Ingresar.setText("Ingresar");
+        btn_Ingresar.setToolTipText("Registra la muerte del Animal");
         btn_Ingresar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_Ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +184,7 @@ public class BajasMuerte extends javax.swing.JFrame {
         jPanel2.add(btn_Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 300, 125, 35));
 
         btn_Historico.setText("Historico");
+        btn_Historico.setToolTipText("Revisa los Animales que ya han muerto");
         btn_Historico.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btn_Historico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

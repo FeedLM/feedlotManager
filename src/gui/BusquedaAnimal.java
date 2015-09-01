@@ -169,6 +169,7 @@ public class BusquedaAnimal extends javax.swing.JFrame {//JDialog { //
         jPanel4.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 100, 20));
 
         btn_detalles.setText("Detalles");
+        btn_detalles.setToolTipText("Muestra las Especificaciones del Animal");
         btn_detalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_detallesActionPerformed(evt);
