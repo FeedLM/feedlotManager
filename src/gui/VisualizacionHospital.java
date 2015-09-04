@@ -246,9 +246,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         tbn_reporte = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualización Hospital");
-        
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);
@@ -265,11 +263,12 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel2.setOpaque(false);
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         etiqueta1.setText("Animales en el Hospital: ");
-        jPanel2.add(etiqueta1);
+        etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 18)); // NOI18N
+        jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
 
         t_animalesHospital.setForeground(new java.awt.Color(230, 225, 195));
         t_animalesHospital.setModel(new javax.swing.table.DefaultTableModel(
@@ -285,9 +284,9 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(t_animalesHospital);
 
-        jPanel2.add(jScrollPane1);
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 150));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 85, 1000, 250));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 85, 1000, -1));
 
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 5));
@@ -336,14 +335,15 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
         jPanel6.add(jPanel5);
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 1000, -1));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 1000, -1));
 
         jPanel7.setOpaque(false);
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta4.setText("Historico de Animales:");
-        jPanel7.add(etiqueta4);
+        etiqueta4.setFont(new java.awt.Font("Trebuchet", 1, 18)); // NOI18N
+        jPanel7.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
 
         t_HistoricoHospital.setForeground(new java.awt.Color(230, 225, 195));
         t_HistoricoHospital.setModel(new javax.swing.table.DefaultTableModel(
@@ -363,7 +363,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(t_HistoricoHospital);
 
-        jPanel7.add(jScrollPane2);
+        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 150));
 
         jPanel8.setOpaque(false);
         jPanel8.setPreferredSize(new java.awt.Dimension(494, 90));
@@ -389,9 +389,9 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         });
         jPanel8.add(tbn_reporte);
 
-        jPanel7.add(jPanel8);
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 1000, 86));
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 1000, 275));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 1000, 275));
 
         fondo1.setText("fondo1");
         getContentPane().add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

@@ -86,6 +86,7 @@ import com.csvreader.CsvReader;
 //import static gui.Login.formatoDateTime;
 import static domain.CorralAnimal.cargarAnimalesCorral_;
 import static domain.Movimiento.cargarMovimientosSalida;
+import static gui.Desktop.manejadorBD;
 import static gui.Login.gs_mensaje;
 import static gui.Splash.formatoDateTime_11;
 import static gui.Splash.formatoDateTime_2;
@@ -124,6 +125,7 @@ public class Excel {
     private HSSFCellStyle styleParamReport;
     private HSSFCellStyle styleTituloTabla;
     private HSSFCellStyle styleEtiquetaTabla;
+    private HSSFCellStyle styleGananciaPeso;
 
     public static List<RegistroSesion> leerArchivoSesionCSV(String archivoSesion) {
 
@@ -345,6 +347,18 @@ public class Excel {
         styleEtiquetaTabla.setAlignment(HSSFCellStyle.ALIGN_LEFT);
         styleEtiquetaTabla.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
         styleEtiquetaTabla.setFont(FontEtiquetaTabla);
+
+        /*ETIQUETA GANANCIA DE PESO */
+        HSSFFont FontGananciaPeso = wb.createFont();
+        FontGananciaPeso.setFontName("Calibri");
+        FontGananciaPeso.setFontHeightInPoints((short) 12);
+        FontGananciaPeso.setColor(HSSFColor.BLACK.index);
+
+        styleGananciaPeso = wb.createCellStyle();
+        styleGananciaPeso.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+        styleGananciaPeso.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        styleGananciaPeso.setFont(FontGananciaPeso);
+
     }
 
     public Cell agregarValor(Integer fila, Integer columna, String valor) {
@@ -951,8 +965,8 @@ public class Excel {
         }
         cargarLogo();
     }
-    
-private void reporteSesiones() {
+
+    private void reporteSesiones() {
 
         cargarLogo();
 
@@ -1497,20 +1511,13 @@ private void reporteSesiones() {
         Date fecha = null;
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
-
             peso = Double.parseDouble(t_tabla.getValueAt(i, 1).toString().substring(0, t_tabla.getValueAt(i, 1).toString().length() - 2));
-
             try {
                 fecha = formatoDate.parse(t_tabla.getValueAt(i, 0).toString().substring(0, 11));
-
-            
-
-} catch (ParseException ex) {
-                Logger.getLogger(Excel.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(Excel.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
-
             agregarValor(fila_inicial + i, 0, formatoDate.format(fecha), styleCenter);
             //sheet.createRow(fila_inicial + i).createCell(0).setCellValue(formatoDate.format(fecha));
             agregarValor(fila_inicial + i, 1, peso, styleRight);
@@ -1519,7 +1526,36 @@ private void reporteSesiones() {
             //sheet.getRow(fila_inicial + i).getCell(1).setCellStyle(styleRight);
             fila_final = fila_inicial + i;
         }
-
+        agregarValor(fila_final + 1, 0, "Ganancia diaria", styleGananciaPeso);
+        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
+                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+                + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
+                + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
+                + "AND      D.id_animal	= '" + animal.id_animal + "'\n"
+                + "ORDER BY fecha DESC LIMIT 1) - (SELECT Round(peso,2) \n"
+                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+                + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto =  D.id_concepto ) \n"
+                + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
+                + "AND      D.id_animal	= '" + animal.id_animal + "'\n"
+                + "ORDER BY fecha ASC LIMIT 1)) / (SELECT TIMESTAMPDIFF(DAY, (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
+                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+                + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
+                + "AND M.id_movimiento =   D.id_movimiento 	   \n"
+                + "AND M.id_concepto	=   D.id_concepto ) \n"
+                + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
+                + "AND M.id_rancho     =   r.id_rancho	) \n"
+                + "AND      D.id_animal	= '" + animal.id_animal + "' \n"
+                + "ORDER BY fecha ASC LIMIT 1), (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
+                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+                + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
+                + "AND M.id_movimiento =   D.id_movimiento 	   \n"
+                + "AND M.id_concepto	=   D.id_concepto ) \n"
+                + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
+                + "AND M.id_rancho     =   r.id_rancho	) \n"
+                + "AND      D.id_animal	= '" + animal.id_animal + "' \n"
+                + "ORDER BY fecha DESC LIMIT 1)))),2), 0)");
+        agregarValor(fila_final + 1, 1, manejadorBD.getValorString(0, 0));
+        relleno("A" + (fila_final + 2), IndexedColors.BLUE.index, IndexedColors.WHITE.index);
         graficar((short) 2, 6, (short) 9, 26);
     }
 
