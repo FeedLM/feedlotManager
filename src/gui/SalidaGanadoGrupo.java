@@ -39,20 +39,14 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
      * Creates new form SalidaGanadoGrupos
      */
     public SalidaGanadoGrupo(Desktop parent) {
-        //  super(parent, modal);
         this.parent = parent;
         initComponents();
-//        setLocationRelativeTo(null);
-//        Image i = null;
-//        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-//        setIconImage(i);
         setClosable(true);
         this.pack();
         this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
         animal = new Animal();
         reporteSalidas = new ReporteSalidas();
 
-        //   this.tagIdSelector.addArray(cargarTagIds());
         claseMovimientoSelector.addArray(cargarClaseMovimiento());
         clienteSelector1.cargar();
 
@@ -74,7 +68,10 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
-        cargarComponentes();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension tamanoPantalla = tk.getScreenSize();
+        setResizable(false);
+        fondo1.cargar(tamanoPantalla);
     }
 
     /**
@@ -110,6 +107,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Salida de Ganado");
+        setPreferredSize(new java.awt.Dimension(1300, 630));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);
@@ -122,7 +120,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Información de Salida");
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
-        jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 79));
+        jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 79));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -134,37 +132,37 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta2.setText("Fecha de Movimiento: ");
-        jPanel4.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 20));
+        jPanel4.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 20));
 
         etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta3.setText("Clase de Movimiento:  ");
-        jPanel4.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 200, 20));
+        jPanel4.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 150, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta4.setText("Número de pedido:  ");
-        jPanel4.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, 20));
+        jPanel4.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 150, 20));
 
         etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta5.setText("Cliente: ");
-        jPanel4.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 200, 20));
+        jPanel4.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 20));
 
         etiqueta6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta6.setText("Peso Actual (Kg):  ");
-        jPanel4.add(etiqueta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 200, 20));
+        jPanel4.add(etiqueta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, 20));
 
         calendar1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 200, 20));
+        jPanel4.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 200, 20));
 
         tf_numeroPedido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(tf_numeroPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 200, 20));
+        jPanel4.add(tf_numeroPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 20));
 
         claseMovimientoSelector.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(claseMovimientoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 200, 20));
+        jPanel4.add(claseMovimientoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 200, 20));
 
         tf_pesoActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_pesoActual.setText("0.0");
         tf_pesoActual.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jPanel4.add(tf_pesoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 200, 20));
+        jPanel4.add(tf_pesoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 200, 20));
 
         btn_salida.setText("Salida de Animales");
         btn_salida.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -173,7 +171,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
                 btn_salidaActionPerformed(evt);
             }
         });
-        jPanel4.add(btn_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 445, 150, 30));
+        jPanel4.add(btn_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 150, 30));
 
         btn_Historico.setText("Historico");
         btn_Historico.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -182,10 +180,10 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
                 btn_HistoricoActionPerformed(evt);
             }
         });
-        jPanel4.add(btn_Historico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 445, 150, 30));
-        jPanel4.add(clienteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 200, 20));
+        jPanel4.add(btn_Historico, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 150, 30));
+        jPanel4.add(clienteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 200, 20));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,7 +192,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         animalesSeleccionados1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPanel5.add(animalesSeleccionados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, -1, -1));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
         jPanel1.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -338,14 +336,6 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
     }
 
-    private void cargarComponentes() {
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension pantallaTamano = tk.getScreenSize();
-        setResizable(false);
-        setSize(pantallaTamano);
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        fondo1.cargar(pantallaTamano);
-    }
 
     String puertoStick, puertoBascula;
     private SR232 stick;

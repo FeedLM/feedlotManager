@@ -91,16 +91,16 @@ public class CargarArchivoSesion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(tf_archivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 150, 350, 20));
-        jPanel1.add(Bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 400, 20));
+        jPanel1.add(tf_archivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 350, 20));
+        jPanel1.add(Bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 400, 20));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Cargar Archivo de Sesión");
-        etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 36)); // NOI18N
+        etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 24)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
+        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 425, 50));
 
         btn_cargar.setText("Cargar Sesión");
         btn_cargar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -109,7 +109,7 @@ public class CargarArchivoSesion extends javax.swing.JFrame {
                 btn_cargarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 150, 30));
+        jPanel1.add(btn_cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 150, 30));
 
         btn_examinar.setText("Examinar");
         btn_examinar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -118,12 +118,12 @@ public class CargarArchivoSesion extends javax.swing.JFrame {
                 btn_examinarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_examinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 150, 30));
+        jPanel1.add(btn_examinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 150, 30));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 280));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 225));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

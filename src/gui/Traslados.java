@@ -99,9 +99,6 @@ public class Traslados extends javax.swing.JInternalFrame{
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanoPantalla = tk.getScreenSize();
         setResizable(false);
-//        setSize(tamanoPantalla);
-//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
         fondo1.cargar(tamanoPantalla);
     }
 

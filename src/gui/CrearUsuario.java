@@ -252,7 +252,7 @@ public class CrearUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
+
     }//GEN-LAST:event_formWindowClosing
 
     /**

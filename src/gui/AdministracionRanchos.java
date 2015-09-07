@@ -199,25 +199,25 @@ public class AdministracionRanchos extends javax.swing.JFrame {
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        etq_ciudad.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etq_ciudad.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         etq_ciudad.setForeground(new java.awt.Color(95, 84, 88));
         etq_ciudad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etq_ciudad.setText("Ciudad:");
         jPanel4.add(etq_ciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 80, 22));
 
-        etq_nombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etq_nombre.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         etq_nombre.setForeground(new java.awt.Color(95, 84, 88));
         etq_nombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etq_nombre.setText("Nombre:");
         jPanel4.add(etq_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 22));
 
-        etq_actividad.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etq_actividad.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         etq_actividad.setForeground(new java.awt.Color(95, 84, 88));
         etq_actividad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etq_actividad.setText("Actividad:");
         jPanel4.add(etq_actividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 80, 60));
 
-        etq_Estado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etq_Estado.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         etq_Estado.setForeground(new java.awt.Color(95, 84, 88));
         etq_Estado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etq_Estado.setText("Estado:");

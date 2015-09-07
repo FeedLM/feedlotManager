@@ -167,7 +167,7 @@ public class BusquedaAnimalSelector extends javax.swing.JFrame { //
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Busqueda por:");
-        etiqueta1.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
+        etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 80));
 
@@ -178,20 +178,20 @@ public class BusquedaAnimalSelector extends javax.swing.JFrame { //
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Arete Visual:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 20));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Arete Electronico:");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, 20));
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Arete Siniiga:");
@@ -211,7 +211,6 @@ public class BusquedaAnimalSelector extends javax.swing.JFrame { //
         });
         jPanel4.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 20));
 
-        animalSelector.setFont(new java.awt.Font("Trebuchet", 0, 12)); // NOI18N
         animalSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 animalSelectorActionPerformed(evt);

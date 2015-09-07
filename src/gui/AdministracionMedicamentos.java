@@ -256,21 +256,21 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_unidades.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lbl_unidades.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         lbl_unidades.setForeground(new java.awt.Color(95, 84, 88));
         lbl_unidades.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_unidades.setText("Unidad de Medida:");
         lbl_unidades.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel1.add(lbl_unidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, 20));
 
-        lbl_nombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lbl_nombre.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         lbl_nombre.setForeground(new java.awt.Color(95, 84, 88));
         lbl_nombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_nombre.setText("Nombre:");
         lbl_nombre.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 20));
 
-        lbl_codigo.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lbl_codigo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         lbl_codigo.setForeground(new java.awt.Color(95, 84, 88));
         lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_codigo.setText("Codigo:");
@@ -284,7 +284,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         });
         jPanel1.add(unidadSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 200, 20));
 
-        tf_Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_NombreActionPerformed(evt);
@@ -292,7 +291,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         });
         jPanel1.add(tf_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 20));
 
-        tf_Codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Codigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tf_CodigoFocusLost(evt);
@@ -314,12 +312,10 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
 
         tf_Existencias.setEditable(false);
-        tf_Existencias.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Existencias.setEnabled(false);
         jPanel1.add(tf_Existencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
 
         tf_CostoPromedio.setEditable(false);
-        tf_CostoPromedio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_CostoPromedio.setEnabled(false);
         jPanel1.add(tf_CostoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
 
@@ -328,7 +324,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel1.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, 20));
 
         tf_UltimoCosto.setEditable(false);
-        tf_UltimoCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_UltimoCosto.setEnabled(false);
         jPanel1.add(tf_UltimoCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 20));
 
@@ -451,37 +446,37 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 84, 88));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Codigo:");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 22));
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Medicamento:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 100, 22));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Dosis");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 100, 22));
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Unidades");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 100, 22));
 
-        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 84, 88));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Costo:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 100, 22));
 
-        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(95, 84, 88));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Nombre:");
@@ -511,7 +506,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         });
         jPanel3.add(tratamientoSelectorCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 200, 20));
 
-        tf_DosisTratamiento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_DosisTratamiento.setText("0.0");
         tf_DosisTratamiento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tf_DosisTratamiento.addActionListener(new java.awt.event.ActionListener() {

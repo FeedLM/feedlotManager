@@ -16,6 +16,7 @@ public class PasswordField extends javax.swing.JPasswordField {
     public PasswordField() {
         
         setFont(FormatoControles.Fuente1);
+        setHorizontalAlignment(javax.swing.JTextField.CENTER);
 //        setBackground(FormatoControles.color3);
 //        setForeground(FormatoControles.color2);
     }

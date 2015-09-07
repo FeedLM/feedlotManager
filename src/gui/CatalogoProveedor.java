@@ -468,11 +468,13 @@ public class CatalogoProveedor extends javax.swing.JDialog {
         jPanel1.add(id_proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 260, -1));
         jPanel1.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 250, -1));
 
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("ID:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 100, 20));
 
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Telefono:");
@@ -481,18 +483,21 @@ public class CatalogoProveedor extends javax.swing.JDialog {
         CB_FisicaMoral.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Fisica", "Moral" }));
         jPanel1.add(CB_FisicaMoral, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 84, 88));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nombre:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 20));
         jPanel1.add(TF_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 250, -1));
 
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(95, 84, 88));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Persona Fisica/Moral:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 20));
         jPanel1.add(TF_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 100, -1));
 
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 84, 88));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("e-mail:");
@@ -504,6 +509,7 @@ public class CatalogoProveedor extends javax.swing.JDialog {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(paisSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 240, -1));
 
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setText("Dirección");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 60, 20));
@@ -515,16 +521,19 @@ public class CatalogoProveedor extends javax.swing.JDialog {
         });
         jPanel3.add(estadoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 240, -1));
 
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 84, 88));
         jLabel8.setText("Pais:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 60, 20));
         jPanel3.add(ciudadSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 240, -1));
 
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(95, 84, 88));
         jLabel9.setText("Estado:");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 60, 20));
         jPanel3.add(TF_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 400, -1));
 
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(95, 84, 88));
         jLabel10.setText("Ciudad:");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 60, 20));

@@ -115,6 +115,7 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         fondo4.setText("fondo4");
 
         setTitle("Configuración");
+        setPreferredSize(new java.awt.Dimension(630, 376));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -132,20 +133,20 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
                 puertoStickSelectorActionPerformed(evt);
             }
         });
-        jPanel1.add(puertoStickSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 150, 20));
+        jPanel1.add(puertoStickSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 150, 20));
 
         statusBar.setBackground(new java.awt.Color(230, 225, 195));
         statusBar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         statusBar.setForeground(new java.awt.Color(95, 84, 88));
         statusBar.setText("Configuracion...");
         statusBar.setOpaque(true);
-        jPanel1.add(statusBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 520, 16));
+        jPanel1.add(statusBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 520, 16));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Puerto COM:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 150, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 150, 20));
 
         btn_bascula.setText("Buscar Automáticamente");
         btn_bascula.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +154,7 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
                 btn_basculaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_bascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 180, 30));
+        jPanel1.add(btn_bascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 180, 30));
 
         fondo2.setText("fondo2");
         jPanel1.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -164,25 +165,23 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tf_CostoAlimento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_CostoAlimento.setText("0.00");
-        jPanel3.add(tf_CostoAlimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 150, 20));
+        jPanel3.add(tf_CostoAlimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 150, 20));
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 84, 88));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Costo del Alimento:");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 150, 20));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 150, 20));
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Precio de la Carne:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 150, 20));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 150, 20));
 
-        tf_PrecioCarne.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_PrecioCarne.setText("0.00");
-        jPanel3.add(tf_PrecioCarne, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 150, 20));
+        jPanel3.add(tf_PrecioCarne, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 150, 20));
 
         fondo3.setText("fondo3");
         jPanel3.add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -192,43 +191,41 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(tf_RecComBascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 150, 20));
-        jPanel6.add(tf_Envio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 150, 20));
-        jPanel6.add(tf_RecComBaston, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 150, 20));
+        jPanel6.add(tf_RecComBascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 150, 20));
+        jPanel6.add(tf_Envio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 150, 20));
+        jPanel6.add(tf_RecComBaston, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 150, 20));
+        jPanel6.add(tf_TiempoEsperaCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 150, 20));
 
-        tf_TiempoEsperaCom.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel6.add(tf_TiempoEsperaCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 150, 20));
-
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Tiempo de espera Respuesta (seg.):");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 200, 20));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 200, 20));
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 84, 88));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Envio al Puerto COM:");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 200, 20));
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 200, 20));
 
-        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(95, 84, 88));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Recepcion de Bascula:");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 20));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 20));
 
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 84, 88));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Recepcion de Baston:");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 20));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 200, 20));
 
         fondo5.setText("fondo5");
         jPanel6.add(fondo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jTabbedPane1.addTab("Conf./Busqueda Automatica", jPanel6);
 
-        jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 290));
+        jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 290));
 
         btn_grabar.setText("Grabar");
         btn_grabar.setToolTipText("Guarda los valores");
@@ -237,7 +234,7 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
                 btn_grabarActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_grabar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 100, 30));
+        jPanel2.add(btn_grabar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 100, 30));
 
         fondo1.setText("fondo1");
         jPanel2.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

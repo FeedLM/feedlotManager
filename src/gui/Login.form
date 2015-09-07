@@ -65,7 +65,6 @@
           <SubComponents>
             <Component class="abstractt.TextField" name="usuario">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="admin"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="18" style="0"/>
@@ -128,7 +127,6 @@
             </Component>
             <Component class="abstractt.PasswordField" name="contrase&#xf1;a">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="admin"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="18" style="0"/>

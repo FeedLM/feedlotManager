@@ -47,14 +47,14 @@ public class PasswordDialogo extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Escriba la Contraseña:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 150, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 20));
 
         tf_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_passwordActionPerformed(evt);
             }
         });
-        jPanel1.add(tf_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, 20));
+        jPanel1.add(tf_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 150, 20));
 
         boton1.setText("Aceptar");
         boton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +62,7 @@ public class PasswordDialogo extends javax.swing.JDialog {
                 boton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 100, 30));
+        jPanel1.add(boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 100, 30));
 
         boton2.setText("Cancelar");
         boton2.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +70,12 @@ public class PasswordDialogo extends javax.swing.JDialog {
                 boton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(boton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 100, 30));
+        jPanel1.add(boton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 100, 30));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 200));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

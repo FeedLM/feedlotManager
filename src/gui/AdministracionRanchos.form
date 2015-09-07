@@ -202,7 +202,7 @@
                 <Component class="javax.swing.JLabel" name="etq_ciudad">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet MS" size="12" style="0"/>
+                      <Font name="Trebuchet MS" size="12" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -219,7 +219,7 @@
                 <Component class="javax.swing.JLabel" name="etq_nombre">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet MS" size="12" style="0"/>
+                      <Font name="Trebuchet MS" size="12" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -236,7 +236,7 @@
                 <Component class="javax.swing.JLabel" name="etq_actividad">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet MS" size="12" style="0"/>
+                      <Font name="Trebuchet MS" size="12" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -253,7 +253,7 @@
                 <Component class="javax.swing.JLabel" name="etq_Estado">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet MS" size="12" style="0"/>
+                      <Font name="Trebuchet MS" size="12" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="58" green="54" red="5f" type="rgb"/>

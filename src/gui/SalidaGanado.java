@@ -150,7 +150,6 @@ public class SalidaGanado extends javax.swing.JFrame {
         fondo1 = new abstractt.fondo();
 
         setTitle("Salida de Ganado");
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -330,7 +329,7 @@ public class SalidaGanado extends javax.swing.JFrame {
         fondo1.setText("fondo1");
         jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -447,7 +446,7 @@ public class SalidaGanado extends javax.swing.JFrame {
         Dimension pantallaTamano = tk.getScreenSize();
         setResizable(false);
         setSize(pantallaTamano);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         fondo1.cargar(pantallaTamano);
     }
 

@@ -22,6 +22,7 @@ public class EditorComboBox implements ComboBoxEditor {
 
         editor = new JButton("");
         editor.setFont(FormatoControles.Fuente1);
+        editor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 //        editor.setBackground(FormatoControles.color1);
 //        editor.setForeground(FormatoControles.color2);
 

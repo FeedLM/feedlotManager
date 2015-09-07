@@ -247,6 +247,8 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         fondo1 = new abstractt.fondo();
 
         setTitle("Visualización Hospital");
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(1020, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setOpaque(false);
@@ -258,7 +260,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         etq_visualización_Hospital.setText("Visualización Hospital");
         etq_visualización_Hospital.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etq_visualización_Hospital.setOpaque(true);
-        jPanel1.add(etq_visualización_Hospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 79));
+        jPanel1.add(etq_visualización_Hospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 79));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -286,7 +288,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 150));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 85, 1000, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, 1000, -1));
 
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 5));
@@ -295,7 +297,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
         etiqueta2.setText("Fecha de reintegro: ");
-        etiqueta2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etiqueta2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jPanel3.add(etiqueta2);
 
         calendar1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -308,7 +310,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
         etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta3.setText("Corral de Destino: ");
-        etiqueta3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        etiqueta3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jPanel4.add(etiqueta3);
 
         corralSelector1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -335,7 +337,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
         jPanel6.add(jPanel5);
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 1000, -1));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1000, -1));
 
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -367,7 +369,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
 
         jPanel8.setOpaque(false);
         jPanel8.setPreferredSize(new java.awt.Dimension(494, 90));
-        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 5));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 180, 20));
 
         tbn_reporte1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/animales en hospital ICONO.png"))); // NOI18N
         tbn_reporte1.setToolTipText("Reporte de Hospital");
@@ -389,9 +391,9 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         });
         jPanel8.add(tbn_reporte);
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 1000, 86));
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 1000, 100));
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 1000, 275));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 1000, 275));
 
         fondo1.setText("fondo1");
         getContentPane().add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

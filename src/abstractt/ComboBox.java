@@ -54,7 +54,7 @@ public class ComboBox extends JComboBox {
             }
         });
 
-        editor.setHorizontalAlignment(JTextField.LEFT);
+        editor.setHorizontalAlignment(JTextField.CENTER);
         setEditable(true);
         // setFont(new java.awt.Font("Calibri", 0, 12));
 

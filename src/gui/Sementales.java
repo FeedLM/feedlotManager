@@ -135,18 +135,18 @@ public class Sementales extends javax.swing.JFrame {
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setText("Arete Visual:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 20));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setText("Arete Electronico:");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 120, 20));
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setText("Arete Siniiga:");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 20));
@@ -174,6 +174,7 @@ public class Sementales extends javax.swing.JFrame {
         jPanel4.add(animalSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 200, 20));
 
         btn_detalles.setText("Detalles");
+        btn_detalles.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         btn_detalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_detallesActionPerformed(evt);
@@ -182,6 +183,7 @@ public class Sementales extends javax.swing.JFrame {
         jPanel4.add(btn_detalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 200, 30));
 
         btn_emparejar.setText("Emparejar");
+        btn_emparejar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         btn_emparejar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_emparejarActionPerformed(evt);
@@ -197,7 +199,7 @@ public class Sementales extends javax.swing.JFrame {
         });
         jPanel4.add(tf_areteSiniiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 200, 20));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1000, 90));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1000, 90));
 
         t_animales.setForeground(new java.awt.Color(230, 225, 195));
         t_animales.setModel(new javax.swing.table.DefaultTableModel(
@@ -211,7 +213,7 @@ public class Sementales extends javax.swing.JFrame {
         t_animales.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(t_animales);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 1000, 300));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 1000, 300));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -219,7 +221,7 @@ public class Sementales extends javax.swing.JFrame {
         etiqueta1.setText("Sementales");
         etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel3.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 80));
+        jPanel3.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 80));
 
         fondo1.setText("fondo1");
         jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

@@ -235,44 +235,44 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         pn_Formulario.setOpaque(false);
         pn_Formulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Arete Visual (IDV):");
         pn_Formulario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 120, 20));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Arete Electronico (IDE):");
         pn_Formulario.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 120, 20));
 
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 84, 88));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Arete Siniiga:");
         pn_Formulario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 120, 20));
 
-        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 84, 88));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Arete Campaña:");
         pn_Formulario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 120, 20));
 
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(95, 84, 88));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Semental:");
         jLabel14.setFocusable(false);
         pn_Formulario.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 120, 20));
 
-        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(95, 84, 88));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Peso Actual (Kg):");
         pn_Formulario.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 120, 20));
 
-        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(95, 84, 88));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Fecha de Ingreso:");
@@ -284,49 +284,49 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel19.setFocusable(false);
         pn_Formulario.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 110, 20));
 
-        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(95, 84, 88));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Raza:");
         pn_Formulario.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, 20));
 
-        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(95, 84, 88));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Peso de Compra:");
         pn_Formulario.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 120, 20));
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Corral:");
         pn_Formulario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 20));
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 84, 88));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Proveedor:");
         pn_Formulario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 20));
 
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(95, 84, 88));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Sexo:");
         pn_Formulario.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 120, 20));
 
-        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(95, 84, 88));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Numero de Lote:");
         pn_Formulario.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 120, 20));
 
-        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(95, 84, 88));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("Compra:");
         pn_Formulario.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 120, 20));
 
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(95, 84, 88));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Fecha de Compra:");
@@ -390,7 +390,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         pn_Formulario.add(tf_PesoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 160, 20));
 
         jrb_esSemental.setBackground(new java.awt.Color(255, 255, 255));
-        jrb_esSemental.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jrb_esSemental.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_esSemental.setForeground(new java.awt.Color(95, 84, 88));
         jrb_esSemental.setText("Es Semental:                   ");
         jrb_esSemental.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -732,7 +732,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private void btn_BajasMuerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BajasMuerteActionPerformed
         // TODO add your handling code here:
         bajasMuerte = new BajasMuerte(parent, animalDetalle);
-        this.setVisible(false);
         bajasMuerte.setVisible(true);
     }//GEN-LAST:event_btn_BajasMuerteActionPerformed
 
@@ -755,7 +754,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         // TODO add your handling code here:
         if (animalDetalle != null) {
             medicinasAnimal = new MedicinasAnimal(animalDetalle);
-            this.setVisible(false);
             medicinasAnimal.setVisible(true);
         }
     }//GEN-LAST:event_btn_medicinasActionPerformed

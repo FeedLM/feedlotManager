@@ -124,7 +124,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Aplicacion de Medicinas");
         jLabel3.setOpaque(true);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 80));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 80));
 
         jScrollPane2.setOpaque(false);
 
@@ -157,7 +157,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
             t_MedicinaAnimal.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 325, 800, 188));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 800, 188));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,16 +194,16 @@ public class MedicinasAnimal extends javax.swing.JFrame {
         });
         jPanel5.add(codigoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 25, 160, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 400, 100));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 400, 100));
         jPanel5.getAccessibleContext().setAccessibleName("Medicamento");
 
         selectorFecha.setFont(new java.awt.Font("Trebuchet MS", 0, 11)); // NOI18N
-        jPanel1.add(selectorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 270, 60));
+        jPanel1.add(selectorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 270, 60));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Costo Total:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 525, 110, 25));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 110, 25));
 
         tf_costo.setFocusable(false);
         tf_costo.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                 tf_costoActionPerformed(evt);
             }
         });
-        jPanel1.add(tf_costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 525, 150, 25));
+        jPanel1.add(tf_costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 520, 150, 25));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(64, 37, 4)), "Tratamientos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 11), new java.awt.Color(64, 37, 4))); // NOI18N
         jPanel3.setOpaque(false);
@@ -242,13 +242,13 @@ public class MedicinasAnimal extends javax.swing.JFrame {
         });
         jPanel3.add(tratamientoSelectorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 160, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 400, 100));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 400, 100));
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(64, 37, 4));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Dosis:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 275, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 60, 30));
 
         tf_Dosis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Dosis.setText("0.00");
@@ -257,18 +257,18 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                 tf_DosisActionPerformed(evt);
             }
         });
-        jPanel1.add(tf_Dosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 275, 160, 30));
+        jPanel1.add(tf_Dosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 160, 30));
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(64, 37, 4));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Animal (ID Visual)");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 100, 150, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 150, 20));
 
         tf_TagID.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         tf_TagID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_TagID.setFocusable(false);
-        jPanel1.add(tf_TagID, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 100, 160, -1));
+        jPanel1.add(tf_TagID, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 160, -1));
 
         btn_Aplicar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono crear.png"))); // NOI18N
         btn_Aplicar.setText("Aplicar");
@@ -277,7 +277,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                 btn_AplicarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Aplicar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 575, 150, 40));
+        jPanel1.add(btn_Aplicar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 150, 40));
 
         btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono eliminar.png"))); // NOI18N
         btn_Eliminar.setText("Eliminar");
@@ -286,7 +286,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                 btn_EliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 575, 150, 40));
+        jPanel1.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 150, 40));
 
         bt_Reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte de entradas.png"))); // NOI18N
         bt_Reporte.setText("Reporte");
@@ -295,7 +295,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                 bt_ReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(bt_Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 575, 150, 40));
+        jPanel1.add(bt_Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 150, 40));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

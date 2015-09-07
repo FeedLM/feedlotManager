@@ -325,10 +325,11 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
         jtf_localizacion.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jtf_localizacion.setForeground(new java.awt.Color(64, 37, 4));
+        jtf_localizacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         datosPanel.add(jtf_localizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 140, -1));
 
         jtf_numAnimales.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jtf_numAnimales.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtf_numAnimales.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtf_numAnimales.setFocusable(false);
         datosPanel.add(jtf_numAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 100, -1));
 
@@ -398,12 +399,10 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel15.setText("Alimento Ingresado:");
         datosPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 120, 22));
 
-        t_pesoPromedio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_pesoPromedio.setText("0.00");
         t_pesoPromedio.setFocusable(false);
         datosPanel.add(t_pesoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 100, 22));
 
-        t_alimentoIngresado.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_alimentoIngresado.setText("0.00");
         t_alimentoIngresado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -417,22 +416,18 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         });
         datosPanel.add(t_alimentoIngresado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 100, 22));
 
-        t_totalKilos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_totalKilos.setText("0.00");
         t_totalKilos.setFocusable(false);
         datosPanel.add(t_totalKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 100, 22));
 
-        t_pesoMinimo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_pesoMinimo.setText("0.00");
         t_pesoMinimo.setFocusable(false);
         datosPanel.add(t_pesoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 100, 22));
 
-        t_pesoMaximo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_pesoMaximo.setText("0.00");
         t_pesoMaximo.setFocusable(false);
         datosPanel.add(t_pesoMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 100, 22));
 
-        t_gananciaKilos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         t_gananciaKilos.setText("0.00");
         t_gananciaKilos.setFocusable(false);
         datosPanel.add(t_gananciaKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 100, 22));

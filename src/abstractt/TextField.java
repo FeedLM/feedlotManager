@@ -47,6 +47,7 @@ public class TextField extends javax.swing.JTextField {
         });
 
         setFont(FormatoControles.Fuente1);
+        setHorizontalAlignment(javax.swing.JTextField.CENTER);
 //        setBackground(FormatoControles.color3);
 //        setForeground(FormatoControles.color2);
 

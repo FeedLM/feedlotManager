@@ -108,7 +108,7 @@
                     <Component class="javax.swing.JLabel" name="lbl_unidades">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -126,7 +126,7 @@
                     <Component class="javax.swing.JLabel" name="lbl_nombre">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -144,7 +144,7 @@
                     <Component class="javax.swing.JLabel" name="lbl_codigo">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -170,9 +170,6 @@
                       </Constraints>
                     </Component>
                     <Component class="abstractt.TextField" name="tf_Nombre">
-                      <Properties>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
-                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_NombreActionPerformed"/>
                       </Events>
@@ -183,9 +180,6 @@
                       </Constraints>
                     </Component>
                     <Component class="abstractt.TextField" name="tf_Codigo">
-                      <Properties>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
-                      </Properties>
                       <Events>
                         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_CodigoFocusLost"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_CodigoActionPerformed"/>
@@ -221,7 +215,6 @@
                     <Component class="abstractt.TextField" name="tf_Existencias">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -233,7 +226,6 @@
                     <Component class="abstractt.TextFieldMoneda" name="tf_CostoPromedio">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -256,7 +248,6 @@
                     <Component class="abstractt.TextFieldMoneda" name="tf_UltimoCosto">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
@@ -527,7 +518,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel1">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -544,7 +535,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -561,7 +552,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -578,7 +569,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel4">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -595,7 +586,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -612,7 +603,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="12" style="0"/>
+                          <Font name="Trebuchet MS" size="12" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="54" red="5f" type="rgb"/>
@@ -673,7 +664,6 @@
                     </Component>
                     <Component class="abstractt.TextField" name="tf_DosisTratamiento">
                       <Properties>
-                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.0"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="12" style="0"/>

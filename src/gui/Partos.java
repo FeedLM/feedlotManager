@@ -138,6 +138,7 @@ public class Partos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura de Partos");
+        setPreferredSize(new java.awt.Dimension(525, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -160,7 +161,7 @@ public class Partos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(t_Parto);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 500, 200));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 500, 200));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
@@ -170,19 +171,19 @@ public class Partos extends javax.swing.JFrame {
         selectorFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha Nacimiento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel3.add(selectorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 115, 300, -1));
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Arete");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 50, 20));
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Sexo");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 50, 20));
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 84, 88));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Raza");
@@ -194,20 +195,20 @@ public class Partos extends javax.swing.JFrame {
         tf_Eid.setFocusable(false);
         jPanel3.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 160, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 150, 350, 230));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 150, 350, 230));
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 84, 88));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Arete Visual(Madre):");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 130, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 20));
 
         animalSelector1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 animalSelector1ActionPerformed(evt);
             }
         });
-        jPanel1.add(animalSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 150, 20));
+        jPanel1.add(animalSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 150, 20));
 
         etiqueta1.setBackground(new java.awt.Color(97, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -215,7 +216,7 @@ public class Partos extends javax.swing.JFrame {
         etiqueta1.setText("P a r t o s");
         etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 80));
+        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 80));
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N

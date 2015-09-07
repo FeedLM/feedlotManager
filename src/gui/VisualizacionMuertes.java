@@ -97,9 +97,7 @@ public class VisualizacionMuertes extends javax.swing.JInternalFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(32767, 20));
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Muertes");
-        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +111,7 @@ public class VisualizacionMuertes extends javax.swing.JInternalFrame {
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 80));
 
         jrb_hoy.setBackground(new java.awt.Color(255, 255, 255));
-        jrb_hoy.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jrb_hoy.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_hoy.setForeground(new java.awt.Color(97, 84, 88));
         jrb_hoy.setSelected(true);
         jrb_hoy.setText("Hoy");
@@ -127,7 +125,7 @@ public class VisualizacionMuertes extends javax.swing.JInternalFrame {
         jPanel1.add(jrb_hoy, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 100, 20));
 
         jrb_fecha.setBackground(new java.awt.Color(255, 255, 255));
-        jrb_fecha.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jrb_fecha.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_fecha.setForeground(new java.awt.Color(97, 84, 88));
         jrb_fecha.setText("Otra Fecha");
         jrb_fecha.setOpaque(false);
@@ -139,7 +137,7 @@ public class VisualizacionMuertes extends javax.swing.JInternalFrame {
         jPanel1.add(jrb_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, 100, 20));
 
         jrb_entre_fechas.setBackground(new java.awt.Color(255, 255, 255));
-        jrb_entre_fechas.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jrb_entre_fechas.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_entre_fechas.setForeground(new java.awt.Color(97, 84, 88));
         jrb_entre_fechas.setText("Entre Fechas");
         jrb_entre_fechas.setOpaque(false);
@@ -151,7 +149,7 @@ public class VisualizacionMuertes extends javax.swing.JInternalFrame {
         jPanel1.add(jrb_entre_fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 20));
 
         jrb_tagId.setBackground(new java.awt.Color(255, 255, 255));
-        jrb_tagId.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jrb_tagId.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_tagId.setForeground(new java.awt.Color(97, 84, 88));
         jrb_tagId.setText("Arete Visual");
         jrb_tagId.setOpaque(false);

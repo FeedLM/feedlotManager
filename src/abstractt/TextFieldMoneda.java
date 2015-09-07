@@ -32,8 +32,9 @@ public class TextFieldMoneda extends TextField {
             }
         });
         
-        setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        
         setText("$ 0.00");
+        setHorizontalAlignment(javax.swing.JTextField.CENTER);
         setFont(new java.awt.Font("Calibri", 0, 12));
     }
     
