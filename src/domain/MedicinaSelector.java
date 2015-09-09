@@ -39,5 +39,4 @@ public class MedicinaSelector extends ComboBox {
 
         return medicina;
     }
-
 }
