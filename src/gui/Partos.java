@@ -140,13 +140,14 @@ public class Partos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         animalSelector1 = new domain.AnimalSelector();
         etiqueta1 = new abstractt.Etiqueta();
+        fondo1 = new abstractt.fondo();
+        jPanel2 = new javax.swing.JPanel();
         btn_Agregar = new abstractt.Boton();
         btn_Eliminar = new abstractt.Boton();
-        fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura de Partos");
-        setPreferredSize(new java.awt.Dimension(525, 700));
+        setPreferredSize(new java.awt.Dimension(500, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -156,6 +157,7 @@ public class Partos extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(520, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         t_Parto.setForeground(new java.awt.Color(230, 225, 195));
@@ -239,6 +241,12 @@ public class Partos extends javax.swing.JFrame {
         etiqueta1.setOpaque(true);
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 80));
 
+        fondo1.setText("fondo1");
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         btn_Agregar.setText("Agregar");
         btn_Agregar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +254,7 @@ public class Partos extends javax.swing.JFrame {
                 btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 650, 100, 30));
+        jPanel2.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 100, 30));
 
         btn_Eliminar.setText("Eliminar");
         btn_Eliminar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
@@ -255,12 +263,11 @@ public class Partos extends javax.swing.JFrame {
                 btn_EliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 650, 100, 30));
+        jPanel2.add(btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 100, 30));
 
-        fondo1.setText("fondo1");
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 520, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -401,6 +408,7 @@ public class Partos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private domain.RazaSelector razaSelector1;

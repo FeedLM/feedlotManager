@@ -96,6 +96,7 @@ public class Emparejamiento extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -122,6 +123,7 @@ public class Emparejamiento extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
+        t_animales.setForeground(new java.awt.Color(230, 225, 195));
         t_animales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -139,7 +141,7 @@ public class Emparejamiento extends javax.swing.JFrame {
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Emparejamiento");
-        etiqueta1.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
+        etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 80));
 

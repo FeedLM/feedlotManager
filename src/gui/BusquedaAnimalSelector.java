@@ -54,7 +54,7 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
 
         setResizable(false);
 
-        fondo1.cargar(getSize());
+        fondo1.cargar(this.jPanel3.getSize());
 
         t_animales.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -160,7 +160,7 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
@@ -197,7 +197,6 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
         jLabel4.setText("Arete Siniiga:");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
 
-        tf_Eid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_Eid.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tf_Eid.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -236,6 +235,7 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 90));
 
+        t_animales.setForeground(new java.awt.Color(230, 225, 195));
         t_animales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -247,12 +247,12 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
         t_animales.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(t_animales);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 1000, 250));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 980, 250));
 
         fondo1.setText("fondo1");
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
