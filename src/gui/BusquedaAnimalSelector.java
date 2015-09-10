@@ -24,13 +24,13 @@ import javax.swing.JTable;
  *
  * @author Developer GAGS
  */
-public class BusquedaAnimalSelector extends javax.swing.JFrame { //
+public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.JFrame { //
 
     /**
      * Creates new form SalidaGanado tipo 1 todos 2 hembras
      */
     public BusquedaAnimalSelector(Desktop parent, Integer tipo) {
-//        super(parent, modal);
+        super(parent, true);
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);

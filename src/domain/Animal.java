@@ -9,11 +9,13 @@ import abstractt.Table;
 import static gui.Splash.formatoDateTime;
 import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
+import static gui.Login.gs_mensaje;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -539,6 +541,65 @@ public class Animal {
         return tabla;
     }
 
+    public static Table registrosEmpadre(Animal hembra, Table tabla) {
+
+        tabla = crearTablaRegistroEmpadre(tabla);
+
+        manejadorBD.consulta(""
+                + "SELECT   r.id_registro_empadre,  COALESCE(r.fecha,'1900-01-01 00:00'),\n"
+                + "         r.id_hembra,            r.id_semental,\n"
+                + "         s.arete_visual,         r.status_gestacional,\n"
+                + "         r.aborto,\n"
+                + "FROM     registro_empadre r, animal s\n"
+                + "WHERE    r.id_semental = s.id_animal"
+                + "AND      r.id_hembra    = '" + hembra.id_animal + "'");
+
+        manejadorBD.asignarTable(tabla);
+
+        return tabla;
+    }
+
+    private static Table crearTablaRegistroEmpadre(Table tabla) {
+
+        if (tabla == null) {
+
+            tabla = new Table();
+        }
+
+        String titulos[] = {
+            "id Registro Empadre", "Fecha", "id Hembra",
+            "id Semental", "Id Semental", "Status Gestacional",
+            "Aborto"};
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                titulos));
+
+        tabla.setTitulos(titulos);
+        tabla.cambiarTitulos();
+        tabla.setFormato(new int[]{
+            Table.letra, Table.fecha, Table.letra,
+            Table.letra, Table.letra, Table.letra, 
+            Table.letra});
+
+        int[] tamaños = new int[13];
+        tamaños[0] = 0;//id Registro Empadre
+        tamaños[1] = 80;//Fecha
+        tamaños[2] = 0;//id Hembra
+        tamaños[3] = 0;//id Semental
+        tamaños[4] = 0;//ID Semental
+        tamaños[5] = 80;//Status Gestacional
+        tamaños[6] = 80;//Aborto
+        tabla.tamañoColumna(tamaños);
+
+        tabla.ocultarcolumna(0);
+        tabla.ocultarcolumna(2);
+        tabla.ocultarcolumna(3);
+        tabla.ocultarcolumna(4);
+        
+        return tabla;
+    }
+
     public static ArrayList cargarEidsTodos() {
 
         ArrayList array = new ArrayList();
@@ -895,4 +956,25 @@ public class Animal {
         }
         return false;
     }
+
+    public boolean crearRegistroEmpadre() {
+
+        if (!this.sexo.descripcion.equals("Hembra")) {
+
+            JOptionPane.showMessageDialog(null, "el Animal no es Hembra", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+
+        manejadorBD.parametrosSP.agregarParametro(id_animal, "varIdHembra", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(this.semental.id_animal, "varIdSemental", "STRING", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call agregarRegistroEmpadre(?,?)}") == 0) {
+
+            return true;
+        }
+        return false;
+    }
 }
+

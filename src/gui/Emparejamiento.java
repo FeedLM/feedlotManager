@@ -262,8 +262,8 @@ public class Emparejamiento extends javax.swing.JFrame {
 
         hembra.semental = semental;
 
-        if (hembra.actualizar()) {
-
+        if (hembra.actualizar() && hembra.crearRegistroEmpadre()) {            
+            
             JOptionPane.showMessageDialog(this, "Se actualizó el animal Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
 
         } else {

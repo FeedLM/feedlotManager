@@ -29,6 +29,8 @@ public class Cria {
     public Date fecha_nacimiento;
     public Raza raza;
     public String   status;
+    public Double peso;
+    public String tipo_parto;
 
     public Cria() {
 
@@ -152,8 +154,11 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_nacimiento), "varFechaNacimiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(sexo.id_color.toString(), "varIdSexo", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(tipo_parto, "varTipoParto", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call agregarCria(?,?,?,?,?,?) }") == 0) {
+
+        if (manejadorBD.ejecutarSP("{ call agregarCria(?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         } else {
@@ -172,8 +177,10 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_nacimiento), "varFechaNacimiento", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(sexo.id_color.toString(), "varIdSexo", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(tipo_parto, "varTipoParto", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call actualizarCria(?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call actualizarCria(?,?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         } else {
@@ -197,5 +204,4 @@ public class Cria {
             return false;
         }
     }
-
 }
