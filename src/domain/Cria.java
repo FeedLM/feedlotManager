@@ -25,21 +25,22 @@ public class Cria {
     public Animal madre;
     public String id_cria;
     public String arete;
-    public Color sexo;//SEXO
+    public Sexo sexo;//SEXO
     public Date fecha_nacimiento;
     public Raza raza;
-    public String   status;
+    public String status;
     public Double peso;
-    public String tipo_parto;
+    public TipoParto tipo_parto;
 
     public Cria() {
 
         madre = new Animal();
         id_cria = "";
         arete = "";
-        sexo = new Color();
+        sexo = new Sexo();
         fecha_nacimiento = new Date();
         raza = new Raza();
+        tipo_parto = new TipoParto();
     }
 
     public void cargarPorIdCria(Integer AidCria) {
@@ -48,10 +49,11 @@ public class Cria {
                 + "SELECT   id_madre,           id_cria, \n"
                 + "         arete,              id_sexo,\n"
                 + "         fecha_nacimiento,   id_raza,\n"
-                + "         status \n"
+                + "         status,             peso\n"
+                + "         id_tipo_parto\n"
                 + "FROM     cria \n"
                 + "WHERE    cria.id_rancho = '" + rancho.id_rancho + "' \n"
-                + "AND      cria.id_cria = '" + AidCria+ "'");
+                + "AND      cria.id_cria = '" + AidCria + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -61,14 +63,15 @@ public class Cria {
 
     public void asignarValores() {
 
-        Integer id_color;
+        String id_sexo;
         String id_raza;
         String id_madre;
+        String id_tipo_parto;
 
         id_madre = manejadorBD.getValorString(0, 0);
         id_cria = manejadorBD.getValorString(0, 1);
         arete = manejadorBD.getValorString(0, 2);
-        id_color = manejadorBD.getValorInt(0, 3);
+        id_sexo = manejadorBD.getValorString(0, 3);
 
         try {
 
@@ -79,11 +82,14 @@ public class Cria {
         }
 
         id_raza = manejadorBD.getValorString(0, 5);
-        status  = manejadorBD.getValorString(0, 6);
+        status = manejadorBD.getValorString(0, 6);
+        peso = manejadorBD.getValorDouble(0, 7);
+        id_tipo_parto = manejadorBD.getValorString(0, 8);
 
         madre.cargarPorId(id_madre);
-        sexo.cargarPorId(id_color);
+        sexo.cargarPorId(id_sexo);
         raza.cargarPorId(id_raza);
+        tipo_parto.cargarPorId(id_tipo_parto);
     }
 
     public static Table leerCrias(Table tabla, Animal madre) {
@@ -91,13 +97,15 @@ public class Cria {
         tabla = crearTablaCrias(tabla);
 
         manejadorBD.consulta(""
-                + "SELECT   id_madre, id_cria, arete, fecha_nacimiento,\n"
-                + "         color_arete.descripcion sexo, raza.descripcion raza\n"
-                + "FROM     cria, color_arete, raza\n"
-                + "WHERE    cria.id_sexo    = color_arete.id_color\n"
+                + "SELECT   id_madre,   id_cria,    arete, \n"
+                + "         sexo.descripcion sexo, raza.descripcion raza,\n"
+                + "          DATE_FORMAT(fecha_nacimiento, '%Y/%m/%d'),   peso, tipo_parto.descripcion\n"
+                + "FROM     cria, sexo, raza, tipo_parto\n"
+                + "WHERE    cria.id_tipo_parto  =   tipo_parto.id_tipo_parto\n"
+                + "AND      cria.id_sexo    = sexo.id_sexo\n"
                 + "AND      cria.id_raza    = raza.id_raza \n"
                 + "AND      cria.id_rancho  = '" + rancho.id_rancho + "' \n"
-                + "AND      cria.id_madre   = '" + madre.id_animal+ "' \n"
+                + "AND      cria.id_madre   = '" + madre.id_animal + "' \n"
                 + "AND      cria.status     =   'A'");
 
         if (manejadorBD.getRowCount() > 0) {
@@ -121,7 +129,7 @@ public class Cria {
         }
 
         String titulos[] = {"Id Madre", "Id Cria", "arete", "Sexo",
-            "Fecha de Nacimiento", "Raza"};
+             "Raza", "Fecha de Nacimiento","Peso al Nacer", "Tipo de Parto"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -129,16 +137,26 @@ public class Cria {
 
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
-        tabla.setFormato(new int[]{tabla.numero_entero, tabla.numero_entero,
-            tabla.letra, tabla.letra, tabla.fecha, tabla.letra});
+        tabla.setFormato(new int[]{
+            tabla.letra,
+            tabla.letra,
+            tabla.letra,
+            tabla.letra,
+            tabla.fecha,
+            tabla.letra,
+            tabla.numero_double,
+            tabla.letra});
 
-        int[] tamaños = new int[6];
-        tamaños[0] = 80;//id Madre
-        tamaños[1] = 100;//id_cria
-        tamaños[2] = 80;//arete
-        tamaños[3] = 120;//sexo
-        tamaños[4] = 140;//fecha_de_Nacimiento
-        tamaños[5] = 120;//Raza
+        int[] tamaños = new int[]{
+            80,//id Madre
+            100,//id_cria
+            80,//arete
+            120,//sexo
+            140,//fecha_de_Nacimiento
+            120,//Raza
+            140,//peso al nacer
+            120//tipo de parto
+        };
 
         tabla.tamañoColumna(tamaños);
 
@@ -152,21 +170,20 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(madre.id_animal, "varIdMadre", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete, "varArete", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_nacimiento), "varFechaNacimiento", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(sexo.id_color.toString(), "varIdSexo", "INT", "IN");
+        manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(tipo_parto, "varTipoParto", "STRING", "IN");
-
+        manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarCria(?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         } else {
-            
+
             return false;
         }
     }
-    
+
     public boolean actualizar() {
 
         manejadorBD.parametrosSP = new ParametrosSP();
@@ -175,16 +192,16 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(id_cria, "varIdCria", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete, "varArete", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_nacimiento), "varFechaNacimiento", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(sexo.id_color.toString(), "varIdSexo", "INT", "IN");
+        manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(tipo_parto, "varTipoParto", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call actualizarCria(?,?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         } else {
-            
+
             return false;
         }
     }

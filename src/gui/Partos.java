@@ -35,7 +35,7 @@ public class Partos extends javax.swing.JFrame {
 
         // cargarParto();
         this.razaSelector1.cargarSeleccionar();
-        this.colorSelector1.cargar();
+        this.sexoSelector.cargar();
 
         cargarPuertos();
         /*
@@ -58,6 +58,8 @@ public class Partos extends javax.swing.JFrame {
         fondo1.cargar(jPanel1.getSize());
 
         tf_Peso.textFieldDouble();
+        
+        tipoPartoSelector.cargar();
     }
 
     public void cargarStick() {
@@ -82,7 +84,7 @@ public class Partos extends javax.swing.JFrame {
             cria.cargarPorIdCria(Integer.parseInt(t_Parto.getValueAt(fila, 1).toString()));
 
             this.tf_Eid.setText(cria.arete);
-            this.colorSelector1.setSelectedItem(cria.sexo.descripcion);
+            this.sexoSelector.setSelectedItem(cria.sexo.descripcion);
             this.razaSelector1.setSelectedItem(cria.raza.descripcion);
             this.selectorFecha.setFecha(cria.fecha_nacimiento);
 
@@ -129,11 +131,12 @@ public class Partos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         razaSelector1 = new domain.RazaSelector();
-        colorSelector1 = new domain.ColorSelector();
         tf_Eid = new abstractt.TextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tf_Peso = new abstractt.TextField();
+        tipoPartoSelector = new domain.TipoPartoSelector();
+        sexoSelector = new domain.SexoSelector();
         jLabel1 = new javax.swing.JLabel();
         animalSelector1 = new domain.AnimalSelector();
         etiqueta1 = new abstractt.Etiqueta();
@@ -194,7 +197,6 @@ public class Partos extends javax.swing.JFrame {
         jLabel5.setText("Tipo de Parto");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 20));
         jPanel3.add(razaSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, -1));
-        jPanel3.add(colorSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 160, -1));
         jPanel3.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 160, -1));
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -211,6 +213,8 @@ public class Partos extends javax.swing.JFrame {
 
         tf_Peso.setText("0.00");
         jPanel3.add(tf_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 160, -1));
+        jPanel3.add(tipoPartoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 160, -1));
+        jPanel3.add(sexoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 160, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 130, 350, 290));
 
@@ -266,9 +270,9 @@ public class Partos extends javax.swing.JFrame {
         cria.fecha_nacimiento = selectorFecha.getFecha();;
         cria.madre = animal;
         cria.raza.cargarPorDescripcion(razaSelector1.getSelectedItem().toString());
-        cria.sexo.cargarPorDescripcion(colorSelector1.getSelectedItem().toString());
+        cria.sexo = sexoSelector.getSexo(); //.  cargarPorDescripcion(sexoSelector.getSelectedItem().toString());
         cria.peso = tf_Peso.getDouble();
-//        cria.tipo_parto = cb_TipoParto.getSelectedItem().toString();
+        cria.tipo_parto = this.tipoPartoSelector.getTipoParto();
     }
 
     private void agregar() {
@@ -388,7 +392,6 @@ public class Partos extends javax.swing.JFrame {
     private abstractt.Boton btn_Agregar;
     private abstractt.Boton btn_Eliminar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private domain.ColorSelector colorSelector1;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.fondo fondo1;
     private javax.swing.JLabel jLabel1;
@@ -402,8 +405,10 @@ public class Partos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private domain.RazaSelector razaSelector1;
     private gui.SelectorFecha selectorFecha;
+    private domain.SexoSelector sexoSelector;
     private abstractt.Table t_Parto;
     private abstractt.TextField tf_Eid;
     private abstractt.TextField tf_Peso;
+    private domain.TipoPartoSelector tipoPartoSelector;
     // End of variables declaration//GEN-END:variables
 }

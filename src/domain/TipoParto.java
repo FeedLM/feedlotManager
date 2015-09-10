@@ -61,8 +61,7 @@ public class TipoParto {
         array.add("");
         manejadorBD.consulta(""
                 + "SELECT descripcion \n"
-                + "FROM   tipo_parto\n"
-                + "ORDER BY descripcion");
+                + "FROM   tipo_parto");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {
 

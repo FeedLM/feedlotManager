@@ -171,21 +171,21 @@ public class Seguridad extends abstractt.ClaseAbstracta {
         fechaActual = fecha.getTime();
 
         /**/
-        
+        /*
         Date fechaFinal = fecha.getTime();;
         try {
             fechaFinal = formatoDateTime.parse("2015-09-09 23:59");
         } catch (ParseException ex) {
             //Logger.getLogger(Seguridad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(fechaActual.after(fechaFinal)){
+  
+        if(fechaActual.after(fecha_ultima_corrida)){//fechaFinal)){
             return false;
         }
         return true;
-          
+*/          
         /**/
-        /*
+
         if (fechaActual.after(fecha_ultima_corrida) || fechaActual.equals(fecha_ultima_corrida)) {
 
             System.out.println("Fecha actual correcta");
@@ -194,7 +194,7 @@ public class Seguridad extends abstractt.ClaseAbstracta {
 
         System.out.println("fecha actual incorrecta");
         return false;
-*/
+
     }
 
     public static boolean pideContraseña() {

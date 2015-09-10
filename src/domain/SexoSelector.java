@@ -15,8 +15,11 @@ import abstractt.ComboBox;
  */
 public class SexoSelector extends ComboBox{
     
+    Sexo sexo;
+    
     public SexoSelector(){
         
+       
     }
     
     public void cargarTodos(){
@@ -27,5 +30,13 @@ public class SexoSelector extends ComboBox{
     public void cargar(){
         
         addArray(domain.Sexo.cargarSexo());        
+    }
+    
+    public Sexo getSexo(){
+        
+         sexo = new Sexo();
+         
+         sexo.cargarPorDescripcion(this.getSelectedItem().toString());
+         return sexo;
     }
 }
