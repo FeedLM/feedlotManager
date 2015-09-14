@@ -697,6 +697,29 @@ public class Animal {
 
         return array;
     }
+    
+    public static ArrayList cargararete_visualshembrasEmparejadas() {
+
+        ArrayList array = new ArrayList();
+
+        manejadorBD.consulta(""
+                + "SELECT arete_visual                    \n"
+                + "FROM   animal  LEFT OUTER JOIN sexo "
+                + "       ON animal.id_sexo = sexo.id_sexo, \n"
+                + "       corral_animal  \n"
+                + "WHERE  status = 'A' \n"
+                + "AND	  sexo.descripcion = 'Hembra'\n"
+                + "AND    COALESCE(animal.id_semental,'0') <> '0' \n"                
+                + "AND    animal.id_animal = corral_animal.id_animal \n"
+                + "AND    corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
+
+        for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+
+            array.add(manejadorBD.getValueAt(i, 0).toString());
+        }
+
+        return array;
+    }
 
     public static ArrayList cargArareteVisualStatus(String aStatus) {
 

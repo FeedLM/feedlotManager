@@ -60,6 +60,8 @@ public class Partos extends javax.swing.JFrame {
         tf_Peso.textFieldDouble();
         
         tipoPartoSelector.cargar();
+        
+       // animalSelector2.cargararete_visualshembrasEmparejadas();
     }
 
     public void cargarStick() {
@@ -122,6 +124,7 @@ public class Partos extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         t_Parto = new abstractt.Table();
@@ -144,6 +147,29 @@ public class Partos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btn_Agregar = new abstractt.Boton();
         btn_Eliminar = new abstractt.Boton();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        t_Parto1 = new abstractt.Table();
+        jPanel6 = new javax.swing.JPanel();
+        selectorFecha1 = new gui.SelectorFecha();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        razaSelector2 = new domain.RazaSelector();
+        tf_Eid1 = new abstractt.TextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        tf_Peso1 = new abstractt.TextField();
+        tipoPartoSelector1 = new domain.TipoPartoSelector();
+        sexoSelector1 = new domain.SexoSelector();
+        jLabel12 = new javax.swing.JLabel();
+        animalSelector2 = new domain.AnimalSelector();
+        etiqueta2 = new abstractt.Etiqueta();
+        fondo2 = new abstractt.fondo();
+        jPanel7 = new javax.swing.JPanel();
+        btn_Agregar1 = new abstractt.Boton();
+        btn_Eliminar1 = new abstractt.Boton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura de Partos");
@@ -267,7 +293,125 @@ public class Partos extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 520, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 700));
+        jTabbedPane1.addTab("P a r t o s", jPanel1);
+        jPanel1.getAccessibleContext().setAccessibleName("");
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(520, 750));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        t_Parto1.setForeground(new java.awt.Color(230, 225, 195));
+        t_Parto1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+            }
+        ));
+        jScrollPane3.setViewportView(t_Parto1);
+
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 500, 200));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
+        jPanel6.setOpaque(false);
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        selectorFecha1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha Nacimiento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
+        jPanel6.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 300, -1));
+
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Arete");
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 50, 20));
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Sexo");
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 50, 20));
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Tipo de Parto");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 20));
+        jPanel6.add(razaSelector2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, -1));
+        jPanel6.add(tf_Eid1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 160, -1));
+
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Raza");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 50, 20));
+
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Peso");
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 50, 20));
+
+        tf_Peso1.setText("0.00");
+        jPanel6.add(tf_Peso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 160, -1));
+        jPanel6.add(tipoPartoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 160, -1));
+        jPanel6.add(sexoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 160, -1));
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 130, 350, 290));
+
+        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Arete Visual(Madre):");
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 20));
+
+        animalSelector2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                animalSelector2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(animalSelector2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 150, 20));
+
+        etiqueta2.setBackground(new java.awt.Color(97, 84, 88));
+        etiqueta2.setForeground(new java.awt.Color(230, 225, 195));
+        etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiqueta2.setText("A b o r t o s");
+        etiqueta2.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
+        etiqueta2.setOpaque(true);
+        jPanel5.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 80));
+
+        fondo2.setText("fondo1");
+        jPanel5.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel7.setOpaque(false);
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Agregar1.setText("Agregar");
+        btn_Agregar1.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        btn_Agregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Agregar1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_Agregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 100, 30));
+
+        btn_Eliminar1.setText("Eliminar");
+        btn_Eliminar1.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        btn_Eliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Eliminar1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_Eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 100, 30));
+
+        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 520, 70));
+
+        jPanel4.add(jPanel5);
+
+        jTabbedPane1.addTab("A b o r t o s", jPanel4);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,6 +497,18 @@ public class Partos extends javax.swing.JFrame {
         eliminar();
     }//GEN-LAST:event_btn_EliminarActionPerformed
 
+    private void animalSelector2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animalSelector2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_animalSelector2ActionPerformed
+
+    private void btn_Agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Agregar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Agregar1ActionPerformed
+
+    private void btn_Eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Eliminar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Eliminar1ActionPerformed
+
     private void eliminar() {
 
         int opcion;
@@ -396,27 +552,51 @@ public class Partos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private domain.AnimalSelector animalSelector1;
+    private domain.AnimalSelector animalSelector2;
     private abstractt.Boton btn_Agregar;
+    private abstractt.Boton btn_Agregar1;
     private abstractt.Boton btn_Eliminar;
+    private abstractt.Boton btn_Eliminar1;
     private javax.swing.ButtonGroup buttonGroup1;
     private abstractt.Etiqueta etiqueta1;
+    private abstractt.Etiqueta etiqueta2;
     private abstractt.fondo fondo1;
+    private abstractt.fondo fondo2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private domain.RazaSelector razaSelector1;
+    private domain.RazaSelector razaSelector2;
     private gui.SelectorFecha selectorFecha;
+    private gui.SelectorFecha selectorFecha1;
     private domain.SexoSelector sexoSelector;
+    private domain.SexoSelector sexoSelector1;
     private abstractt.Table t_Parto;
+    private abstractt.Table t_Parto1;
     private abstractt.TextField tf_Eid;
+    private abstractt.TextField tf_Eid1;
     private abstractt.TextField tf_Peso;
+    private abstractt.TextField tf_Peso1;
     private domain.TipoPartoSelector tipoPartoSelector;
+    private domain.TipoPartoSelector tipoPartoSelector1;
     // End of variables declaration//GEN-END:variables
 }
