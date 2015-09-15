@@ -30,7 +30,7 @@ public class Cria {
     public Raza raza;
     public String status;
     public Double peso;
-    public TipoParto tipo_parto;
+   // public TipoParto tipo_parto;
 
     public Cria() {
 
@@ -40,7 +40,7 @@ public class Cria {
         sexo = new Sexo();
         fecha_nacimiento = new Date();
         raza = new Raza();
-        tipo_parto = new TipoParto();
+     //   tipo_parto = new TipoParto();
     }
 
     public void cargarPorIdCria(Integer AidCria) {
@@ -49,8 +49,7 @@ public class Cria {
                 + "SELECT   id_madre,           id_cria, \n"
                 + "         arete,              id_sexo,\n"
                 + "         fecha_nacimiento,   id_raza,\n"
-                + "         status,             peso\n"
-                + "         id_tipo_parto\n"
+                + "         status,             peso\n"       
                 + "FROM     cria \n"
                 + "WHERE    cria.id_rancho = '" + rancho.id_rancho + "' \n"
                 + "AND      cria.id_cria = '" + AidCria + "'");
@@ -66,7 +65,7 @@ public class Cria {
         String id_sexo;
         String id_raza;
         String id_madre;
-        String id_tipo_parto;
+     //   String id_tipo_parto;
 
         id_madre = manejadorBD.getValorString(0, 0);
         id_cria = manejadorBD.getValorString(0, 1);
@@ -84,12 +83,12 @@ public class Cria {
         id_raza = manejadorBD.getValorString(0, 5);
         status = manejadorBD.getValorString(0, 6);
         peso = manejadorBD.getValorDouble(0, 7);
-        id_tipo_parto = manejadorBD.getValorString(0, 8);
+      //  id_tipo_parto = manejadorBD.getValorString(0, 8);
 
         madre.cargarPorId(id_madre);
         sexo.cargarPorId(id_sexo);
         raza.cargarPorId(id_raza);
-        tipo_parto.cargarPorId(id_tipo_parto);
+        //tipo_parto.cargarPorId(id_tipo_parto);
     }
 
     public static Table leerCrias(Table tabla, Animal madre) {
@@ -173,7 +172,7 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
+        //manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarCria(?,?,?,?,?,?,?,?) }") == 0) {
 
@@ -195,7 +194,7 @@ public class Cria {
         manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso.toString(), "varPeso", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
+      //  manejadorBD.parametrosSP.agregarParametro(tipo_parto.id_tipo_parto, "varIdTipoParto", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call actualizarCria(?,?,?,?,?,?,?,?,?) }") == 0) {
 

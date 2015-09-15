@@ -163,7 +163,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
 
     private void btn_partosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_partosActionPerformed
         
-        partos = new Partos(parent);
+        partos = new PartosAbortos(parent);
         partos.setVisible(true);
     }//GEN-LAST:event_btn_partosActionPerformed
 
@@ -209,7 +209,7 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
 //        });
 //    }
     private Desktop parent;
-    Partos partos;
+    PartosAbortos partos;
     Sementales sementales;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

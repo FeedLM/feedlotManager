@@ -497,7 +497,7 @@ public class Desktop extends javax.swing.JFrame {
     public AdministracionAnimales administracionAnimales;
     public static BusquedaAnimalSelector busquedaAnimalSelector;
     public Sementales sementales;
-    public Partos partos;
+    public PartosAbortos partos;
     public AdministracionGrupos administracionGrupos;
     public MedicinasAnimalGrupo medicinasAnimalGrupo;
     public SalidaGanadoGrupo salidaGanadoGrupo;

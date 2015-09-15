@@ -29,6 +29,11 @@ public class AnimalSelector extends ComboBox {
 
         addArray(domain.Animal.cargararete_visualshembrasSinEmparejar());
     }
+    
+    public void cargararete_visualshembrasEmparejadas() {
+
+        addArray(domain.Animal.cargararete_visualshembrasEmparejadas());
+    }
 
     public void cargarTagsIdsSementales() {
 
