@@ -791,7 +791,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
     private void btn_RegistroEmpadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroEmpadreActionPerformed
-    
+
         registroEmpadre = new RegistroEmpadre(animalDetalle);
         registroEmpadre.setVisible(true);
     }//GEN-LAST:event_btn_RegistroEmpadreActionPerformed
@@ -1433,8 +1433,27 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 + "AND      D.id_animal	= '" + id_animal + "' \n"
                 + "ORDER BY fecha DESC LIMIT 1)))),2), 0)");
         if (manejadorBD.getRowCount() > 0) {
+            
+            System.out.println("Peso 1 "+manejadorBD.getValorString(0, 0));
+            
             tf_ganancia.setText(manejadorBD.getValorString(0, 0));
         }
+/*
+        manejadorBD.consulta(""
+                + "SELECT   ROUND((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),2) \n"
+                + "FROM     movimiento m, detalle_movimiento d, rancho r \n"
+                + "WHERE    m.id_rancho	=   r.id_rancho\n"
+                + "AND      m.id_concepto	=   r.con_pesaje\n"
+                + "AND      (   m.id_rancho     =   d.id_rancho\n"
+                + "         AND m.id_concepto   =   d.id_concepto\n"
+                + "         AND m.id_movimiento =   d.id_movimiento\n "
+                + "         AND d.id_animal     =   '" + id_animal + "')");
+        if (manejadorBD.getRowCount() > 0) {
+            
+            System.out.println("Peso 2 "+manejadorBD.getValorString(0, 0));
+            tf_ganancia.setText(manejadorBD.getValorString(0, 0));
+        }
+*/
     }
 
 }
