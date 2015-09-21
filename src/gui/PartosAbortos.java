@@ -62,8 +62,10 @@ public class PartosAbortos extends javax.swing.JFrame {
         tipoPartoSelector.cargar();
         tipoPartoSelector1.cargar();
 
-        animalSelector2.cargararete_visualshembrasEmparejadas();
+        HembrasEparejadasSelector.cargararete_visualshembrasEmparejadas();
+        HembrasEparejadasSelector1.cargararete_visualshembrasEmparejadas();
         tipoAbortoSelector1.cargar();
+        tipoPartoSelector2.cargar();
     }
 
     public void cargarStick() {
@@ -151,7 +153,7 @@ public class PartosAbortos extends javax.swing.JFrame {
         fondo1 = new abstractt.fondo();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        animalSelector2 = new domain.AnimalSelector();
+        HembrasEparejadasSelector = new domain.AnimalSelector();
         etiqueta2 = new abstractt.Etiqueta();
         jPanel7 = new javax.swing.JPanel();
         btn_Agregar1 = new abstractt.Boton();
@@ -161,6 +163,16 @@ public class PartosAbortos extends javax.swing.JFrame {
         selectorFecha1 = new gui.SelectorFecha();
         tipoAbortoSelector1 = new domain.TipoAbortoSelector();
         tipoPartoSelector1 = new domain.TipoPartoSelector();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        HembrasEparejadasSelector1 = new domain.AnimalSelector();
+        etiqueta3 = new abstractt.Etiqueta();
+        jPanel8 = new javax.swing.JPanel();
+        btn_Agregar2 = new abstractt.Boton();
+        fondo3 = new abstractt.fondo();
+        jLabel10 = new javax.swing.JLabel();
+        selectorFecha2 = new gui.SelectorFecha();
+        tipoPartoSelector2 = new domain.TipoPartoSelector();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura de Partos");
@@ -296,12 +308,12 @@ public class PartosAbortos extends javax.swing.JFrame {
         jLabel12.setText("Arete Visual(Madre):");
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 130, 20));
 
-        animalSelector2.addActionListener(new java.awt.event.ActionListener() {
+        HembrasEparejadasSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                animalSelector2ActionPerformed(evt);
+                HembrasEparejadasSelectorActionPerformed(evt);
             }
         });
-        jPanel5.add(animalSelector2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 160, 20));
+        jPanel5.add(HembrasEparejadasSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 160, 20));
 
         etiqueta2.setBackground(new java.awt.Color(97, 84, 88));
         etiqueta2.setForeground(new java.awt.Color(230, 225, 195));
@@ -347,26 +359,94 @@ public class PartosAbortos extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("A b o r t o s", jPanel5);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setPreferredSize(new java.awt.Dimension(520, 750));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Arete Visual(Madre):");
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 130, 20));
+
+        HembrasEparejadasSelector1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HembrasEparejadasSelector1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(HembrasEparejadasSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 160, 20));
+
+        etiqueta3.setBackground(new java.awt.Color(97, 84, 88));
+        etiqueta3.setForeground(new java.awt.Color(230, 225, 195));
+        etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiqueta3.setText("Status Gestación");
+        etiqueta3.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
+        etiqueta3.setOpaque(true);
+        jPanel6.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 80));
+
+        jPanel8.setOpaque(false);
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Agregar2.setText("Agregar");
+        btn_Agregar2.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
+        btn_Agregar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Agregar2ActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btn_Agregar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 100, 30));
+
+        jPanel6.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 400, 70));
+
+        fondo3.setText("fondo1");
+        jPanel6.add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(95, 84, 88));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Tipo de Parto:");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 140, 20));
+
+        selectorFecha2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
+        jPanel6.add(selectorFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 300, -1));
+        jPanel6.add(tipoPartoSelector2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 160, -1));
+
+        jTabbedPane1.addTab("Status Gestacion", jPanel6);
+
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargaNuevosDatosCria() {
-        cria.arete = tf_Eid.getText();;
-        cria.fecha_nacimiento = selectorFecha.getFecha();;
+
+        cria.arete = tf_Eid.getText();
+        cria.fecha_nacimiento = selectorFecha.getFecha();
         cria.madre = animal;
         cria.raza.cargarPorDescripcion(razaSelector1.getSelectedItem().toString());
-        cria.sexo = sexoSelector.getSexo(); //.  cargarPorDescripcion(sexoSelector.getSelectedItem().toString());
+        cria.sexo = sexoSelector.getSexo();
         cria.peso = tf_Peso.getDouble();
-     //   cria.tipo_parto = this.tipoPartoSelector.getTipoParto();
+        cria.tipo_parto =   this.tipoPartoSelector.getTipoParto();
     }
 
-    private void agregarAborto(){
-        
-        
+    private void agregarAborto() {
+
+        Animal animal;
+        animal = new Animal();
+        Date fecha;
+
+        fecha = this.selectorFecha1.getFecha();
+        animal = HembrasEparejadasSelector.getAnimal();
+
+        if (animal.agregarAborto(fecha)) {
+            
+            JOptionPane.showMessageDialog(this, "Se agrego el registro de Aborto Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error al agregar el registro de Aborto\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
+
     private void agregarParto() {
 
         //  Cria cria = new Cria(); 
@@ -438,13 +518,21 @@ public class PartosAbortos extends javax.swing.JFrame {
         eliminar();
     }//GEN-LAST:event_btn_EliminarActionPerformed
 
-    private void animalSelector2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animalSelector2ActionPerformed
+    private void HembrasEparejadasSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HembrasEparejadasSelectorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_animalSelector2ActionPerformed
+    }//GEN-LAST:event_HembrasEparejadasSelectorActionPerformed
 
     private void btn_Agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Agregar1ActionPerformed
         agregarAborto();
     }//GEN-LAST:event_btn_Agregar1ActionPerformed
+
+    private void HembrasEparejadasSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HembrasEparejadasSelector1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HembrasEparejadasSelector1ActionPerformed
+
+    private void btn_Agregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Agregar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Agregar2ActionPerformed
 
     private void eliminar() {
 
@@ -488,18 +576,24 @@ public class PartosAbortos extends javax.swing.JFrame {
     private Cria cria;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private domain.AnimalSelector HembrasEparejadasSelector;
+    private domain.AnimalSelector HembrasEparejadasSelector1;
     private domain.AnimalSelector animalSelector1;
-    private domain.AnimalSelector animalSelector2;
     private abstractt.Boton btn_Agregar;
     private abstractt.Boton btn_Agregar1;
+    private abstractt.Boton btn_Agregar2;
     private abstractt.Boton btn_Eliminar;
     private javax.swing.ButtonGroup buttonGroup1;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
+    private abstractt.Etiqueta etiqueta3;
     private abstractt.fondo fondo1;
     private abstractt.fondo fondo2;
+    private abstractt.fondo fondo3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -511,12 +605,15 @@ public class PartosAbortos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private domain.RazaSelector razaSelector1;
     private gui.SelectorFecha selectorFecha;
     private gui.SelectorFecha selectorFecha1;
+    private gui.SelectorFecha selectorFecha2;
     private domain.SexoSelector sexoSelector;
     private abstractt.Table t_Parto;
     private abstractt.TextField tf_Eid;
@@ -524,5 +621,6 @@ public class PartosAbortos extends javax.swing.JFrame {
     private domain.TipoAbortoSelector tipoAbortoSelector1;
     private domain.TipoPartoSelector tipoPartoSelector;
     private domain.TipoPartoSelector tipoPartoSelector1;
+    private domain.TipoPartoSelector tipoPartoSelector2;
     // End of variables declaration//GEN-END:variables
 }

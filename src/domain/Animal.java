@@ -49,6 +49,7 @@ public class Animal {
     public String es_semental;
     public Animal semental;
     public Raza raza;
+    public String id_registro_empadre;
 
     public Animal() {
 
@@ -282,7 +283,28 @@ public class Animal {
         sexo.cargarPorId(id_sexo);
         raza.cargarPorId(id_raza);
         corral.cargarPorAnimal(this);
+
+        if (sexo.descripcion.equals("Hembra") && !id_semental.equals("")) {
+            //Tiene emparejamiento
+            obtenerRegistroEmpadre();
+        }
     }
+    
+    public void obtenerRegistroEmpadre(){
+        
+        manejadorBD.consulta(""
+                + "SELECT id_registro_empadre\n"
+                + "FROM   registro_empadre \n"
+                + "WHERE  id_hembra = '" + id_animal + "'\n"
+                + "AND    activo    = 'S' ");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+    }
+            
+            
 
     public String toString() {
 
@@ -549,13 +571,18 @@ public class Animal {
                 + "SELECT   r.id_registro_empadre,  COALESCE(r.fecha,'1900-01-01 00:00'),\n"
                 + "         r.id_hembra,            r.id_semental,\n"
                 + "         s.arete_visual,         r.status_gestacional,\n"
-                + "         r.aborto,\n"
+                + "         r.aborto\n"
                 + "FROM     registro_empadre r, animal s\n"
-                + "WHERE    r.id_semental = s.id_animal"
+                + "WHERE    r.id_semental = s.id_animal\n"
                 + "AND      r.id_hembra    = '" + hembra.id_animal + "'");
 
         manejadorBD.asignarTable(tabla);
 
+        tabla.ocultarcolumna(0);
+        tabla.ocultarcolumna(2);
+        tabla.ocultarcolumna(3);
+
+        // tabla.setValueAt(true, 0, 6);
         return tabla;
     }
 
@@ -568,35 +595,51 @@ public class Animal {
 
         String titulos[] = {
             "id Registro Empadre", "Fecha", "id Hembra",
-            "id Semental", "Id Semental", "Status Gestacional",
+            "id Semental", "Semental", "Status Gestacional",
             "Aborto"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
-                titulos));
+                titulos
+        ) {
+            Class[] types = new Class[]{
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Boolean.class,
+                java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
 
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
             Table.letra, Table.fecha, Table.letra,
-            Table.letra, Table.letra, Table.letra, 
+            Table.letra, Table.letra, Table.letra,
             Table.letra});
 
-        int[] tamaños = new int[13];
-        tamaños[0] = 0;//id Registro Empadre
-        tamaños[1] = 80;//Fecha
-        tamaños[2] = 0;//id Hembra
-        tamaños[3] = 0;//id Semental
-        tamaños[4] = 0;//ID Semental
-        tamaños[5] = 80;//Status Gestacional
-        tamaños[6] = 80;//Aborto
+        int[] tamaños = new int[]{
+            0,//id Registro Empadre
+            80,//Fecha
+            0,//id Hembra
+            0,//id Semental
+            80,//ID Semental
+            80,//Status Gestacional
+            80//Aborto
+        };
+
         tabla.tamañoColumna(tamaños);
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(2);
-        tabla.ocultarcolumna(3);
-        tabla.ocultarcolumna(4);
-        
         return tabla;
     }
 
@@ -606,8 +649,8 @@ public class Animal {
 
         manejadorBD.consulta(""
                 + "SELECT   arete_electronico "
-                + "FROM     animal, corral_animal \n"
-                + "WHERE    animal.id_animal = corral_animal.id_animal \n"
+                + "FROM     animal, corral_animal   \n"
+                + "WHERE    animal.id_animal    =   corral_animal.id_animal \n"
                 + "AND      corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {
@@ -697,7 +740,7 @@ public class Animal {
 
         return array;
     }
-    
+
     public static ArrayList cargararete_visualshembrasEmparejadas() {
 
         ArrayList array = new ArrayList();
@@ -709,7 +752,7 @@ public class Animal {
                 + "       corral_animal  \n"
                 + "WHERE  status = 'A' \n"
                 + "AND	  sexo.descripcion = 'Hembra'\n"
-                + "AND    COALESCE(animal.id_semental,'0') <> '0' \n"                
+                + "AND    COALESCE(animal.id_semental,'0') <> '0' \n"
                 + "AND    animal.id_animal = corral_animal.id_animal \n"
                 + "AND    corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
 
@@ -999,5 +1042,19 @@ public class Animal {
         }
         return false;
     }
-}
 
+    public boolean agregarAborto(Date fecha) {
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+
+        manejadorBD.parametrosSP.agregarParametro(id_animal, "varIdHembra", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha), "varFecha", "STRING", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call agregarAborto(?,?)}") == 0) {
+
+            return true;
+        }
+        return false;
+
+    }
+}
