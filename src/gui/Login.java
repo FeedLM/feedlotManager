@@ -112,8 +112,7 @@ public class Login extends javax.swing.JFrame {
         setIconImage(i);
         // System.load("C:\\FeedLot\\libSerialPort.dll");
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);        
 
         jPanel2.setOpaque(false);
         /*

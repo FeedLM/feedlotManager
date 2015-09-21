@@ -7,6 +7,7 @@ import static domain.Medicina.cargarCodigoMedicinas;
 import static domain.Medicina.cargarMedicinas;
 import static domain.Medicina.leerMedicinaAnimal;
 import domain.ParametrosSP;
+import domain.TipoParto;
 import domain.Tratamiento;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
@@ -39,19 +40,16 @@ public class StatusGestacional extends javax.swing.JFrame {
         setIconImage(i);
         animal = aAnimal;
 
-        
-  
         //leerMedicinaAnimal(t_MedicinaAnimal, id_animal);
-
         tf_TagID.setText(animal.arete_visual.toString());
-
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
-
         cargarComponentes();
-        
+
         tipoPartoSelector.cargar();
+
+        System.out.println(animal.id_registro_empadre);
     }
 
     /**
@@ -72,9 +70,9 @@ public class StatusGestacional extends javax.swing.JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jLabel10 = new javax.swing.JLabel();
         tipoPartoSelector = new domain.TipoPartoSelector();
-        selectorFecha1 = new gui.SelectorFecha();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        selectorFecha = new gui.SelectorFecha();
+        jRB_Negativo = new javax.swing.JRadioButton();
+        jRB_Positivo = new javax.swing.JRadioButton();
         btn_RegistroEmpadre = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
 
@@ -121,33 +119,33 @@ public class StatusGestacional extends javax.swing.JFrame {
         jLabel10.setText("Tipo de Parto:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 140, 20));
         jPanel1.add(tipoPartoSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 160, -1));
-        jPanel1.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+        jPanel1.add(selectorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(64, 37, 4));
-        jRadioButton1.setText("Negativo:                        ");
-        jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton1.setOpaque(false);
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRB_Negativo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(jRB_Negativo);
+        jRB_Negativo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jRB_Negativo.setForeground(new java.awt.Color(64, 37, 4));
+        jRB_Negativo.setText("Negativo:                        ");
+        jRB_Negativo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jRB_Negativo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRB_Negativo.setOpaque(false);
+        jRB_Negativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jRB_NegativoActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 270, -1));
+        jPanel1.add(jRB_Negativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 270, -1));
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(64, 37, 4));
-        jRadioButton2.setSelected(true);
-        jRadioButton2.setText("Positivo:                        ");
-        jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton2.setOpaque(false);
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 300, -1));
+        jRB_Positivo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(jRB_Positivo);
+        jRB_Positivo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jRB_Positivo.setForeground(new java.awt.Color(64, 37, 4));
+        jRB_Positivo.setSelected(true);
+        jRB_Positivo.setText("Positivo:                        ");
+        jRB_Positivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jRB_Positivo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRB_Positivo.setOpaque(false);
+        jPanel1.add(jRB_Positivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 300, -1));
 
         btn_RegistroEmpadre.setText("Grabar");
         btn_RegistroEmpadre.setToolTipText("Estatus de Registro de Empadre Actual");
@@ -170,18 +168,45 @@ public class StatusGestacional extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
     }//GEN-LAST:event_formWindowClosing
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jRB_NegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRB_NegativoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jRB_NegativoActionPerformed
 
     private void btn_RegistroEmpadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroEmpadreActionPerformed
 
+        grabar();
     }//GEN-LAST:event_btn_RegistroEmpadreActionPerformed
+
+    private void grabar() {
+        
+        String status;
+        Date fecha;
+        TipoParto tipo_parto;
+
+        if (jRB_Positivo.isSelected()) {
+
+            status = "P";
+        } else {
+
+            status = "N";
+        }
+
+        fecha = selectorFecha.getFecha();
+        tipo_parto = this.tipoPartoSelector.getTipoParto();
+
+        if (animal.agregarStatusGestacional(animal.id_registro_empadre, status, fecha, tipo_parto)) {
+
+            JOptionPane.showMessageDialog(this, "Se agrego el status gestacional correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error al agregar el status gestacional\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void cargarComponentes() {
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -214,9 +239,9 @@ public class StatusGestacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private gui.SelectorFecha selectorFecha1;
+    private javax.swing.JRadioButton jRB_Negativo;
+    private javax.swing.JRadioButton jRB_Positivo;
+    private gui.SelectorFecha selectorFecha;
     private javax.swing.JTextField tf_TagID;
     private domain.TipoPartoSelector tipoPartoSelector;
     // End of variables declaration//GEN-END:variables

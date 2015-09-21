@@ -289,9 +289,9 @@ public class Animal {
             obtenerRegistroEmpadre();
         }
     }
-    
-    public void obtenerRegistroEmpadre(){
-        
+
+    public void obtenerRegistroEmpadre() {
+
         manejadorBD.consulta(""
                 + "SELECT id_registro_empadre\n"
                 + "FROM   registro_empadre \n"
@@ -300,11 +300,11 @@ public class Animal {
 
         if (manejadorBD.getRowCount() > 0) {
 
-            asignarValores();
+            this.id_registro_empadre = manejadorBD.getValorString(0, 0);
+        } else {
+            this.id_registro_empadre = "0";
         }
     }
-            
-            
 
     public String toString() {
 
@@ -1055,6 +1055,23 @@ public class Animal {
             return true;
         }
         return false;
+    }
+
+    public boolean agregarStatusGestacional(String id_registro_empadre, String status, Date fechaChequeda, TipoParto tipo_parto) {
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+
+        manejadorBD.parametrosSP.agregarParametro(id_registro_empadre, "varIdRegistroEmpadre", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(status, "varStatus", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fechaChequeda), "varFechaChequeo", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(tipo_parto.descripcion, "varIdTipoParto", "STRING", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call agregarStatusGestacion(?,?,?,?)}") == 0) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
+
 }
