@@ -244,7 +244,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(64, 37, 4));
-        jTabbedPane1.setForeground(new java.awt.Color(230, 225, 195));
+        jTabbedPane1.setForeground(new java.awt.Color(64, 37, 4));
         jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1000, 526));
 

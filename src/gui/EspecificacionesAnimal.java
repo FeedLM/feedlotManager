@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -1405,40 +1405,40 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void gananciaDiaria(String id_animal) {
-        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
-                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-                + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
-                + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
-                + "AND      D.id_animal	= '" + id_animal + "'\n"
-                + "ORDER BY fecha DESC LIMIT 1) - (SELECT Round(peso,2) \n"
-                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-                + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
-                + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
-                + "AND      D.id_animal	= '" + id_animal + "'\n"
-                + "ORDER BY fecha ASC LIMIT 1)) / (SELECT TIMESTAMPDIFF(DAY, (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
-                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-                + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
-                + "AND M.id_movimiento =   D.id_movimiento 	   \n"
-                + "AND M.id_concepto	=   D.id_concepto ) \n"
-                + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
-                + "AND M.id_rancho     =   r.id_rancho	) \n"
-                + "AND      D.id_animal	= '" + id_animal + "' \n"
-                + "ORDER BY fecha ASC LIMIT 1), (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
-                + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-                + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
-                + "AND M.id_movimiento =   D.id_movimiento 	   \n"
-                + "AND M.id_concepto	=   D.id_concepto ) \n"
-                + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
-                + "AND M.id_rancho     =   r.id_rancho	) \n"
-                + "AND      D.id_animal	= '" + id_animal + "' \n"
-                + "ORDER BY fecha DESC LIMIT 1)))),2), 0)");
-        if (manejadorBD.getRowCount() > 0) {
+        /*        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
+         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+         + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
+         + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
+         + "AND      D.id_animal	= '" + id_animal + "'\n"
+         + "ORDER BY fecha DESC LIMIT 1) - (SELECT Round(peso,2) \n"
+         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+         + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
+         + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
+         + "AND      D.id_animal	= '" + id_animal + "'\n"
+         + "ORDER BY fecha ASC LIMIT 1)) / (SELECT TIMESTAMPDIFF(DAY, (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
+         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+         + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
+         + "AND M.id_movimiento =   D.id_movimiento 	   \n"
+         + "AND M.id_concepto	=   D.id_concepto ) \n"
+         + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
+         + "AND M.id_rancho     =   r.id_rancho	) \n"
+         + "AND      D.id_animal	= '" + id_animal + "' \n"
+         + "ORDER BY fecha ASC LIMIT 1), (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
+         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
+         + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
+         + "AND M.id_movimiento =   D.id_movimiento 	   \n"
+         + "AND M.id_concepto	=   D.id_concepto ) \n"
+         + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
+         + "AND M.id_rancho     =   r.id_rancho	) \n"
+         + "AND      D.id_animal	= '" + id_animal + "' \n"
+         + "ORDER BY fecha DESC LIMIT 1)))),2), 0)");
+         if (manejadorBD.getRowCount() > 0) {
             
-            System.out.println("Peso 1 "+manejadorBD.getValorString(0, 0));
+         System.out.println("Peso 1 "+manejadorBD.getValorString(0, 0));
             
-            tf_ganancia.setText(manejadorBD.getValorString(0, 0));
-        }
-/*
+         tf_ganancia.setText(manejadorBD.getValorString(0, 0));
+         }
+         */
         manejadorBD.consulta(""
                 + "SELECT   ROUND((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),2) \n"
                 + "FROM     movimiento m, detalle_movimiento d, rancho r \n"
@@ -1449,11 +1449,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 + "         AND m.id_movimiento =   d.id_movimiento\n "
                 + "         AND d.id_animal     =   '" + id_animal + "')");
         if (manejadorBD.getRowCount() > 0) {
-            
-            System.out.println("Peso 2 "+manejadorBD.getValorString(0, 0));
+
+            System.out.println("Peso 2 " + manejadorBD.getValorString(0, 0));
             tf_ganancia.setText(manejadorBD.getValorString(0, 0));
         }
-*/
+
     }
 
 }

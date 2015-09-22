@@ -117,7 +117,6 @@ public class BajasMuerte extends javax.swing.JFrame {
         btn_Historico = new abstractt.Boton();
         tf_Eid = new abstractt.TextField();
         etiqueta1 = new abstractt.Etiqueta();
-        plecaSuperior1 = new abstractt.PlecaSuperior();
         fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -193,17 +192,14 @@ public class BajasMuerte extends javax.swing.JFrame {
         });
         jPanel2.add(btn_Historico, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 300, 125, 35));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, 400));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 400));
         jPanel1.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Información para dar de baja");
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
-        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1220, -1));
-
-        plecaSuperior1.setText("plecaSuperior1");
-        jPanel1.add(plecaSuperior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 60));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -282,7 +278,7 @@ public class BajasMuerte extends javax.swing.JFrame {
 //        setSize(pantallaTamano);
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
-        plecaSuperior1.cargar();
+//        plecaSuperior1.cargar();
         fondo1.cargar(pantallaTamano);
     }
 
@@ -307,7 +303,6 @@ public class BajasMuerte extends javax.swing.JFrame {
     private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private abstractt.PlecaSuperior plecaSuperior1;
     private abstractt.TextField tfDxMuerte;
     private abstractt.TextField tfEtapaReproductiva;
     private abstractt.TextField tfNecropcia;

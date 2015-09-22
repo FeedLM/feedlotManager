@@ -122,7 +122,7 @@ public class AdministracionConfiguracion extends javax.swing.JInternalFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(64, 37, 4));
-        jTabbedPane1.setForeground(new java.awt.Color(230, 225, 195));
+        jTabbedPane1.setForeground(new java.awt.Color(64, 37, 4));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);

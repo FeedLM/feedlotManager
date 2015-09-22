@@ -56,7 +56,7 @@ public class PartosAbortos extends javax.swing.JFrame {
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         fondo1.cargar(jPanel1.getSize());
-
+        fondo2.cargar(jPanel5.getSize());
         tf_Peso.textFieldDouble();
 
         tipoPartoSelector.cargar();
@@ -155,12 +155,12 @@ public class PartosAbortos extends javax.swing.JFrame {
         etiqueta2 = new abstractt.Etiqueta();
         jPanel7 = new javax.swing.JPanel();
         btn_Agregar1 = new abstractt.Boton();
-        fondo2 = new abstractt.fondo();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         selectorFecha1 = new gui.SelectorFecha();
         tipoAbortoSelector1 = new domain.TipoAbortoSelector();
         tipoPartoSelector1 = new domain.TipoPartoSelector();
+        fondo2 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura de Partos");
@@ -325,9 +325,6 @@ public class PartosAbortos extends javax.swing.JFrame {
 
         jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 400, 70));
 
-        fondo2.setText("fondo1");
-        jPanel5.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 84, 88));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -344,6 +341,9 @@ public class PartosAbortos extends javax.swing.JFrame {
         jPanel5.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 300, -1));
         jPanel5.add(tipoAbortoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 160, -1));
         jPanel5.add(tipoPartoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 160, -1));
+
+        fondo2.setText("fondo1");
+        jPanel5.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jTabbedPane1.addTab("A b o r t o s", jPanel5);
 

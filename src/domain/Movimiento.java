@@ -197,7 +197,7 @@ public class Movimiento {
         tabla = crearTablaPesos(tabla);
 
         String consulta = ""
-                + "SELECT   a.id_animal, a.arete_visual, a.arete_electronico, \n"
+                + "SELECT   a.id_animal, a.arete_visual, COALESCE(a.arete_electronico,''), \n"
                 + "         DATE_FORMAT(m.fecha, '%Y/%m/%d') fecha, \n"
                 + "         round(m.peso,2) peso, c.nombre \n"
                 + "FROM     movimiento m, detalle_movimiento d, animal a, \n"
