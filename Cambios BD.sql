@@ -10,13 +10,13 @@ USE `feedlotmanager`;
 
 DELIMITER $$
 
-DROP TRIGGER IF EXISTS feedlotmanager.cria_AUPD$$
+DROP TRIGGER IF EXISTS cria_AUPD$$
 USE `feedlotmanager`$$
 
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `feedlotmanager`.`cria_AUPD`
-AFTER UPDATE ON `feedlotmanager`.`cria`
+TRIGGER `cria_AUPD`
+AFTER UPDATE ON `cria`
 FOR EACH ROW
 BEGIN	
 
@@ -47,4 +47,3 @@ BEGIN
 	-- FTP
 END$$
 DELIMITER ;
-	

@@ -24,19 +24,20 @@ public class Movimiento {
         String consulta = ""
                 + "SELECT   a.id_animal, a.arete_visual, a.arete_electronico, m.codigo, m.nombre, \n"
                 + "         DATE_FORMAT(ma.fecha, '%Y/%m/%d') fecha, c.nombre, \n"
-                + "         round(ma.dosis,2) dosis , round(ma.costo,2) Costo_unitario, "
-                + "         round(ma.dosis * ma.costo ,2) importe \n"
+                + "         round(ma.dosis,2) dosis , round(rm.costo_promedio,2) costo, round(ma.dosis * rm.costo_promedio ,2) importe \n"
                 + "FROM     medicina_animal ma, animal a, medicina m, \n"
-                + "         corral_animal ca, corral c \n"
+                + "         corral_animal ca, corral c, rancho_medicina rm\n"
                 + "WHERE    ma.id_animal   = a.id_animal \n"
                 + "AND      ma.id_medicina = m.id_medicina \n"
                 + "AND      ca.id_rancho   = ma.id_rancho \n"
                 + "AND      ca.id_animal   = ma.id_animal \n"
                 + "AND      ma.id_rancho   = c.id_rancho \n"
                 + "AND      c.id_corral    = ca.id_corral \n"
+                + "AND     rm.id_medicina 	= 	m.id_medicina\n"
                 + "AND      a.status           =   'A' \n"
-                + "AND      ma.id_rancho     = '" + rancho.id_rancho + "' \n "
-                + "AND      c.id_corral        =   '" + corral.id_corral + "' \n";
+                + "AND      ma.id_rancho     = '" + rancho.id_rancho + "'\n"
+                + "AND 	rm.id_rancho 	=  '" + rancho.id_rancho + "'\n"
+                + "AND      c.id_corral        =   '" + corral.id_corral + "'";
 
         switch (tipo) {
             case 1://fecha
@@ -51,7 +52,7 @@ public class Movimiento {
                 consulta += "AND a.arete_visual = '" + animal.arete_visual + "' ";
         }
 
-        consulta += "ORDER BY ma.fecha";
+        consulta += "ORDER BY a.arete_visual";
 
         manejadorBD.consulta(consulta);
 
@@ -377,8 +378,8 @@ public class Movimiento {
                 + "AND    m.id_corral_origen  <> r.id_corral_hospital \n"
                 + "AND    m.id_corral_destino <> r.id_corral_hospital \n"
                 + "AND    m.id_rancho     = '" + rancho.id_rancho + "' \n"
-                + "AND (origen.nombre = '"+ corral.nombre +"' \n"
-                +" OR destino.nombre = '" + corral.nombre + "') \n";
+                + "AND (origen.nombre = '" + corral.nombre + "' \n"
+                + " OR destino.nombre = '" + corral.nombre + "') \n";
 
         switch (tipo) {
             case 1://Todo
