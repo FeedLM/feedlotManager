@@ -83,5 +83,11 @@ public class AnimalSelector extends ComboBox {
         return animal;
     }
 
+    public void setAnimal(Animal Aanimal){
+        
+        animal = Aanimal;
+        this.setSelectedItem(animal.arete_visual);        
+    }
+    
     public EspecificacionesAnimal especificacionesAnimal;
 }

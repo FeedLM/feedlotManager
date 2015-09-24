@@ -50,6 +50,7 @@ public class Animal {
     public Animal semental;
     public Raza raza;
     public String id_registro_empadre;
+    public Genealogia genealogia;
 
     public Animal() {
 
@@ -59,6 +60,7 @@ public class Animal {
         proveedor = new Proveedor();
         corral = new Corral();
         raza = new Raza();
+        genealogia = new Genealogia();
         //tipoGanado = new TipoGanado();
         //tipoMedicamento = new TipoMedicamento();
         // 
@@ -246,6 +248,8 @@ public class Animal {
             //Tiene emparejamiento
             obtenerRegistroEmpadre();
         }
+        
+        genealogia.cargarGenealogia(id_animal);
     }
 
     public void obtenerRegistroEmpadre() {
