@@ -31,6 +31,7 @@ public class Cria {
     public String status;
     public Double peso;
     public TipoParto tipo_parto;
+    public Animal animal;
 
     public Cria() {
 
@@ -41,6 +42,7 @@ public class Cria {
         fecha_nacimiento = new Date();
         raza = new Raza();
         tipo_parto = new TipoParto();
+        animal = new Animal();
     }
 
     public void cargarPorIdCria(Integer AidCria) {
@@ -50,10 +52,11 @@ public class Cria {
                 + "         arete,              id_sexo,\n"
                 + "         fecha_nacimiento,   id_raza,\n"
                 + "         status,             peso,   \n"
-                + "         id_tipo_parto   \n"       
-                + "FROM     cria \n"
-                + "WHERE    cria.id_rancho = '" + rancho.id_rancho + "' \n"
-                + "AND      cria.id_cria = '" + AidCria + "'");
+                + "         id_tipo_parto,      id_animal\n"
+                + "FROM     cria, animal \n"
+                + "WHERE    cria.id_animal = animal.id_animal\n"
+                + "AND      cria.id_rancho = '" + rancho.id_rancho + "' \n"
+                + "AND      cria.id_cria   = '" + AidCria + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -67,6 +70,7 @@ public class Cria {
         String id_raza;
         String id_madre;
         String id_tipo_parto;
+        String id_animal;
 
         id_madre = manejadorBD.getValorString(0, 0);
         id_cria = manejadorBD.getValorString(0, 1);
@@ -85,11 +89,13 @@ public class Cria {
         status = manejadorBD.getValorString(0, 6);
         peso = manejadorBD.getValorDouble(0, 7);
         id_tipo_parto = manejadorBD.getValorString(0, 8);
+        id_animal = manejadorBD.getValorString(0, 9);
 
         madre.cargarPorId(id_madre);
         sexo.cargarPorId(id_sexo);
         raza.cargarPorId(id_raza);
         tipo_parto.cargarPorId(id_tipo_parto);
+        animal.cargarPorId(id_animal);
     }
 
     public static Table leerCrias(Table tabla, Animal madre) {
@@ -99,10 +105,12 @@ public class Cria {
         manejadorBD.consulta(""
                 + "SELECT   id_madre,   id_cria,    arete, \n"
                 + "         sexo.descripcion sexo, raza.descripcion raza,\n"
-                + "          DATE_FORMAT(fecha_nacimiento, '%Y/%m/%d'),   peso, tipo_parto.descripcion\n"
+                + "         DATE_FORMAT(fecha_nacimiento, '%Y/%m/%d'),   peso, tipo_parto.descripcion,\n"
+                + "         cria.id_animal\n"
                 + "FROM     cria LEFT OUTER JOIN tipo_parto ON cria.id_tipo_parto  =   tipo_parto.id_tipo_parto,\n"
-                + "          sexo, raza \n"
-                + "WHERE    cria.id_sexo    = sexo.id_sexo\n"
+                + "         sexo, raza, animal\n"
+                + "WHERE    cria.id_animal  = animal.id_animal \n"
+                + "AND      cria.id_sexo    = sexo.id_sexo\n"
                 + "AND      cria.id_raza    = raza.id_raza \n"
                 + "AND      cria.id_rancho  = '" + rancho.id_rancho + "' \n"
                 + "AND      cria.id_madre   = '" + madre.id_animal + "' \n"
@@ -117,6 +125,7 @@ public class Cria {
 
         tabla.ocultarcolumna(0);
         tabla.ocultarcolumna(1);
+        tabla.ocultarcolumna(8);
 
         return tabla;
     }
@@ -129,7 +138,7 @@ public class Cria {
         }
 
         String titulos[] = {"Id Madre", "Id Cria", "arete", "Sexo",
-             "Raza", "Fecha de Nacimiento","Peso al Nacer", "Tipo de Parto"};
+            "Raza", "Fecha de Nacimiento", "Peso al Nacer", "Tipo de Parto", "id_animal"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -145,6 +154,7 @@ public class Cria {
             tabla.fecha,
             tabla.letra,
             tabla.numero_double,
+            tabla.letra,
             tabla.letra});
 
         int[] tamaños = new int[]{
@@ -155,7 +165,8 @@ public class Cria {
             140,//fecha_de_Nacimiento
             120,//Raza
             140,//peso al nacer
-            120//tipo de parto
+            120,//tipo de parto
+            0// id_animal
         };
 
         tabla.tamañoColumna(tamaños);

@@ -64,18 +64,24 @@ public class Animal {
         // 
     }
 
-    public void cargarPorId(String sId_animal) {
-
-        manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual, \n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña, \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote, \n"
-                + "       compra,                                       id_proveedor, \n"
+    public String selectInicial(){
+        
+        return "SELECT animal.id_animal,                             arete_visual, \n"
+                + "       COALESCE(arete_electronico,''),               COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
+                + "       COALESCE(arete_siniiga,''),                   COALESCE(arete_campaña,''), \n"
+                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), COALESCE(numero_lote,''), \n"
+                + "       COALESCE(compra,''),                          COALESCE(id_proveedor,''), \n"
                 + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
                 + "       COALESCE(peso_compra,0),                      status, \n"
                 + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'') \n "
+                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'') \n ";
+        
+    }
+    
+    public void cargarPorId(String sId_animal) {
+
+        manejadorBD.consulta(""
+                + selectInicial()
                 + "FROM   animal, corral_animal \n"
                 + "WHERE  animal.id_animal        = '" + sId_animal + "' \n"
                 + "AND    animal.id_animal        = corral_animal.id_animal \n"
@@ -90,15 +96,7 @@ public class Animal {
     public void cargarPorEid(String sEid) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE animal.status = 'A' \n"
                 + "AND   animal.arete_electronico    = '" + sEid + "' \n"
@@ -114,15 +112,7 @@ public class Animal {
     public void cargarPorAreteElectronicoStatus(String aAreteElectronico, String aStatus) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE animal.status = '" + aStatus + "' \n"
                 + "AND   animal.arete_electronico    = '" + aAreteElectronico + "' \n"
@@ -138,15 +128,7 @@ public class Animal {
     public void cargarPorEidTodosRanchos(String sEid) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+               + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE animal.status = 'A' \n"
                 + "AND   animal.arete_electronico    = '" + sEid + "' \n"
@@ -161,15 +143,7 @@ public class Animal {
     public void cargarPorAreteVisual(String aAreteVisual, String aStatus) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+               + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE    animal.arete_visual  = '" + aAreteVisual + "' \n"
                 + "AND      status  =   '" + aStatus + "'                    \n"
@@ -185,15 +159,7 @@ public class Animal {
     public void cargarPorAreteVisualTodos(String aAreteVisual) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+               + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE    animal.arete_visual  = '" + aAreteVisual + "' \n"
                 + "AND      animal.id_animal    =   corral_animal.id_animal \n"
@@ -208,15 +174,7 @@ public class Animal {
     public void cargarPorAreteSiniiga(String sSiniiga) {
 
         manejadorBD.consulta(""
-                + "SELECT animal.id_animal,                             arete_visual,\n"
-                + "       arete_electronico,                            COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       arete_siniiga,                                arete_campaña,   \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), numero_lote,\n"
-                + "       compra,                                       id_proveedor,\n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status,\n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'')    \n "
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE   animal.arete_siniiga  = '" + sSiniiga + "' \n"
                 + "AMD     animal.id_animal = corral_animal.id_animal \n"
@@ -968,8 +926,9 @@ public class Animal {
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
 
         manejadorBD.parametrosSP.agregarParametro("A", "varStatus", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro("", "varIdCria", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call agregarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call agregarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         }

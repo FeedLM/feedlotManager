@@ -205,6 +205,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         btn_pesoManual = new abstractt.Boton();
         btn_RegistroEmpadre = new abstractt.Boton();
         btn_BajasMuerte = new abstractt.Boton();
+        btn_Partos = new abstractt.Boton();
         pn_Peso = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -560,7 +561,19 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         });
         pn_botonesVerticales.add(btn_BajasMuerte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, -1));
 
-        jPanel3.add(pn_botonesVerticales, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
+        btn_Partos.setText("Historial Partos");
+        btn_Partos.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btn_Partos.setMaximumSize(new java.awt.Dimension(150, 30));
+        btn_Partos.setMinimumSize(new java.awt.Dimension(150, 30));
+        btn_Partos.setPreferredSize(new java.awt.Dimension(200, 30));
+        btn_Partos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PartosActionPerformed(evt);
+            }
+        });
+        pn_botonesVerticales.add(btn_Partos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 150, -1));
+
+        jPanel3.add(pn_botonesVerticales, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, 450));
 
         pn_Peso.setBackground(new java.awt.Color(255, 255, 255));
         pn_Peso.setOpaque(false);
@@ -795,6 +808,12 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         registroEmpadre = new RegistroEmpadre(animalDetalle);
         registroEmpadre.setVisible(true);
     }//GEN-LAST:event_btn_RegistroEmpadreActionPerformed
+
+    private void btn_PartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PartosActionPerformed
+
+        historialPartos = new HistorialPartos(animalDetalle, parent);
+        historialPartos.setVisible(true);
+    }//GEN-LAST:event_btn_PartosActionPerformed
 
     private boolean validacionCodigo;
 
@@ -1321,6 +1340,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private MedicinasAnimal medicinasAnimal;
     private BajasMuerte bajasMuerte;
     private RegistroEmpadre registroEmpadre;
+    private HistorialPartos historialPartos;
     private Hospital hospital;
     private String puertoStick;
     private String puertoBascula;
@@ -1335,6 +1355,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.Calendar JDc_FechaIngreso;
     private abstractt.Boton btn_BajasMuerte;
     private abstractt.Boton btn_Hospital;
+    private abstractt.Boton btn_Partos;
     private abstractt.Boton btn_RegistroEmpadre;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
@@ -1440,7 +1461,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
          }
          */
         manejadorBD.consulta(""
-                + "SELECT   ROUND((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),2) \n"
+                + "SELECT   ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)  \n"
                 + "FROM     movimiento m, detalle_movimiento d, rancho r \n"
                 + "WHERE    m.id_rancho	=   r.id_rancho\n"
                 + "AND      m.id_concepto	=   r.con_pesaje\n"
@@ -1450,7 +1471,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 + "         AND d.id_animal     =   '" + id_animal + "')");
         if (manejadorBD.getRowCount() > 0) {
 
-            System.out.println("Peso 2 " + manejadorBD.getValorString(0, 0));
+            System.out.println("Peso 2 " + manejadorBD.getValorDouble(0, 0));
             tf_ganancia.setText(manejadorBD.getValorString(0, 0));
         }
 
