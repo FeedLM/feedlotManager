@@ -1254,7 +1254,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
             this.jrb_esSemental.setEnabled(false);
             this.semental.setEnabled(false);
-
+            
+            this.animalSelectorMadre.setAnimal(animalDetalle.genealogia.madre);
+            this.animalSelectorPadre.setAnimal(animalDetalle.genealogia.padre);
+            
             if (animalDetalle.sexo.descripcion.equals("Macho")) {//es Macho
 
                 this.jrb_esSemental.setEnabled(true);
@@ -1263,13 +1266,14 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
                     this.jrb_esSemental.setSelected(true);
                 }
-
             } else {
                 this.semental.setEnabled(true);
 
                 if (animalDetalle.semental != null) {
+                    
                     this.semental.setSelectedItem(animalDetalle.semental.arete_visual);
                 } else {
+                    
                     this.semental.setSelectedItem("");
                 }
             }
@@ -1326,15 +1330,18 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         //String l_eid;
         //l_eid = EEid(id_animal);
         if (animalDetalle.arete_electronico.length() == 0) {
+            
             this.tf_AreteVisual.setText(animalDetalle.arete_visual);
             leerAreteVisual();
         } else {
+            
             this.tf_Eid.setText(animalDetalle.arete_electronico);
             leerEid();
         }
     }
 
     public void setEid(String AEid) {
+        
         corralSelector.addArray(cargarCorrales());
         this.tf_Eid.setText(AEid);
         leerEid();
@@ -1352,6 +1359,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void cargarComponentes() {
+        
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension pantallaTamano = tk.getScreenSize();
 //        setSize(pantallaTamano); /*Dar tamaño máximo a la pantalla*/
@@ -1449,6 +1457,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
      * @param consulta the consulta to set
      */
     public void setConsulta(boolean consulta) {
+        
         this.consulta = consulta;
     }
 
@@ -1459,6 +1468,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void gananciaDiaria(String id_animal) {
+        
         /*        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
          + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
          + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
@@ -1502,12 +1512,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 + "         AND m.id_concepto   =   d.id_concepto\n"
                 + "         AND m.id_movimiento =   d.id_movimiento\n "
                 + "         AND d.id_animal     =   '" + id_animal + "')");
+        
         if (manejadorBD.getRowCount() > 0) {
 
             System.out.println("Peso 2 " + manejadorBD.getValorDouble(0, 0));
             tf_ganancia.setText(manejadorBD.getValorString(0, 0));
         }
-
     }
-
 }

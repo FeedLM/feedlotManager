@@ -23,15 +23,15 @@ public class AnimalSelector extends ComboBox {
     Animal animal;
 
     public AnimalSelector() {
-        
+
         /**
          * 2015-09-22
          *
-         * Al dar doble Click sobre cualquier animal selector
-         * abrira su kardex
-         * 
+         * Al dar doble Click sobre cualquier animal selector abrira su kardex
+         *
          * Falta ponerle el parent si se va a usar el baston y/o bascula
-        **/
+        *
+         */
         Component[] comps = getComponents();
         for (int i = 0; i < comps.length; i++) {
             comps[i].addMouseListener(new MouseAdapter() {
@@ -77,17 +77,20 @@ public class AnimalSelector extends ComboBox {
     }
 
     public Animal getAnimal() {
-        
+
         animal = new Animal();
         animal.cargarPorAreteVisual(this.getSelectedItem().toString(), "A");
         return animal;
     }
 
-    public void setAnimal(Animal Aanimal){
-        
-        animal = Aanimal;
-        this.setSelectedItem(animal.arete_visual);        
+    public void setAnimal(Animal Aanimal) {
+
+        if (Aanimal != null) {
+
+            animal = Aanimal;
+            this.setSelectedItem(animal.arete_visual);
+        }
     }
-    
+
     public EspecificacionesAnimal especificacionesAnimal;
 }
