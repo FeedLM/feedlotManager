@@ -116,10 +116,10 @@ public class Cria {
                 + "AND      cria.id_madre   = '" + madre.id_animal + "' \n"
                 + "AND      cria.status     =   'A'");
 
-        if (manejadorBD.getRowCount() > 0) {
+       // if (manejadorBD.getRowCount() > 0) {
 
             manejadorBD.asignarTable(tabla);
-        }
+        //}
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
 

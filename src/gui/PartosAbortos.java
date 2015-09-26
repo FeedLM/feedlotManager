@@ -31,7 +31,8 @@ public class PartosAbortos extends javax.swing.JFrame {
         animal = new Animal();
 
 //        parent = Aparent;
-        this.animalSelector1.cargararete_visuals();
+        animalSelector1.cargararete_visualshembrasEmparejadas();
+        HembrasEparejadasSelector.cargararete_visualshembrasEmparejadas();
 
         // cargarParto();
         this.razaSelector1.cargarSeleccionar();
@@ -62,7 +63,6 @@ public class PartosAbortos extends javax.swing.JFrame {
         tipoPartoSelector.cargar();
         tipoPartoSelector1.cargar();
 
-        HembrasEparejadasSelector.cargararete_visualshembrasEmparejadas();        
         tipoAbortoSelector1.cargar();
     }
 
@@ -360,7 +360,7 @@ public class PartosAbortos extends javax.swing.JFrame {
         cria.raza.cargarPorDescripcion(razaSelector1.getSelectedItem().toString());
         cria.sexo = sexoSelector.getSexo();
         cria.peso = tf_Peso.getDouble();
-        cria.tipo_parto =   this.tipoPartoSelector.getTipoParto();
+        cria.tipo_parto = this.tipoPartoSelector.getTipoParto();
     }
 
     private void agregarAborto() {
@@ -373,7 +373,7 @@ public class PartosAbortos extends javax.swing.JFrame {
         animal = HembrasEparejadasSelector.getAnimal();
 
         if (animal.agregarAborto(fecha)) {
-            
+
             JOptionPane.showMessageDialog(this, "Se agrego el registro de Aborto Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
         } else {
 
@@ -425,14 +425,14 @@ public class PartosAbortos extends javax.swing.JFrame {
 
         id_animal = this.animalSelector1.getSelectedItem().toString();
 
-        if (!id_animal.equals("")) {
+      //  if (!id_animal.equals("")) {
 
             animal.cargarPorAreteVisual(id_animal, "A");
 
-            leerCrias(t_Parto, animal);
+        //}
+        leerCrias(t_Parto, animal);
+        cria = new Cria();
 
-            cria = new Cria();
-        }
     }
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

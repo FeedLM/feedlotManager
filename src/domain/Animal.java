@@ -444,6 +444,7 @@ public class Animal {
                 + "AND   sexo.descripcion                 = 'Hembra'\n"
                 + "AND   ( COALESCE(animal.id_semental,'0') = '0' \n"
                 + "       OR animal.id_semental = '' ) \n"
+                + "AND   animal.es_vientre  =   'S'\n"
                 + "AND   corral.id_rancho                 = '" + rancho.id_rancho + "'\n"
                 + "/*Consulta de Todas las Hembras sin Emparejar*/");
 
@@ -708,6 +709,8 @@ public class Animal {
 
         ArrayList array = new ArrayList();
 
+        array.add("");
+        
         manejadorBD.consulta(""
                 + "SELECT   arete_visual                    \n"
                 + "FROM     animal  LEFT OUTER JOIN sexo "
@@ -718,6 +721,7 @@ public class Animal {
                 + "AND   ( COALESCE(animal.id_semental,'0') = '0' \n"
                 + "       OR animal.id_semental = '' ) \n"
                 + "AND      animal.id_animal = corral_animal.id_animal \n"
+                + "AND      animal.es_vientre = 'S' "
                 + "AND      corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {
@@ -731,6 +735,8 @@ public class Animal {
     public static ArrayList cargararete_visualshembrasEmparejadas() {
 
         ArrayList array = new ArrayList();
+        
+        array.add("");
 
         manejadorBD.consulta(""
                 + "SELECT arete_visual                    \n"
@@ -740,7 +746,8 @@ public class Animal {
                 + "WHERE  status = 'A' \n"
                 + "AND	  sexo.descripcion = 'Hembra'\n"
                 + "AND    COALESCE(animal.id_semental,'0') <> '0' \n"
-                + "AND    animal.id_animal = corral_animal.id_animal \n"
+                + "AND    animal.id_animal = corral_animal.id_animal\n"
+                + "AND    es_vientre    =   'S'   \n"
                 + "AND    corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {

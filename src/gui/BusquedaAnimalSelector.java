@@ -325,7 +325,10 @@ public class BusquedaAnimalSelector extends javax.swing.JDialog {//javax.swing.J
         //id_animal = Integer.parseInt(tagIdSelector.getSelectedItem().toString());
         animal.cargarPorAreteVisual(animalSelector.getSelectedItem().toString(), "A");
 
-        cargarDatosTag();
+        if (!animal.id_animal.equals("")) {
+
+            cargarDatosTag();
+        }
     }//GEN-LAST:event_animalSelectorActionPerformed
 
     private void tf_areteSiniigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_areteSiniigaActionPerformed

@@ -45,6 +45,7 @@ public class Emparejamiento extends javax.swing.JFrame {
         setResizable(false);
 
         fondo1.cargar(getSize());
+        animalSelector.setSelectedItem(semental.arete_visual);
 
     }
 

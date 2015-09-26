@@ -358,7 +358,7 @@ public class ManejadorBD extends AbstractTableModel {
         }
 
         if (muestraSQL) {
-            System.out.println("SQL: " + consulta);
+            System.out.println("\nSQL: " + consulta);
         }
 
         sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);//ResultSet.CONCUR_READ_ONLY);
