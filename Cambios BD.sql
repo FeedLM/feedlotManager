@@ -64,7 +64,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarAnimal`(
 	varNumeroLote	CHAR(255),		varPesoCompra		DECIMAL(20,4),	
 	varIdSexo		CHAR(36),		varFechaIngreso		DATETIME,
 	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),
-	varAreteSiniiga	CHAR(255),		varAreteCampaña		CHAR(255),
+	varAreteSiniiga	CHAR(255),		varAreteCampaï¿½a		CHAR(255),
 	varPesoActual	DECIMAL(20,4),	varTemperatura		DECIMAL(20,4),
 	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),
 	varIdRaza		CHAR(36),		varStatus			CHAR(1),
@@ -77,7 +77,7 @@ BEGIN
 		peso_compra			=	varPesoCompra,			id_sexo			=	varIdSexo,
 		fecha_ingreso		=	varFechaIngreso,		arete_visual	=	varAreteVisual,
 		arete_electronico	=	varAreteElectronico,	arete_siniiga	=	varAreteSiniiga,
-		arete_campaña		=	varAreteCampaña,		peso_actual		=	varPesoActual,
+		arete_campaï¿½a		=	varAreteCampaï¿½a,		peso_actual		=	varPesoActual,
 		temperatura			=	varTemperatura,			es_semental		=	varEsSemental,
 		id_semental			=	varIdSemental,			id_raza			=	varIdRaza,
 		status				=	varStatus,				es_vientre		=	varEsVientre		
@@ -101,7 +101,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarAnimal`(
 	varFechaCompra	DATETIME,		varCompra			CHAR(255),		varNumeroLote	CHAR(255),
 	varPesoCompra	DECIMAL(20,4),	varIdSexo			CHAR(36),		varFechaIngreso	DATETIME,
 	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),		varAreteSiniiga	CHAR(255),
-	varAreteCampaña	CHAR(255),		varPesoActual		DECIMAL(20,4),	varTemperatura	DECIMAL(20,4),
+	varAreteCampaï¿½a	CHAR(255),		varPesoActual		DECIMAL(20,4),	varTemperatura	DECIMAL(20,4),
 	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),		varIdRaza		CHAR(36),
 	varStatus		CHAR(1),		varIdCria			CHAR(36),		varEsVientre	CHAR(1))
 BEGIN
@@ -118,13 +118,13 @@ BEGIN
     INSERT animal
     (	id_animal,		id_proveedor,		fecha_compra,	compra,
 		numero_lote,	peso_compra,		id_sexo,		fecha_ingreso,
-		arete_visual,	arete_electronico,	arete_siniiga,	arete_campaña,
+		arete_visual,	arete_electronico,	arete_siniiga,	arete_campaï¿½a,
 		peso_actual,	temperatura,		es_semental,	id_semental,
 		id_raza,		status,				es_vientre)
     SELECT
 		varIdAnimal,	varIdProveedor,			varFechaCompra,		varCompra,
 		varNumeroLote,	varPesoCompra,			varIdSexo,			varFechaIngreso,
-		varAreteVisual,	varAreteElectronico,	varAreteSiniiga,	varAreteCampaña,
+		varAreteVisual,	varAreteElectronico,	varAreteSiniiga,	varAreteCampaï¿½a,
 		varPesoActual,	varTemperatura,			varEsSemental,		varIdSemental,		
 		varIdRaza,		varStatus,				varEsVientre;
 
@@ -187,4 +187,101 @@ END$$
 
 DELIMITER ;
 
+--2015-09-26
+ALTER TABLE `feedlotmanager`.`movimiento` 
+CHANGE COLUMN `id_cliente` `id_cliente` CHAR(36) NULL DEFAULT NULL ;
 
+--2015-09-26
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `movimientoSalidaGrupo`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `movimientoSalidaGrupo`(	
+	varIdRancho 			CHAR(36),	varFechaSalida	DATETIME,
+	varIdClaseMovimiento	CHAR(255),	varNumeroPedido	CHAR(255),
+	varIdCliente			CHAR(255),		varPesoActual	DECIMAL(20,4),
+	varIdUsuario			CHAR(36))
+BEGIN
+	
+	DECLARE varIdAnimal,		varIdCorralOrigen,
+			varIdDetalle,		varConceptoMovimiento,	
+            varIdMovimiento		CHAR(36);
+
+	DECLARE varPesoProrrateado	DECIMAL(20,4);
+
+	DECLARE vb_termina BOOL DEFAULT FALSE;
+	
+	DECLARE cur_animales CURSOR
+	FOR	SELECT	animal_grupo.id_animal,	id_corral                                
+		FROM	animal_grupo, corral_animal
+		WHERE	animal_grupo.id_animal	=	corral_animal.id_animal
+        AND		animal_grupo.id_rancho	=	varIdRancho
+		AND		id_usuario				=	varIdUsuario		
+		AND		tipo					=	'salida';
+
+	DECLARE CONTINUE HANDLER 
+	FOR SQLSTATE '02000'
+	SET vb_termina = TRUE;	
+
+	SELECT (varPesoActual	/	(	SELECT COUNT(*)
+									FROM	animal_grupo
+									WHERE	id_rancho 	=	varIdRancho
+									AND		id_usuario	=	varIdUsuario		
+									AND		tipo		=	'salida') )
+	INTO	varPesoProrrateado;
+
+	SELECT	con_salida
+	INTO	varConceptoMovimiento
+	FROM	rancho
+	WHERE 	id_rancho	=	varIdRancho;
+
+	OPEN cur_animales;
+
+	Recorre_Cursor: LOOP
+		
+		FETCH cur_animales INTO varIdAnimal, varIdCorralOrigen;
+
+		IF vb_termina THEN
+        
+            LEAVE Recorre_Cursor;
+        END IF;
+
+		SELECT UUID()
+        INTO varIdMovimiento;    
+
+		CALL insertarMovimiento(varIdRancho,		varIdMovimiento,	varConceptoMovimiento,	
+								varFechaSalida,		NULL,				varIdCorralOrigen,	
+                                NULL,				NULL,				varIdClaseMovimiento,
+                                varNumeroPedido,	varIdCliente,		NULL,	
+                                NULL,				NULL,				NULL,	
+                                NULL,				varPesoProrrateado);
+
+		CALL insertarDetalleMovimiento(	varIdRancho,	varIdMovimiento,	varConceptoMovimiento,	varIdAnimal);
+
+	-- Se inserta porque el movimiento genera un cambio de corral
+		IF NOT EXISTS (SELECT * FROM corral_animal WHERE id_rancho = varIdRancho AND id_corral = varIdCorralOrigen AND id_animal = varIdAnimal)
+		THEN
+       
+			INSERT INTO corral_animal
+			SELECT varIdRancho, varIdCorralOrigen, varIdAnimal;
+		END IF;
+
+		UPDATE animal
+		SET		status		=	'V',
+				peso_actual	=	varPesoProrrateado
+		WHERE 	id_animal	=	varIdAnimal;
+
+	END LOOP;
+  	CLOSE cur_animales;
+
+	DELETE	FROM	animal_grupo
+			WHERE	id_rancho 	=	varIdRancho
+			AND		id_usuario	=	varIdUsuario
+			AND		tipo		=	'salida';
+
+END$$
+
+DELIMITER ;
+
+--

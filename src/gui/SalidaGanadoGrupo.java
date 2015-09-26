@@ -13,6 +13,7 @@ import domain.AnimalGrupo;
 import static domain.ClaseMovimiento.cargarClaseMovimiento;
 import static domain.ClaseMovimiento.idClaseDescripcion;
 import static domain.Cliente.cliente;
+import static domain.Cliente.idCliente;
 import domain.ParametrosSP;
 import domain.SR232;
 import static gui.Desktop.manejadorBD;
@@ -241,7 +242,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
 
         fecha = this.calendar1.getDate();
         idClaseMovimiento = idClaseDescripcion(this.claseMovimientoSelector.getSelectedItem().toString());
-        id_cliente = cliente(this.clienteSelector1.getSelectedItem().toString());
+        id_cliente = idCliente(this.clienteSelector1.getSelectedItem().toString());
         numeroPedido = tf_numeroPedido.getText();
         peso_actual = this.tf_pesoActual.getDouble();
 
@@ -252,7 +253,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         manejadorBD.parametrosSP.agregarParametro(formatoDelTexto.format(fecha), "varFechaSalida", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(idClaseMovimiento.toString(), "varIdClaseMovimiento", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(numeroPedido, "varNumeroPedido", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(id_cliente.toString(), "varIdCliente", "INT", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_cliente, "varIdCliente", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso_actual.toString(), "varPesoActual", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(usuario_activo.id_usuario, "varIdUsuario", "STRING", "IN");
 
@@ -340,7 +341,7 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
     String puertoStick, puertoBascula;
     private SR232 stick;
     private Integer idClaseMovimiento;
-    private Integer id_cliente;
+    private String id_cliente;
     private ReporteSalidas reporteSalidas;
     private VisualizacionSalidaGanado visualizacionSalidaGanado;
     private Integer id_animal;

@@ -159,7 +159,7 @@ public class Cliente {
         return "";
     }
 
-    public static Integer cliente(String cliente) {
+    public static String idCliente(String cliente) {
 
         manejadorBD.consulta(""
                 + "SELECT id_cliente "
@@ -170,10 +170,10 @@ public class Cliente {
 
         if (manejadorBD.getColumnCount() > 0) {
 
-            return manejadorBD.getValorInt(0, 0);
+            return manejadorBD.getValorString(0, 0);
         }
 
-        return 0;
+        return "";
     }
 
     public static void cargarClientes(Table tabla) {

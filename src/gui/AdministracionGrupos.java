@@ -266,6 +266,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel17 = new javax.swing.JLabel();
         panelGrafica = new javax.swing.JPanel();
         botonesHoriz = new javax.swing.JPanel();
+        boton1 = new abstractt.Boton();
         btn_reporteCorral = new abstractt.Boton();
         btn_reporteEntradas = new abstractt.Boton();
         btn_cargarArchivo = new abstractt.Boton();
@@ -469,6 +470,12 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         panelGrafica.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 400, 220));
 
+        botonesHoriz.setOpaque(false);
+
+        boton1.setText("Cierre");
+        boton1.setPreferredSize(new java.awt.Dimension(69, 45));
+        botonesHoriz.add(boton1);
+
         btn_reporteCorral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte corral.png"))); // NOI18N
         btn_reporteCorral.setToolTipText("Reporte de Corral");
         btn_reporteCorral.addActionListener(new java.awt.event.ActionListener() {
@@ -505,7 +512,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         });
         botonesHoriz.add(btn_detalles);
 
-        jPanel6.add(botonesHoriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 325, -1, -1));
+        jPanel6.add(botonesHoriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 330, -1, -1));
 
         botonesVert.setOpaque(false);
         botonesVert.setPreferredSize(new java.awt.Dimension(80, 300));
@@ -1134,6 +1141,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.Boton boton1;
     private javax.swing.JPanel botonesHoriz;
     private javax.swing.JPanel botonesVert;
     private abstractt.Boton btn_Actualizar;
