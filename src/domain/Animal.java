@@ -51,6 +51,7 @@ public class Animal {
     public Raza raza;
     public String id_registro_empadre;
     public Genealogia genealogia;
+    public String es_vientre;
 
     public Animal() {
 
@@ -69,14 +70,15 @@ public class Animal {
     public String selectInicial(){
         
         return "SELECT animal.id_animal,                             arete_visual, \n"
-                + "       COALESCE(arete_electronico,''),               COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
-                + "       COALESCE(arete_siniiga,''),                   COALESCE(arete_campaña,''), \n"
-                + "       COALESCE(fecha_compra,'1900-01-01 00:00:00'), COALESCE(numero_lote,''), \n"
-                + "       COALESCE(compra,''),                          COALESCE(id_proveedor,''), \n"
-                + "       COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
-                + "       COALESCE(peso_compra,0),                      status, \n"
-                + "       COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
-                + "       COALESCE(animal.id_sexo,''),                    COALESCE(id_raza,'') \n ";
+                + "    COALESCE(arete_electronico,''),               COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
+                + "    COALESCE(arete_siniiga,''),                   COALESCE(arete_campaña,''), \n"
+                + "    COALESCE(fecha_compra,'1900-01-01 00:00:00'), COALESCE(numero_lote,''), \n"
+                + "    COALESCE(compra,''),                          COALESCE(id_proveedor,''), \n"
+                + "    COALESCE(peso_actual,0),                      COALESCE(temperatura,0), \n"
+                + "    COALESCE(peso_compra,0),                      status, \n"
+                + "    COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
+                + "    COALESCE(animal.id_sexo,''),                  COALESCE(id_raza,''),\n"
+                + "    COALESCE(es_vientre,'N') \n ";
         
     }
     
@@ -158,6 +160,7 @@ public class Animal {
         }
     }
 
+      
     public void cargarPorAreteVisualTodos(String aAreteVisual) {
 
         manejadorBD.consulta(""
@@ -231,6 +234,7 @@ public class Animal {
         id_semental = manejadorBD.getValorString(0, 15);
         id_sexo = manejadorBD.getValorString(0, 16);
         id_raza = manejadorBD.getValorString(0, 17);
+        es_vientre = manejadorBD.getValorString(0, 18);
 
         proveedor.cargarPorId(id_proveedor);
 
@@ -679,6 +683,27 @@ public class Animal {
         return array;
     }
 
+    public static ArrayList cargararete_visuals_2() {
+
+        ArrayList array = new ArrayList();
+
+        array.add("");
+        
+        manejadorBD.consulta(""
+                + "SELECT   arete_visual "
+                + "FROM     animal, corral_animal \n"
+                + "WHERE    status = 'A' \n"
+                + "AND      animal.id_animal = corral_animal.id_animal \n"
+                + "AND      corral_animal.id_rancho    =   '" + rancho.id_rancho + "'");
+
+        for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+
+            array.add(manejadorBD.getValueAt(i, 0).toString());
+        }
+
+        return array;
+    }
+    
     public static ArrayList cargararete_visualshembrasSinEmparejar() {
 
         ArrayList array = new ArrayList();
@@ -931,6 +956,7 @@ public class Animal {
 
         manejadorBD.parametrosSP.agregarParametro("A", "varStatus", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro("", "varIdCria", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(es_vientre, "varEsVientre", "STRING", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
@@ -978,8 +1004,11 @@ public class Animal {
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
 
         manejadorBD.parametrosSP.agregarParametro("A", "varStatus", "STRING", "IN");
+        
+        manejadorBD.parametrosSP.agregarParametro(es_vientre, "varEsVientre", "STRING", "IN");
+        
 
-        if (manejadorBD.ejecutarSP("{ call actualizarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call actualizarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         }

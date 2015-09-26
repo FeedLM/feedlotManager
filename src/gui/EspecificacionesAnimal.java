@@ -107,8 +107,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.tf_ganancia.setEditable(false);
         razaSelector1.cargarSeleccionar();
 
-        animalSelectorMadre.cargararete_visuals();
-        animalSelectorPadre.cargararete_visuals();        
+        animalSelectorMadre.cargararete_visuals_2();
+        animalSelectorPadre.cargararete_visuals_2();        
         cargarComponentes();
     }
 
@@ -198,6 +198,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel22 = new javax.swing.JLabel();
         animalSelectorMadre = new domain.AnimalSelector();
         animalSelectorPadre = new domain.AnimalSelector();
+        jrb_esVientre = new javax.swing.JRadioButton();
         pn_Grafica_Tabla = new javax.swing.JPanel();
         panelGrafica = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -272,7 +273,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Padre:");
         jLabel14.setFocusable(false);
-        pn_Formulario.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 120, 20));
+        pn_Formulario.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 120, 20));
 
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(95, 84, 88));
@@ -396,7 +397,12 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esSemental.setText("Es Semental:                   ");
         jrb_esSemental.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jrb_esSemental.setOpaque(false);
-        pn_Formulario.add(jrb_esSemental, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 420, 190, 20));
+        jrb_esSemental.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrb_esSementalActionPerformed(evt);
+            }
+        });
+        pn_Formulario.add(jrb_esSemental, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 220, 20));
         jrb_esSemental.getAccessibleContext().setAccessibleName("Es Semental:                  ");
 
         semental.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -447,15 +453,23 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Madre:");
         jLabel22.setFocusable(false);
-        pn_Formulario.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 120, 20));
+        pn_Formulario.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 120, 20));
 
         animalSelectorMadre.setEnabled(false);
-        pn_Formulario.add(animalSelectorMadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 160, -1));
+        pn_Formulario.add(animalSelectorMadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 160, -1));
 
         animalSelectorPadre.setEnabled(false);
-        pn_Formulario.add(animalSelectorPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 160, -1));
+        pn_Formulario.add(animalSelectorPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 160, -1));
 
-        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 540));
+        jrb_esVientre.setBackground(new java.awt.Color(255, 255, 255));
+        jrb_esVientre.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrb_esVientre.setForeground(new java.awt.Color(95, 84, 88));
+        jrb_esVientre.setText("Es Vientre:                   ");
+        jrb_esVientre.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jrb_esVientre.setOpaque(false);
+        pn_Formulario.add(jrb_esVientre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 210, 20));
+
+        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 570));
 
         pn_Grafica_Tabla.setBackground(new java.awt.Color(255, 255, 255));
         pn_Grafica_Tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -648,7 +662,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         });
         pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 45, 30));
 
-        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 330, 111));
+        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 330, 111));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -704,7 +718,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
 
         pack();
@@ -819,13 +833,24 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void sexoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoSelector1ActionPerformed
+        
         if (sexoSelector1.getSelectedItem().equals("Macho")) {
+            
             semental.setEnabled(false);
             jrb_esSemental.setEnabled(true);
+            jrb_esVientre.setEnabled(false);
+            jrb_esVientre.setSelected(false);
+            btn_RegistroEmpadre.setEnabled(false);
+            btn_Partos.setEnabled(false);
         }
         if (sexoSelector1.getSelectedItem().equals("Hembra")) {
+            
             semental.setEnabled(true);
             jrb_esSemental.setEnabled(false);
+            jrb_esSemental.setSelected(false);
+            this.jrb_esVientre.setEnabled(true);
+            btn_RegistroEmpadre.setEnabled(true);
+            btn_Partos.setEnabled(true);
         }
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
@@ -840,6 +865,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         historialPartos = new HistorialPartos(animalDetalle, parent);
         historialPartos.setVisible(true);
     }//GEN-LAST:event_btn_PartosActionPerformed
+
+    private void jrb_esSementalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_esSementalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrb_esSementalActionPerformed
 
     private boolean validacionCodigo;
 
@@ -997,6 +1026,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 }
             }
         }
+        
+        if(this.jrb_esVientre.isSelected()){
+            
+            animalDetalle.es_vientre = "S";
+        }
 
         animalDetalle.sexo.cargarPorDescripcion(this.sexoSelector1.getSelectedItem().toString());
 
@@ -1061,6 +1095,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         animalDetalle.raza.cargarPorDescripcion(razaSelector1.getSelectedItem().toString());
         animalDetalle.raza.descripcion = razaSelector1.getSelectedItem().toString();
+        
+        if(this.jrb_esVientre.isSelected()){
+            
+            animalDetalle.es_vientre = "S";
+        }
 
         if (animalDetalle.corral.id_corral.equals("")) {
             JOptionPane.showMessageDialog(this, "No ha seleccionado un corral valido", gs_mensaje, JOptionPane.ERROR_MESSAGE);
@@ -1145,6 +1184,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             if (animalDetalle.sexo.descripcion.equals("Macho")) {//es Macho
 
                 this.jrb_esSemental.setEnabled(true);
+                this.jrb_esVientre.setEnabled(false);
 
                 if (animalDetalle.es_semental.equals("S")) {
 
@@ -1153,12 +1193,18 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
             } else {
                 this.semental.setEnabled(true);
-
+                this.jrb_esVientre.setEnabled(true);
+                    
                 if (animalDetalle.semental != null) {
                     this.semental.setSelectedItem(animalDetalle.semental.arete_visual);
                 } else {
                     this.semental.setSelectedItem("");
                 }
+            }
+            
+            if(animalDetalle.es_vientre.equals("S") ){
+            
+                this.jrb_esVientre.setSelected(true);
             }
 
         } else {
@@ -1261,6 +1307,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             if (animalDetalle.sexo.descripcion.equals("Macho")) {//es Macho
 
                 this.jrb_esSemental.setEnabled(true);
+                this.jrb_esVientre.setEnabled(false);
 
                 if (animalDetalle.es_semental.equals("S")) {
 
@@ -1268,6 +1315,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 }
             } else {
                 this.semental.setEnabled(true);
+                this.jrb_esVientre.setEnabled(true);
 
                 if (animalDetalle.semental != null) {
                     
@@ -1277,7 +1325,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                     this.semental.setSelectedItem("");
                 }
             }
-
+                        
+            if(animalDetalle.es_vientre.equals("S") ){
+            
+                this.jrb_esVientre.setSelected(true);
+            }            
         } else {
 
             //buscar el EId en todos los ranchos
@@ -1430,6 +1482,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton jrb_esSemental;
+    private javax.swing.JRadioButton jrb_esVientre;
     private javax.swing.JPanel panelGrafica;
     private javax.swing.JPanel pn_Formulario;
     private javax.swing.JPanel pn_Grafica_Tabla;

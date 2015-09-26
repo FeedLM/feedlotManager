@@ -30,7 +30,7 @@ public class AnimalSelector extends ComboBox {
          * Al dar doble Click sobre cualquier animal selector abrira su kardex
          *
          * Falta ponerle el parent si se va a usar el baston y/o bascula
-        *
+         *
          */
         Component[] comps = getComponents();
         for (int i = 0; i < comps.length; i++) {
@@ -48,8 +48,11 @@ public class AnimalSelector extends ComboBox {
 
                         animal = getAnimal();
 
-                        especificacionesAnimal.setId_animal(animal.id_animal);
-                        especificacionesAnimal.setVisible(true);
+                        if (!animal.id_animal.equals("")) {
+
+                            especificacionesAnimal.setId_animal(animal.id_animal);
+                            especificacionesAnimal.setVisible(true);
+                        }
                     }
                 }
             });
@@ -59,6 +62,11 @@ public class AnimalSelector extends ComboBox {
     public void cargararete_visuals() {
 
         addArray(domain.Animal.cargararete_visuals());
+    }
+
+    public void cargararete_visuals_2() {
+
+        addArray(domain.Animal.cargararete_visuals_2());
     }
 
     public void cargararete_visualshembrasSinEmparejar() {
