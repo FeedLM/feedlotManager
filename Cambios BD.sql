@@ -283,5 +283,90 @@ BEGIN
 END$$
 
 DELIMITER ;
+--
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `reinicia_bd`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reinicia_bd`()
+BEGIN
+/*	DECLARE varIdRancho			,
+			varIdCorralAnimal	CHAR(36);
+	*/
+	TRUNCATE TABLE animal;
+	TRUNCATE TABLE animal_grupo;
+    TRUNCATE TABLE cliente;
+    TRUNCATE TABLE corral;
+    TRUNCATE TABLE corral_animal;
+    TRUNCATE TABLE corral_datos;
+    TRUNCATE TABLE compra;
+    TRUNCATE TABLE concepto_movimiento;
+    TRUNCATE TABLE cria;
+    TRUNCATE TABLE detalle_compra;
+    TRUNCATE TABLE detalle_movimiento;
+    TRUNCATE TABLE medicina;
+    TRUNCATE TABLE medicina_animal;
+    TRUNCATE TABLE medicina_tratamiento;
+    TRUNCATE TABLE movimiento;
+    TRUNCATE TABLE movimiento_animal; 
+    TRUNCATE TABLE proveedor;
+    TRUNCATE TABLE rancho;
+    TRUNCATE TABLE rancho_medicina;
+    TRUNCATE TABLE tratamiento;
+    TRUNCATE TABLE usuario;
+                
+    TRUNCATE TABLE repl_concepto_movimiento;
+    TRUNCATE TABLE repl_animal;
+    TRUNCATE TABLE repl_cliente;
+    TRUNCATE TABLE repl_concepto_movimiento;
+    TRUNCATE TABLE repl_corral;    
+    TRUNCATE TABLE repl_corral_animal;
+    TRUNCATE TABLE repl_corral_datos;
+    TRUNCATE TABLE repl_cria;
+    TRUNCATE TABLE repl_detalle_movimiento;
+    TRUNCATE TABLE repl_medicina;
+    TRUNCATE TABLE repl_medicina_animal;
+    TRUNCATE TABLE repl_medicina_tratamiento;
+    TRUNCATE TABLE repl_movimiento;
+    TRUNCATE TABLE repl_movimiento_animal;
+    TRUNCATE TABLE repl_proveedor;
+    TRUNCATE TABLE repl_rancho;
+    TRUNCATE TABLE repl_tratamiento;
+    
+    INSERT INTO `usuario` (`id_usuario`, `log`, `password`) VALUES ('1', 'admin', 'admin');
+    /*
+    SELECT 	id_rancho
+    INTO	varIdRancho 
+    FROM	rancho;
+    
+    CALL agregarCorral(varIdRancho, 'Hospital', '', '', '', '', 0.00);
+    
+    UPDATE corral
+    SET status = 'E'
+    WHERE	nombre = 'Hospital';
+    
+    SELECT	id_corral
+    INTO 	varIdCorralAnimal
+    FROM	corral
+    WHERE	nombre = 'Hospital';
+    
+    UPDATE rancho
+    SET		id_corral_hospital	=	varIdCorralAnimal;
+
+
+    UPDATE rancho SET 
+		con_muerte				=	(	SELECT	id_concepto	FROM	concepto_movimiento	WHERE	descripcion	=	'Muerte' 			),
+		con_pesaje				=	(	SELECT	id_concepto	FROM	concepto_movimiento	WHERE	descripcion	=	'Peso'				),
+		con_traspaso_salida		=	(	SELECT	id_concepto	FROM	concepto_movimiento	WHERE	descripcion	=	'Traspaso Salida'	),
+		con_traspaso_entrada	=	(	SELECT	id_concepto	FROM	concepto_movimiento	WHERE	descripcion	=	'Traspaso Entrada'	),
+		con_salida				=	(	SELECT	id_concepto	FROM	concepto_movimiento	WHERE	descripcion	=	'Salida'			); 
+
+*/
+    
+END$$
+
+DELIMITER ;
+
 
 --
