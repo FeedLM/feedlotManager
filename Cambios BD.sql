@@ -369,4 +369,36 @@ END$$
 DELIMITER ;
 
 
---
+--2015-09-28
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `cierreCorral`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cierreCorral`(
+varIdCorral CHAR(36), varIdRancho CHAR(36))
+BEGIN
+UPDATE animal a 
+SET 
+    status = 'C'
+WHERE
+    (SELECT 
+            ca.id_animal
+        FROM
+            corral_animal ca
+        WHERE
+            ca.id_corral = varIdCorral
+                AND a.id_animal = ca.id_animal
+                AND a.status = 'A') = a.id_animal;
+
+UPDATE corral c 
+SET 
+    status = 'C'
+WHERE
+    c.id_corral = varIdCorral
+        AND c.id_rancho = varIdRancho;
+END$$
+
+DELIMITER ;
+
+

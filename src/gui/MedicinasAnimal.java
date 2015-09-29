@@ -445,7 +445,7 @@ public class MedicinasAnimal extends javax.swing.JFrame {
                     }
                     cargarMedicinaAnimal();
                 } else {
-                    JOptionPane.showMessageDialog(this, "La Cantidad del tratamiento es incorrecta");
+                    JOptionPane.showMessageDialog(this, "No hay suficientes medicinas en el almacén");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No hay suficientes medicamentos en el almacen", gs_mensaje, JOptionPane.ERROR_MESSAGE);

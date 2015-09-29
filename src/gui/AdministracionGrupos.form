@@ -499,13 +499,16 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="abstractt.Boton" name="boton1">
+            <Component class="abstractt.Boton" name="btn_cierreCorral">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cierre"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[69, 45]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cierreCorralActionPerformed"/>
+              </Events>
             </Component>
             <Component class="abstractt.Boton" name="btn_reporteCorral">
               <Properties>

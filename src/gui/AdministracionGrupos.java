@@ -49,18 +49,17 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         this.parent = aparent;
         initComponents();
         setLocationRelativeTo(null);
-        
+
 //        setClosable(true);
 //        this.pack();
 //        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
-
         cargarPuertos();
 
         cargarStick();
 
         corralSelector.valor_nuevo = true;
         razaSelector.valor_nuevo = true;
-        
+
         Frame F = JOptionPane.getFrameForComponent(this);
         reporteEntradas = new ReporteEntradas(F);
 
@@ -137,7 +136,6 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 //        Image i = null;
 //        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
 //        setIconImage(i);
-
         this.t_alimentoIngresado.textFieldDouble();
         this.t_pesoMaximo.textFieldDouble();
         this.t_pesoMinimo.textFieldDouble();
@@ -266,7 +264,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel17 = new javax.swing.JLabel();
         panelGrafica = new javax.swing.JPanel();
         botonesHoriz = new javax.swing.JPanel();
-        boton1 = new abstractt.Boton();
+        btn_cierreCorral = new abstractt.Boton();
         btn_reporteCorral = new abstractt.Boton();
         btn_reporteEntradas = new abstractt.Boton();
         btn_cargarArchivo = new abstractt.Boton();
@@ -472,9 +470,14 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
         botonesHoriz.setOpaque(false);
 
-        boton1.setText("Cierre");
-        boton1.setPreferredSize(new java.awt.Dimension(69, 45));
-        botonesHoriz.add(boton1);
+        btn_cierreCorral.setText("Cierre");
+        btn_cierreCorral.setPreferredSize(new java.awt.Dimension(69, 45));
+        btn_cierreCorral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cierreCorralActionPerformed(evt);
+            }
+        });
+        botonesHoriz.add(btn_cierreCorral);
 
         btn_reporteCorral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte corral.png"))); // NOI18N
         btn_reporteCorral.setToolTipText("Reporte de Corral");
@@ -1069,13 +1072,15 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     }//GEN-LAST:event_btn_reporteEntradasActionPerformed
 
     private void btn_reporteCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reporteCorralActionPerformed
-        Excel excel;
-
-        excel = new Excel();
-
-        excel.reporteCorral(corral, Grafica);
+        reporteCorral();
     }//GEN-LAST:event_btn_reporteCorralActionPerformed
 
+    private void reporteCorral() {
+        Excel excel;
+        excel = new Excel();
+        excel.reporteCorral(corral, Grafica);
+
+    }
     private void btn_cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarArchivoActionPerformed
 
         if (parent.cargarArchivoSesion != null) {
@@ -1087,6 +1092,22 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
         parent.cargarArchivoSesion.setVisible(true);
     }//GEN-LAST:event_btn_cargarArchivoActionPerformed
+
+    private void btn_cierreCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorralActionPerformed
+        reporteCorral();
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(corral.id_corral, "varIdCorral", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
+
+            JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            this.cargarAnimalesCorral();
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_cierreCorralActionPerformed
 
     Double alimento_ingresado;
 
@@ -1141,7 +1162,6 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton boton1;
     private javax.swing.JPanel botonesHoriz;
     private javax.swing.JPanel botonesVert;
     private abstractt.Boton btn_Actualizar;
@@ -1150,6 +1170,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private abstractt.Boton btn_Eliminar;
     private abstractt.Boton btn_busqueda;
     private abstractt.Boton btn_cargarArchivo;
+    private abstractt.Boton btn_cierreCorral;
     private abstractt.Boton btn_detalles;
     private abstractt.Boton btn_reporteCorral;
     private abstractt.Boton btn_reporteEntradas;

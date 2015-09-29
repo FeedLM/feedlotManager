@@ -256,7 +256,7 @@ public class Corral {
                 + "SELECT   nombre\n "
                 + "FROM     corral\n "
                 + "WHERE    status = 'S'\n "
-                + "AND      id_rancho = '" + rancho.id_rancho + "'"
+                + "AND      id_rancho = '" + rancho.id_rancho + "' "
                 + "ORDER BY nombre");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {
