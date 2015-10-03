@@ -141,8 +141,8 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table1 = new abstractt.Table();
-        btn_detalles = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 50), new java.awt.Dimension(0, 50), new java.awt.Dimension(32767, 50));
+        btn_detalles = new abstractt.Boton();
         etiqueta1 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
@@ -317,28 +317,22 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         jScrollPane3.setViewportView(table1);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 300));
+        jPanel5.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
-        btn_detalles.setBackground(new java.awt.Color(64, 37, 4));
-        btn_detalles.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        btn_detalles.setForeground(new java.awt.Color(230, 225, 195));
-        btn_detalles.setMnemonic('t');
         btn_detalles.setText("Detalles");
-        btn_detalles.setToolTipText("");
-        btn_detalles.setEnabled(false);
         btn_detalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_detallesActionPerformed(evt);
             }
         });
-        jPanel5.add(btn_detalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 325, 200, 30));
-        jPanel5.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        jPanel5.add(btn_detalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 100, 30));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etiqueta1.setText("Vizualización de Salidad de Ganado");
+        etiqueta1.setText("Visualización de Salida de Ganado");
         etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 80));
@@ -404,6 +398,10 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_EIDSelectorActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
     private void btn_detallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detallesActionPerformed
 
         if (especificacionesAnimal != null) {
@@ -421,10 +419,6 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
 
         especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_detallesActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
 
     private void visualizarDatos() {
 
@@ -494,7 +488,7 @@ public class VisualizacionSalidaGanado extends javax.swing.JFrame {//JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.ComboBox EIDSelector;
     private javax.swing.JButton btn_Reporte;
-    private javax.swing.JButton btn_detalles;
+    private abstractt.Boton btn_detalles;
     private javax.swing.JButton btn_visualiza;
     private javax.swing.ButtonGroup buttonGroup1;
     private abstractt.Calendar calendar1;

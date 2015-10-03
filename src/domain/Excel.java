@@ -673,7 +673,7 @@ public class Excel {
         FontNameReport.setFontName("Calibri");
         FontNameReport.setFontHeightInPoints((short) 11);
         FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
+        FontNameReport.setColor(HSSFColor.DARK_RED.index);
 
         HSSFCellStyle styleNameReport = wb.createCellStyle();
         styleNameReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -752,13 +752,13 @@ public class Excel {
         //Condition 1: Cell Value Is   greater than  70   (Blue Fill)
         ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
         PatternFormatting fill1 = rule1.createPatternFormatting();
-        fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill1.setFillBackgroundColor(IndexedColors.DARK_RED.index);
         fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
 
         //Condition 2: Cell Value Is  less than      50   (Green Fill)
         ConditionalFormattingRule rule2 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.LT, "50");
         PatternFormatting fill2 = rule2.createPatternFormatting();
-        fill2.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill2.setFillBackgroundColor(IndexedColors.DARK_RED.index);
         fill2.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
 
         FontFormatting font = rule1.createFontFormatting();
@@ -827,7 +827,7 @@ public class Excel {
         FontNameReport.setFontName("Calibri");
         FontNameReport.setFontHeightInPoints((short) 11);
         FontNameReport.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        FontNameReport.setColor(HSSFColor.DARK_BLUE.index);
+        FontNameReport.setColor(HSSFColor.DARK_RED.index);
 
         HSSFCellStyle styleNameReport = wb.createCellStyle();
         styleNameReport.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -914,13 +914,13 @@ public class Excel {
         //Condition 1: Cell Value Is   greater than  70   (Blue Fill)
         ConditionalFormattingRule rule1 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.GT, "1000");
         PatternFormatting fill1 = rule1.createPatternFormatting();
-        fill1.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill1.setFillBackgroundColor(IndexedColors.DARK_RED.index);
         fill1.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
 
         //Condition 2: Cell Value Is  less than      50   (Green Fill)
         ConditionalFormattingRule rule2 = sheetCF.createConditionalFormattingRule(CFRuleRecord.ComparisonOperator.LT, "50");
         PatternFormatting fill2 = rule2.createPatternFormatting();
-        fill2.setFillBackgroundColor(IndexedColors.BLUE.index);
+        fill2.setFillBackgroundColor(IndexedColors.DARK_RED.index);
         fill2.setFillPattern(PatternFormatting.SOLID_FOREGROUND);
 
         FontFormatting font = rule1.createFontFormatting();
@@ -1000,7 +1000,7 @@ public class Excel {
         tamañoColumna(12, 10);
         tamañoColumna(13, 10);
 
-        relleno("A6:N6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:N6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1094,7 +1094,7 @@ public class Excel {
         tamañoColumna(4, 14);
         tamañoColumna(5, 18);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1182,7 +1182,7 @@ public class Excel {
         tamañoColumna(3, 27);
         tamañoColumna(4, 27);
 
-        relleno("A6:E6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:E6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1243,7 +1243,7 @@ public class Excel {
         tamañoColumna(3, 27);
         tamañoColumna(4, 14);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1312,7 +1312,7 @@ public class Excel {
         tamañoColumna(7, 11);
         tamañoColumna(8, 11);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1394,7 +1394,7 @@ public class Excel {
         tamañoColumna(7, 11);
         tamañoColumna(8, 11);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1637,7 +1637,7 @@ public class Excel {
         tamañoColumna(11, 16);
         tamañoColumna(12, 16);
 
-        relleno("A6:P6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:P6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
@@ -1930,7 +1930,7 @@ public class Excel {
         tamañoColumna(6, 17);
         tamañoColumna(7, 11);
 
-        relleno("A6:H6", IndexedColors.BLUE.index, IndexedColors.WHITE.index);
+        relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         Integer fila_inicial = 6;
 
