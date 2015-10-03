@@ -37,7 +37,8 @@ public class CorralAnimal {
                 + "                LEFT OUTER JOIN sexo s ON a.id_sexo = s.id_sexo,       corral c, corral_animal ca  \n"
                 + "WHERE  a.id_animal    = ca.id_animal  \n"
                 + "AND    c.id_corral    = ca.id_corral  \n"
-                + "AND    c.id_corral    = '" + id_corral + "'");
+                + "AND    c.id_corral    = '" + id_corral + "' "
+                + "AND      a.status = 'A'");
 
         if (manejadorBD.getRowCount() > 0) {
 
