@@ -735,17 +735,17 @@ public class Excel {
         cell.setCellStyle(styleParamReport);
 
         /**/
-        sheet.createRow(5).createCell(0).setCellValue("Id Animal");
+        sheet.createRow(5).createCell(0).setCellValue("Arete Visual");
         sheet.getRow(5).createCell(1).setCellValue("Arete Electronico");
         sheet.getRow(5).createCell(2).setCellValue("Fecha");
         sheet.getRow(5).createCell(3).setCellValue("Peso");
         sheet.getRow(5).createCell(4).setCellValue("Corral");
 
-        sheet.setColumnWidth(0, 28 * Unidad);
-        sheet.setColumnWidth(1, 29 * Unidad);
-        sheet.setColumnWidth(2, 27 * Unidad);
-        sheet.setColumnWidth(3, 25 * Unidad);
-        sheet.setColumnWidth(4, 29 * Unidad);
+        sheet.setColumnWidth(0, 16 * Unidad);
+        sheet.setColumnWidth(1, 16 * Unidad);
+        sheet.setColumnWidth(2, 16 * Unidad);
+        sheet.setColumnWidth(3, 16 * Unidad);
+        sheet.setColumnWidth(4, 16 * Unidad);
 
         SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
@@ -1087,11 +1087,11 @@ public class Excel {
         agregarValor(5, 4, "Dias Muerte");
         agregarValor(5, 5, "Etapa Reproductiva");
 
-        tamañoColumna(0, 13);
+        tamañoColumna(0, 12);
         tamañoColumna(1, 16);
-        tamañoColumna(2, 20);
-        tamañoColumna(3, 27);
-        tamañoColumna(4, 14);
+        tamañoColumna(2, 13);
+        tamañoColumna(3, 15);
+        tamañoColumna(4, 11);
         tamañoColumna(5, 18);
 
         relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
@@ -1914,21 +1914,19 @@ public class Excel {
 
         agregarValor(5, 0, "Arete Visual");
         agregarValor(5, 1, "Arete Electronico");
-        agregarValor(5, 2, "Arete Siniiga");
-        agregarValor(5, 3, "Fecha de Movimiento");
-        agregarValor(5, 4, "Clase de Movimiento");
-        agregarValor(5, 5, "Numero de Pedido");
-        agregarValor(5, 6, "Grupo de Origen");
-        agregarValor(5, 7, "Peso (kg)");
+        agregarValor(5, 2, "Fecha de Movimiento");
+        agregarValor(5, 3, "Clase de Movimiento");
+        agregarValor(5, 4, "Numero de Pedido");
+        agregarValor(5, 5, "Grupo de Origen");
+        agregarValor(5, 6, "Peso (kg)");
 
-        tamañoColumna(0, 19);
-        tamañoColumna(1, 15);
-        tamañoColumna(2, 15);
+        tamañoColumna(0, 15);
+        tamañoColumna(1, 21);
+        tamañoColumna(2, 21);
         tamañoColumna(3, 21);
-        tamañoColumna(4, 21);
+        tamañoColumna(4, 17);
         tamañoColumna(5, 18);
-        tamañoColumna(6, 17);
-        tamañoColumna(7, 11);
+        tamañoColumna(6, 11);
 
         relleno("A6:H6", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
@@ -1936,14 +1934,13 @@ public class Excel {
 
         for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
 
-            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString());
-            agregarValor(fila_inicial + i, 1, t_tabla.getValueAt(i, 1).toString());
-            agregarValor(fila_inicial + i, 2, t_tabla.getValueAt(i, 2).toString());
-            agregarValor(fila_inicial + i, 3, t_tabla.getValueAt(i, 4).toString());
-            agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 5).toString());
-            agregarValor(fila_inicial + i, 5, t_tabla.getValueAt(i, 6).toString());
-            agregarValor(fila_inicial + i, 6, t_tabla.getValueAt(i, 7).toString());
-            agregarValor(fila_inicial + i, 7, t_tabla.getValueAt(i, 8).toString());
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 1).toString());
+            agregarValor(fila_inicial + i, 1, t_tabla.getValueAt(i, 2).toString());
+            agregarValor(fila_inicial + i, 2, t_tabla.getValueAt(i, 4).toString());
+            agregarValor(fila_inicial + i, 3, t_tabla.getValueAt(i, 5).toString());
+            agregarValor(fila_inicial + i, 4, t_tabla.getValueAt(i, 6).toString());
+            agregarValor(fila_inicial + i, 5, t_tabla.getValueAt(i, 7).toString());
+            agregarValor(fila_inicial + i, 6, t_tabla.getValueAt(i, 8).toString());
 
             asignarEstilo(fila_inicial + i, 0, styleCenter);
             asignarEstilo(fila_inicial + i, 1, styleCenter);
