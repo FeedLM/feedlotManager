@@ -466,15 +466,13 @@
                   <Color blue="58" green="54" red="5f" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Es Semental:                   "/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Es Semental:                  "/>
               </AccessibilityProperties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrb_esSementalActionPerformed"/>
-              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="70" y="420" width="220" height="20"/>
@@ -483,6 +481,7 @@
             </Component>
             <Component class="domain.AnimalSelector" name="semental">
               <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="12" style="0"/>
                 </Property>

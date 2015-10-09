@@ -23,16 +23,16 @@ public class CorralAnimal {
         Table tabla = crearTablaAnimalesCorral();
 
         manejadorBD.consulta(""
-                + "SELECT a.arete_visual,                a.arete_electronico,\n"
+                + "SELECT COALESCE(a.arete_visual,''),                COALESCE(a.arete_electronico,''),\n"
                 + "       COALESCE(p.descripcion,''),\n"
                 + "       COALESCE(DATE_FORMAT(a.fecha_ingreso, '%d/%m/%Y'), '00/00/0000'), \n"
-                + "       a.arete_siniiga,\n"
-                + "       a.arete_campaña,               COALESCE(s.descripcion,''),\n"
+                + "       COALESCE(a.arete_siniiga, ''), \n"
+                + "       COALESCE(a.arete_campaña,''),               COALESCE(s.descripcion,''),\n"
                 //+ "       cast(a.fecha_compra as Date), "
-                +"        COALESCE(DATE_FORMAT(fecha_compra, '%d/%m/%Y'), '00/00/0000'), \n"
-                + "       a.numero_lote,\n"
-                + "	  a.compra,                      round(a.peso_actual,2),\n"
-                + "       round(a.temperatura,2)\n"
+                + "        COALESCE(DATE_FORMAT(fecha_compra, '%d/%m/%Y'), '00/00/0000'), \n"
+                + "       COALESCE(a.numero_lote,''), \n"
+                + "	  COALESCE(a.compra,''),                      round(a.peso_actual,2),\n"
+                + "       COALESCE(round(a.temperatura,2),'')\n"
                 + "FROM   animal a LEFT OUTER JOIN  proveedor p ON a.id_proveedor    =   p.id_proveedor\n"
                 + "                LEFT OUTER JOIN sexo s ON a.id_sexo = s.id_sexo,       corral c, corral_animal ca  \n"
                 + "WHERE  a.id_animal    = ca.id_animal  \n"
@@ -47,7 +47,67 @@ public class CorralAnimal {
 
         return tabla;
     }
-    
+
+    public static Table cargarAnimalesCorralCerrado(String id_corral) {
+
+        Table tabla = crearTablaAnimalesCorralCerrado();
+
+        manejadorBD.consulta(""
+                + "SELECT COALESCE(a.arete_visual,''),                COALESCE(a.arete_electronico,''),\n"
+                + "       COALESCE(p.descripcion,''),\n"
+                + "       COALESCE(DATE_FORMAT(a.fecha_ingreso, '%d/%m/%Y'), '00/00/0000'), \n"
+                + "       COALESCE(a.arete_siniiga, ''), \n"
+                + "       COALESCE(a.arete_campaña,''),               COALESCE(s.descripcion,''),\n"
+                //+ "       cast(a.fecha_compra as Date), "
+                + "        COALESCE(DATE_FORMAT(fecha_compra, '%d/%m/%Y'), '00/00/0000'), \n"
+                + "       COALESCE(a.numero_lote,''), \n"
+                + "	  COALESCE(a.compra,''),                      round(a.peso_actual,2),\n"
+                + "       COALESCE(round(a.temperatura,2),'')\n"
+                + "FROM   animal a LEFT OUTER JOIN  proveedor p ON a.id_proveedor    =   p.id_proveedor\n"
+                + "                LEFT OUTER JOIN sexo s ON a.id_sexo = s.id_sexo,       corral c, corral_animal ca  \n"
+                + "WHERE  a.id_animal    = ca.id_animal  \n"
+                + "AND    c.id_corral    = ca.id_corral  \n"
+                + "AND    c.id_corral    = '" + id_corral + "' "
+                + "AND      a.status = 'C'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            manejadorBD.asignarTable(tabla);
+        }
+
+        return tabla;
+    }
+
+    public static Table crearTablaAnimalesCorralCerrado() {
+
+        Table t_corralCerrado;
+
+        t_corralCerrado = new Table();
+
+        String titulos[] = {
+            "Arete Visual", "Arete Electronico",
+            "Proveedor", "Fecha de Ingreso", "Arete Siniiga",
+            "Arete Campaña", "Sexo", "Fecha de Compra",
+            "Numero de Lote", "Compra", "Peso Actual (kg)",
+            "Temperatura"};
+
+        t_corralCerrado.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                titulos
+        ));
+
+        t_corralCerrado.setTitulos(titulos);
+        t_corralCerrado.cambiarTitulos();
+        t_corralCerrado.setFormato(new int[]{
+            Table.letra, Table.letra,
+            Table.letra, Table.fecha, Table.letra,
+            Table.letra, Table.letra, Table.fecha,
+            Table.letra, Table.letra, Table.numero_double,
+            Table.numero_double});
+
+        return t_corralCerrado;
+    }
+
     public static Table crearTablaAnimalesCorral() {
 
         Table t_Salidas;
@@ -55,7 +115,7 @@ public class CorralAnimal {
         t_Salidas = new Table();
 
         String titulos[] = {
-            "Arete Visual", "Arete Electronico", 
+            "Arete Visual", "Arete Electronico",
             "Proveedor", "Fecha de Ingreso", "Arete Siniiga",
             "Arete Campaña", "Sexo", "Fecha de Compra",
             "Numero de Lote", "Compra", "Peso Actual (kg)",

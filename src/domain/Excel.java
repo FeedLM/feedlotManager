@@ -57,6 +57,7 @@ import org.apache.poi.util.IOUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.ui.ExtensionFileFilter;
 import com.csvreader.CsvReader;
+import static domain.CorralAnimal.cargarAnimalesCorralCerrado;
 //import static gui.Login.formatoDate;
 //import static gui.Login.formatoDateTime;
 import static domain.CorralAnimal.cargarAnimalesCorral_;
@@ -1500,7 +1501,7 @@ public class Excel {
         relleno("D32:E32", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         agregarValor(32, 3, "GANANCIA DE PESO DIARIO", this.styleRight);
-        manejadorBD.consulta("SELECT   ROUND((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),2) \n"
+        manejadorBD.consulta("SELECT   COALESCE(ROUND((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),2),0.00) \n"
                 + "FROM     movimiento m, detalle_movimiento d, rancho r \n"
                 + "WHERE    m.id_rancho	=   r.id_rancho\n"
                 + "AND      m.id_concepto	=   r.con_pesaje\n"
@@ -1510,7 +1511,7 @@ public class Excel {
                 + "AND d.id_animal = '" + animal.id_animal + "';");
         agregarValor(32, 4, manejadorBD.getValorString(0, 0) + " Kg/día", this.styleCenter);
         agregarValor(33, 3, "KILOS GANADOS", this.styleRight);
-        manejadorBD.consulta("SELECT (a.peso_actual - a.peso_compra) \n"
+        manejadorBD.consulta("SELECT COALESCE((a.peso_actual - a.peso_compra),0.00) \n"
                 + "FROM animal a \n"
                 + "WHERE a.id_animal = '" + animal.id_animal + "';");
         double aux = manejadorBD.getValorDouble(0, 0);
@@ -1521,7 +1522,7 @@ public class Excel {
         aux = manejadorBD.getValorDouble(0, 0);
         agregarValor(34, 4, "$ " + aux, this.styleCenter);
         agregarValor(35, 3, "GASTO EN MEDICAMENTOS", this.styleRight);
-        manejadorBD.consulta("SELECT SUM(round(round(rm.costo_promedio,2) * ma.dosis,2))\n"
+        manejadorBD.consulta("SELECT COALESCE(SUM(round(round(rm.costo_promedio,2) * ma.dosis,2)),0.00)\n"
                 + "FROM medicina_animal ma, medicina m, unidades_de_medida um, rancho_medicina rm\n"
                 + "WHERE ma.id_medicina = m.id_medicina AND m.id_unidad = um.id_unidad \n"
                 + "AND rm.id_medicina = ma.id_medicina\n"
@@ -1893,6 +1894,204 @@ public class Excel {
         styles();
         reporteSalidaCrear();
         crearExcel();
+    }
+
+    public void reporteCorralCerrado(Corral aCorral, JFreeChart aGrafica) {
+        corral = aCorral;
+        grafica = aGrafica;
+
+        t_tabla = cargarAnimalesCorralCerrado(corral.id_corral);
+
+        if (t_tabla.getRowCount() <= 0) {
+
+            System.out.println("No hay Datos");
+            JOptionPane.showMessageDialog(null, "No hay datos, para exportar", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (!showOpenFileDialog()) {
+            return;
+        }
+        wb = new HSSFWorkbook();
+        sheet = wb.createSheet("Reporte de Cierre de Corral");
+        sheet.setDisplayGridlines(false);
+        styles();
+
+        reporteCorralCerradoCrear();
+
+        crearExcel();
+    }
+
+    private void reporteCorralCerradoCrear() {
+
+        Double total_kilos, peso_minimo, peso_maximo,
+                peso_promedio, alimento_ingresado, peso_ganancia;
+
+        Integer fila_encabezado = 18;
+
+        //cargarLogo();
+        cargarLogo2(1, 0, 1.0);
+
+        cargarLogo1(1, 11, 0.22);
+
+        combinarRango("A1:M4");
+        //combinarRango("A2:M2");
+        //combinarRango("A3:M4");
+
+        agregarValor(0, 0, "REPORTE DE CIERRE DE CORRAL", styleNameReport);
+
+        /**
+         * Tabla Datos informativos /*
+         */
+        Integer fila_tablas = 7;
+
+        combinarRango("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1));
+        relleno("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+
+        agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
+        agregarValor(fila_tablas + 1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 0, "PESO MAXIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 0, "PESO MINIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
+        
+//        agregarValor(fila_tablas + 1, 2, formatoDateTime.format(corral.fecha_cierre), styleCenter);
+        agregarValor(fila_tablas + 1, 2, corral.fecha_cierre.toString(), styleCenter);
+        agregarValor(fila_tablas + 2, 2, corral.nombre, styleCenter);
+        agregarValor(fila_tablas + 3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
+        agregarValor(fila_tablas + 4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
+        agregarValor(fila_tablas + 5, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
+        agregarValor(fila_tablas + 6, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
+        agregarValor(fila_tablas + 7, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
+        agregarValor(fila_tablas + 8, 2, new FormatoNumero(corral.peso_minimo.toString()).convierte(corral.peso_minimo), styleRight);
+        agregarValor(fila_tablas + 9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
+
+        String rango;
+        for (int i = fila_tablas + 2; i <= 17; i++) {
+
+            rango = "A" + i + ":B" + i;
+
+            combinarRango(rango);
+            this.bordes(rango, CellStyle.BORDER_THIN);
+            this.bordes("C" + i + ":C" + i, CellStyle.BORDER_THIN);
+        }
+
+        this.bordes("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+        this.bordes("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
+
+        /**
+         * Tabla Resultados y Rendimientos
+         */
+        combinarRango("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1));
+        relleno("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+
+        agregarValor(fila_tablas, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
+        agregarValor(fila_tablas + 1, 4, "GANANCIA DE PESO X PRECIO DE CARNE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 4, "SUELDOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 4, "GASTOS FIJOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 4, "GASTOS VARIOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
+        //agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
+
+        agregarValor(fila_tablas + 1, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
+        agregarValor(fila_tablas + 2, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
+        agregarValor(fila_tablas + 3, 7, new FormatoNumero(corral.costo_alimento.toString()).convierte(corral.costo_alimento), styleRight);
+        agregarValor(fila_tablas + 4, 7, new FormatoNumero(corral.utilidad_s_gastos.toString()).convierte(corral.utilidad_s_gastos), styleRight);
+
+        for (int i = fila_tablas + 2; i <= 17; i++) {
+
+            rango = "E" + i + ":G" + i;
+
+            combinarRango(rango);
+            this.bordes(rango, CellStyle.BORDER_THIN);
+            this.bordes("H" + i + ":H" + i, CellStyle.BORDER_THIN);
+        }
+
+        this.bordes("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+        this.bordes("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
+
+        agregarValor(fila_encabezado, 0, "ID Visual", styleCenter);
+        agregarValor(fila_encabezado, 1, "ID Electronico", styleCenter);
+        agregarValor(fila_encabezado, 2, "Proveedor", styleCenter);
+        //agregarValor(fila_encabezado, 2, "Corral");
+        agregarValor(fila_encabezado, 3, ""); // Espacio
+
+        agregarValor(fila_encabezado, 4, "Compra", styleCenter);
+        agregarValor(fila_encabezado, 5, "ID Siniiga", styleCenter);
+        agregarValor(fila_encabezado, 6, "ID Campaña", styleCenter);
+
+        agregarValor(fila_encabezado, 7, "Sexo", styleCenter);
+        agregarValor(fila_encabezado, 8, "Ingreso", styleCenter);
+        agregarValor(fila_encabezado, 9, "# Lote", styleCenter);
+        agregarValor(fila_encabezado, 10, "Compra", styleCenter);
+
+        agregarValor(fila_encabezado, 11, "Peso Actual (Kg)", styleCenter);
+        agregarValor(fila_encabezado, 12, "Peso de Compra", styleCenter);
+
+        tamañoColumna(0, 9);//A
+        tamañoColumna(1, 15);//B
+        tamañoColumna(2, 14);//C
+        tamañoColumna(3, 1);// Espacio D
+        tamañoColumna(4, 13);//E        
+        tamañoColumna(5, 8);//F
+        tamañoColumna(6, 10);//G
+        tamañoColumna(7, 8);//H
+        tamañoColumna(8, 8);//I
+        tamañoColumna(9, 5);//J
+        tamañoColumna(10, 7);//K
+        tamañoColumna(11, 14);//L
+        tamañoColumna(12, 10);//M
+
+        relleno("A" + (fila_encabezado + 1) + ":N" + (fila_encabezado + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+
+        Integer fila_inicial = fila_encabezado + 1;
+        Integer columna;
+
+        for (int i = 0; i < this.t_tabla.getRowCount(); i++) {
+
+            if (i % 2 > 0) {
+
+                relleno("A" + (fila_encabezado + 2 + i) + ":N" + (fila_encabezado + 2 + i), IndexedColors.LIGHT_GREEN.index, IndexedColors.BLACK.index);
+            }
+
+            agregarValor(fila_inicial + i, 0, t_tabla.getValueAt(i, 0).toString(), styleCenter);
+            agregarValor(fila_inicial + i, 3, "");
+            //sheet.getRow(fila_inicial + i).getCell(0).setCellStyle(bordes(cell.getCellStyle(), HSSFCellStyle.BORDER_THIN));
+            for (int j = 1; j < 12; j++) {
+                /// System.out.println(i + "," + j); 
+                columna = j;
+
+                if (j > 2) {
+                    columna = j + 1;
+                }
+
+                agregarValor(fila_inicial + i, columna, t_tabla.getValueAt(i, j).toString(), styleCenter);
+            }
+
+            asignarEstilo(fila_inicial + i, 11, styleRight);
+            asignarEstilo(fila_inicial + i, 12, styleRight);
+        }
+
+        agregarValor(fila_tablas, 8, "GRAFICA DE GANANCIA DE PESO", styleCenter);
+        relleno("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+        bordes("I" + (fila_tablas + 1) + ":M" + (fila_tablas + 1), CellStyle.BORDER_MEDIUM);
+
+        bordes("I" + (fila_tablas + 2) + ":M" + (fila_tablas + 10), CellStyle.BORDER_MEDIUM);
+
+        /**
+         * GRAFICA /*
+         */
+        combinarRango("I8:M8");
+
+        graficar((short) 8, 8, (short) 13, 17);
+
     }
 
     private void reporteSalidaCrear() {

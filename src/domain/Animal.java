@@ -780,7 +780,7 @@ public class Animal {
     public static ArrayList cargararete_visualsSementales() {
 
         ArrayList array = new ArrayList();
-
+        array.add("");
         manejadorBD.consulta(""
                 + "SELECT   arete_visual "
                 + "FROM     animal, corral_animal \n"
@@ -990,33 +990,26 @@ public class Animal {
         manejadorBD.parametrosSP.agregarParametro(proveedor.id_proveedor, "varIdProveedor", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_compra), "varFechaCompra", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra, "varCompra", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(numero_lote.toString(), "varNumeroLote", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(numero_lote, "varNumeroLote", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso_compra.toString(), "varPesoCompra", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_ingreso), "varFechaIngreso", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_visual, "varAreteVisual", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_electronico, "varAreteElectronico", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_siniiga, "varAreteSiniiga", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(arete_campaña.toString(), "varAreteCampaña", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(arete_campaña, "varAreteCampaña", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso_actual.toString(), "varPesoActual", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(temperatura.toString(), "varTemperatura", "DOUBLE", "IN");
-
         manejadorBD.parametrosSP.agregarParametro(es_semental, "varEsSemental", "STRING", "IN");
-
         if (semental != null) {
             manejadorBD.parametrosSP.agregarParametro(semental.id_animal, "varIdSemental", "STRING", "IN");
         } else {
             manejadorBD.parametrosSP.agregarParametro("0", "varIdSemental", "STRING", "IN");
         }
         manejadorBD.parametrosSP.agregarParametro(raza.id_raza, "varIdRaza", "STRING", "IN");
-
         manejadorBD.parametrosSP.agregarParametro("A", "varStatus", "STRING", "IN");
-        
         manejadorBD.parametrosSP.agregarParametro(es_vientre, "varEsVientre", "STRING", "IN");
-        
-
         if (manejadorBD.ejecutarSP("{ call actualizarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
-
             return true;
         }
         return false;

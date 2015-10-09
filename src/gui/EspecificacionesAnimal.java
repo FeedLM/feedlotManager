@@ -395,16 +395,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esSemental.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jrb_esSemental.setForeground(new java.awt.Color(95, 84, 88));
         jrb_esSemental.setText("Es Semental:                   ");
+        jrb_esSemental.setEnabled(false);
         jrb_esSemental.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jrb_esSemental.setOpaque(false);
-        jrb_esSemental.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrb_esSementalActionPerformed(evt);
-            }
-        });
         pn_Formulario.add(jrb_esSemental, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 220, 20));
         jrb_esSemental.getAccessibleContext().setAccessibleName("Es Semental:                  ");
 
+        semental.setEnabled(false);
         semental.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         pn_Formulario.add(semental, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 160, 20));
 
@@ -865,10 +862,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         historialPartos = new HistorialPartos(animalDetalle, parent);
         historialPartos.setVisible(true);
     }//GEN-LAST:event_btn_PartosActionPerformed
-
-    private void jrb_esSementalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_esSementalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrb_esSementalActionPerformed
 
     private boolean validacionCodigo;
 

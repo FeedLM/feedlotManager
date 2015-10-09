@@ -12,9 +12,11 @@ import static domain.Corral.cargarCorrales;
 import domain.Excel;
 import domain.Grafica;
 import domain.ParametrosSP;
+import domain.Raza;
 import static domain.Raza.cargarRazasTodas;
 import domain.SR232;
 import static domain.Seguridad.pideContraseña;
+import domain.Sexo;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
@@ -64,7 +66,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         reporteEntradas = new ReporteEntradas(F);
 
         String titulos[] = {
-            "Id Animal", "id Animal", "Arete Electronico",
+            "Id Animal", "Arete Visual", "Arete Electronico",
             "Proveedor", "Fecha de Compra", "Arete Siniiga",
             "Arete Campaña", "Sexo", "Fecha de Ingreso",
             "Numero de Lote", "No. Compra", "Peso Actual",
@@ -265,9 +267,9 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         panelGrafica = new javax.swing.JPanel();
         botonesHoriz = new javax.swing.JPanel();
         btn_cierreCorral = new abstractt.Boton();
+        btn_historico = new abstractt.Boton();
         btn_reporteCorral = new abstractt.Boton();
         btn_reporteEntradas = new abstractt.Boton();
-        btn_cargarArchivo = new abstractt.Boton();
         btn_detalles = new abstractt.Boton();
         botonesVert = new javax.swing.JPanel();
         btn_Crear = new abstractt.Boton();
@@ -438,8 +440,12 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         datosPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 110, 22));
 
         sexoSelector1.setEditable(false);
-        sexoSelector1.setEnabled(false);
         sexoSelector1.setFocusable(false);
+        sexoSelector1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexoSelector1ActionPerformed(evt);
+            }
+        });
         datosPanel.add(sexoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -466,7 +472,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
         panelGrafica.setBackground(new java.awt.Color(0, 102, 102));
         panelGrafica.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 400, 220));
+        jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 400, 220));
 
         botonesHoriz.setOpaque(false);
 
@@ -478,6 +484,16 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             }
         });
         botonesHoriz.add(btn_cierreCorral);
+
+        btn_historico.setText("Historico de Corrales");
+        btn_historico.setFont(new java.awt.Font("Trebuchet", 0, 10)); // NOI18N
+        btn_historico.setPreferredSize(new java.awt.Dimension(130, 45));
+        btn_historico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_historicoActionPerformed(evt);
+            }
+        });
+        botonesHoriz.add(btn_historico);
 
         btn_reporteCorral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono reporte corral.png"))); // NOI18N
         btn_reporteCorral.setToolTipText("Reporte de Corral");
@@ -496,15 +512,6 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             }
         });
         botonesHoriz.add(btn_reporteEntradas);
-
-        btn_cargarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono subir.png"))); // NOI18N
-        btn_cargarArchivo.setToolTipText("Cargar archivo de Excel");
-        btn_cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cargarArchivoActionPerformed(evt);
-            }
-        });
-        botonesHoriz.add(btn_cargarArchivo);
 
         btn_detalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icono detalles.jpg"))); // NOI18N
         btn_detalles.setToolTipText("Especificaciones del Animal");
@@ -788,22 +795,6 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
             return;
         }
-        /*
-         raza = razaSelector.getSelectedItem().toString();
-
-         if (!raza.equals("")) {
-
-         manejadorBD.consulta(""
-         + "SELECT id_raza "
-         + "FROM raza "
-         + "where descripcion   =   \"" + raza + "\"");
-
-         id_raza = manejadorBD.getValorInt(0, 0);
-         } else {
-
-         id_raza = 0;
-         }
-         */
     }//GEN-LAST:event_razaSelectorActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -1081,33 +1072,131 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         excel.reporteCorral(corral, Grafica);
 
     }
-    private void btn_cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarArchivoActionPerformed
-
-        if (parent.cargarArchivoSesion != null) {
-
-            parent.cargarArchivoSesion.dispose();
-        }
-
-        parent.cargarArchivoSesion = new CargarArchivoSesion(parent);
-
-        parent.cargarArchivoSesion.setVisible(true);
-    }//GEN-LAST:event_btn_cargarArchivoActionPerformed
-
     private void btn_cierreCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorralActionPerformed
-        reporteCorral();
-        manejadorBD.parametrosSP = new ParametrosSP();
-        manejadorBD.parametrosSP.agregarParametro(corral.id_corral, "varIdCorral", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
+        int opcion;
+        opcion = JOptionPane.showConfirmDialog(this, "Desea hacer 'Cierre de Corral'?", gs_mensaje, JOptionPane.YES_NO_OPTION);
+        if (opcion == 0) {
+            if (!pideContraseña()) {
+                return;
+            }
+            reporteCorral();
+            manejadorBD.parametrosSP = new ParametrosSP();
+            manejadorBD.parametrosSP.agregarParametro(corral.id_corral, "varIdCorral", "STRING", "IN");
+            manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
 
-            JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
-            this.cargarAnimalesCorral();
-        } else {
+            if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
+                if (manejadorBD.actualizacion(""
+                        + "UPDATE corral \n"
+                        + "SET \n"
+                        + "    total_kilos = " + corral.total_kilos + ",\n"
+                        + "    peso_ganancia = " + corral.peso_ganancia + ",\n"
+                        + "    num_animales = " + corral.numero_anmales + ",\n"
+                        + "    peso_minimo = " + corral.peso_minimo + ",\n"
+                        + "    peso_maximo = " + corral.peso_maximo + ",\n"
+                        + "    peso_promedio = " + corral.peso_promedio + "\n"
+                        + "WHERE\n"
+                        + "    id_corral = '" + corral.id_corral + "' AND id_rancho = '" + rancho.id_rancho + "'") == 0) {
+                    JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                    this.cargarAnimalesCorral();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
 
-            JOptionPane.showMessageDialog(this, "Error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btn_cierreCorralActionPerformed
+
+    private void btn_historicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_historicoActionPerformed
+        CorralesCerrados corralesCerrados = new CorralesCerrados(this);
+        corralesCerrados.setVisible(true);
+    }//GEN-LAST:event_btn_historicoActionPerformed
+
+    private void sexoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoSelector1ActionPerformed
+        sexo = this.sexoSelector1.getSexo();
+        if (sexo.descripcion.length() > 0) {
+            if (sexo.descripcion.equals("Mixto")) {
+                cargarAnimalesCorral();
+            } else {
+                cargarCorralPorSexo();
+            }
+        }
+    }//GEN-LAST:event_sexoSelector1ActionPerformed
+
+    private void cargarCorralPorSexo() {
+        if (!corralActivo) {
+            return;
+        }
+
+        corral = new Corral();
+        String nombre = corralSelector.getSelectedItem().toString();
+        corral.cargarPorNombre(nombre);
+        if (!corral.id_corral.equals("")) {
+            this.btn_Crear.setEnabled(false);
+            this.btn_Actualizar.setEnabled(true);
+            this.btn_Eliminar.setEnabled(true);
+            t_totalKilos.setDouble(corral.total_kilos);
+            t_pesoMinimo.setDouble(corral.peso_minimo);
+            t_pesoMaximo.setDouble(corral.peso_maximo);
+            t_pesoPromedio.setDouble(corral.peso_promedio);
+            t_alimentoIngresado.setDouble(corral.alimento_ingresado);
+            t_gananciaKilos.setDouble(corral.peso_ganancia);
+            jtf_localizacion.setText(corral.localizacion);
+            jtf_numAnimales.setText(corral.numero_anmales.toString());
+            razaSelector.setSelectedItem(corral.raza.descripcion);
+            sexoSelector1.setSelectedItem(sexo.descripcion);
+            this.jta_Observaciones.setText(corral.observaciones);
+
+            manejadorBD.consulta(""
+                    + "SELECT animal.id_animal,         animal.arete_visual,\n"
+                    + "       animal.arete_electronico, p.descripcion,\n"
+                    + "       animal.fecha_ingreso,     animal.arete_siniiga,\n"
+                    + "       animal.arete_campaña,     sexo.descripcion,\n"
+                    + "       animal.fecha_compra,      animal.numero_lote,\n"
+                    + "       animal.compra,            animal.peso_actual,\n"
+                    + "       animal.temperatura\n"
+                    + "FROM   corral, corral_animal,\n"
+                    + "       ( animal LEFT OUTER JOIN proveedor p ON animal.id_proveedor = p.id_proveedor )\n"
+                    + "        LEFT OUTER JOIN sexo ON  animal.id_sexo  = sexo.id_sexo\n"
+                    + "WHERE corral.id_corral    = corral_animal.id_corral\n"
+                    + "AND   animal.id_animal    = corral_animal.id_animal\n"
+                    + "AND   animal.status = 'A'\n"
+                    + "AND  animal.id_sexo = '" + sexo.id_sexo + "' \n"
+                    + "AND   corral.id_corral    = '" + corral.id_corral + "'");
+
+            manejadorBD.asignarTable(t_animales);
+
+            if (manejadorBD.getRowCount() > 0) {
+
+                this.t_animales.setRowSelectionInterval(0, 0);
+                selectAnimal();
+                this.btn_Animal.setEnabled(true);
+                btn_reporteCorral.setEnabled(true);
+            } else {
+                this.btn_Animal.setEnabled(false);
+                btn_reporteCorral.setEnabled(false);
+                this.t_pesos.limpiarTabla();
+                graficar();
+            }
+            t_animales.ocultarcolumna(0);
+
+        } else {
+            this.btn_Crear.setEnabled(true);
+            this.btn_Actualizar.setEnabled(false);
+            this.btn_Eliminar.setEnabled(false);
+            this.btn_Animal.setEnabled(false);
+            btn_reporteCorral.setEnabled(false);
+            limpiarVariables();
+        }
+        if (t_pesos.getRowCount() > 0) {
+
+            this.btn_detalles.setEnabled(true);
+        } else {
+            this.btn_detalles.setEnabled(false);
+        }
+    }
 
     Double alimento_ingresado;
 
@@ -1159,6 +1248,8 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private boolean paisActivo;
     private boolean razaActivo;
     private boolean cargandoDatos;
+    Sexo sexo;
+    Raza raza;
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1169,9 +1260,9 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private abstractt.Boton btn_Crear;
     private abstractt.Boton btn_Eliminar;
     private abstractt.Boton btn_busqueda;
-    private abstractt.Boton btn_cargarArchivo;
     private abstractt.Boton btn_cierreCorral;
     private abstractt.Boton btn_detalles;
+    private abstractt.Boton btn_historico;
     private abstractt.Boton btn_reporteCorral;
     private abstractt.Boton btn_reporteEntradas;
     private abstractt.ComboBox corralSelector;

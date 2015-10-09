@@ -195,10 +195,12 @@ public class BajasMuerte extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 400));
         jPanel1.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Información para dar de baja");
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
+        etiqueta1.setOpaque(true);
         jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 60));
 
         fondo1.setText("fondo1");

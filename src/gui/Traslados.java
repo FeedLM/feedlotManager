@@ -144,7 +144,7 @@ public class Traslados extends javax.swing.JInternalFrame{
                         if (JL_Animales.getModel().getElementAt(j).toString().equals(animal.arete_visual)) {
 
                             JL_Animales.setSelectedIndex(j);
-                            agregarAnimal();
+                            agregarAnimales();
                             break;
                         }
                     }
@@ -397,18 +397,25 @@ public class Traslados extends javax.swing.JInternalFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        agregarAnimal();
+        agregarAnimales();
 
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
-    private void agregarAnimal() {
+    private void agregarAnimales(){
+        Object tagId[] = JL_Animales.getSelectedValues();
+        for (int i = 0; i < tagId.length; i++) {
+            agregarAnimal(tagId[i].toString());
+        }
+    }
+    
+    private void agregarAnimal(String tag) {
         animal = new Animal();
 
         String tagId;
         boolean existe = false;
 
         //esarete_visual
-        tagId = JL_Animales.getSelectedValue().toString();
+        tagId = tag;
 
         animal.cargarPorAreteVisual(tagId,"A");
 

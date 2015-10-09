@@ -12,6 +12,7 @@ import static gui.Splash.formatoDate;
 import static gui.Splash.formatoDateTime;
 import static gui.Splash.formatoDate;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -43,6 +44,7 @@ public class Corral {
     public Double ganancia_precio_carne;
     public Double costo_alimento;
     public Double utilidad_s_gastos;
+    public Date fecha_cierre;
 
     //public CorralDatos corralDatos;
     public Corral() {
@@ -237,7 +239,7 @@ public class Corral {
 
     private void calculosTotales() {
 
-        Configuracion configuracion ;
+        Configuracion configuracion;
         configuracion = new Configuracion();
         configuracion.cargarConfiguracion();
 
@@ -382,5 +384,35 @@ public class Corral {
             return true;
         }
         return false;
+    }
+
+    public void cargarCorralCerrado(String id_corral) {
+
+        manejadorBD.consulta(""
+                + "SELECT   id_rancho,                          id_corral,\n"
+                + "         nombre,                             localizacion,\n"
+                + "         num_animales,                       IFNULL(id_sexo,''),\n"
+                + "         IFNULL(id_raza,''),                 status,\n"
+                + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
+                + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
+                + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
+                + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
+                + "         COALESCE(total_costo_medicina,0.0),  fecha_cierre\n"
+                + "FROM     corral \n"
+                + "WHERE    status = 'C' \n"
+                + "AND      id_corral = '" + id_corral + "' \n "
+                + "AND      id_rancho = '" + rancho.id_rancho + "'");
+
+        if (manejadorBD.getRowCount() > 0) {
+            asignarValores();
+            try {
+                fecha_cierre = formatoDateTime.parse(manejadorBD.getValorString(0, 17));
+            } catch (ParseException ex) {
+                Logger.getLogger(Corral.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            id_corral = "";
+        }
+
     }
 }

@@ -393,7 +393,8 @@ WHERE
 
 UPDATE corral c 
 SET 
-    status = 'C'
+    status = 'C',
+    fecha_cierre = NOW()
 WHERE
     c.id_corral = varIdCorral
         AND c.id_rancho = varIdRancho;
@@ -402,3 +403,75 @@ END$$
 DELIMITER ;
 
 
+-- 2015-10-08 18:33
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `actualizarAnimal`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarAnimal`(
+    varIdAnimal		CHAR(36),		varIdProveedor		CHAR(36),		
+	varFechaCompra	DATETIME,		varCompra			CHAR(255),
+	varNumeroLote	CHAR(255),		varPesoCompra		DECIMAL(20,4),	
+	varIdSexo		CHAR(36),		varFechaIngreso		DATETIME,
+	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),
+	varAreteSiniiga	CHAR(255),		varAreteCampaña		CHAR(255),
+	varPesoActual	DECIMAL(20,4),	varTemperatura		DECIMAL(20,4),
+	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),
+	varIdRaza		CHAR(36),		varStatus			CHAR(1),
+	varEsVientre	CHAR(1))
+BEGIN
+	
+	UPDATE animal set 
+		id_proveedor		=	varIdProveedor,			fecha_compra	=	varFechaCompra,
+		compra				=	varCompra,				numero_lote		=	varNumeroLote,
+		peso_compra			=	varPesoCompra,			id_sexo			=	varIdSexo,
+		fecha_ingreso		=	varFechaIngreso,		arete_visual	=	varAreteVisual,
+		arete_electronico	=	varAreteElectronico,	arete_siniiga	=	varAreteSiniiga,
+		arete_campaña		=	varAreteCampaña,		peso_actual		=	varPesoActual,
+		temperatura			=	varTemperatura,			es_semental		=	varEsSemental,
+		id_semental			=	varIdSemental,			id_raza			=	varIdRaza,
+		status				=	varStatus,				es_vientre		=	varEsVientre		
+	WHERE	id_animal	=	varIdAnimal;	
+
+END$$
+
+DELIMITER ;
+
+-- 2015-10-09 13:38
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `reactivarCorral`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE PROCEDURE `reactivarCorral` (varIdCorral CHAR(36), varIdRancho CHAR(36))
+BEGIN
+UPDATE animal a 
+SET 
+    status = 'A'
+WHERE
+    (SELECT 
+            ca.id_animal
+        FROM
+            corral_animal ca
+        WHERE
+            ca.id_corral = varIdCorral
+                AND a.id_animal = ca.id_animal
+                AND a.status = 'C') = a.id_animal;
+
+UPDATE corral c 
+SET 
+    status = 'S'
+WHERE
+    c.id_corral = varIdCorral
+        AND c.id_rancho = varIdRancho;
+END
+$$
+
+DELIMITER ;
+
+-- 2015-10-09 17:47
+
+ALTER TABLE `feedlotmanager`.`corral` 
+ADD COLUMN `fecha_cierre` DATETIME NULL DEFAULT NULL AFTER `total_costo_medicina`;
