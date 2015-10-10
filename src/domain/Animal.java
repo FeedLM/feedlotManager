@@ -965,7 +965,7 @@ public class Animal {
         manejadorBD.parametrosSP.agregarParametro("", "varIdCria", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(es_vientre, "varEsVientre", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call agregarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call agregarAnimal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             return true;
         }
