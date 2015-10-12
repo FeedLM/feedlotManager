@@ -325,7 +325,7 @@ public class Desktop extends javax.swing.JFrame {
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
         try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "D:/Proyectos/Merida/FeedLotManager/feedLotManager/Ayuda.pdf");
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "Ayuda.pdf");
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("Sin ayuda existente...");

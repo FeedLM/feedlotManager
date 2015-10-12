@@ -40,12 +40,9 @@ public class Animal {
     public Double peso_actual;
     public Double temperatura;
     public Double peso_compra;
-    //   public String sexo;
     public Sexo sexo;
     public String status;
     public Corral corral;
-    //   public TipoGanado tipoGanado;
-//    public TipoMedicamento tipoMedicamento;
     public String es_semental;
     public Animal semental;
     public Raza raza;

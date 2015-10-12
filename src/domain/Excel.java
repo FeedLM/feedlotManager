@@ -65,8 +65,10 @@ import static domain.Movimiento.cargarMovimientosSalida;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
+import static gui.Splash.formatoDateTime_1;
 import static gui.Splash.formatoDateTime_11;
 import static gui.Splash.formatoDateTime_2;
+import static gui.Splash.formatoDateTime_21;
 import org.apache.poi.hssf.util.HSSFRegionUtil;
 import org.apache.poi.ss.usermodel.CellStyle;
 //import static gui.Splash.formatoDateTime_2;
@@ -1958,9 +1960,7 @@ public class Excel {
         agregarValor(fila_tablas + 7, 0, "PESO MAXIMO", styleEtiquetaTabla);
         agregarValor(fila_tablas + 8, 0, "PESO MINIMO", styleEtiquetaTabla);
         agregarValor(fila_tablas + 9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
-        
-//        agregarValor(fila_tablas + 1, 2, formatoDateTime.format(corral.fecha_cierre), styleCenter);
-        agregarValor(fila_tablas + 1, 2, corral.fecha_cierre.toString(), styleCenter);
+        agregarValor(fila_tablas + 1, 2, formatoDateTime.format(corral.fecha_cierre), styleCenter);
         agregarValor(fila_tablas + 2, 2, corral.nombre, styleCenter);
         agregarValor(fila_tablas + 3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
         agregarValor(fila_tablas + 4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);

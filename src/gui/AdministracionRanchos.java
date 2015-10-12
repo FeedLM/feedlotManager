@@ -390,7 +390,8 @@ public class AdministracionRanchos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
+        SeleccionarRancho seleccionarRancho = new SeleccionarRancho();
+        seleccionarRancho.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
     public SeleccionarRancho getSeleccionarRancho() {
         return seleccionarRancho;

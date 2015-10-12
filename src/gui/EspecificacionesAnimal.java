@@ -1023,6 +1023,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         if(this.jrb_esVientre.isSelected()){
             
             animalDetalle.es_vientre = "S";
+        }else{
+            animalDetalle.es_vientre = "N";
         }
 
         animalDetalle.sexo.cargarPorDescripcion(this.sexoSelector1.getSelectedItem().toString());
@@ -1092,6 +1094,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         if(this.jrb_esVientre.isSelected()){
             
             animalDetalle.es_vientre = "S";
+        }else{
+            animalDetalle.es_vientre = "N";
         }
 
         if (animalDetalle.corral.id_corral.equals("")) {
@@ -1325,9 +1329,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             }            
         } else {
 
-            //buscar el EId en todos los ranchos
-            //  animalDetalle.cargarPorEidTodosRanchos(eid);
-            // if (animalDetalle.id_animal.equals("")) {
             if (dialogoConfirmacionSiNo(this, "¿El animal no existe desea ingresarlo al sistema?", gs_mensaje, 1) == 0) {
 
                 nuevo = true;

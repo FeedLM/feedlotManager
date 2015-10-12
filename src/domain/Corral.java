@@ -11,6 +11,7 @@ import static gui.Desktop.rancho;
 import static gui.Splash.formatoDate;
 import static gui.Splash.formatoDateTime;
 import static gui.Splash.formatoDate;
+import static gui.Splash.formatoDateTime_1;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -237,6 +238,41 @@ public class Corral {
         calculosTotales();
     }
 
+    private void asignarValores2() throws ParseException {
+
+        String id_sexo;
+
+        String id_raza;
+
+        //id_rancho = manejadorBD.getValorString(0, 0);
+        id_corral = manejadorBD.getValorString(0, 1);
+        nombre = manejadorBD.getValorString(0, 2);
+        localizacion = manejadorBD.getValorString(0, 3);
+        numero_anmales = manejadorBD.getValorInt(0, 4);
+        id_sexo = manejadorBD.getValorString(0, 5);
+        id_raza = manejadorBD.getValorString(0, 6);
+        status = manejadorBD.getValorString(0, 7);
+
+        total_kilos = manejadorBD.getValorDouble(0, 8);
+        peso_minimo = manejadorBD.getValorDouble(0, 9);
+        peso_maximo = manejadorBD.getValorDouble(0, 10);
+        peso_promedio = manejadorBD.getValorDouble(0, 11);
+        alimento_ingresado = manejadorBD.getValorDouble(0, 12);
+        peso_ganancia = manejadorBD.getValorDouble(0, 13);
+        observaciones = manejadorBD.getValorString(0, 14);
+        total_kilos_inicial = manejadorBD.getValorDouble(0, 15);
+        total_costo_medicina = manejadorBD.getValorDouble(0, 16);
+        
+        fecha_cierre = formatoDateTime_1.parse(manejadorBD.getValorString(0, 17));
+
+        sexo.cargarPorId(id_sexo);
+
+        raza.cargarPorId(id_raza);
+        // corralDatos.cargarPorId(id_corral);
+
+        calculosTotales();
+    }
+
     private void calculosTotales() {
 
         Configuracion configuracion;
@@ -386,7 +422,7 @@ public class Corral {
         return false;
     }
 
-    public void cargarCorralCerrado(String id_corral) {
+    public void cargarCorralCerrado(String id_corral) throws ParseException {
 
         manejadorBD.consulta(""
                 + "SELECT   id_rancho,                          id_corral,\n"
@@ -397,19 +433,14 @@ public class Corral {
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
                 + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
                 + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
-                + "         COALESCE(total_costo_medicina,0.0),  fecha_cierre\n"
+                + "         COALESCE(total_costo_medicina,0.0), fecha_cierre \n"
                 + "FROM     corral \n"
                 + "WHERE    status = 'C' \n"
                 + "AND      id_corral = '" + id_corral + "' \n "
                 + "AND      id_rancho = '" + rancho.id_rancho + "'");
 
         if (manejadorBD.getRowCount() > 0) {
-            asignarValores();
-            try {
-                fecha_cierre = formatoDateTime.parse(manejadorBD.getValorString(0, 17));
-            } catch (ParseException ex) {
-                Logger.getLogger(Corral.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            asignarValores2();
         } else {
             id_corral = "";
         }

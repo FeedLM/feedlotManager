@@ -56,6 +56,8 @@ public class CatalogoCliente extends javax.swing.JDialog {
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         setLocationRelativeTo(null);
         fondo1.cargar(this.getSize());
+        id_cliente.setVisible(false);
+        
     }
 
     private void table1KeyPressed(KeyEvent evt) {
@@ -261,7 +263,6 @@ public class CatalogoCliente extends javax.swing.JDialog {
         btn_Eliminar = new abstractt.Boton();
         id_cliente = new abstractt.TextField();
         descripcion = new abstractt.TextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         CB_FisicaMoral = new abstractt.ComboBox();
         jLabel5 = new javax.swing.JLabel();
@@ -337,12 +338,6 @@ public class CatalogoCliente extends javax.swing.JDialog {
         id_cliente.setEditable(false);
         jPanel1.add(id_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 260, -1));
         jPanel1.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 250, -1));
-
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(95, 84, 88));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("ID:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 100, 20));
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
@@ -556,7 +551,6 @@ public class CatalogoCliente extends javax.swing.JDialog {
     private abstractt.fondo fondo1;
     private abstractt.TextField id_cliente;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

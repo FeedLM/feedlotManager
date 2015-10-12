@@ -167,8 +167,7 @@ public class SeleccionarRancho extends javax.swing.JFrame {
     private void nuevoRancho() {
         administracionRanchos = new AdministracionRanchos(this);
         administracionRanchos.setVisible(true);
-        this.setVisible(false);
-
+        this.dispose();
     }
 
     private void seleccionaRancho() {

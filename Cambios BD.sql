@@ -475,3 +475,53 @@ DELIMITER ;
 
 ALTER TABLE `feedlotmanager`.`corral` 
 ADD COLUMN `fecha_cierre` DATETIME NULL DEFAULT NULL AFTER `total_costo_medicina`;
+
+-- 2015-10-10 14:15
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarAnimal`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarAnimal`(
+    varIdRancho		CHAR(36),		varIdCorral     	CHAR(36),		varIdProveedor	CHAR(36),		
+	varFechaCompra	DATETIME,		varCompra			CHAR(255),		varNumeroLote	CHAR(255),
+	varPesoCompra	DECIMAL(20,4),	varIdSexo			CHAR(36),		varFechaIngreso	DATETIME,
+	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),		varAreteSiniiga	CHAR(255),
+	varAreteCampaña	CHAR(255),		varPesoActual		DECIMAL(20,4),	varTemperatura	DECIMAL(20,4),
+	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),		varIdRaza		CHAR(36),
+	varStatus		CHAR(1),		varIdCria			CHAR(36),		varEsVientre	CHAR(1))
+BEGIN
+    DECLARE varIdAnimal CHAR(36);
+
+	SELECT UUID()
+	INTO varIdAnimal;
+
+	INSERT corral_animal
+    (   id_rancho,    id_corral,    id_animal)
+    SELECT
+        varIdRancho, varIdCorral, varIdAnimal;
+
+    INSERT animal
+    (	id_animal,		id_proveedor,		fecha_compra,	compra,
+		numero_lote,	peso_compra,		id_sexo,		fecha_ingreso,
+		arete_visual,	arete_electronico,	arete_siniiga,	arete_campaña,
+		peso_actual,	temperatura,		es_semental,	id_semental,
+		id_raza,		status,				es_vientre)
+    SELECT
+		varIdAnimal,	varIdProveedor,			varFechaCompra,		varCompra,
+		varNumeroLote,	varPesoCompra,			varIdSexo,			varFechaIngreso,
+		varAreteVisual,	varAreteElectronico,	varAreteSiniiga,	varAreteCampaña,
+		varPesoActual,	varTemperatura,			varEsSemental,		varIdSemental,		
+		varIdRaza,		varStatus,				varEsVientre;
+
+    call movimientoPeso( varIdRancho, varIdAnimal, varFechaIngreso, varPesoActual);
+
+	update	cria 
+	set		id_animal	=	varIdAnimal
+	where	id_cria		=	varIdCria;
+END$$
+
+DELIMITER ;
+
+

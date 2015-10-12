@@ -9,6 +9,9 @@ import static gui.Desktop.rancho;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,7 +28,11 @@ public class CorralesCerrados extends javax.swing.JFrame {
 
         lsm.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                selectCorral();
+                try {
+                    selectCorral();
+                } catch (ParseException ex) {
+                    Logger.getLogger(CorralesCerrados.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         Image i = null;
@@ -76,7 +83,7 @@ public class CorralesCerrados extends javax.swing.JFrame {
         }
     }
 
-    private void selectCorral() {
+    private void selectCorral() throws ParseException {
         Integer fila = t_corral.getSelectedRow();
         corral = new Corral();
         corral.cargarCorralCerrado(t_corral.getValueAt(fila, 1).toString());
@@ -248,6 +255,8 @@ public class CorralesCerrados extends javax.swing.JFrame {
         jScrollPane1.setViewportView(t_corral);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 280));
+
+        jPanel2.setOpaque(false);
 
         boton1.setText("Generar Reporte");
         boton1.setPreferredSize(new java.awt.Dimension(130, 30));
