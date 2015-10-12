@@ -33,7 +33,7 @@ public class fondo extends JLabel{
         this.setText("");
         
         ImageIcon fot  = (ImageIcon) new javax.swing.ImageIcon(getClass().getResource("/resources/backgroudbeige.png"));
-        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT));
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(getWidth() + 1, getHeight() + 1, Image.SCALE_DEFAULT));
         setIcon(icono);
        
         
