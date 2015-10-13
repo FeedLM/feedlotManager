@@ -595,3 +595,30 @@ CREATE TABLE `feedlotmanager`.`ingreso_alimento` (
   `costo_total` DECIMAL(20,4) NULL,
   `carro` VARCHAR(45) NULL,
   PRIMARY KEY (`id_ingreso_alimento`));
+  
+  USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarIngresoAlimento`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarIngresoAlimento`(
+    varNumeroLote	CHAR(255),		varIdCorral			CHAR(36),		varTotalAlimento	decimal(20,4),
+    varFecha		DATETIME,		varCostoUnitario	DECIMAL(20,4),	varCostoTotal		DECIMAL(20,4),	
+    varCarro		varchar(45))
+BEGIN
+    DECLARE varIdIngresoAlimento char(36);
+	
+	SELECT	UUID()
+	INTO	varIdIngresoAlimento;
+     	
+    INSERT ingreso_alimento
+    (	id_ingreso_alimento,	numero_lote,	id_corral,		total_alimento,
+		fecha,					costo_unitario,	costo_total, 	carro)
+    SELECT
+		varIdIngresoAlimento,	varNumeroLote,		varIdCorral,	varTotalAlimento,
+        varFecha,				varCostoUnitario,	varCostoTotal,	varCarro;
+END$$
+
+DELIMITER ;
+
+
