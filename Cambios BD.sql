@@ -557,4 +557,18 @@ CREATE TABLE `recepcion` (
 PRIMARY KEY (`id_recepcion`));
 
 
+CREATE TABLE `lote` (
+  
+`id_lote` CHAR(36) NOT NULL,
+  
+`descripcion_lote` VARCHAR(45) NULL,
+  
+`merma` DECIMAL(20,4) NULL,
+  
+`porcentaje_merma` DECIMAL(20,4) NULL,
+  
+`total_alimento` DECIMAL(20,4) NULL,
+  
+PRIMARY KEY (`id_lote`));
+
 
