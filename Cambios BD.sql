@@ -524,7 +524,7 @@ END$$
 
 DELIMITER ;
 
-CREATE TABLE `feedlotmanager`.`recepcion` (
+CREATE TABLE `recepcion` (
 
   `id_recepcion` CHAR(36) NOT NULL,
   
