@@ -584,3 +584,14 @@ ADD COLUMN `total_alimento` 			DECIMAL(20,4) NULL AFTER `costo_flete`,
 ADD COLUMN `costo_alimento` 			DECIMAL(20,4) NULL AFTER `total_alimento`,
 ADD COLUMN `promedio_alimento` 			DECIMAL(20,4) NULL AFTER `costo_alimento`,
 ADD COLUMN `promedio_costo_alimento` 	DECIMAL(20,4) NULL AFTER `promedio_alimento`;
+
+CREATE TABLE `feedlotmanager`.`ingreso_alimento` (
+  `id_ingreso_alimento` CHAR(36) NOT NULL,
+  `numero_lote` VARCHAR(45) NULL,
+  `id_corral` CHAR(36) NULL,
+  `total_alimento` DECIMAL(20,4) NULL,
+  `fecha` DATETIME NULL,
+  `costo_unitario` DECIMAL(20,4) NULL,
+  `costo_total` DECIMAL(20,4) NULL,
+  `carro` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_ingreso_alimento`));
