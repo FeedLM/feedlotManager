@@ -588,8 +588,8 @@ ADD COLUMN `fecha_ultima_comida`		DECIMAL(20,4) NULL AFTER `promedio_costo_alime
 
 
 CREATE TABLE `feedlotmanager`.`ingreso_alimento` (
-  `id_ingreso_alimento` CHAR(36) NOT NULL,
-  `numero_lote` VARCHAR(45) NULL,
+  `id_ingreso_alimento`	CHAR(36) NOT NULL,
+  `numero_lote` 		VARCHAR(45) NULL,
   `id_corral` CHAR(36) NULL,
   `total_alimento` DECIMAL(20,4) NULL,
   `fecha` DATETIME NULL,
@@ -748,9 +748,9 @@ BEGIN
     from	recepcion r,	animal a
     where   r.numero_lote	=	a.numero_lote;
 
-	update animal
-    set promedio_alimento 		=	total_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion),
-		promedio_costo_alimento	=	costo_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion)
+	update	animal
+    set 	promedio_alimento		=	total_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion),
+			promedio_costo_alimento	=	costo_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion)
 	WHERE	id_animal	=	NEW.id_animal;
 
 -- GAnancia promedio
@@ -879,7 +879,13 @@ BEGIN
 									FROM	animal, corral_animal
 									WHERE	STATUS					=	'A'
 									AND		corral_animal.id_corral	=	corral.id_corral
-									and 	corral_animal.id_animal	=	animal.id_animal)
+									and 	corral_animal.id_animal	=	animal.id_animal),
+		
+        promedio_alimento	=	(	SELECT	AVG(	animal.promedio_alimento		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'A'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal	)
 									
 	WHERE corral.id_corral	=	varIdCorral;    
     
@@ -941,3 +947,6 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `animal_AINS` AFTER INSERT ON `animal`
 
 END$$
 DELIMITER ;
+
+ALTER TABLE `feedlotmanager`.`corral` 
+ADD COLUMN `promedio_alimento` DECIMAL(20,4) NULL AFTER `ganancia_promedio`;
