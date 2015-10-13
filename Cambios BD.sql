@@ -705,8 +705,7 @@ BEGIN
 	update	animal
     set		promedio_alimento 		=	total_alimento	/	datediff(	fecha_ultima_comida,	varFechaRecepcion	),
 			promedio_costo_alimento	=	costo_alimento	/	datediff(	fecha_ultima_comida,	varFechaRecepcion	)
-	WHERE	id_rancho	=	varIdRancho
-	AND		id_animal	=	NEW.id_animal;
+	WHERE	id_animal	=	NEW.id_animal;
 
  -- Envio a FTP
 	DELETE FROM repl_animal
@@ -752,8 +751,7 @@ BEGIN
 	update animal
     set promedio_alimento 		=	total_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion),
 		promedio_costo_alimento	=	costo_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion)
-	WHERE	id_rancho	=	varIdRancho
-	AND		id_animal	=	NEW.id_animal;
+	WHERE	id_animal	=	NEW.id_animal;
 
 -- GAnancia promedio
 
@@ -769,8 +767,7 @@ BEGIN
 
 	update	animal
 	set		ganancia_promedio	=	varGananciaPromedio
-    WHERE	id_rancho	=	varIdRancho
-	AND		id_animal	=	NEW.id_animal;
+    WHERE	id_animal	=	NEW.id_animal;
     
 	SELECT	id_corral, 		id_rancho
 	INTO	varIdCorral,	varIdRancho
@@ -779,6 +776,160 @@ BEGIN
 	
 	CALL animalesPorCorral(varIdCorral);
 	
+ -- Envio a FTP
+	DELETE FROM repl_animal
+	WHERE	id_rancho	=	varIdRancho
+	AND		id_animal	=	NEW.id_animal;
+
+    INSERT INTO repl_animal
+	SELECT varIdRancho, NEW.id_animal, NOW(), 'PE';
+ -- Envio a FTP
+
+END$$
+DELIMITER ;
+
+ALTER TABLE `feedlotmanager`.`corral` 
+ADD COLUMN `ganancia_promedio` DECIMAL(20,4) NULL DEFAULT NULL AFTER `fecha_cierre`;
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `animalesPorCorral`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `animalesPorCorral`(
+	varIdCorral CHAR(36)	)
+BEGIN
+	
+	UPDATE corral
+	SET num_animales =	(	SELECT	count(	*	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		total_kilos	=	(	SELECT	SUM(	peso_actual	) 
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_minimo	=	(	SELECT	MIN(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_maximo	=	(	SELECT	MAX(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_promedio	=	(	SELECT	AVG(	peso_actual	)
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'A'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		peso_ganancia	=	(	SELECT	SUM(	peso_actual	) - SUM(	peso_compra) 
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'A'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		id_raza			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_raza
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_raza,	COUNT(DISTINCT id_raza) AS count, 
+											(	SELECT	id_raza	
+												FROM	raza
+												WHERE	descripcion = 'Mixto' ) mixto
+											FROM	animal a, corral_animal ca
+											WHERE	a.id_animal	=	ca.id_animal
+											AND  	id_corral	=	varIdCorral		)	a1	),                                                                                      
+		id_sexo			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_sexo
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_sexo,	COUNT(DISTINCT id_sexo) AS count, 
+											(	SELECT	id_sexo	
+												FROM	sexo
+												WHERE	descripcion = 'Mixto' ) mixto
+												FROM	animal a, corral_animal ca
+												WHERE	a.id_animal = ca.id_animal
+												AND		id_corral 	= varIdCorral	)	a1	),
+		
+        total_kilos_iniciales	=	(	SELECT	SUM(peso_compra)										
+										FROM    corral_animal c, animal a
+										WHERE   c.id_animal	=	a.id_animal
+										AND     c.id_corral	=	corral.id_corral),
+         
+		total_costo_medicina	=	(	SELECT  SUM( ma.dosis * rm.costo_promedio)
+										FROM 	corral_animal ca, medicina_animal ma, medicina m, rancho_medicina rm
+										WHERE 	ma.id_medicina	=	m.id_medicina
+                                        AND 	rm.id_medicina 	= 	m.id_medicina
+                                        AND		ca.id_animal	=	ma.id_animal
+										AND		ma.id_rancho	=	ca.id_rancho
+										AND 	rm.id_rancho	= 	corral.id_rancho
+                                        AND		ca.id_rancho	=	corral.id_rancho
+										AND		ca.id_corral	=	corral.id_corral	),
+                                        
+		ganancia_promedio	=	(	SELECT	AVG(	animal.ganancia_promedio		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'A'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal)
+									
+	WHERE corral.id_corral	=	varIdCorral;    
+    
+    UPDATE	corral
+    SET		peso_ganancia		=	CASE WHEN peso_ganancia < 0 THEN 0 ELSE peso_ganancia END
+    WHERE	corral.id_corral	=	varIdCorral;
+END$$
+
+DELIMITER ;
+
+USE `feedlotmanager`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_AINS$$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `animal_AINS` AFTER INSERT ON `animal` FOR EACH ROW BEGIN
+
+	DECLARE varIdCorral ,
+			varIdRancho	CHAR(36);
+    declare	varPorcentajeMerma decimal(20,4);
+    declare	varCostoFlete		decimal(20,4);
+    declare	varIdProveedor		char(36);
+    declare	varFechaCompra		datetime;
+    declare	varCompra			char(255);
+            
+	select 	porcentaje_merma, 	round(costo_flete / animales,2),
+			id_proveedor,		fecha_compra,
+            folio
+	into	varPorcentajeMerma,	varCostoFlete,
+			varIdProveedor,		varFechaCompra,
+            varCompra
+	from 	recepcion
+    where 	recepcion.numero_lote = new.numero_lote;
+
+	UPDATE	animal
+    SET		porcentaje_merma	=	varPorcentajeMerma,
+			costo_flete			=	varCostoFlete,
+			id_proveedor		=	varIdProveedor,
+			fecha_compra		=	varFechaCompra,
+			compra				=	varCompra    
+    WHERE	id_animal			=	NEW.id_animal;
+
+	SELECT	id_corral, 		id_rancho
+	INTO	varIdCorral,	varIdRancho
+	FROM 	corral_animal
+	WHERE	id_animal	=	NEW.id_animal;
+
+	CALL animalesPorCorral(varIdCorral);
+    
  -- Envio a FTP
 	DELETE FROM repl_animal
 	WHERE	id_rancho	=	varIdRancho

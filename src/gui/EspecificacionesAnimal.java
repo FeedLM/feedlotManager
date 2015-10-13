@@ -1142,17 +1142,17 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_PesoActual.setText("0.0");
             tf_PesoCompra.setText("0.0");
             sexoSelector1.setSelectedItem(animalDetalle.sexo.descripcion);
-            razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);
+            razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);            
         }
 
         if (!consulta) {
-
+            
             animalDetalle = new Animal();
             animalDetalle.cargarPorEid(eid);
         }
-
+        
         if (!animalDetalle.id_animal.equals("")) {
-
+            
             tf_AreteVisual.setText(animalDetalle.arete_visual);
             corralSelector.setSelectedItem(animalDetalle.corral.nombre);
             JDc_FechaIngreso.setDate(animalDetalle.fecha_ingreso);
@@ -1189,12 +1189,16 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 }
 
             } else {
+                
                 this.semental.setEnabled(true);
                 this.jrb_esVientre.setEnabled(true);
                     
                 if (animalDetalle.semental != null) {
+                    
                     this.semental.setSelectedItem(animalDetalle.semental.arete_visual);
+                    
                 } else {
+                    
                     this.semental.setSelectedItem("");
                 }
             }
@@ -1552,7 +1556,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
          */
         manejadorBD.consulta(""
                 + "SELECT   ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)  \n"
-                + "FROM     movimiento m, detalle_movimiento d, rancho r \n"
+                + "FROM     movimiento m,   detalle_movimiento d, rancho r \n"
                 + "WHERE    m.id_rancho	=   r.id_rancho\n"
                 + "AND      m.id_concepto	=   r.con_pesaje\n"
                 + "AND      (   m.id_rancho     =   d.id_rancho\n"
