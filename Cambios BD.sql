@@ -552,7 +552,7 @@ CREATE TABLE `recepcion` (
   
 `causa_devolucion` VARCHAR(45) NULL,
   
-PRIMARY KEY (`id_recepcion`));
+PRIMARY KEY (`id_rancho`,`id_recepcion`));
 
 
 
