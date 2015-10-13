@@ -702,12 +702,83 @@ BEGIN
     from	recepcion r,	animal a
     where   r.numero_lote	=	a.numero_lote;
 
+	update	animal
+    set		promedio_alimento 		=	total_alimento	/	datediff(	fecha_ultima_comida,	varFechaRecepcion	),
+			promedio_costo_alimento	=	costo_alimento	/	datediff(	fecha_ultima_comida,	varFechaRecepcion	)
+	WHERE	id_rancho	=	varIdRancho
+	AND		id_animal	=	NEW.id_animal;
+
+ -- Envio a FTP
+	DELETE FROM repl_animal
+	WHERE	id_rancho	=	varIdRancho
+	AND		id_animal	=	NEW.id_animal;
+
+    INSERT INTO repl_animal
+	SELECT varIdRancho, NEW.id_animal, NOW(), 'PE';
+ -- Envio a FTP
+
+END$$
+DELIMITER ;
+
+ALTER TABLE `feedlotmanager`.`animal` 
+ADD COLUMN `ganancia_promedio` DECIMAL(20,4) NULL AFTER `fecha_ultima_comida`;
+
+USE `feedlotmanager`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_AUPD$$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `animal_AUPD`
+AFTER UPDATE ON `animal`
+FOR EACH ROW
+BEGIN	
+
+	DECLARE varIdCorral ,
+			varIdRancho	CHAR(36);
+	declare varFechaRecepcion datetime;
+    declare	varGananciaPromedio decimal(20,4);
+	/*
+	IF NEW.id_semental <> NULL THEN
+	
+		call agregarRegistroEmpadre(NOW(),	NEW.id_animal, NEW.id_semental);
+	END IF;
+*/
+	select	fecha_recepcion
+    into	varFechaRecepcion
+    from	recepcion r,	animal a
+    where   r.numero_lote	=	a.numero_lote;
+
 	update animal
     set promedio_alimento 		=	total_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion),
 		promedio_costo_alimento	=	costo_alimento	/	datediff(fecha_ultima_comida, varFechaRecepcion)
 	WHERE	id_rancho	=	varIdRancho
 	AND		id_animal	=	NEW.id_animal;
 
+-- GAnancia promedio
+
+	SELECT	ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)
+    into	varGananciaPromedio
+	FROM	movimiento m, detalle_movimiento d, rancho r
+    WHERE	m.id_rancho	=   r.id_rancho
+    AND		m.id_concepto	=   r.con_pesaje
+    AND		(		m.id_rancho     =   d.id_rancho
+             AND	m.id_concepto   =   d.id_concepto
+             AND	m.id_movimiento =   d.id_movimiento
+			 AND	d.id_animal     =   new.id_animal );
+
+	update	animal
+	set		ganancia_promedio	=	varGananciaPromedio
+    WHERE	id_rancho	=	varIdRancho
+	AND		id_animal	=	NEW.id_animal;
+    
+	SELECT	id_corral, 		id_rancho
+	INTO	varIdCorral,	varIdRancho
+	FROM	corral_animal
+	WHERE	id_animal	=	NEW.id_animal;
+	
+	CALL animalesPorCorral(varIdCorral);
+	
  -- Envio a FTP
 	DELETE FROM repl_animal
 	WHERE	id_rancho	=	varIdRancho
