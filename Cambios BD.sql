@@ -524,35 +524,37 @@ END$$
 
 DELIMITER ;
 
+-- 2015-10-10 14:15
+
 CREATE TABLE `recepcion` (
 
-  `id_rancho` CHAR(36) NOT NULL,
-  
   `id_recepcion` CHAR(36) NOT NULL,
   
-`id_proveedor` CHAR(36) NULL,
+  `id_proveedor` CHAR(36) NULL,
   
-`origen` VARCHAR(45) NULL,
+  `id_origen` CHAR(36) NULL,
   
-`folio` VARCHAR(45) NULL,
+  `folio` VARCHAR(45) NULL,
+ 
+  `fecha` datetime NULL,
+   
+  `animales` INT(10) NULL,
   
-`animales` INT(10) NULL,
+  `peso_origen` DECIMAL(20,4) NULL,
   
-`peso_origen` DECIMAL(20,4) NULL,
+  `limite_merma` DECIMAL(20,4) NULL,
   
-`limite_merma` DECIMAL(20,4) NULL,
+  `peso_recepcion` DECIMAL(20,4) NULL,
   
-`peso_recepcion` DECIMAL(20,4) NULL,
+  `id_lote` CHAR(36) NULL,
   
-`lote` VARCHAR(45) NULL,
+  `costo_flete` DECIMAL(20,4) NULL,
   
-`costo_flete` DECIMAL(20,4) NULL,
+  `devoluciones` INT(10) NULL,
   
-`devoluciones` INT(10) NULL,
+  `causa_devolucion` VARCHAR(45) NULL,
   
-`causa_devolucion` VARCHAR(45) NULL,
-  
-PRIMARY KEY (`id_rancho`,`id_recepcion`));
+PRIMARY KEY (`id_recepcion`));
 
 
 
