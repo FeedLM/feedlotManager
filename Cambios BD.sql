@@ -526,6 +526,8 @@ DELIMITER ;
 
 CREATE TABLE `recepcion` (
 
+  `id_rancho` CHAR(36) NOT NULL,
+  
   `id_recepcion` CHAR(36) NOT NULL,
   
 `id_proveedor` CHAR(36) NULL,
