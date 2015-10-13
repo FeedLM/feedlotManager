@@ -1,4 +1,4 @@
--- 2015-09-23 
+﻿-- 2015-09-23 
 create table genealogia(
 	id_animal	char(36)	not null,
 	id_madre	char(36)	not null,
@@ -523,5 +523,34 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+CREATE TABLE `feedlotmanager`.`recepcion` (
+
+  `id_recepcion` CHAR(36) NOT NULL,
+  
+`id_proveedor` CHAR(36) NULL,
+  
+`origen` VARCHAR(45) NULL,
+  
+`folio` VARCHAR(45) NULL,
+  
+`animales` INT(10) NULL,
+  
+`peso_origen` DECIMAL(20,4) NULL,
+  
+`limite_merma` DECIMAL(20,4) NULL,
+  
+`peso_recepcion` DECIMAL(20,4) NULL,
+  
+`lote` VARCHAR(45) NULL,
+  
+`costo_flete` DECIMAL(20,4) NULL,
+  
+`devoluciones` INT(10) NULL,
+  
+`causa_devolucion` VARCHAR(45) NULL,
+  
+PRIMARY KEY (`id_recepcion`));
+
 
 
