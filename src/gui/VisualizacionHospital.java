@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Animal;
 import static domain.Corral.corralIdNombre;
 import domain.Excel;
 import domain.Movimiento;
@@ -54,7 +55,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         corralSelector1.cargar();
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-
+        animal_detalles = new Animal();
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension TamanoPantalla = tk.getScreenSize();
         fondo1.cargar(TamanoPantalla);
@@ -71,12 +72,16 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
     private void selectAnimal() {
 
         Integer fila = t_animalesHospital.getSelectedRow();
+
         this.btn_salidaHospital.setEnabled(false);
+
         if (fila >= 0) {
 
             id_animal = t_animalesHospital.getValueAt(fila, 0).toString();
             this.btn_salidaHospital.setEnabled(true);
-        }
+            this.btn_detalles.setEnabled(true);
+            animal_detalles.cargarPorId(this.t_animalesHospital.getValueAt(fila, 0).toString());
+        } 
 
     }
 
@@ -237,6 +242,7 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         corralSelector1 = new domain.CorralSelector();
         jPanel5 = new javax.swing.JPanel();
         btn_salidaHospital = new abstractt.Boton();
+        btn_detalles = new abstractt.Boton();
         jPanel7 = new javax.swing.JPanel();
         etiqueta4 = new abstractt.Etiqueta();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -247,7 +253,6 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         fondo1 = new abstractt.fondo();
 
         setTitle("Visualización Hospital");
-        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1020, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -336,6 +341,15 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
         jPanel5.add(btn_salidaHospital);
 
         jPanel6.add(jPanel5);
+
+        btn_detalles.setText("Detalles");
+        btn_detalles.setPreferredSize(new java.awt.Dimension(117, 25));
+        btn_detalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_detallesActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btn_detalles);
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1000, -1));
 
@@ -428,11 +442,31 @@ public class VisualizacionHospital extends javax.swing.JInternalFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btn_detallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detallesActionPerformed
+        if (especificacionesAnimal != null) {
+
+            especificacionesAnimal.dispose();
+        }
+
+        especificacionesAnimal = new EspecificacionesAnimal(parent);
+        especificacionesAnimal.setConsulta(true);
+
+        if (!animal_detalles.id_animal.equals("")) {
+
+            especificacionesAnimal.setId_animal(animal_detalles.id_animal);
+        }
+
+        especificacionesAnimal.setVisible(true);
+    }//GEN-LAST:event_btn_detallesActionPerformed
+
     Desktop parent;
     private String id_corral_destino;
     private String id_animal;
-
+    private Animal animal_detalles;
+    EspecificacionesAnimal especificacionesAnimal;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.Boton btn_detalles;
     private abstractt.Boton btn_salidaHospital;
     private abstractt.Calendar calendar1;
     private domain.CorralSelector corralSelector1;

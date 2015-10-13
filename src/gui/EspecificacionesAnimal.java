@@ -332,7 +332,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel21.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(95, 84, 88));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel21.setText("Compra:");
+        jLabel21.setText("Folio de Compra:");
         pn_Formulario.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 120, 20));
 
         jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
