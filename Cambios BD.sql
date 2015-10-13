@@ -583,7 +583,7 @@ ADD COLUMN `costo_flete` 				DECIMAL(20,4) NULL AFTER `porcentaje_merma`,
 ADD COLUMN `total_alimento` 			DECIMAL(20,4) NULL AFTER `costo_flete`,
 ADD COLUMN `costo_alimento` 			DECIMAL(20,4) NULL AFTER `total_alimento`,
 ADD COLUMN `promedio_alimento` 			DECIMAL(20,4) NULL AFTER `costo_alimento`,
-ADD COLUMN `promedio_costo_alimento`	DECIMAL(20,4) NULL AFTER `promedio_alimento`;
+ADD COLUMN `promedio_costo_alimento`	DECIMAL(20,4) NULL AFTER `promedio_alimento`,
 ADD COLUMN `fecha_ultima_comida`		DECIMAL(20,4) NULL AFTER `promedio_costo_alimento`;
 
 
