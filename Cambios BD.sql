@@ -528,47 +528,86 @@ DELIMITER ;
 
 CREATE TABLE `recepcion` (
 
-  `id_recepcion` CHAR(36) NOT NULL,
-  
-  `id_proveedor` CHAR(36) NULL,
-  
-  `id_origen` CHAR(36) NULL,
-  
-  `folio` VARCHAR(45) NULL,
- 
-  `fecha` datetime NULL,
-   
-  `animales` INT(10) NULL,
-  
-  `peso_origen` DECIMAL(20,4) NULL,
-  
-  `limite_merma` DECIMAL(20,4) NULL,
-  
-  `peso_recepcion` DECIMAL(20,4) NULL,
-  
-  `id_lote` CHAR(36) NULL,
-  
-  `costo_flete` DECIMAL(20,4) NULL,
-  
-  `devoluciones` INT(10) NULL,
-  
-  `causa_devolucion` VARCHAR(45) NULL,
-  
+  `id_recepcion` CHAR(36) NOT NULL,  
+  `id_proveedor` CHAR(36) NULL,  
+  `id_origen` CHAR(36) NULL,  
+  `folio` VARCHAR(45) NULL, 
+  `fecha` datetime NULL,   
+  `animales` INT(10) NULL,  
+  `peso_origen` DECIMAL(20,4) NULL,  
+  `limite_merma` DECIMAL(20,4) NULL,  
+  `peso_recepcion` DECIMAL(20,4) NULL,  
+  `id_lote` CHAR(36) NULL,  
+  `costo_flete` DECIMAL(20,4) NULL,  
+  `devoluciones` INT(10) NULL,  
+  `causa_devolucion` VARCHAR(45) NULL,  
 PRIMARY KEY (`id_recepcion`));
 
-
-CREATE TABLE `lote` (
-  
-`id_lote` CHAR(36) NOT NULL,
-  
-`descripcion_lote` VARCHAR(45) NULL,
-  
-`merma` DECIMAL(20,4) NULL,
-  
-`porcentaje_merma` DECIMAL(20,4) NULL,
-  
-`total_alimento` DECIMAL(20,4) NULL,
-  
+CREATE TABLE `lote` (  
+  `id_lote` CHAR(36) NOT NULL,  
+  `descripcion_lote` VARCHAR(45) NULL,  
+  `merma` DECIMAL(20,4) NULL,  
+  `porcentaje_merma` DECIMAL(20,4) NULL,  
+  `total_alimento` DECIMAL(20,4) NULL,  
 PRIMARY KEY (`id_lote`));
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarLote`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarLote`(
+    varDescripcionLote	CHAR(45))
+BEGIN
+    DECLARE varIdLote CHAR(36);
+
+	SELECT UUID()
+	INTO varIdLote;
+
+	INSERT lote
+    (   id_lote,	descripcion_lote)
+    SELECT
+        varIdLote, 	varDescripcionLote;
+END$$
+
+DELIMITER ;
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarRecepcion`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarRecepcion`(
+    varIdProveedor	CHAR(36),		varIdOrigen			CHAR(36),		varFolio			CHAR(45),
+    varFecha		DATETIME,		varAnimales			int(10),		varPesoOrigen		DECIMAL(20,4),
+	varLimiteMerma	DECIMAL(20,4),	varPesoRecepcion	DECIMAL(20,4),	varDescripcionLote	char(45),
+	varCostoFlete	DECIMAL(20,4),	varDevoluciones		int(10),		varCausaDevolucion 	char(45))
+BEGIN
+    DECLARE varIdRecepcion ,
+			varIdLote	char(36);
+	
+	SELECT UUID()
+	INTO varIdRecepcion;
+	
+    call agregarLote(varDescripcionLote);
+    
+    select id_lote
+    into	varIdLote
+    from 	lote
+    where 	descripcion_lote	=	varDescripcionLote;
+    	
+    INSERT recepcion
+    (	id_recepcion,	id_proveedor,	id_origen,		folio,
+		fecha, 			animales, 		peso_origen,	limite_merma,
+		peso_recepcion,	id_lote,		costo_flete,	devoluciones,
+        causa_devolucion)
+    SELECT
+		varIdRecepcion,		varIdProveedor,		varIdOrigen,	varFolio,
+		varFecha,			varAnimales,		varPesoOrigen,	varLimiteMerma,
+		varPesoRecepcion,	varIdLote,			varCostoFlete,	varDevoluciones,
+		varCausaDevolucion;	
+END$$
+
+DELIMITER ;
 
 
