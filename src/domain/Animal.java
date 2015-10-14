@@ -26,13 +26,9 @@ public class Animal {
     public String id_animal;
     public String arete_visual;
     public String arete_electronico;
-    //  public String categoria;
     public Date fecha_ingreso;
     public String arete_siniiga;
     public String arete_campaña;
-//    public String arete_metalico_numero;
-    //   public String ganado_amedias;
-    //   public Color color;
     public Date fecha_compra;
     public String numero_lote;
     public String compra;
@@ -50,6 +46,14 @@ public class Animal {
     public Genealogia genealogia;
     public String es_vientre;
 
+    public Double porcentaje_merma;
+    public Double costo_flete;
+    public Double costo_alimentacion;
+    public Double promedio_alimentacion;
+    public Double promedio_costo_alimento;
+    public Date fecha_ultima_comida;
+    public Double ganancia_promedio;
+
     public Animal() {
 
         id_animal = "";
@@ -59,13 +63,11 @@ public class Animal {
         corral = new Corral();
         raza = new Raza();
         genealogia = new Genealogia();
-        //tipoGanado = new TipoGanado();
-        //tipoMedicamento = new TipoMedicamento();
-        // 
+
     }
 
-    public String selectInicial(){
-        
+    public String selectInicial() {
+
         return "SELECT animal.id_animal,                             arete_visual, \n"
                 + "    COALESCE(arete_electronico,''),               COALESCE(fecha_ingreso,'1900-01-01 00:00:00'), \n"
                 + "    COALESCE(arete_siniiga,''),                   COALESCE(arete_campaña,''), \n"
@@ -75,10 +77,14 @@ public class Animal {
                 + "    COALESCE(peso_compra,0),                      status, \n"
                 + "    COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
                 + "    COALESCE(animal.id_sexo,''),                  COALESCE(id_raza,''),\n"
-                + "    COALESCE(es_vientre,'N') \n ";
-        
+                + "    COALESCE(es_vientre,'N'),                     COALESCE(porcentaje_merma,0),"
+                + "    COALESCE(costo_flete, 0),                  COALESCE(total_alimento, 0),"
+                + "     COALESCE(costo_alimento, 0),                COALESCE(promedio_alimento, 0),"
+                + "     COALESCE(promedio_costo_alimento,0),        COALESCE(fecha_ultima_comida, '1900-01-01 00:00:00'),"
+                + "     COALESCE(ganancia_promedio, 0) \n ";
+
     }
-    
+
     public void cargarPorId(String sId_animal) {
 
         manejadorBD.consulta(""
@@ -129,7 +135,7 @@ public class Animal {
     public void cargarPorEidTodosRanchos(String sEid) {
 
         manejadorBD.consulta(""
-               + selectInicial()
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE animal.status = 'A' \n"
                 + "AND   animal.arete_electronico    = '" + sEid + "' \n"
@@ -144,7 +150,7 @@ public class Animal {
     public void cargarPorAreteVisual(String aAreteVisual, String aStatus) {
 
         manejadorBD.consulta(""
-               + selectInicial()
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE    animal.arete_visual  = '" + aAreteVisual + "' \n"
                 + "AND      status  =   '" + aStatus + "'                    \n"
@@ -157,11 +163,10 @@ public class Animal {
         }
     }
 
-      
     public void cargarPorAreteVisualTodos(String aAreteVisual) {
 
         manejadorBD.consulta(""
-               + selectInicial()
+                + selectInicial()
                 + "FROM  animal, corral_animal  \n"
                 + "WHERE    animal.arete_visual  = '" + aAreteVisual + "' \n"
                 + "AND      animal.id_animal    =   corral_animal.id_animal \n"
@@ -249,8 +254,22 @@ public class Animal {
             //Tiene emparejamiento
             obtenerRegistroEmpadre();
         }
-        
+
         genealogia.cargarGenealogia(id_animal);
+
+        porcentaje_merma = manejadorBD.getValorDouble(0, 19);
+        costo_flete = manejadorBD.getValorDouble(0, 20);
+        costo_alimentacion = manejadorBD.getValorDouble(0, 21);
+        promedio_alimentacion = manejadorBD.getValorDouble(0, 22);
+        promedio_costo_alimento = manejadorBD.getValorDouble(0, 23);
+
+        try {
+            fecha_ultima_comida = formatoDateTime.parse(manejadorBD.getValorString(0, 6));
+        } catch (ParseException ex) {
+            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ganancia_promedio = manejadorBD.getValorDouble(0, 25);
+
     }
 
     public void obtenerRegistroEmpadre() {
@@ -686,7 +705,7 @@ public class Animal {
         ArrayList array = new ArrayList();
 
         array.add("");
-        
+
         manejadorBD.consulta(""
                 + "SELECT   arete_visual "
                 + "FROM     animal, corral_animal \n"
@@ -701,13 +720,13 @@ public class Animal {
 
         return array;
     }
-    
+
     public static ArrayList cargararete_visualshembrasSinEmparejar() {
 
         ArrayList array = new ArrayList();
 
         array.add("");
-        
+
         manejadorBD.consulta(""
                 + "SELECT   arete_visual                    \n"
                 + "FROM     animal  LEFT OUTER JOIN sexo "
@@ -732,7 +751,7 @@ public class Animal {
     public static ArrayList cargararete_visualshembrasEmparejadas() {
 
         ArrayList array = new ArrayList();
-        
+
         array.add("");
 
         manejadorBD.consulta(""

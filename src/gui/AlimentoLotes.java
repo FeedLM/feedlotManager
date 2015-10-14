@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Corral;
 import domain.Recepcion;
 
 /**
@@ -117,7 +118,8 @@ public class AlimentoLotes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoActionPerformed
-        ingresoAlimento = new IngresoAlimento(this, recepcion.numero_lote, null);
+        corral = new Corral();
+        ingresoAlimento = new IngresoAlimento(this, recepcion.numero_lote, corral);
         ingresoAlimento.setVisible(true);
     }//GEN-LAST:event_btn_ingresoActionPerformed
 
@@ -126,9 +128,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
         tf_totalAlimento.setText(recepcion.total_alimento.toString());
     }//GEN-LAST:event_loteSelector1ActionPerformed
     
-    
     IngresoAlimento ingresoAlimento;
     Recepcion recepcion;
+    Corral corral;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Boton btn_ingreso;
     private abstractt.Etiqueta etiqueta1;

@@ -104,7 +104,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         this.razaSelector1.valor_nuevo = true;
         this.proveedorSelector1.valor_nuevo = true;
-        this.tf_ganancia.setEditable(false);
+        this.tf_ganancia.setEditable(false);        
+        
         razaSelector1.cargarSeleccionar();
 
         animalSelectorMadre.cargararete_visuals_2();
@@ -188,7 +189,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esSemental = new javax.swing.JRadioButton();
         semental = new domain.AnimalSelector();
         tf_Compra = new javax.swing.JTextField();
-        tf_NumeroLote = new abstractt.TextField();
         JDc_FechaCompra = new abstractt.Calendar();
         sexoSelector1 = new domain.SexoSelector();
         proveedorSelector1 = new domain.ProveedorSelector();
@@ -199,6 +199,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalSelectorMadre = new domain.AnimalSelector();
         animalSelectorPadre = new domain.AnimalSelector();
         jrb_esVientre = new javax.swing.JRadioButton();
+        loteSelector1 = new domain.LoteSelector();
         pn_Grafica_Tabla = new javax.swing.JPanel();
         panelGrafica = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -409,9 +410,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         tf_Compra.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pn_Formulario.add(tf_Compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 160, 20));
 
-        tf_NumeroLote.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(tf_NumeroLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 160, 20));
-
         JDc_FechaCompra.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
         pn_Formulario.add(JDc_FechaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 160, 20));
 
@@ -465,6 +463,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esVientre.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jrb_esVientre.setOpaque(false);
         pn_Formulario.add(jrb_esVientre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 210, 20));
+
+        loteSelector1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loteSelector1ActionPerformed(evt);
+            }
+        });
+        pn_Formulario.add(loteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 160, -1));
 
         jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 570));
 
@@ -700,7 +705,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 180, 110));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 570, 180, 110));
 
         fondo1.setText("fondo1");
         jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
@@ -863,6 +868,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         historialPartos.setVisible(true);
     }//GEN-LAST:event_btn_PartosActionPerformed
 
+    private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
+        this.proveedorSelector1.setEditable(false);
+        this.tf_Compra.setEditable(false);
+        this.tf_PesoCompra.setEditable(false);
+        
+    }//GEN-LAST:event_loteSelector1ActionPerformed
+
     private boolean validacionCodigo;
 
     private void validarCodigo() {
@@ -994,7 +1006,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalDetalle.arete_siniiga = tf_AreteSiniiga.getText();
         animalDetalle.arete_campaña = tf_AreteCampaña.getText();
         animalDetalle.fecha_compra = JDc_FechaCompra.getCalendar().getTime();
-        animalDetalle.numero_lote = tf_NumeroLote.getText();
+        animalDetalle.numero_lote = loteSelector1.getText();
         animalDetalle.compra = tf_Compra.getText();
 
         animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
@@ -1058,7 +1070,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalDetalle.arete_siniiga = tf_AreteSiniiga.getText();
         animalDetalle.arete_campaña = tf_AreteCampaña.getText();
         animalDetalle.fecha_compra = JDc_FechaCompra.getCalendar().getTime();
-        animalDetalle.numero_lote = tf_NumeroLote.getText();
+        animalDetalle.numero_lote = loteSelector1.getText();
         animalDetalle.compra = tf_Compra.getText();
         // animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
         animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
@@ -1136,7 +1148,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteCampaña.setText("");
 
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
-            tf_NumeroLote.setText(animalDetalle.numero_lote);
+            loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText("0.0");
@@ -1159,7 +1171,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteSiniiga.setText(animalDetalle.arete_siniiga);
             tf_AreteCampaña.setText(animalDetalle.arete_campaña);
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
-            tf_NumeroLote.setText(animalDetalle.numero_lote);
+            loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());
@@ -1263,7 +1275,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteCampaña.setText("");
 
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
-            tf_NumeroLote.setText(animalDetalle.numero_lote);
+            loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText("0.0");
@@ -1286,7 +1298,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteSiniiga.setText(animalDetalle.arete_siniiga);
             tf_AreteCampaña.setText(animalDetalle.arete_campaña);
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
-            tf_NumeroLote.setText(animalDetalle.numero_lote);
+            loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());
@@ -1481,6 +1493,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton jrb_esSemental;
     private javax.swing.JRadioButton jrb_esVientre;
+    private domain.LoteSelector loteSelector1;
     private javax.swing.JPanel panelGrafica;
     private javax.swing.JPanel pn_Formulario;
     private javax.swing.JPanel pn_Grafica_Tabla;
@@ -1496,7 +1509,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.TextField tf_AreteVisual;
     private javax.swing.JTextField tf_Compra;
     private abstractt.TextField tf_Eid;
-    private abstractt.TextField tf_NumeroLote;
     private abstractt.TextField tf_PesoActual;
     private abstractt.TextField tf_PesoCompra;
     private abstractt.TextField tf_Temperatura;
