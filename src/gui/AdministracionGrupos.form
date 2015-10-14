@@ -790,7 +790,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="abstractt.Boton" name="btn_cierreCorral1">
+        <Component class="abstractt.Boton" name="btn_IngresoAlimento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingreso Alimento"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -801,7 +801,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cierreCorral1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_IngresoAlimentoActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -48,6 +48,7 @@ public class Animal {
 
     public Double porcentaje_merma;
     public Double costo_flete;
+    public Double total_alimento;
     public Double costo_alimentacion;
     public Double promedio_alimentacion;
     public Double promedio_costo_alimento;
@@ -237,7 +238,22 @@ public class Animal {
         id_sexo = manejadorBD.getValorString(0, 16);
         id_raza = manejadorBD.getValorString(0, 17);
         es_vientre = manejadorBD.getValorString(0, 18);
+        
+        porcentaje_merma = manejadorBD.getValorDouble(0, 19);
+        costo_flete = manejadorBD.getValorDouble(0, 20);
+        total_alimento = manejadorBD.getValorDouble(0, 21);
+        costo_alimentacion = manejadorBD.getValorDouble(0, 22);
+        
+        promedio_alimentacion = manejadorBD.getValorDouble(0, 23);
+        promedio_costo_alimento = manejadorBD.getValorDouble(0, 24);
 
+        try {
+            fecha_ultima_comida = formatoDateTime.parse(manejadorBD.getValorString(0, 25));
+        } catch (ParseException ex) {
+            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ganancia_promedio = manejadorBD.getValorDouble(0, 26);
+        
         proveedor.cargarPorId(id_proveedor);
 
         if (!id_semental.equals("")) {
@@ -256,19 +272,6 @@ public class Animal {
         }
 
         genealogia.cargarGenealogia(id_animal);
-
-        porcentaje_merma = manejadorBD.getValorDouble(0, 19);
-        costo_flete = manejadorBD.getValorDouble(0, 20);
-        costo_alimentacion = manejadorBD.getValorDouble(0, 21);
-        promedio_alimentacion = manejadorBD.getValorDouble(0, 22);
-        promedio_costo_alimento = manejadorBD.getValorDouble(0, 23);
-
-        try {
-            fecha_ultima_comida = formatoDateTime.parse(manejadorBD.getValorString(0, 6));
-        } catch (ParseException ex) {
-            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ganancia_promedio = manejadorBD.getValorDouble(0, 25);
 
     }
 

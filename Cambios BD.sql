@@ -950,3 +950,159 @@ DELIMITER ;
 
 ALTER TABLE `feedlotmanager`.`corral` 
 ADD COLUMN `promedio_alimento` DECIMAL(20,4) NULL AFTER `ganancia_promedio`;
+
+-- 2015-10-14 11:14
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS ingreso_alimento_AFTER_INSERT$$
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `ingreso_alimento_AFTER_INSERT`
+AFTER INSERT ON `ingreso_alimento` 
+FOR EACH ROW
+begin
+
+    declare varAlimentoAnimal decimal(20,4);
+              
+    if new.id_corral = "" then 
+		
+        select 	new.total_alimento / count(*)
+        into	varAlimentoAnimal 
+        from   	animal
+        where  	numero_lote = new.numero_lote;
+        -- and		coalesce( id_corral, '' ) = '';
+        
+        update	animal
+        set		total_alimento		=	total_alimento	+	varAlimentoAnimal,
+				costo_alimento		=	costo_alimento	+	(	varAlimentoAnimal	*	new.costo_unitario	),
+                fecha_ultima_comida	=	NOW()
+        where	numero_lote		=	new.numero_lote;
+      --   and		coalesce( id_corral, '') = '';
+    end if;    
+    
+    if new.numero_lote  = "" then 
+		
+        select 	new.total_alimento / count(*)
+        into	varAlimentoAnimal 
+        from   	animal, corral_animal
+        where  	corral_animal.id_corral		=	new.id_corral
+        and     corral_animal.id_animal		=	animal.id_animal;
+        
+        update	animal
+        set		total_alimento 		=	total_alimento	+	varAlimentoAnimal,
+				costo_alimento 		=	costo_alimento	+	(  varAlimentoAnimal * new.costo_unitario ),
+                fecha_ultima_comida	=	NOW()
+		-- from 	corral_animal
+        where	id_animal in (	select id_animal
+								from   corral_animal 
+								where  corral_animal.id_corral = new.id_corral);
+    end if;    
+end$$
+DELIMITER ;
+
+--2015 -10-14 12:23
+ALTER TABLE `animal` 
+CHANGE COLUMN `fecha_ultima_comida` `fecha_ultima_comida` DATETIME NULL DEFAULT NULL ;
+
+--2015-10-14 12:33
+CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_BUPD`
+BEFORE UPDATE ON `feedlotmanager`.`animal`
+FOR EACH ROW
+BEGIN	
+
+	declare varFechaRecepcion datetime;
+    declare	varGananciaPromedio decimal(20,4);
+	
+	select	fecha_recepcion
+    into	varFechaRecepcion
+    from	recepcion r,	animal a
+    where   r.numero_lote	=	a.numero_lote;
+
+	set 	new.promedio_alimento		=	new.total_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion),
+			new.promedio_costo_alimento	=	new.costo_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion);
+
+-- GAnancia promedio
+
+	SELECT	ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)
+    into	varGananciaPromedio
+	FROM	movimiento m, detalle_movimiento d, rancho r
+    WHERE	m.id_rancho	=   r.id_rancho
+    AND		m.id_concepto	=   r.con_pesaje
+    AND		(		m.id_rancho     =   d.id_rancho
+             AND	m.id_concepto   =   d.id_concepto
+             AND	m.id_movimiento =   d.id_movimiento
+			 AND	d.id_animal     =   new.id_animal );
+
+	set		new.ganancia_promedio	=	varGananciaPromedio;    
+
+END
+
+--2015-10-14 12:33
+CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_AUPD`
+AFTER UPDATE ON `feedlotmanager`.`animal`
+FOR EACH ROW
+BEGIN	
+
+	DECLARE varIdCorral ,
+			varIdRancho	CHAR(36);            
+    
+	SELECT	id_corral, 		id_rancho
+	INTO	varIdCorral,	varIdRancho
+	FROM	corral_animal
+	WHERE	id_animal	=	NEW.id_animal;
+	
+	CALL animalesPorCorral(varIdCorral);
+	
+ -- Envio a FTP
+	DELETE FROM repl_animal
+	WHERE	id_rancho	=	varIdRancho
+	AND		id_animal	=	NEW.id_animal;
+
+    INSERT INTO repl_animal
+	SELECT varIdRancho, NEW.id_animal, NOW(), 'PE';
+ -- Envio a FTP
+
+END
+
+-- 2015-10-14 12:34
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `ingreso_alimento_AFTER_INSERT`
+AFTER INSERT ON `ingreso_alimento` 
+FOR EACH ROW
+begin
+
+    declare varAlimentoAnimal decimal(20,4);
+              
+    if new.id_corral = "" then 
+		
+        select 	new.total_alimento / count(*)
+        into	varAlimentoAnimal 
+        from   	animal
+        where  	numero_lote = new.numero_lote;
+        -- and		coalesce( id_corral, '' ) = '';
+        
+        update	animal
+        set		total_alimento		=	coalesce(total_alimento, 0.0)	+	varAlimentoAnimal,
+				costo_alimento		=	coalesce(costo_alimento, 0.0)	+	(	varAlimentoAnimal	*	new.costo_unitario	),
+                fecha_ultima_comida	=	NOW()
+        where	numero_lote		=	new.numero_lote;
+      --   and		coalesce( id_corral, '') = '';
+    end if;    
+    
+    if new.numero_lote  = "" then 
+		
+        select 	new.total_alimento / count(*)
+        into	varAlimentoAnimal 
+        from   	animal, corral_animal
+        where  	corral_animal.id_corral		=	new.id_corral
+        and     corral_animal.id_animal		=	animal.id_animal;
+        
+        update	animal
+        set		total_alimento 		=	coalesce(total_alimento, 0.0)	+	varAlimentoAnimal,
+				costo_alimento 		=	coalesce(costo_alimento, 0.0)	+	(  varAlimentoAnimal * new.costo_unitario ),
+                fecha_ultima_comida	=	NOW()
+		-- from 	corral_animal
+        where	id_animal in (	select id_animal
+								from   corral_animal 
+								where  corral_animal.id_corral = new.id_corral);
+    end if;    
+end

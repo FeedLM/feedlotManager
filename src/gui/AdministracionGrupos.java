@@ -279,7 +279,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         btn_busqueda = new abstractt.Boton();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_animales = new abstractt.Table();
-        btn_cierreCorral1 = new abstractt.Boton();
+        btn_IngresoAlimento = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
@@ -630,15 +630,15 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 385, 1310, 300));
 
-        btn_cierreCorral1.setText("Ingreso Alimento");
-        btn_cierreCorral1.setFont(new java.awt.Font("Trebuchet", 0, 10)); // NOI18N
-        btn_cierreCorral1.setPreferredSize(new java.awt.Dimension(130, 45));
-        btn_cierreCorral1.addActionListener(new java.awt.event.ActionListener() {
+        btn_IngresoAlimento.setText("Ingreso Alimento");
+        btn_IngresoAlimento.setFont(new java.awt.Font("Trebuchet", 0, 10)); // NOI18N
+        btn_IngresoAlimento.setPreferredSize(new java.awt.Dimension(130, 45));
+        btn_IngresoAlimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cierreCorral1ActionPerformed(evt);
+                btn_IngresoAlimentoActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_cierreCorral1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, 120, 23));
+        jPanel6.add(btn_IngresoAlimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, 120, 23));
 
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta2.setText("Listado de animales");
@@ -1136,20 +1136,30 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         }
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
-    private void btn_cierreCorral1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorral1ActionPerformed
+    private void btn_IngresoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresoAlimentoActionPerformed
        
+        
+        
+        if( corral == null || corral.id_corral.equals("")){
+            
+            JOptionPane.showMessageDialog(this, "Seleccione un corral", gs_mensaje, JOptionPane.INFORMATION_MESSAGE); 
+            return;
+        }
+        
         if (ingresoAlimento != null) {
-
+            
             ingresoAlimento.dispose();
         }
-
+        
         ingresoAlimento = new IngresoAlimentoCaptura(parent, "", this.corral);       
-
+        
         ingresoAlimento.setVisible(true);
-    }//GEN-LAST:event_btn_cierreCorral1ActionPerformed
+    }//GEN-LAST:event_btn_IngresoAlimentoActionPerformed
 
     private void cargarCorralPorSexo() {
+        
         if (!corralActivo) {
+            
             return;
         }
 
@@ -1284,9 +1294,9 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private abstractt.Boton btn_Animal;
     private abstractt.Boton btn_Crear;
     private abstractt.Boton btn_Eliminar;
+    private abstractt.Boton btn_IngresoAlimento;
     private abstractt.Boton btn_busqueda;
     private abstractt.Boton btn_cierreCorral;
-    private abstractt.Boton btn_cierreCorral1;
     private abstractt.Boton btn_detalles;
     private abstractt.Boton btn_historico;
     private abstractt.Boton btn_reporteCorral;
