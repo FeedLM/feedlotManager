@@ -31,18 +31,18 @@ public class Captura_Recepcion extends javax.swing.JFrame {
      */
     public Captura_Recepcion() {
         setLocationRelativeTo(null);
+        initComponents();
+        String titulos[] = {"id_recepcion", "Folio", "Proveedor",
+            "Fecha Compra", "# Animales", "Peso Origen", "Peso Recepción",
+            "Kg Merma", "% Merma", "Devoluciones", "Causa"};
         proveedorSelector1.cargar();
         estadoSelector1.cargar();
         tf_limiteMerma.textFieldDouble();
         tf_numeroAnimales.textFieldSoloNumeros();
         tf_pesoOrigen.textFieldDouble();
-        initComponents();
-        String titulos[] = {"id_recepcion", "Folio", "Proveedor",
-            "Fecha Compra", "# Animales", "Peso Origen", "Peso Recepción",
-            "Kg Merma", "% Merma", "Parametro", "Devoluciones", "Causa"};
         t_recepcion.setTitulos(titulos);
         t_recepcion.cambiarTitulos();
-        t_recepcion.ocultarcolumna(0);
+        cargarTabla();
 
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
@@ -96,15 +96,24 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         etiqueta1.setOpaque(true);
         btn_.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 60));
 
+        t_recepcion.setForeground(new java.awt.Color(230, 225, 95));
         t_recepcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
             }
         ));
         jScrollPane1.setViewportView(t_recepcion);
@@ -190,6 +199,11 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         btn_.add(tf_numeroLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 20));
 
         btn_ingresoAlimento.setText("Ingreso de Alimento");
+        btn_ingresoAlimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ingresoAlimentoActionPerformed(evt);
+            }
+        });
         btn_.add(btn_ingresoAlimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, -1, 30));
 
         fondo1.setText("fondo1");
@@ -211,17 +225,46 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cargarTabla() {
+        manejadorBD.consulta(""
+                + "SELECT \n"
+                + "    id_recepcion,\n"
+                + "    folio,\n"
+                + "    p.descripcion,\n"
+                + "    Fecha_compra,\n"
+                + "    Animales,\n"
+                + "    Peso_Origen,\n"
+                + "    Peso_Recepcion,\n"
+                + "    Merma,\n"
+                + "    porcentaje_Merma,\n"
+                + "    Devoluciones,\n"
+                + "    Causa_devolucion\n"
+                + "FROM\n"
+                + "    recepcion r,\n"
+                + "    proveedor p\n"
+                + "WHERE\n"
+                + "    p.id_proveedor = r.id_proveedor;");
+        manejadorBD.asignarTable(t_recepcion);
+        t_recepcion.ocultarcolumna(0);
+
+    }
+
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         limpiar();
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-
+        guardar();
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void tf_numeroLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_numeroLoteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_numeroLoteActionPerformed
+
+    private void btn_ingresoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoAlimentoActionPerformed
+        AlimentoLotes alimentoLote = new AlimentoLotes();
+        alimentoLote.setVisible(true);
+    }//GEN-LAST:event_btn_ingresoAlimentoActionPerformed
 
     public void guardar() {
         if (tf_folio.equals("") || tf_numeroAnimales.equals("") || this.tf_numeroLote.equals("")) {
@@ -232,6 +275,9 @@ public class Captura_Recepcion extends javax.swing.JFrame {
             return;
         }
         recepcion = new Recepcion();
+        proveedor = new Proveedor();
+        estado = new Estado();
+
         proveedor.cargarPorDescripcion(this.proveedorSelector1.getText());
         recepcion.proveedor = proveedor;
         estado.cargarPorDescripcion(this.estadoSelector1.getText());
@@ -241,6 +287,7 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         recepcion.fecha_recepcion = this.calendar2.getDate();
         recepcion.animales = this.tf_numeroAnimales.getInt();
         recepcion.peso_origen = this.tf_pesoOrigen.getDouble();
+        recepcion.peso_recepcion = this.tf_pesoRecepcion.getDouble();
         recepcion.limite_merma = this.tf_limiteMerma.getDouble();
         recepcion.numero_lote = this.tf_numeroLote.getText();
         recepcion.costo_flete = this.tf_costoFlete.getDouble();
@@ -263,6 +310,7 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         manejadorBD.parametrosSP.agregarParametro(recepcion.causa_devolucion, "varCausaDevolucion", "STRING", "IN");
         if (manejadorBD.ejecutarSP("{ call agregarRecepcion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
             JOptionPane.showMessageDialog(this, "La compra se ha agregado correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+            cargarTabla();
         } else {
             JOptionPane.showMessageDialog(this, "Ocurrió un error con los campos, revise los parametros que esta mandando.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }

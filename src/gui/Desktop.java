@@ -110,7 +110,7 @@ public class Desktop extends javax.swing.JFrame {
             }
         });
 
-        btn_ayuda.setText("Ayuda");
+        btn_ayuda.setText("Recepción");
         btn_ayuda.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         btn_ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +121,6 @@ public class Desktop extends javax.swing.JFrame {
         btn_ayuda.setBounds(60, 120, 180, 30);
 
         btn_administrar.setText("Cambiar de Finca");
-        btn_administrar.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         btn_administrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_administrarActionPerformed(evt);
@@ -324,12 +323,14 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_trasladoGanadoActionPerformed
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
-        try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "Ayuda.pdf");
-        } catch (IOException e) {
-            //e.printStackTrace();
-            System.out.println("Sin ayuda existente...");
-        }
+//        try {
+//            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "Ayuda.pdf");
+//        } catch (IOException e) {
+//            //e.printStackTrace();
+//            System.out.println("Sin ayuda existente...");
+//        }
+        Captura_Recepcion captura_recepcion = new Captura_Recepcion();
+        captura_recepcion.setVisible(true);
     }//GEN-LAST:event_btn_ayudaActionPerformed
 
     public boolean estacerrado(Object obj) {

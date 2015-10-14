@@ -211,9 +211,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         btn_medicinas = new abstractt.Boton();
         btn_Hospital = new abstractt.Boton();
         btn_pesoManual = new abstractt.Boton();
-        btn_RegistroEmpadre = new abstractt.Boton();
         btn_BajasMuerte = new abstractt.Boton();
-        btn_Partos = new abstractt.Boton();
+        jPanel2 = new javax.swing.JPanel();
+        tf_consumo = new abstractt.TextField();
         pn_Peso = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -224,6 +224,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jPanel1 = new javax.swing.JPanel();
         tf_ganancia = new abstractt.TextField();
         fondo1 = new abstractt.fondo();
+        jPanel4 = new javax.swing.JPanel();
+        textField1 = new abstractt.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Especificaciones del Animal");
@@ -579,18 +581,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         });
         pn_botonesVerticales.add(btn_pesoManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 150, -1));
 
-        btn_RegistroEmpadre.setText("Reg. Empadre");
-        btn_RegistroEmpadre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        btn_RegistroEmpadre.setMaximumSize(new java.awt.Dimension(150, 30));
-        btn_RegistroEmpadre.setMinimumSize(new java.awt.Dimension(150, 30));
-        btn_RegistroEmpadre.setPreferredSize(new java.awt.Dimension(200, 30));
-        btn_RegistroEmpadre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_RegistroEmpadreActionPerformed(evt);
-            }
-        });
-        pn_botonesVerticales.add(btn_RegistroEmpadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 150, -1));
-
         btn_BajasMuerte.setText("Muertes");
         btn_BajasMuerte.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btn_BajasMuerte.setMaximumSize(new java.awt.Dimension(150, 30));
@@ -603,19 +593,33 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         });
         pn_botonesVerticales.add(btn_BajasMuerte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, -1));
 
-        btn_Partos.setText("Historial Partos");
-        btn_Partos.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        btn_Partos.setMaximumSize(new java.awt.Dimension(150, 30));
-        btn_Partos.setMinimumSize(new java.awt.Dimension(150, 30));
-        btn_Partos.setPreferredSize(new java.awt.Dimension(200, 30));
-        btn_Partos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_PartosActionPerformed(evt);
-            }
-        });
-        pn_botonesVerticales.add(btn_Partos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 150, -1));
+        jPanel3.add(pn_botonesVerticales, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, 280));
 
-        jPanel3.add(pn_botonesVerticales, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, 450));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consumo Promedio de Alimento"));
+        jPanel2.setOpaque(false);
+
+        tf_consumo.setEditable(false);
+        tf_consumo.setBackground(new java.awt.Color(255, 255, 204));
+        tf_consumo.setText("0.0");
+        tf_consumo.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tf_consumo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(tf_consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 180, 100));
 
         pn_Peso.setBackground(new java.awt.Color(255, 255, 255));
         pn_Peso.setOpaque(false);
@@ -638,7 +642,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         tf_pesoBascula.setFont(new java.awt.Font("Trebuchet MS", 0, 60)); // NOI18N
         jPanel9.add(tf_pesoBascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 50));
 
-        pn_Peso.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 260, 70));
+        pn_Peso.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 40, 260, 70));
 
         btn_quitarPeso.setBackground(new java.awt.Color(64, 37, 4));
         btn_quitarPeso.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -709,6 +713,35 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         fondo1.setText("fondo1");
         jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Porcentaje de Merma"));
+        jPanel4.setOpaque(false);
+
+        textField1.setEditable(false);
+        textField1.setBackground(new java.awt.Color(255, 255, 204));
+        textField1.setText("0.0");
+        textField1.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
+        textField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 360, 180, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -842,8 +875,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             jrb_esSemental.setEnabled(true);
             jrb_esVientre.setEnabled(false);
             jrb_esVientre.setSelected(false);
-            btn_RegistroEmpadre.setEnabled(false);
-            btn_Partos.setEnabled(false);
         }
         if (sexoSelector1.getSelectedItem().equals("Hembra")) {
             
@@ -851,29 +882,18 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             jrb_esSemental.setEnabled(false);
             jrb_esSemental.setSelected(false);
             this.jrb_esVientre.setEnabled(true);
-            btn_RegistroEmpadre.setEnabled(true);
-            btn_Partos.setEnabled(true);
         }
     }//GEN-LAST:event_sexoSelector1ActionPerformed
-
-    private void btn_RegistroEmpadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroEmpadreActionPerformed
-
-        registroEmpadre = new RegistroEmpadre(animalDetalle);
-        registroEmpadre.setVisible(true);
-    }//GEN-LAST:event_btn_RegistroEmpadreActionPerformed
-
-    private void btn_PartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PartosActionPerformed
-
-        historialPartos = new HistorialPartos(animalDetalle, parent);
-        historialPartos.setVisible(true);
-    }//GEN-LAST:event_btn_PartosActionPerformed
 
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
         this.proveedorSelector1.setEditable(false);
         this.tf_Compra.setEditable(false);
-        this.tf_PesoCompra.setEditable(false);
-        
+        this.tf_PesoCompra.setEditable(false);       
     }//GEN-LAST:event_loteSelector1ActionPerformed
+
+    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1ActionPerformed
 
     private boolean validacionCodigo;
 
@@ -1181,7 +1201,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);
             leerPesos(t_pesos, animalDetalle.id_animal);
             graficar();
-            gananciaDiaria(animalDetalle.id_animal);
+            valoresPromedio();
             corralSelector.setEnabled(false);
             
             this.animalSelectorMadre.setAnimal(animalDetalle.genealogia.madre);
@@ -1307,7 +1327,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             sexoSelector1.setSelectedItem(animalDetalle.sexo.descripcion);
             razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);
             leerPesos(t_pesos, animalDetalle.id_animal);
-            gananciaDiaria(animalDetalle.id_animal);
+            valoresPromedio();
             graficar();
             corralSelector.setEnabled(false);
 
@@ -1456,8 +1476,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private domain.AnimalSelector animalSelectorPadre;
     private abstractt.Boton btn_BajasMuerte;
     private abstractt.Boton btn_Hospital;
-    private abstractt.Boton btn_Partos;
-    private abstractt.Boton btn_RegistroEmpadre;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
     private javax.swing.JButton btn_capturarPeso;
@@ -1488,7 +1506,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton jrb_esSemental;
@@ -1504,6 +1524,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private domain.AnimalSelector semental;
     private domain.SexoSelector sexoSelector1;
     private abstractt.Table t_pesos;
+    private abstractt.TextField textField1;
     private abstractt.TextField tf_AreteCampaña;
     private abstractt.TextField tf_AreteSiniiga;
     private abstractt.TextField tf_AreteVisual;
@@ -1512,6 +1533,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.TextField tf_PesoActual;
     private abstractt.TextField tf_PesoCompra;
     private abstractt.TextField tf_Temperatura;
+    private abstractt.TextField tf_consumo;
     private abstractt.TextField tf_ganancia;
     private abstractt.TextField tf_pesoBascula;
     // End of variables declaration//GEN-END:variables
@@ -1530,7 +1552,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.JDc_FechaIngreso.setDate(fecha_reg_csv);
     }
 
-    private void gananciaDiaria(String id_animal) {
+    private void valoresPromedio() {
         
         /*        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
          + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
@@ -1566,20 +1588,20 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
          tf_ganancia.setText(manejadorBD.getValorString(0, 0));
          }
          */
-        manejadorBD.consulta(""
-                + "SELECT   ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)  \n"
-                + "FROM     movimiento m,   detalle_movimiento d, rancho r \n"
-                + "WHERE    m.id_rancho	=   r.id_rancho\n"
-                + "AND      m.id_concepto	=   r.con_pesaje\n"
-                + "AND      (   m.id_rancho     =   d.id_rancho\n"
-                + "         AND m.id_concepto   =   d.id_concepto\n"
-                + "         AND m.id_movimiento =   d.id_movimiento\n "
-                + "         AND d.id_animal     =   '" + id_animal + "')");
-        
-        if (manejadorBD.getRowCount() > 0) {
+//        manejadorBD.consulta(""
+//                + "SELECT   ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)  \n"
+//                + "FROM     movimiento m,   detalle_movimiento d, rancho r \n"
+//                + "WHERE    m.id_rancho	=   r.id_rancho\n"
+//                + "AND      m.id_concepto	=   r.con_pesaje\n"
+//                + "AND      (   m.id_rancho     =   d.id_rancho\n"
+//                + "         AND m.id_concepto   =   d.id_concepto\n"
+//                + "         AND m.id_movimiento =   d.id_movimiento\n "
+//                + "         AND d.id_animal     =   '" + id_animal + "')");
+//        
+//        if (manejadorBD.getRowCount() > 0) {
 
             System.out.println("Peso 2 " + manejadorBD.getValorDouble(0, 0));
-            tf_ganancia.setText(manejadorBD.getValorString(0, 0));
-        }
+            tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
+            this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
     }
 }
