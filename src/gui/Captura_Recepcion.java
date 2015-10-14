@@ -54,7 +54,6 @@ public class Captura_Recepcion extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_ = new javax.swing.JPanel();
-        fondo1 = new abstractt.fondo();
         etiqueta1 = new abstractt.Etiqueta();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_recepcion = new abstractt.Table();
@@ -76,20 +75,18 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         etiqueta10 = new abstractt.Etiqueta();
         btn_limpiar = new abstractt.Boton();
         btn_guardar = new abstractt.Boton();
-        btn_devoluciones = new abstractt.Boton();
         etiqueta11 = new abstractt.Etiqueta();
         tf_pesoRecepcion = new abstractt.TextField();
         calendar1 = new abstractt.Calendar();
         calendar2 = new abstractt.Calendar();
         etiqueta12 = new abstractt.Etiqueta();
         tf_numeroLote = new abstractt.TextField();
+        btn_ingresoAlimento = new abstractt.Boton();
+        fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btn_.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        fondo1.setText("fondo1");
-        btn_.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -174,9 +171,6 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         });
         btn_.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 100, -1));
 
-        btn_devoluciones.setText("Devoluciones");
-        btn_.add(btn_devoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 190, -1, -1));
-
         etiqueta11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta11.setText("Peso Recepción");
         btn_.add(etiqueta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 120, 20));
@@ -194,6 +188,12 @@ public class Captura_Recepcion extends javax.swing.JFrame {
             }
         });
         btn_.add(tf_numeroLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 20));
+
+        btn_ingresoAlimento.setText("Ingreso de Alimento");
+        btn_.add(btn_ingresoAlimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, -1, 30));
+
+        fondo1.setText("fondo1");
+        btn_.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,8 +284,8 @@ public class Captura_Recepcion extends javax.swing.JFrame {
     Recepcion recepcion;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_;
-    private abstractt.Boton btn_devoluciones;
     private abstractt.Boton btn_guardar;
+    private abstractt.Boton btn_ingresoAlimento;
     private abstractt.Boton btn_limpiar;
     private abstractt.Calendar calendar1;
     private abstractt.Calendar calendar2;
