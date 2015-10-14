@@ -279,6 +279,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         btn_busqueda = new abstractt.Boton();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_animales = new abstractt.Table();
+        btn_cierreCorral1 = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
         fondo1 = new abstractt.fondo();
 
@@ -293,7 +294,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         etiqueta1.setText("Administracion de Grupos");
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel6.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 80));
+        jPanel6.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 80));
 
         datosPanel.setBackground(new java.awt.Color(255, 255, 255));
         datosPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -316,7 +317,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel4.setForeground(new java.awt.Color(95, 84, 88));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("No. de Animales:");
-        datosPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 110, 22));
+        datosPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 110, 22));
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 84, 88));
@@ -332,7 +333,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jtf_numAnimales.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jtf_numAnimales.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtf_numAnimales.setFocusable(false);
-        datosPanel.add(jtf_numAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 100, -1));
+        datosPanel.add(jtf_numAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 100, -1));
 
         corralSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,35 +375,35 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel11.setForeground(new java.awt.Color(95, 84, 88));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Total Kilos:");
-        datosPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 110, 22));
+        datosPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 110, 22));
 
         jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(95, 84, 88));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Peso Minimo:");
-        datosPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 110, 22));
+        datosPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 110, 22));
 
         jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(95, 84, 88));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Peso Maximo:");
-        datosPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 110, 22));
+        datosPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 110, 22));
 
         jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(95, 84, 88));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Peso Promedio:");
-        datosPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 110, 22));
+        datosPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, 22));
 
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(95, 84, 88));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Alimento Ingresado:");
-        datosPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 120, 22));
+        datosPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, 22));
 
         t_pesoPromedio.setText("0.00");
         t_pesoPromedio.setFocusable(false);
-        datosPanel.add(t_pesoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 100, 22));
+        datosPanel.add(t_pesoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 100, 22));
 
         t_alimentoIngresado.setText("0.00");
         t_alimentoIngresado.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -415,29 +416,29 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
                 t_alimentoIngresadoActionPerformed(evt);
             }
         });
-        datosPanel.add(t_alimentoIngresado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 100, 22));
+        datosPanel.add(t_alimentoIngresado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 100, 22));
 
         t_totalKilos.setText("0.00");
         t_totalKilos.setFocusable(false);
-        datosPanel.add(t_totalKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 100, 22));
+        datosPanel.add(t_totalKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 100, 22));
 
         t_pesoMinimo.setText("0.00");
         t_pesoMinimo.setFocusable(false);
-        datosPanel.add(t_pesoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 100, 22));
+        datosPanel.add(t_pesoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 100, 22));
 
         t_pesoMaximo.setText("0.00");
         t_pesoMaximo.setFocusable(false);
-        datosPanel.add(t_pesoMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 100, 22));
+        datosPanel.add(t_pesoMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 100, 22));
 
         t_gananciaKilos.setText("0.00");
         t_gananciaKilos.setFocusable(false);
-        datosPanel.add(t_gananciaKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 100, 22));
+        datosPanel.add(t_gananciaKilos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 100, 22));
 
         jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(95, 84, 88));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Ganancia Kilos:");
-        datosPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 110, 22));
+        datosPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 110, 22));
 
         sexoSelector1.setEditable(false);
         sexoSelector1.setFocusable(false);
@@ -468,11 +469,11 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel17.setText("Raza:");
         datosPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 22));
 
-        jPanel6.add(datosPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 700, 230));
+        jPanel6.add(datosPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 600, 230));
 
         panelGrafica.setBackground(new java.awt.Color(0, 102, 102));
         panelGrafica.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 400, 220));
+        jPanel6.add(panelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 400, 220));
 
         botonesHoriz.setOpaque(false);
 
@@ -522,7 +523,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         });
         botonesHoriz.add(btn_detalles);
 
-        jPanel6.add(botonesHoriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 330, -1, -1));
+        jPanel6.add(botonesHoriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 330, 440, -1));
 
         botonesVert.setOpaque(false);
         botonesVert.setPreferredSize(new java.awt.Dimension(80, 300));
@@ -587,7 +588,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         });
         botonesVert.add(btn_busqueda);
 
-        jPanel6.add(botonesVert, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 50, 250));
+        jPanel6.add(botonesVert, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 60, 250));
 
         t_animales.setForeground(new java.awt.Color(230, 225, 195));
         t_animales.setModel(new javax.swing.table.DefaultTableModel(
@@ -627,12 +628,22 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             t_animales.getColumnModel().getColumn(12).setResizable(false);
         }
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 385, 1360, 300));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 385, 1310, 300));
+
+        btn_cierreCorral1.setText("Ingreso Alimento");
+        btn_cierreCorral1.setFont(new java.awt.Font("Trebuchet", 0, 10)); // NOI18N
+        btn_cierreCorral1.setPreferredSize(new java.awt.Dimension(130, 45));
+        btn_cierreCorral1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cierreCorral1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btn_cierreCorral1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, 120, 23));
 
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta2.setText("Listado de animales");
         etiqueta2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        jPanel6.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 1000, 40));
+        jPanel6.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 790, 40));
 
         fondo1.setText("fondo1");
         jPanel6.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -1125,6 +1136,18 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         }
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
+    private void btn_cierreCorral1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorral1ActionPerformed
+       
+        if (ingresoAlimento != null) {
+
+            ingresoAlimento.dispose();
+        }
+
+        ingresoAlimento = new IngresoAlimentoCaptura(parent, "", this.corral);       
+
+        ingresoAlimento.setVisible(true);
+    }//GEN-LAST:event_btn_cierreCorral1ActionPerformed
+
     private void cargarCorralPorSexo() {
         if (!corralActivo) {
             return;
@@ -1252,6 +1275,8 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     Raza raza;
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
+    IngresoAlimentoCaptura ingresoAlimento;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonesHoriz;
     private javax.swing.JPanel botonesVert;
@@ -1261,6 +1286,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private abstractt.Boton btn_Eliminar;
     private abstractt.Boton btn_busqueda;
     private abstractt.Boton btn_cierreCorral;
+    private abstractt.Boton btn_cierreCorral1;
     private abstractt.Boton btn_detalles;
     private abstractt.Boton btn_historico;
     private abstractt.Boton btn_reporteCorral;

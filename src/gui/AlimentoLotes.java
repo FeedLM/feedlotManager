@@ -119,7 +119,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
 
     private void btn_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoActionPerformed
         corral = new Corral();
-        ingresoAlimento = new IngresoAlimento(this, recepcion.numero_lote, corral);
+        ingresoAlimento = new IngresoAlimentoCaptura(this, recepcion.numero_lote, corral);
         ingresoAlimento.setVisible(true);
     }//GEN-LAST:event_btn_ingresoActionPerformed
 
@@ -128,7 +128,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
         tf_totalAlimento.setText(recepcion.total_alimento.toString());
     }//GEN-LAST:event_loteSelector1ActionPerformed
     
-    IngresoAlimento ingresoAlimento;
+    IngresoAlimentoCaptura ingresoAlimento;
     Recepcion recepcion;
     Corral corral;
     // Variables declaration - do not modify//GEN-BEGIN:variables
