@@ -329,7 +329,7 @@ public class Desktop extends javax.swing.JFrame {
 //            //e.printStackTrace();
 //            System.out.println("Sin ayuda existente...");
 //        }
-        Captura_Recepcion captura_recepcion = new Captura_Recepcion();
+        CapturaRecepcion captura_recepcion = new CapturaRecepcion();
         captura_recepcion.setVisible(true);
     }//GEN-LAST:event_btn_ayudaActionPerformed
 

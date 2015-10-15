@@ -24,13 +24,12 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Marco
  */
-public class Captura_Recepcion extends javax.swing.JFrame {
+public class CapturaRecepcion extends javax.swing.JFrame {
 
     /**
      * Creates new form Captura_Recepcion
      */
-    public Captura_Recepcion() {
-        setLocationRelativeTo(null);
+    public CapturaRecepcion() {
         initComponents();
         String titulos[] = {"id_recepcion", "Folio", "Proveedor",
             "Fecha Compra", "# Animales", "Peso Origen", "Peso Recepción",
@@ -43,7 +42,7 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         t_recepcion.setTitulos(titulos);
         t_recepcion.cambiarTitulos();
         cargarTabla();
-
+        setLocationRelativeTo(null);
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
         fondo1.cargar(this.getSize());
@@ -290,7 +289,7 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         recepcion.peso_recepcion = this.tf_pesoRecepcion.getDouble();
         recepcion.limite_merma = this.tf_limiteMerma.getDouble();
         recepcion.numero_lote = this.tf_numeroLote.getText();
-        recepcion.costo_flete = this.tf_costoFlete.getDouble();
+        recepcion.costo_flete = this.tf_costoFlete.obtenerValor();
 
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(recepcion.proveedor.id_proveedor, "varIdProveedor", "STRING", "IN");

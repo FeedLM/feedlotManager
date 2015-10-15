@@ -999,11 +999,12 @@ begin
 end$$
 DELIMITER ;
 
---2015 -10-14 12:23
+-- 2015 -10-14 12:23
 ALTER TABLE `animal` 
 CHANGE COLUMN `fecha_ultima_comida` `fecha_ultima_comida` DATETIME NULL DEFAULT NULL ;
 
---2015-10-14 12:33
+-- 2015-10-14 12:33
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_BUPD`
 BEFORE UPDATE ON `feedlotmanager`.`animal`
 FOR EACH ROW
@@ -1035,8 +1036,10 @@ BEGIN
 	set		new.ganancia_promedio	=	varGananciaPromedio;    
 
 END
+DELIMITER $$
 
---2015-10-14 12:33
+-- 2015-10-14 12:33
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_AUPD`
 AFTER UPDATE ON `feedlotmanager`.`animal`
 FOR EACH ROW
@@ -1062,9 +1065,9 @@ BEGIN
  -- Envio a FTP
 
 END
-
+DELIMITER $$
 -- 2015-10-14 12:34
-
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` TRIGGER `ingreso_alimento_AFTER_INSERT`
 AFTER INSERT ON `ingreso_alimento` 
 FOR EACH ROW
@@ -1106,7 +1109,9 @@ begin
 								where  corral_animal.id_corral = new.id_corral);
     end if;    
 end
---2015-10-15 10:17
+DELIMITER $$
+
+-- 2015-10-15 10:17
 USE `feedlotmanager`;
 DROP procedure IF EXISTS `agregarRecepcion`;
 
