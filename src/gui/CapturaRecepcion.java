@@ -266,11 +266,14 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ingresoAlimentoActionPerformed
 
     public void guardar() {
+        
         if (tf_folio.equals("") || tf_numeroAnimales.equals("") || this.tf_numeroLote.equals("")) {
+            
             JOptionPane.showMessageDialog(this, "Verifique que los campos se llenaron correctamente.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!pideContraseña()) {
+        
             return;
         }
         recepcion = new Recepcion();
@@ -307,15 +310,19 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         manejadorBD.parametrosSP.agregarParametro(recepcion.costo_flete.toString(), "varCostoFlete", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(recepcion.devoluciones.toString(), "varDevoluciones", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(recepcion.causa_devolucion, "varCausaDevolucion", "STRING", "IN");
+        
         if (manejadorBD.ejecutarSP("{ call agregarRecepcion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
+        
             JOptionPane.showMessageDialog(this, "La compra se ha agregado correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
             cargarTabla();
         } else {
+            
             JOptionPane.showMessageDialog(this, "Ocurrió un error con los campos, revise los parametros que esta mandando.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void limpiar() {
+        
         this.tf_costoFlete.setText("$ 0.00");
         this.tf_folio.setText("");
         this.tf_limiteMerma.setText("0.00");
