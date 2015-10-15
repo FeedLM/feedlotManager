@@ -999,12 +999,11 @@ begin
 end$$
 DELIMITER ;
 
--- 2015 -10-14 12:23
+--2015 -10-14 12:23
 ALTER TABLE `animal` 
 CHANGE COLUMN `fecha_ultima_comida` `fecha_ultima_comida` DATETIME NULL DEFAULT NULL ;
 
--- 2015-10-14 12:33
-DELIMITER $$
+--2015-10-14 12:33
 CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_BUPD`
 BEFORE UPDATE ON `feedlotmanager`.`animal`
 FOR EACH ROW
@@ -1036,10 +1035,8 @@ BEGIN
 	set		new.ganancia_promedio	=	varGananciaPromedio;    
 
 END
-DELIMITER $$
 
--- 2015-10-14 12:33
-DELIMITER $$
+--2015-10-14 12:33
 CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_AUPD`
 AFTER UPDATE ON `feedlotmanager`.`animal`
 FOR EACH ROW
@@ -1065,9 +1062,9 @@ BEGIN
  -- Envio a FTP
 
 END
-DELIMITER $$
+
 -- 2015-10-14 12:34
-DELIMITER $$
+
 CREATE DEFINER=`root`@`localhost` TRIGGER `ingreso_alimento_AFTER_INSERT`
 AFTER INSERT ON `ingreso_alimento` 
 FOR EACH ROW
@@ -1109,9 +1106,7 @@ begin
 								where  corral_animal.id_corral = new.id_corral);
     end if;    
 end
-DELIMITER $$
-
--- 2015-10-15 10:17
+--2015-10-15 10:17
 USE `feedlotmanager`;
 DROP procedure IF EXISTS `agregarRecepcion`;
 
@@ -1145,6 +1140,103 @@ BEGIN
 		varNumeroLote,	varCostoFlete,		varDevoluciones,	varCausaDevolucion;	
 END$$
 
+DELIMITER ;
+
+--2015-10-15 16:38
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarRecepcion`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarRecepcion`(
+    varIdProveedor		CHAR(36),		varIdOrigen			CHAR(36),		varFolio			CHAR(45),
+    varFechaCompra		DATETIME,		varFechaRecepcion	DATETIME,		varAnimales			int(10),
+	varPesoOrigen		DECIMAL(20,4),	varLimiteMerma		DECIMAL(20,4),	varMerma			decimal(20,5),
+	varPorcentajeMerma	decimal(20,4),	varPesoRecepcion	DECIMAL(20,4),	varNumeroLote		char(255),	
+	varCostoFlete		DECIMAL(20,4),	varDevoluciones		int(10),		varCausaDevolucion	varchar(45))
+BEGIN
+    DECLARE varIdRecepcion char(36);
+    declare i int;
+    DECLARE varIdAnimal CHAR(36);
+	
+	SELECT	UUID()
+	INTO	varIdRecepcion;
+    
+ 	set varMerma = varPesoOrigen - varPesoRecepcion;
+    
+    set varPorcentajeMerma = ( varMerma * 100 ) / varPesoOrigen;
+	
+	INSERT recepcion
+    (	id_recepcion,	id_proveedor,		id_origen,			folio,
+		fecha_compra,	fecha_recepcion,	animales,			peso_origen,	
+		limite_merma,	merma,				porcentaje_merma,	peso_recepcion,
+		numero_lote,	costo_flete,		devoluciones,		causa_devolucion	)
+    SELECT
+		varIdRecepcion,	varIdProveedor,		varIdOrigen,		varFolio,
+		varFechaCompra,	varFechaRecepcion,	varAnimales,		varPesoOrigen,		
+		varLimiteMerma,	varMerma,			varPorcentajeMerma,	varPesoRecepcion,
+		varNumeroLote,	varCostoFlete,		varDevoluciones,	varCausaDevolucion;	
+ 
+	set i = 0;
+ 
+	while  i < varAnimales do
+    
+		SELECT UUID()
+		INTO varIdAnimal;
+    
+		INSERT animal
+		(	id_animal,		id_proveedor,	                fecha_compra,		compra,
+			numero_lote,	peso_compra,	                porcentaje_merma,   costo_flete,
+            status)
+		SELECT
+			varIdAnimal,	varIdProveedor,	                varFechaCompra,		varfolio,
+			varNumeroLote,	varPesoRecepcion / varAnimales,	varPorcentajeMerma, varCostoFlete / varAnimales,
+            'A';
+    
+		set i = i + 1;
+    end while;
+END$$
+
+DELIMITER ;
+
+--2015-01-15 16:52
+
+USE `feedlotmanager`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_AINS$$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `feedlotmanager`.`animal_AINS`
+AFTER INSERT ON `feedlotmanager`.`animal`
+FOR EACH ROW
+BEGIN
+
+	DECLARE varIdCorral ,
+			varIdRancho	CHAR(36);   
+
+	SELECT	coalesce(id_corral, ''),	coalesce(id_rancho, '')    
+	INTO	varIdCorral,				varIdRancho
+	FROM 	corral_animal
+	WHERE	id_animal	=	NEW.id_animal;
+
+	if  varIdCorral <> '' then
+    
+		CALL animalesPorCorral(varIdCorral);
+	end if;
+    
+    if varIdRancho <> '' then
+    
+	-- Envio a FTP
+		DELETE FROM repl_animal
+		WHERE	id_rancho	=	varIdRancho
+		AND		id_animal	=	NEW.id_animal;
+
+		INSERT INTO repl_animal
+		SELECT varIdRancho, NEW.id_animal, NOW(), 'PE';
+	-- Envio a FTP
+	end if;
+END$$
 DELIMITER ;
 
 
