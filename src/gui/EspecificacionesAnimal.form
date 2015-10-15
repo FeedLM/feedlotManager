@@ -650,6 +650,9 @@
               </Constraints>
             </Component>
             <Component class="domain.LoteSelector" name="loteSelector1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loteSelector1ActionPerformed"/>
               </Events>

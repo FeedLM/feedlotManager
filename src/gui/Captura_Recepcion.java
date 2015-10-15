@@ -84,7 +84,7 @@ public class Captura_Recepcion extends javax.swing.JFrame {
         btn_ingresoAlimento = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btn_.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

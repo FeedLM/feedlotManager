@@ -38,10 +38,10 @@ public class AlimentoLotes extends javax.swing.JFrame {
         etiqueta2 = new abstractt.Etiqueta();
         jPanel2 = new javax.swing.JPanel();
         tf_totalAlimento = new abstractt.TextField();
-        fondo1 = new abstractt.fondo();
         btn_ingreso = new abstractt.Boton();
+        fondo1 = new abstractt.fondo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,9 +92,6 @@ public class AlimentoLotes extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, -1));
 
-        fondo1.setText("fondo1");
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         btn_ingreso.setText("Ingresar Alimento");
         btn_ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +99,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 150, 30));
+
+        fondo1.setText("fondo1");
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,6 +124,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ingresoActionPerformed
 
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
+        recepcion = new Recepcion();
         recepcion.cargarPorLote(loteSelector1.getText());
         tf_totalAlimento.setText(recepcion.total_alimento.toString());
     }//GEN-LAST:event_loteSelector1ActionPerformed

@@ -12,6 +12,7 @@ import static domain.Corral.cargarCorrales;
 import domain.Excel;
 import static domain.Movimiento.leerPesos;
 import domain.ParametrosSP;
+import domain.Recepcion;
 import domain.SR232;
 import static gui.Desktop.rancho;
 import static gui.Desktop.manejadorBD;
@@ -107,7 +108,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.tf_ganancia.setEditable(false);        
         
         razaSelector1.cargarSeleccionar();
-
+        loteSelector1.cargar();
         animalSelectorMadre.cargararete_visuals_2();
         animalSelectorPadre.cargararete_visuals_2();        
         cargarComponentes();
@@ -466,6 +467,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esVientre.setOpaque(false);
         pn_Formulario.add(jrb_esVientre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 210, 20));
 
+        loteSelector1.setEditable(false);
         loteSelector1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loteSelector1ActionPerformed(evt);
@@ -888,7 +890,14 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
         this.proveedorSelector1.setEditable(false);
         this.tf_Compra.setEditable(false);
-        this.tf_PesoCompra.setEditable(false);       
+        this.tf_PesoCompra.setEditable(false);
+        recepcion = new Recepcion();
+        String lote = loteSelector1.getSelectedItem().toString();
+        recepcion.cargarPorLote(lote);
+        proveedorSelector1.setSelectedItem(recepcion.proveedor.descripcion);
+        tf_Compra.setText(recepcion.folio);
+        tf_PesoCompra.setText(recepcion.peso_origen.toString());
+//        this.JDc_FechaCompra.setDate(recepcion.fecha_compra);
     }//GEN-LAST:event_loteSelector1ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
@@ -1467,6 +1476,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private ChartPanel jP_Grafica;
     Desktop parent;
     private Corral corral;
+    Recepcion recepcion;
     private Date fecha_reg_csv;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

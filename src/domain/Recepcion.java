@@ -108,8 +108,8 @@ public class Recepcion {
                 + "    causa_devolucion,\n"
                 + "    total_alimento\n"
                 + "FROM\n"
-                + "    recepcion"
-                + "WHERE numero_lote = '" + lote + "';");
+                + "    recepcion\n"
+                + "WHERE numero_lote = '" + lote + "'");
         if (manejadorBD.getRowCount() > 0) {
             asignarValores();
         } else {
@@ -122,16 +122,16 @@ public class Recepcion {
         proveedor.cargarPorId(manejadorBD.getValorString(0, 1));
         origen.cargarPorId(manejadorBD.getValorString(0, 2));
         folio = manejadorBD.getValorString(0, 3);
-        try {
-            fecha_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 4));
-        } catch (ParseException ex) {
-            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            fecha_recepcion = formatoDateTime.parse(manejadorBD.getValorString(0, 5));
-        } catch (ParseException ex) {
-            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            fecha_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 4));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        try {
+//            fecha_recepcion = formatoDateTime.parse(manejadorBD.getValorString(0, 5));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         animales = manejadorBD.getValorInt(0, 6);
         peso_origen = manejadorBD.getValorDouble(0, 7);
         limite_merma = manejadorBD.getValorDouble(0, 8);
