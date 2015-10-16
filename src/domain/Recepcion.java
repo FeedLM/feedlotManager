@@ -93,23 +93,24 @@ public class Recepcion {
                 + "    id_recepcion,\n"
                 + "    id_proveedor,\n"
                 + "    id_origen,\n"
-                + "    folio,\n"
-                + "    fecha_compra,\n"
-                + "    fecha_recepcion,\n"
-                + "    animales,\n"
-                + "    peso_origen,\n"
-                + "    limite_merma,\n"
-                + "    merma,\n"
-                + "    porcentaje_merma,\n"
-                + "    peso_recepcion,\n"
-                + "    numero_lote,\n"
-                + "    costo_flete,\n"
-                + "    devoluciones,\n"
-                + "    causa_devolucion,\n"
-                + "    total_alimento\n"
+                + "    COALESCE(folio, '') folio,\n"
+                + "    COALESCE(fecha_compra, '1999-01-01 00:00') fecha_compra,\n"
+                + "    COALESCE(fecha_recepcion, '1999-01-01 00:00') fecha_recepcion,\n"
+                + "    COALESCE(animales, 0) animales,\n"
+                + "    COALESCE(peso_origen, 0.0) peso_origen,\n"
+                + "    COALESCE(limite_merma, 0.0) limite_merma,\n"
+                + "    COALESCE(merma, 0.0) merma,\n"
+                + "    COALESCE(porcentaje_merma, 0.0) porcentaje_merma,\n"
+                + "    COALESCE(peso_recepcion, 0.0) peso_recepcion,\n"
+                + "    COALESCE(numero_lote, 0) numero_lote,\n"
+                + "    COALESCE(costo_flete, 0.0) costo_flete,\n"
+                + "    COALESCE(devoluciones, 0) devoluciones,\n"
+                + "    COALESCE(causa_devolucion, '') causa_devolucion,\n"
+                + "    COALESCE(total_alimento, 0.0) total_alimento\n"
                 + "FROM\n"
                 + "    recepcion\n"
-                + "WHERE numero_lote = '" + lote + "'");
+                + "WHERE\n"
+                + "    numero_lote = '" + lote  +"'");
         if (manejadorBD.getRowCount() > 0) {
             asignarValores();
         } else {
@@ -122,16 +123,16 @@ public class Recepcion {
         proveedor.cargarPorId(manejadorBD.getValorString(0, 1));
         origen.cargarPorId(manejadorBD.getValorString(0, 2));
         folio = manejadorBD.getValorString(0, 3);
-//        try {
-//            fecha_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 4));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            fecha_recepcion = formatoDateTime.parse(manejadorBD.getValorString(0, 5));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            fecha_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 4));
+        } catch (ParseException ex) {
+            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            fecha_recepcion = formatoDateTime.parse(manejadorBD.getValorString(0, 5));
+        } catch (ParseException ex) {
+            Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         animales = manejadorBD.getValorInt(0, 6);
         peso_origen = manejadorBD.getValorDouble(0, 7);
         limite_merma = manejadorBD.getValorDouble(0, 8);

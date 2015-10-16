@@ -224,9 +224,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         etiqueta1 = new abstractt.Etiqueta();
         jPanel1 = new javax.swing.JPanel();
         tf_ganancia = new abstractt.TextField();
-        fondo1 = new abstractt.fondo();
         jPanel4 = new javax.swing.JPanel();
-        textField1 = new abstractt.TextField();
+        tf_merma = new abstractt.TextField();
+        fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Especificaciones del Animal");
@@ -617,8 +617,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(tf_consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(tf_consumo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 180, 100));
@@ -683,6 +684,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ganancia de Peso Diaria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel1.setOpaque(false);
 
+        tf_ganancia.setEditable(false);
         tf_ganancia.setBackground(new java.awt.Color(255, 255, 204));
         tf_ganancia.setText("0.0");
         tf_ganancia.setToolTipText("El peso promedio ganado por día");
@@ -713,21 +715,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 570, 180, 110));
 
-        fondo1.setText("fondo1");
-        jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
-
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Porcentaje de Merma"));
         jPanel4.setOpaque(false);
 
-        textField1.setEditable(false);
-        textField1.setBackground(new java.awt.Color(255, 255, 204));
-        textField1.setText("0.0");
-        textField1.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
-        textField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
-            }
-        });
+        tf_merma.setEditable(false);
+        tf_merma.setBackground(new java.awt.Color(255, 255, 204));
+        tf_merma.setText("0.0");
+        tf_merma.setFont(new java.awt.Font("Trebuchet", 0, 48)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -735,15 +729,21 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(tf_merma, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tf_merma, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 360, 180, 100));
+
+        fondo1.setText("fondo1");
+        jPanel3.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -892,17 +892,12 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.tf_Compra.setEditable(false);
         this.tf_PesoCompra.setEditable(false);
         recepcion = new Recepcion();
-        String lote = loteSelector1.getSelectedItem().toString();
-        recepcion.cargarPorLote(lote);
+        recepcion.cargarPorLote(loteSelector1.getSelectedItem().toString());
         proveedorSelector1.setSelectedItem(recepcion.proveedor.descripcion);
         tf_Compra.setText(recepcion.folio);
         tf_PesoCompra.setText(recepcion.peso_origen.toString());
 //        this.JDc_FechaCompra.setDate(recepcion.fecha_compra);
     }//GEN-LAST:event_loteSelector1ActionPerformed
-
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
 
     private boolean validacionCodigo;
 
@@ -1534,7 +1529,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private domain.AnimalSelector semental;
     private domain.SexoSelector sexoSelector1;
     private abstractt.Table t_pesos;
-    private abstractt.TextField textField1;
     private abstractt.TextField tf_AreteCampaña;
     private abstractt.TextField tf_AreteSiniiga;
     private abstractt.TextField tf_AreteVisual;
@@ -1545,6 +1539,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.TextField tf_Temperatura;
     private abstractt.TextField tf_consumo;
     private abstractt.TextField tf_ganancia;
+    private abstractt.TextField tf_merma;
     private abstractt.TextField tf_pesoBascula;
     // End of variables declaration//GEN-END:variables
 
@@ -1610,8 +1605,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 //        
 //        if (manejadorBD.getRowCount() > 0) {
 
-            System.out.println("Peso 2 " + manejadorBD.getValorDouble(0, 0));
             tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
             this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
+            this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + " %");
     }
 }
