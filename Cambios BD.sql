@@ -1239,4 +1239,41 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- 2015-10-17
+ALTER TABLE `feedlotmanager`.`recepcion` 
+ADD COLUMN `animales_pendientes` INT(10) NULL AFTER `animales`;
+
+USE `feedlotmanager`;
+DROP procedure IF EXISTS `agregarRecepcion`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarRecepcion`(
+    varIdProveedor		CHAR(36),		varIdOrigen			CHAR(36),		varFolio			CHAR(45),
+    varFechaCompra		DATETIME,		varFechaRecepcion	DATETIME,		varAnimales			int(10),
+	varPesoOrigen		DECIMAL(20,4),	varLimiteMerma		DECIMAL(20,4),	varMerma			decimal(20,5),
+	varPorcentajeMerma	decimal(20,4),	varPesoRecepcion	DECIMAL(20,4),	varNumeroLote		char(255),	
+	varCostoFlete		DECIMAL(20,4),	varDevoluciones		int(10),		varCausaDevolucion	varchar(45))
+BEGIN
+    DECLARE varIdRecepcion char(36);
+	
+	SELECT UUID() INTO varIdRecepcion;
+    
+ 	set varMerma = varPesoOrigen - varPesoRecepcion;
+    
+    set varPorcentajeMerma = ( varMerma * 100 ) / varPesoOrigen;
+	
+	INSERT recepcion
+    (	id_recepcion,	id_proveedor,		id_origen,			folio,
+		fecha_compra,	fecha_recepcion,	animales, animales_pendientes,			peso_origen,	
+		limite_merma,	merma,				porcentaje_merma,	peso_recepcion,
+		numero_lote,	costo_flete,		devoluciones,		causa_devolucion	)
+    SELECT
+		varIdRecepcion,	varIdProveedor,		varIdOrigen,		varFolio,
+		varFechaCompra,	varFechaRecepcion,	varAnimales, varAnimales,		varPesoOrigen,		
+		varLimiteMerma,	varMerma,			varPorcentajeMerma,	varPesoRecepcion,
+		varNumeroLote,	varCostoFlete,		varDevoluciones,	varCausaDevolucion;	
+END$$
+
+DELIMITER ;
 

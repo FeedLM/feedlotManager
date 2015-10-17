@@ -7,6 +7,7 @@ package gui;
 
 import domain.Corral;
 import domain.Recepcion;
+import static gui.Desktop.manejadorBD;
 
 /**
  *
@@ -126,9 +127,10 @@ public class AlimentoLotes extends javax.swing.JFrame {
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
         recepcion = new Recepcion();
         recepcion.cargarPorLote(loteSelector1.getText());
-        tf_totalAlimento.setText(recepcion.total_alimento.toString());
+        manejadorBD.consulta("");
+        tf_totalAlimento.setText(manejadorBD.getValorString(0, 0));
     }//GEN-LAST:event_loteSelector1ActionPerformed
-    
+
     IngresoAlimentoCaptura ingresoAlimento;
     Recepcion recepcion;
     Corral corral;
