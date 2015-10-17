@@ -94,8 +94,8 @@ public class Recepcion {
                 + "    id_proveedor,\n"
                 + "    id_origen,\n"
                 + "    COALESCE(folio, '') folio,\n"
-                + "    COALESCE(fecha_compra, '1999-01-01 00:00') fecha_compra,\n"
-                + "    COALESCE(fecha_recepcion, '1999-01-01 00:00') fecha_recepcion,\n"
+                + "    COALESCE(fecha_compra, '1900-01-01 00:00:00') fecha_compra,\n"
+                + "    COALESCE(fecha_recepcion, '1900-01-01 00:00:00') fecha_recepcion,\n"
                 + "    COALESCE(animales, 0) animales,\n"
                 + "    COALESCE(peso_origen, 0.0) peso_origen,\n"
                 + "    COALESCE(limite_merma, 0.0) limite_merma,\n"
@@ -110,7 +110,7 @@ public class Recepcion {
                 + "FROM\n"
                 + "    recepcion\n"
                 + "WHERE\n"
-                + "    numero_lote = '" + lote  +"'");
+                + "    numero_lote = '" + lote + "'");
         if (manejadorBD.getRowCount() > 0) {
             asignarValores();
         } else {
@@ -119,9 +119,13 @@ public class Recepcion {
     }
 
     private void asignarValores() {
+
+        String proveedor;
+        String origen;
+
         id_recepcion = manejadorBD.getValorString(0, 0);
-        proveedor.cargarPorId(manejadorBD.getValorString(0, 1));
-        origen.cargarPorId(manejadorBD.getValorString(0, 2));
+        proveedor = manejadorBD.getValorString(0, 1);
+        origen = manejadorBD.getValorString(0, 2);
         folio = manejadorBD.getValorString(0, 3);
         try {
             fecha_compra = formatoDateTime.parse(manejadorBD.getValorString(0, 4));
@@ -144,6 +148,10 @@ public class Recepcion {
         devoluciones = manejadorBD.getValorInt(0, 14);
         causa_devolucion = manejadorBD.getValorString(0, 15);
         total_alimento = manejadorBD.getValorDouble(0, 16);
+
+        this.proveedor.cargarPorId(proveedor);
+        this.origen.cargarPorId(origen);
+
     }
 
     static ArrayList cargarLotes() {
