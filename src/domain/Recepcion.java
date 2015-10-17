@@ -26,6 +26,7 @@ public class Recepcion {
     public Date fecha_compra;
     public Date fecha_recepcion;
     public Integer animales;
+    public Integer animales_pendientes;
     public Double peso_origen;
     public Double limite_merma;
     public Double merma;
@@ -45,6 +46,7 @@ public class Recepcion {
         fecha_compra = null;
         fecha_recepcion = null;
         animales = 0;
+        animales_pendientes = 0;
         peso_origen = 0.0;
         limite_merma = 0.0;
         merma = 0.0;
@@ -67,6 +69,7 @@ public class Recepcion {
                 + "    fecha_compra,\n"
                 + "    fecha_recepcion,\n"
                 + "    animales,\n"
+                + "    animales_pendientes,\n"
                 + "    peso_origen,\n"
                 + "    limite_merma,\n"
                 + "    merma,\n"
@@ -97,6 +100,7 @@ public class Recepcion {
                 + "    COALESCE(fecha_compra, '1900-01-01 00:00:00') fecha_compra,\n"
                 + "    COALESCE(fecha_recepcion, '1900-01-01 00:00:00') fecha_recepcion,\n"
                 + "    COALESCE(animales, 0) animales,\n"
+                + "    COALESCE(animales_pendientes, 0) animales_pendientes,\n"
                 + "    COALESCE(peso_origen, 0.0) peso_origen,\n"
                 + "    COALESCE(limite_merma, 0.0) limite_merma,\n"
                 + "    COALESCE(merma, 0.0) merma,\n"
@@ -138,16 +142,17 @@ public class Recepcion {
             Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);
         }
         animales = manejadorBD.getValorInt(0, 6);
-        peso_origen = manejadorBD.getValorDouble(0, 7);
-        limite_merma = manejadorBD.getValorDouble(0, 8);
-        merma = manejadorBD.getValorDouble(0, 9);
-        porcentaje_merma = manejadorBD.getValorDouble(0, 10);
-        peso_recepcion = manejadorBD.getValorDouble(0, 11);
-        numero_lote = manejadorBD.getValorString(0, 12);
-        costo_flete = manejadorBD.getValorDouble(0, 13);
-        devoluciones = manejadorBD.getValorInt(0, 14);
-        causa_devolucion = manejadorBD.getValorString(0, 15);
-        total_alimento = manejadorBD.getValorDouble(0, 16);
+        animales_pendientes = manejadorBD.getValorInt(0, 7);
+        peso_origen = manejadorBD.getValorDouble(0, 8);
+        limite_merma = manejadorBD.getValorDouble(0, 9);
+        merma = manejadorBD.getValorDouble(0, 10);
+        porcentaje_merma = manejadorBD.getValorDouble(0, 11);
+        peso_recepcion = manejadorBD.getValorDouble(0, 12);
+        numero_lote = manejadorBD.getValorString(0, 13);
+        costo_flete = manejadorBD.getValorDouble(0, 14);
+        devoluciones = manejadorBD.getValorInt(0, 15);
+        causa_devolucion = manejadorBD.getValorString(0, 16);
+        total_alimento = manejadorBD.getValorDouble(0, 17);
 
         this.proveedor.cargarPorId(proveedor);
         this.origen.cargarPorId(origen);
@@ -164,7 +169,8 @@ public class Recepcion {
                 + "    numero_lote\n"
                 + "FROM\n"
                 + "    recepcion\n"
-                + "ORDER BY numero_lote;");
+                + "WHERE\n"
+                + "    animales_pendientes > 0;");
 
         for (int i = 0; i < manejadorBD.getRowCount(); i++) {
 

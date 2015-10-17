@@ -41,6 +41,8 @@ public class AlimentoLotes extends javax.swing.JFrame {
         tf_totalAlimento = new abstractt.TextField();
         btn_ingreso = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
+        jPanel3 = new javax.swing.JPanel();
+        tf_animales = new abstractt.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,10 +62,10 @@ public class AlimentoLotes extends javax.swing.JFrame {
                 loteSelector1ActionPerformed(evt);
             }
         });
-        jPanel1.add(loteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
+        jPanel1.add(loteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         etiqueta2.setText("Lote:");
-        jPanel1.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel1.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total de Alimento Ingresado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
@@ -91,7 +93,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 360, -1));
 
         btn_ingreso.setText("Ingresar Alimento");
         btn_ingreso.addActionListener(new java.awt.event.ActionListener() {
@@ -99,10 +101,36 @@ public class AlimentoLotes extends javax.swing.JFrame {
                 btn_ingresoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 150, 30));
+        jPanel1.add(btn_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 150, 30));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Total de animales en el Lote"));
+
+        tf_animales.setBackground(new java.awt.Color(255, 255, 153));
+        tf_animales.setText("0");
+        tf_animales.setEnabled(false);
+        tf_animales.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tf_animales, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tf_animales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 340, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,8 +155,8 @@ public class AlimentoLotes extends javax.swing.JFrame {
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
         recepcion = new Recepcion();
         recepcion.cargarPorLote(loteSelector1.getText());
-        manejadorBD.consulta("");
-        tf_totalAlimento.setText(manejadorBD.getValorString(0, 0));
+        tf_animales.setText(recepcion.animales_pendientes.toString());
+        tf_totalAlimento.setText(recepcion.total_alimento.toString());
     }//GEN-LAST:event_loteSelector1ActionPerformed
 
     IngresoAlimentoCaptura ingresoAlimento;
@@ -141,7 +169,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
     private abstractt.fondo fondo1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private domain.LoteSelector loteSelector1;
+    private abstractt.TextField tf_animales;
     private abstractt.TextField tf_totalAlimento;
     // End of variables declaration//GEN-END:variables
 }
