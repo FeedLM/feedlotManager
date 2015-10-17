@@ -1926,8 +1926,8 @@ public class Excel {
 
     private void reporteCorralCerradoCrear() {
 
-        Double total_kilos, peso_minimo, peso_maximo,
-                peso_promedio, alimento_ingresado, peso_ganancia;
+//        Double total_kilos, peso_minimo, peso_maximo,
+//                peso_promedio, alimento_ingresado, peso_ganancia;
 
         Integer fila_encabezado = 18;
 
@@ -1951,15 +1951,22 @@ public class Excel {
         relleno("A" + (fila_tablas + 1) + ":C" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         agregarValor(fila_tablas, 0, "DATOS INFORMATIVOS", styleTituloTabla);
-        agregarValor(fila_tablas + 1, 0, "FECHA ELABORACIÓN", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 2, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 3, 0, "TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 4, 0, "TOTAL KILOS INICIO DE CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 5, 0, "TOTAL KILOS FINAL DE CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 6, 0, "GANANCIA DE PESO DEL CORRAL", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 7, 0, "PESO MAXIMO", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 8, 0, "PESO MINIMO", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 9, 0, "PESO PROMEDIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 1, 0, "NOMBRE DEL CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 0, "FECHA DE CIERRE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 0, "FECHA DE INICIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 0, "DÍAS CORRAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 0, "NÚMERO DE ANIMALES", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 0, "TOTAL KILOS INICIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 0, "PROMEDIO DE KILOS INICIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 0, "TOTAL KILOS CIERRE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 9, 0, "PROMEDIO DE KILOS CIERRE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 10, 0, "GANANCIA PROMEDIO DE PESO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 11, 0, "PESO MÁXIMO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 12, 0, "PESO MÍNIMO", styleEtiquetaTabla);
+        
+        
+        
+        
         agregarValor(fila_tablas + 1, 2, formatoDateTime.format(corral.fecha_cierre), styleCenter);
         agregarValor(fila_tablas + 2, 2, corral.nombre, styleCenter);
         agregarValor(fila_tablas + 3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
@@ -1990,15 +1997,18 @@ public class Excel {
         relleno("E" + (fila_tablas + 1) + ":H" + (fila_tablas + 1), IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 
         agregarValor(fila_tablas, 4, "DATOS Y RENDIMIENTOS", styleTituloTabla);
-        agregarValor(fila_tablas + 1, 4, "GANANCIA DE PESO X PRECIO DE CARNE", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 2, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 3, 4, "COSTO TOTAL DE ALIMENTO INGRESADO", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 4, 4, "UTILIDAD IDEAL SIN GASTOS DE OPERACIÓN", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 5, 4, "SUELDOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 6, 4, "GASTOS FIJOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 7, 4, "GASTOS VARIOS", styleEtiquetaTabla);
-        agregarValor(fila_tablas + 8, 4, "UTILIDAD FINAL", styleEtiquetaTabla);
-        //agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 1, 4, "TOTAL ALIMENTO INGRESADO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 2, 4, "CONSUMO DIARIO PROMEDIO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 3, 4, "CONVERSIÓN ALIMENTICIA", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 4, 4, "PROMEDIO DE PESO DE LA CANAL", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 5, 4, "PROMEDIO PESO CANAL CALIENTE", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 6, 4, "PROMEDIO PESO CANAL FRÍO", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 7, 4, "PORCENTAJE DE MERMA", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 8, 4, "COSTO TOTAL DE MEDICAMENTOS INGRESADOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 9, 4, "COSTO TOTAL DE TRANSPORTES", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 10, 4, "GASTOS DIRECTOS", styleEtiquetaTabla);
+        agregarValor(fila_tablas + 11, 4, "GASTOS INDIRECTOS", styleEtiquetaTabla);
+//agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
 
         agregarValor(fila_tablas + 1, 7, new FormatoNumero(corral.ganancia_precio_carne.toString()).convierte(corral.ganancia_precio_carne), styleRight);
         agregarValor(fila_tablas + 2, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);

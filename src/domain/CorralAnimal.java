@@ -68,7 +68,7 @@ public class CorralAnimal {
                 + "WHERE  a.id_animal    = ca.id_animal  \n"
                 + "AND    c.id_corral    = ca.id_corral  \n"
                 + "AND    c.id_corral    = '" + id_corral + "' "
-                + "AND      a.status = 'C'");
+                + "AND      a.status = 'V' ");
 
         if (manejadorBD.getRowCount() > 0) {
 
