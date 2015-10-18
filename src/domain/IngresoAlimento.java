@@ -49,10 +49,10 @@ public class IngresoAlimento {
         manejadorBD.parametrosSP.agregarParametro(carro.toString(), "varCarro", "STRING", "IN");
         
         if (manejadorBD.ejecutarSP("{ call agregarIngresoAlimento(?,?,?,?,?,?,?) }") == 0) {
+     
             return true;
         }
+        
         return false;
-
     }
-
 }
