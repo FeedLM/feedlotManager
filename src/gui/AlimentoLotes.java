@@ -40,9 +40,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         tf_totalAlimento = new abstractt.TextField();
         btn_ingreso = new abstractt.Boton();
-        fondo1 = new abstractt.fondo();
         jPanel3 = new javax.swing.JPanel();
         tf_animales = new abstractt.TextField();
+        fondo1 = new abstractt.fondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -103,9 +103,6 @@ public class AlimentoLotes extends javax.swing.JFrame {
         });
         jPanel1.add(btn_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 150, 30));
 
-        fondo1.setText("fondo1");
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Total de animales en el Lote"));
 
         tf_animales.setBackground(new java.awt.Color(255, 255, 153));
@@ -131,6 +128,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 340, 90));
+
+        fondo1.setText("fondo1");
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -184,7 +184,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         etiqueta5.setText("Fecha de Compra");
         jPanel2.add(etiqueta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 120, 20));
 
-        btn_.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        btn_.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 340, -1));
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -215,7 +215,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         jPanel1.add(tf_costoFlete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 130, 20));
         jPanel1.add(calendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 120, 20));
 
-        btn_.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        btn_.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
 
         fondo1.setText("fondo1");
         btn_.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

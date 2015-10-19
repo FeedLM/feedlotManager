@@ -78,11 +78,11 @@ public class Animal {
                 + "    COALESCE(peso_compra,0),                      status, \n"
                 + "    COALESCE(es_semental,'N'),                    COALESCE(id_semental,0), \n"
                 + "    COALESCE(animal.id_sexo,''),                  COALESCE(id_raza,''),\n"
-                + "    COALESCE(es_vientre,'N'),                     COALESCE(porcentaje_merma,0),"
+                + "    COALESCE(es_vientre,'N'),                     round(COALESCE(porcentaje_merma,0),2),"
                 + "    COALESCE(costo_flete, 0),                  COALESCE(total_alimento, 0),"
-                + "     COALESCE(costo_alimento, 0),                COALESCE(promedio_alimento, 0),"
-                + "     COALESCE(promedio_costo_alimento,0),        COALESCE(fecha_ultima_comida, '1900-01-01 00:00:00'),"
-                + "     COALESCE(ganancia_promedio, 0) \n ";
+                + "    COALESCE(costo_alimento, 0),                round(COALESCE(promedio_alimento, 0),2),"
+                + "    COALESCE(promedio_costo_alimento,0),        COALESCE(fecha_ultima_comida, '1900-01-01 00:00:00'),"
+                + "    round(COALESCE(ganancia_promedio, 0),2) \n ";
 
     }
 

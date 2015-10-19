@@ -1030,7 +1030,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalDetalle.arete_siniiga = tf_AreteSiniiga.getText();
         animalDetalle.arete_campaña = tf_AreteCampaña.getText();
         animalDetalle.fecha_compra = JDc_FechaCompra.getCalendar().getTime();
-        animalDetalle.numero_lote = loteSelector1.getText();
+        animalDetalle.numero_lote = loteSelector1.getSelectedItem().toString();
         animalDetalle.compra = tf_Compra.getText();
 
         animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
@@ -1094,7 +1094,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalDetalle.arete_siniiga = tf_AreteSiniiga.getText();
         animalDetalle.arete_campaña = tf_AreteCampaña.getText();
         animalDetalle.fecha_compra = JDc_FechaCompra.getCalendar().getTime();
-        animalDetalle.numero_lote = loteSelector1.getText();
+        animalDetalle.numero_lote = loteSelector1.getSelectedItem().toString();
         animalDetalle.compra = tf_Compra.getText();
         // animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
         animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
@@ -1607,6 +1607,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
             tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
             this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
-            this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + " %");
+            this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + "%");
     }
 }
