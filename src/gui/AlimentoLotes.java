@@ -104,6 +104,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
         jPanel1.add(btn_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 150, 30));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Total de animales en el Lote"));
+        jPanel3.setOpaque(false);
 
         tf_animales.setBackground(new java.awt.Color(255, 255, 153));
         tf_animales.setText("0");

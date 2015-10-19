@@ -68,7 +68,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         String titulos[] = {
             "Id Animal", "Arete Visual", "Arete Electronico",
             "Proveedor", "Fecha de Compra", "Arete Siniiga",
-            "Arete Campaña", "Sexo", "Fecha de Ingreso",
+            "Arete Campaña", "Sexo", "Ingreso al Corral",
             "Numero de Lote", "No. Compra", "Peso Actual",
             "Peso de Compra"};
 
@@ -294,7 +294,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         etiqueta1.setText("Administracion de Grupos");
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel6.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 80));
+        jPanel6.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 80));
 
         datosPanel.setBackground(new java.awt.Color(255, 255, 255));
         datosPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -406,6 +406,8 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         datosPanel.add(t_pesoPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 100, 22));
 
         t_alimentoIngresado.setText("0.00");
+        t_alimentoIngresado.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        t_alimentoIngresado.setFocusable(false);
         t_alimentoIngresado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 t_alimentoIngresadoFocusLost(evt);
@@ -1261,11 +1263,8 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     }
 
     private void cargarComponentes() {
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension pantallaTamano = tk.getScreenSize();
-        setSize(pantallaTamano);
 //        plecaSuperior1.cargar();
-        fondo1.cargar(pantallaTamano);
+        fondo1.cargar(getSize());
 //        jPanel1.setLocation((pantallaTamano.width / 2) - (jPanel1.getWidth() / 2), (pantallaTamano.height / 2) - (jPanel1.getHeight() / 2));
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);

@@ -201,6 +201,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalSelectorPadre = new domain.AnimalSelector();
         jrb_esVientre = new javax.swing.JRadioButton();
         loteSelector1 = new domain.LoteSelector();
+        calendar1 = new abstractt.Calendar();
+        etiqueta2 = new abstractt.Etiqueta();
+        etiqueta3 = new abstractt.Etiqueta();
+        textField1 = new abstractt.TextField();
         pn_Grafica_Tabla = new javax.swing.JPanel();
         panelGrafica = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -252,38 +256,38 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel2.setForeground(new java.awt.Color(95, 84, 88));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Arete Visual (IDV):");
-        pn_Formulario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 120, 20));
+        pn_Formulario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 120, 20));
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 84, 88));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Arete Electronico (IDE):");
-        pn_Formulario.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 300, 160, 20));
+        pn_Formulario.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 360, 160, 20));
 
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 84, 88));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Arete Siniiga:");
-        pn_Formulario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 120, 20));
+        pn_Formulario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 120, 20));
 
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 84, 88));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Arete Campaña:");
-        pn_Formulario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 120, 20));
+        pn_Formulario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 120, 20));
 
         jLabel14.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(95, 84, 88));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Padre:");
         jLabel14.setFocusable(false);
-        pn_Formulario.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 120, 20));
+        pn_Formulario.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 120, 20));
 
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(95, 84, 88));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Peso Actual (Kg):");
-        pn_Formulario.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 120, 20));
+        pn_Formulario.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 120, 20));
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(95, 84, 88));
@@ -301,7 +305,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel16.setForeground(new java.awt.Color(95, 84, 88));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Raza:");
-        pn_Formulario.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 120, 20));
+        pn_Formulario.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 120, 20));
 
         jLabel18.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(95, 84, 88));
@@ -325,7 +329,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jLabel10.setForeground(new java.awt.Color(95, 84, 88));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Sexo:");
-        pn_Formulario.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 120, 20));
+        pn_Formulario.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 120, 20));
 
         jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(95, 84, 88));
@@ -348,7 +352,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         tf_PesoActual.setText("0.00");
         tf_PesoActual.setFocusable(false);
         tf_PesoActual.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(tf_PesoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 160, 20));
+        pn_Formulario.add(tf_PesoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 160, 20));
 
         tf_Eid.setFocusable(false);
         tf_Eid.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -362,13 +366,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 tf_EidActionPerformed(evt);
             }
         });
-        pn_Formulario.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 160, 20));
+        pn_Formulario.add(tf_Eid, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 160, 20));
 
         tf_AreteSiniiga.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(tf_AreteSiniiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 160, 20));
+        pn_Formulario.add(tf_AreteSiniiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 160, 20));
 
         tf_AreteCampaña.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(tf_AreteCampaña, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 160, 20));
+        pn_Formulario.add(tf_AreteCampaña, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 160, 20));
 
         tf_AreteVisual.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tf_AreteVisual.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -381,7 +385,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 tf_AreteVisualActionPerformed(evt);
             }
         });
-        pn_Formulario.add(tf_AreteVisual, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 160, 20));
+        pn_Formulario.add(tf_AreteVisual, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 160, 20));
 
         JDc_FechaIngreso.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
         pn_Formulario.add(JDc_FechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 20));
@@ -402,12 +406,12 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esSemental.setEnabled(false);
         jrb_esSemental.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jrb_esSemental.setOpaque(false);
-        pn_Formulario.add(jrb_esSemental, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 220, 20));
+        pn_Formulario.add(jrb_esSemental, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 220, 20));
         jrb_esSemental.getAccessibleContext().setAccessibleName("Es Semental:                  ");
 
         semental.setEnabled(false);
         semental.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(semental, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 160, 20));
+        pn_Formulario.add(semental, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 160, 20));
 
         tf_Compra.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tf_Compra.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -422,7 +426,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 sexoSelector1ActionPerformed(evt);
             }
         });
-        pn_Formulario.add(sexoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, -1));
+        pn_Formulario.add(sexoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 160, -1));
 
         proveedorSelector1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         pn_Formulario.add(proveedorSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 160, 20));
@@ -437,27 +441,27 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         pn_Formulario.add(corralSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 160, 20));
 
         razaSelector1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        pn_Formulario.add(razaSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, -1));
+        pn_Formulario.add(razaSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 160, -1));
 
         jLabel20.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(95, 84, 88));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText("Semental:");
         jLabel20.setFocusable(false);
-        pn_Formulario.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 120, 20));
+        pn_Formulario.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 120, 20));
 
         jLabel22.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(95, 84, 88));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Madre:");
         jLabel22.setFocusable(false);
-        pn_Formulario.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 120, 20));
+        pn_Formulario.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 120, 20));
 
         animalSelectorMadre.setEnabled(false);
-        pn_Formulario.add(animalSelectorMadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 160, -1));
+        pn_Formulario.add(animalSelectorMadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, 160, 20));
 
         animalSelectorPadre.setEnabled(false);
-        pn_Formulario.add(animalSelectorPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 160, -1));
+        pn_Formulario.add(animalSelectorPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 660, 160, 20));
 
         jrb_esVientre.setBackground(new java.awt.Color(255, 255, 255));
         jrb_esVientre.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -465,7 +469,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         jrb_esVientre.setText("Es Vientre:                   ");
         jrb_esVientre.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jrb_esVientre.setOpaque(false);
-        pn_Formulario.add(jrb_esVientre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 210, 20));
+        pn_Formulario.add(jrb_esVientre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, 210, 20));
 
         loteSelector1.setEditable(false);
         loteSelector1.addActionListener(new java.awt.event.ActionListener() {
@@ -474,8 +478,20 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             }
         });
         pn_Formulario.add(loteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 160, -1));
+        pn_Formulario.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 20));
 
-        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 570));
+        etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta2.setText("Fecha de Recepción: ");
+        pn_Formulario.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 20));
+
+        etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        etiqueta3.setText("Peso de Recepción: ");
+        pn_Formulario.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 210, 130, -1));
+
+        textField1.setText("0.00");
+        pn_Formulario.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 20));
+
+        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 320, 490));
 
         pn_Grafica_Tabla.setBackground(new java.awt.Color(255, 255, 255));
         pn_Grafica_Tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -645,7 +661,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         tf_pesoBascula.setFont(new java.awt.Font("Trebuchet MS", 0, 60)); // NOI18N
         jPanel9.add(tf_pesoBascula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 50));
 
-        pn_Peso.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 40, 260, 70));
+        pn_Peso.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 260, 70));
 
         btn_quitarPeso.setBackground(new java.awt.Color(64, 37, 4));
         btn_quitarPeso.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -657,7 +673,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 btn_quitarPesoActionPerformed(evt);
             }
         });
-        pn_Peso.add(btn_quitarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 75, 45, 30));
+        pn_Peso.add(btn_quitarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 35, 45, 30));
 
         btn_capturarPeso.setBackground(new java.awt.Color(64, 37, 4));
         btn_capturarPeso.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -669,9 +685,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 btn_capturarPesoActionPerformed(evt);
             }
         });
-        pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 45, 30));
+        pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 45, 30));
 
-        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 330, 111));
+        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 611, 330, 80));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -1488,8 +1504,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.Boton btn_pesoManual;
     private javax.swing.JButton btn_quitarPeso;
     private abstractt.Boton btn_reporte;
+    private abstractt.Calendar calendar1;
     private abstractt.ComboBox corralSelector;
     private abstractt.Etiqueta etiqueta1;
+    private abstractt.Etiqueta etiqueta2;
+    private abstractt.Etiqueta etiqueta3;
     private abstractt.fondo fondo1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1529,6 +1548,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private domain.AnimalSelector semental;
     private domain.SexoSelector sexoSelector1;
     private abstractt.Table t_pesos;
+    private abstractt.TextField textField1;
     private abstractt.TextField tf_AreteCampaña;
     private abstractt.TextField tf_AreteSiniiga;
     private abstractt.TextField tf_AreteVisual;

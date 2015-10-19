@@ -45,6 +45,8 @@ public class Animal {
     public String id_registro_empadre;
     public Genealogia genealogia;
     public String es_vientre;
+    public Date fecha_recepcion;
+    public Double peso_recepcion;
 
     public Double porcentaje_merma;
     public Double costo_flete;

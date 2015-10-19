@@ -16,9 +16,6 @@ import static gui.Login.gs_mensaje;
 import static gui.Splash.formatoDateTime;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -32,7 +29,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     public CapturaRecepcion() {
         initComponents();
         String titulos[] = {"id_recepcion", "Folio", "Proveedor",
-            "Fecha Compra", "# Animales", "Peso Origen", "Peso Recepción",
+            "Fecha Compra", "# Animales", "Peso Origen", "Peso Recepción", "Lote",
             "Kg Merma", "% Merma", "Devoluciones", "Causa"};
         proveedorSelector1.cargar();
         estadoSelector1.cargar();
@@ -100,21 +97,21 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         t_recepcion.setForeground(new java.awt.Color(230, 225, 95));
         t_recepcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12"
             }
         ));
         jScrollPane1.setViewportView(t_recepcion);
@@ -176,8 +173,8 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         jPanel2.add(tf_numeroLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 130, 20));
 
         etiqueta12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        etiqueta12.setText("Lote (folio de Compra + Lote)");
-        jPanel2.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+        etiqueta12.setText("Lote ");
+        jPanel2.add(etiqueta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, 20));
         jPanel2.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 120, -1));
 
         etiqueta5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -246,6 +243,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
                 + "    Animales,\n"
                 + "    Peso_Origen,\n"
                 + "    Peso_Recepcion,\n"
+                + "    Numero_lote, \n"
                 + "    Merma,\n"
                 + "    porcentaje_Merma,\n"
                 + "    Devoluciones,\n"
