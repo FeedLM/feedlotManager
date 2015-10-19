@@ -105,12 +105,12 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         this.razaSelector1.valor_nuevo = true;
         this.proveedorSelector1.valor_nuevo = true;
-        this.tf_ganancia.setEditable(false);        
-        
+        this.tf_ganancia.setEditable(false);
+
         razaSelector1.cargarSeleccionar();
         loteSelector1.cargar();
         animalSelectorMadre.cargararete_visuals_2();
-        animalSelectorPadre.cargararete_visuals_2();        
+        animalSelectorPadre.cargararete_visuals_2();
         cargarComponentes();
     }
 
@@ -201,10 +201,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         animalSelectorPadre = new domain.AnimalSelector();
         jrb_esVientre = new javax.swing.JRadioButton();
         loteSelector1 = new domain.LoteSelector();
-        calendar1 = new abstractt.Calendar();
+        JDc_fechaRecepcion = new abstractt.Calendar();
         etiqueta2 = new abstractt.Etiqueta();
         etiqueta3 = new abstractt.Etiqueta();
-        textField1 = new abstractt.TextField();
+        tf_pesoRecepcion = new abstractt.TextField();
         pn_Grafica_Tabla = new javax.swing.JPanel();
         panelGrafica = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -478,7 +478,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             }
         });
         pn_Formulario.add(loteSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 160, -1));
-        pn_Formulario.add(calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 20));
+        pn_Formulario.add(JDc_fechaRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 20));
 
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta2.setText("Fecha de Recepción: ");
@@ -488,8 +488,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         etiqueta3.setText("Peso de Recepción: ");
         pn_Formulario.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 210, 130, -1));
 
-        textField1.setText("0.00");
-        pn_Formulario.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 20));
+        tf_pesoRecepcion.setText("0.00");
+        pn_Formulario.add(tf_pesoRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 20));
 
         jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 320, 490));
 
@@ -886,16 +886,16 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void sexoSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoSelector1ActionPerformed
-        
+
         if (sexoSelector1.getSelectedItem().equals("Macho")) {
-            
+
             semental.setEnabled(false);
             jrb_esSemental.setEnabled(true);
             jrb_esVientre.setEnabled(false);
             jrb_esVientre.setSelected(false);
         }
         if (sexoSelector1.getSelectedItem().equals("Hembra")) {
-            
+
             semental.setEnabled(true);
             jrb_esSemental.setEnabled(false);
             jrb_esSemental.setSelected(false);
@@ -904,15 +904,27 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
     private void loteSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteSelector1ActionPerformed
-        this.proveedorSelector1.setEditable(false);
-        this.tf_Compra.setEditable(false);
-        this.tf_PesoCompra.setEditable(false);
+        this.proveedorSelector1.setFocusable(false);
+        this.JDc_FechaCompra.setFocusable(false);
+        this.JDc_fechaRecepcion.setFocusable(false);
+        this.tf_Compra.setFocusable(false);
+        this.tf_PesoCompra.setFocusable(false);
+        this.tf_pesoRecepcion.setFocusable(false);
         recepcion = new Recepcion();
         recepcion.cargarPorLote(loteSelector1.getSelectedItem().toString());
         proveedorSelector1.setSelectedItem(recepcion.proveedor.descripcion);
         tf_Compra.setText(recepcion.folio);
-        tf_PesoCompra.setText(recepcion.peso_origen.toString());
-//        this.JDc_FechaCompra.setDate(recepcion.fecha_compra);
+        Double d = recepcion.peso_origen / recepcion.animales;
+        if (d > 0) {
+            tf_PesoCompra.setText(d.toString());
+        }
+        d = recepcion.peso_recepcion / recepcion.animales;
+        if (d > 0) {
+            tf_pesoRecepcion.setText(d.toString());
+        }
+        JDc_fechaRecepcion.setDate(recepcion.fecha_recepcion);
+        JDc_FechaCompra.setDate(recepcion.fecha_compra);
+
     }//GEN-LAST:event_loteSelector1ActionPerformed
 
     private boolean validacionCodigo;
@@ -1071,11 +1083,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 }
             }
         }
-        
-        if(this.jrb_esVientre.isSelected()){
-            
+
+        if (this.jrb_esVientre.isSelected()) {
+
             animalDetalle.es_vientre = "S";
-        }else{
+        } else {
             animalDetalle.es_vientre = "N";
         }
 
@@ -1142,11 +1154,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         animalDetalle.raza.cargarPorDescripcion(razaSelector1.getSelectedItem().toString());
         animalDetalle.raza.descripcion = razaSelector1.getSelectedItem().toString();
-        
-        if(this.jrb_esVientre.isSelected()){
-            
+
+        if (this.jrb_esVientre.isSelected()) {
+
             animalDetalle.es_vientre = "S";
-        }else{
+        } else {
             animalDetalle.es_vientre = "N";
         }
 
@@ -1194,17 +1206,17 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_PesoActual.setText("0.0");
             tf_PesoCompra.setText("0.0");
             sexoSelector1.setSelectedItem(animalDetalle.sexo.descripcion);
-            razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);            
+            razaSelector1.setSelectedItem(animalDetalle.raza.descripcion);
         }
 
         if (!consulta) {
-            
+
             animalDetalle = new Animal();
             animalDetalle.cargarPorEid(eid);
         }
-        
+
         if (!animalDetalle.id_animal.equals("")) {
-            
+
             tf_AreteVisual.setText(animalDetalle.arete_visual);
             corralSelector.setSelectedItem(animalDetalle.corral.nombre);
             JDc_FechaIngreso.setDate(animalDetalle.fecha_ingreso);
@@ -1223,7 +1235,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             graficar();
             valoresPromedio();
             corralSelector.setEnabled(false);
-            
+
             this.animalSelectorMadre.setAnimal(animalDetalle.genealogia.madre);
             this.animalSelectorPadre.setAnimal(animalDetalle.genealogia.padre);
 
@@ -1241,22 +1253,22 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 }
 
             } else {
-                
+
                 this.semental.setEnabled(true);
                 this.jrb_esVientre.setEnabled(true);
-                    
+
                 if (animalDetalle.semental != null) {
-                    
+
                     this.semental.setSelectedItem(animalDetalle.semental.arete_visual);
-                    
+
                 } else {
-                    
+
                     this.semental.setSelectedItem("");
                 }
             }
-            
-            if(animalDetalle.es_vientre.equals("S") ){
-            
+
+            if (animalDetalle.es_vientre.equals("S")) {
+
                 this.jrb_esVientre.setSelected(true);
             }
 
@@ -1353,10 +1365,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
             this.jrb_esSemental.setEnabled(false);
             this.semental.setEnabled(false);
-            
+
             this.animalSelectorMadre.setAnimal(animalDetalle.genealogia.madre);
             this.animalSelectorPadre.setAnimal(animalDetalle.genealogia.padre);
-            
+
             if (animalDetalle.sexo.descripcion.equals("Macho")) {//es Macho
 
                 this.jrb_esSemental.setEnabled(true);
@@ -1371,18 +1383,18 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 this.jrb_esVientre.setEnabled(true);
 
                 if (animalDetalle.semental != null) {
-                    
+
                     this.semental.setSelectedItem(animalDetalle.semental.arete_visual);
                 } else {
-                    
+
                     this.semental.setSelectedItem("");
                 }
             }
-                        
-            if(animalDetalle.es_vientre.equals("S") ){
-            
+
+            if (animalDetalle.es_vientre.equals("S")) {
+
                 this.jrb_esVientre.setSelected(true);
-            }            
+            }
         } else {
 
             if (dialogoConfirmacionSiNo(this, "¿El animal no existe desea ingresarlo al sistema?", gs_mensaje, 1) == 0) {
@@ -1432,18 +1444,18 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         //String l_eid;
         //l_eid = EEid(id_animal);
         if (animalDetalle.arete_electronico.length() == 0) {
-            
+
             this.tf_AreteVisual.setText(animalDetalle.arete_visual);
             leerAreteVisual();
         } else {
-            
+
             this.tf_Eid.setText(animalDetalle.arete_electronico);
             leerEid();
         }
     }
 
     public void setEid(String AEid) {
-        
+
         corralSelector.addArray(cargarCorrales());
         this.tf_Eid.setText(AEid);
         leerEid();
@@ -1461,7 +1473,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void cargarComponentes() {
-        
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension pantallaTamano = tk.getScreenSize();
 //        setSize(pantallaTamano); /*Dar tamaño máximo a la pantalla*/
@@ -1493,6 +1505,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Calendar JDc_FechaCompra;
     private abstractt.Calendar JDc_FechaIngreso;
+    private abstractt.Calendar JDc_fechaRecepcion;
     private domain.AnimalSelector animalSelectorMadre;
     private domain.AnimalSelector animalSelectorPadre;
     private abstractt.Boton btn_BajasMuerte;
@@ -1504,7 +1517,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.Boton btn_pesoManual;
     private javax.swing.JButton btn_quitarPeso;
     private abstractt.Boton btn_reporte;
-    private abstractt.Calendar calendar1;
     private abstractt.ComboBox corralSelector;
     private abstractt.Etiqueta etiqueta1;
     private abstractt.Etiqueta etiqueta2;
@@ -1548,7 +1560,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private domain.AnimalSelector semental;
     private domain.SexoSelector sexoSelector1;
     private abstractt.Table t_pesos;
-    private abstractt.TextField textField1;
     private abstractt.TextField tf_AreteCampaña;
     private abstractt.TextField tf_AreteSiniiga;
     private abstractt.TextField tf_AreteVisual;
@@ -1561,13 +1572,14 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private abstractt.TextField tf_ganancia;
     private abstractt.TextField tf_merma;
     private abstractt.TextField tf_pesoBascula;
+    private abstractt.TextField tf_pesoRecepcion;
     // End of variables declaration//GEN-END:variables
 
     /**
      * @param consulta the consulta to set
      */
     public void setConsulta(boolean consulta) {
-        
+
         this.consulta = consulta;
     }
 
@@ -1578,7 +1590,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void valoresPromedio() {
-        
+
         /*        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
          + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
          + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
@@ -1624,9 +1636,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 //                + "         AND d.id_animal     =   '" + id_animal + "')");
 //        
 //        if (manejadorBD.getRowCount() > 0) {
-
-            tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
-            this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
-            this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + "%");
+        tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
+        this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
+        this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + "%");
     }
 }

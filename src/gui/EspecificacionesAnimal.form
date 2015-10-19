@@ -662,7 +662,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="abstractt.Calendar" name="calendar1">
+            <Component class="abstractt.Calendar" name="JDc_fechaRecepcion">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="160" y="180" width="160" height="20"/>
@@ -691,7 +691,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="abstractt.TextField" name="textField1">
+            <Component class="abstractt.TextField" name="tf_pesoRecepcion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
