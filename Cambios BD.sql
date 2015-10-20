@@ -1730,3 +1730,315 @@ END$$
 
 DELIMITER ;
 
+--2015-10-19 22:55
+--trigger ingreso alimento
+DELIMITER $$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `feedlotmanager`.`ingreso_alimento_AFTER_INSERT`
+AFTER INSERT ON `feedlotmanager`.`ingreso_alimento`
+FOR EACH ROW
+begin
+    declare varAlimentoAnimal decimal(20,4);
+          
+     
+    if new.id_corral = "" then 
+		
+        select 	new.total_alimento / animales_pendientes
+        into	varAlimentoAnimal 
+        from   	recepcion
+        where  	numero_lote = new.numero_lote;
+     
+        update	animal
+        set		total_alimento		=	coalesce(total_alimento, 0.00)	+	varAlimentoAnimal,
+				costo_alimento		=	coalesce(costo_alimento, 0.00)	+	(	varAlimentoAnimal	*	new.costo_unitario	),
+                fecha_ultima_comida	=	new.fecha
+        where	numero_lote		=	new.numero_lote;
+
+		update	recepcion
+		set		total_alimento	=	total_alimento + new.total_alimento
+		where 	new.numero_lote = recepcion.numero_lote;
+
+
+    end if;    
+    
+    if new.numero_lote  = "" then 
+		
+        select 	new.total_alimento / count(*)
+        into	varAlimentoAnimal 
+        from   	animal, corral_animal
+        where  	corral_animal.id_corral		=	new.id_corral
+        and     corral_animal.id_animal		=	animal.id_animal;
+
+        update	animal
+        set		total_alimento 		=	coalesce(total_alimento, 0.00)	+	varAlimentoAnimal,
+				costo_alimento 		=	coalesce(costo_alimento, 0.00)	+	(  varAlimentoAnimal * new.costo_unitario ),
+                fecha_ultima_comida	=	new.fecha
+        where	id_animal in (	select id_animal
+								from   corral_animal 
+								where  corral_animal.id_corral = new.id_corral);
+
+		call animalesPorCorral(new.id_corral);
+    end if;
+end$$
+--2015-10-19 23:06
+--sp animales por corral
+CREATE DEFINER=`root`@`localhost` PROCEDURE `animalesPorCorral`(
+	varIdCorral CHAR(36)	)
+BEGIN
+	
+	UPDATE corral
+	SET num_animales =	(	SELECT	count(	*	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		total_kilos	=	(	SELECT	SUM(	peso_actual	) 
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_minimo	=	(	SELECT	MIN(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_maximo	=	(	SELECT	MAX(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'A'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_promedio	=	(	SELECT	AVG(	peso_actual	)
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'A'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		peso_ganancia	=	(	SELECT	SUM(	peso_actual	) - SUM(	peso_compra) 
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'A'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		id_raza			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_raza
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_raza,	COUNT(DISTINCT id_raza) AS count, 
+											(	SELECT	id_raza	
+												FROM	raza
+												WHERE	descripcion = 'Mixto' ) mixto
+											FROM	animal a, corral_animal ca
+											WHERE	a.id_animal	=	ca.id_animal
+											AND  	id_corral	=	varIdCorral		)	a1	),                                                                                      
+		id_sexo			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_sexo
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_sexo,	COUNT(DISTINCT id_sexo) AS count, 
+											(	SELECT	id_sexo	
+												FROM	sexo
+												WHERE	descripcion = 'Mixto' ) mixto
+												FROM	animal a, corral_animal ca
+												WHERE	a.id_animal = ca.id_animal
+												AND		id_corral 	= varIdCorral	)	a1	),
+		
+        total_kilos_iniciales	=	(	SELECT	SUM(peso_compra)										
+										FROM    corral_animal c, animal a
+										WHERE   c.id_animal	=	a.id_animal
+										AND     c.id_corral	=	corral.id_corral),
+         
+		total_costo_medicina	=	(	SELECT  SUM( ma.dosis * rm.costo_promedio)
+										FROM 	corral_animal ca, medicina_animal ma, medicina m, rancho_medicina rm
+										WHERE 	ma.id_medicina	=	m.id_medicina
+                                        AND 	rm.id_medicina 	= 	m.id_medicina
+                                        AND		ca.id_animal	=	ma.id_animal
+										AND		ma.id_rancho	=	ca.id_rancho
+										AND 	rm.id_rancho	= 	corral.id_rancho
+                                        AND		ca.id_rancho	=	corral.id_rancho
+										AND		ca.id_corral	=	corral.id_corral	),
+                                        
+		ganancia_promedio	=	(	SELECT	AVG(	animal.ganancia_promedio		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'A'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal),
+		
+        promedio_alimento	=	(	SELECT	AVG(	animal.promedio_alimento		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'A'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal	),
+
+		alimento_ingresado	=	(	SELECT	sum(	animal.total_alimento		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'A'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal	)
+									
+	WHERE corral.id_corral	=	varIdCorral;    
+    
+    UPDATE	corral
+    SET		peso_ganancia		=	CASE WHEN peso_ganancia < 0 THEN 0 ELSE peso_ganancia END
+    WHERE	corral.id_corral	=	varIdCorral;
+END
+--2015-10-19 23:14
+ALTER TABLE `animal` 
+ADD COLUMN `fecha_recepcion` DATETIME NULL  AFTER `es_vientre` , 
+ADD COLUMN `peso_recepcion` DECIMAL(20,4) NULL  AFTER `fecha_recepcion` ;
+--2015-10-19 23:15
+--sp agregar recepcion
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarRecepcion`(
+    varIdProveedor		CHAR(36),		varIdOrigen			CHAR(36),		varFolio			CHAR(45),
+    varFechaCompra		DATETIME,		varFechaRecepcion	DATETIME,		varAnimales			int(10),
+	varPesoOrigen		DECIMAL(20,4),	varLimiteMerma		DECIMAL(20,4),	varMerma			decimal(20,5),
+	varPorcentajeMerma	decimal(20,4),	varPesoRecepcion	DECIMAL(20,4),	varNumeroLote		char(255),	
+	varCostoFlete		DECIMAL(20,4),	varDevoluciones		int(10),		varCausaDevolucion	varchar(45))
+BEGIN
+    DECLARE varIdRecepcion char(36);
+	declare i int;
+    DECLARE varIdAnimal CHAR(36);
+
+	SELECT	UUID()
+	INTO	varIdRecepcion;
+     	
+	set varMerma = varPesoOrigen - varPesoRecepcion;
+    
+    set varPorcentajeMerma = ( varMerma * 100 ) / varPesoOrigen;
+
+    INSERT recepcion
+    (	id_recepcion,	id_proveedor,		id_origen,			folio,
+		fecha_compra,	fecha_recepcion,	animales,			animales_pendientes,
+		peso_origen,	limite_merma,		merma,				porcentaje_merma,	
+		peso_recepcion,	numero_lote,		costo_flete,		devoluciones,		
+		causa_devolucion	)
+    SELECT
+		varIdRecepcion,		varIdProveedor,		varIdOrigen,		varFolio,
+		varFechaCompra,		varFechaRecepcion,	varAnimales,		varAnimales,
+		varPesoOrigen,		varLimiteMerma,		varMerma,			varPorcentajeMerma,
+		varPesoRecepcion,	varNumeroLote,		varCostoFlete,		varDevoluciones,	
+		varCausaDevolucion;	
+
+	-- set i = 0;
+ 
+	-- while  i < varAnimales do
+
+-- se agrega un animal base, para asignar alimento
+		SELECT UUID()
+		INTO varIdAnimal;
+    
+		INSERT animal
+		(	id_animal,			id_proveedor,	                fecha_compra,		compra,
+			numero_lote,		peso_compra,	                fecha_recepcion,	peso_recepcion,
+			porcentaje_merma,   costo_flete,
+            status)
+		SELECT
+			varIdAnimal,		varIdProveedor,	                varFechaCompra,		varfolio,
+			varNumeroLote,		varPesoOrigen / varAnimales,	varFechaRecepcion,	varPesoRecepcion / varAnimales
+			varPorcentajeMerma, varCostoFlete / varAnimales,
+            'A';
+    
+	-- set i = i + 1;
+    -- end while;
+END
+--2015-10-19 23:17
+--sp agregar animal
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarAnimal`(
+    varIdRancho		CHAR(36),		varIdCorral     	CHAR(36),		varIdProveedor	CHAR(36),		
+	varFechaCompra	DATETIME,		varCompra			CHAR(255),		varNumeroLote	CHAR(255),
+	varPesoCompra	DECIMAL(20,4),	varIdSexo			CHAR(36),		varFechaIngreso	DATETIME,
+	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),		varAreteSiniiga	CHAR(255),
+	varAreteCampaña	CHAR(255),		varPesoActual		DECIMAL(20,4),	varTemperatura	DECIMAL(20,4),
+	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),		varIdRaza		CHAR(36),
+	varStatus		CHAR(1),		varIdCria			CHAR(36),		varEsVientre	CHAR(1))
+BEGIN
+    DECLARE varIdAnimal,	varIdRecepcion CHAR(36);
+	declare varPorcentajeMerma,		varCostoFlete,				varTotalAlimento,		varCostoAlimento,
+			varPromedioAlimento,	varPromedioCostoAlimento, varGananciaPromedio,		varPesoCompra,
+			varPesoRecepcion	DECIMAL(20,4);		
+
+	declare	varAnimalesPendientes int(10);
+
+	declare varFechaUltimaComida,varFechaRecepcion datetime;
+
+	SELECT UUID()
+	INTO varIdAnimal;
+
+	INSERT corral_animal
+    (   id_rancho,    id_corral,    id_animal)
+    SELECT
+        varIdRancho, varIdCorral, varIdAnimal;
+
+    INSERT animal
+    (	id_animal,		id_proveedor,		fecha_compra,	compra,
+		numero_lote,	peso_compra,		id_sexo,		fecha_ingreso,
+		arete_visual,	arete_electronico,	arete_siniiga,	arete_campaña,
+		peso_actual,	temperatura,		es_semental,	id_semental,
+		id_raza,		status,				es_vientre)
+    SELECT
+		varIdAnimal,	varIdProveedor,			varFechaCompra,		varCompra,
+		varNumeroLote,	varPesoCompra,			varIdSexo,			varFechaIngreso,
+		varAreteVisual,	varAreteElectronico,	varAreteSiniiga,	varAreteCampaña,
+		varPesoActual,	varTemperatura,			varEsSemental,		varIdSemental,		
+		varIdRaza,		varStatus,				varEsVientre;
+
+    call movimientoPeso( varIdRancho, varIdAnimal, varFechaIngreso, varPesoActual);
+
+	update	cria 
+	set		id_animal	=	varIdAnimal
+	where	id_cria		=	varIdCria;
+
+	-- obtener datos del animal base
+	select	peso_compra,				fecha_recepcion,			peso_recepcion,			porcentaje_merma,
+			costo_flete,				total_alimento,				costo_alimento,			promedio_alimento,
+			promedio_costo_alimento,	fecha_ultima_comida,		ganancia_promedio
+	into	varPesoCompra,				varFechaRecepcion,			varPesoRecepcion,		varPorcentajeMerma,		
+			varCostoFlete,				varTotalAlimento,			varCostoAlimento,
+			varPromedioAlimento,		varPromedioCostoAlimento, 	varFechaUltimaComida,	varGananciaPromedio
+	from	animal
+	where 	numero_lote = varNumeroLote
+	and		not exists (	select	* 
+							from	corral_animal 
+							where	corral_animal.id_animal = animal.id_animal	);
+
+	update animal set	peso_compra				=	varPesoCompra,
+						fecha_recepcion			=	varFechaRecepcion,
+						peso_recepcion			=	varPesoRecepcion,
+						porcentaje_merma		=	varPorcentajeMerma,
+						costo_flete				=	varCostoFlete,				
+						total_alimento			=	varTotalAlimento,			
+						costo_alimento			=	varCostoAlimento,
+						promedio_alimento		=	varPromedioAlimento,	
+						promedio_costo_alimento	=	varPromedioCostoAlimento,	
+						fecha_ultima_comida		=	varFechaUltimaComida,
+						ganancia_promedio		=	varGananciaPromedio
+	where	id_animal	=	varidAnimal;
+
+	-- disminuir el numero de animales en recepcion de animales
+	select	id_recepcion,	animales_pendientes
+	into	varIdRecepcion,	varAnimalesPendientes
+	from	recepcion
+	where	animales_pendientes > 0
+	and 	numero_lote = varNumeroLote;
+	
+	update	recepcion
+	set		animales_pendientes = animales_pendientes - 1
+	where	id_recepcion = varIdRecepcion;
+
+	-- si quedaba un solo animal pendiente, se elimina el animal base
+	if varAnimalesPendientes = 1 then
+
+		delete from animal
+		where numero_lote = varNumeroLote
+		and		not exists (	select	* 
+							from	corral_animal 
+							where	corral_animal.id_animal = animal.id_animal	);
+
+	end if;
+END
+
