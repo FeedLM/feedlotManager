@@ -84,7 +84,8 @@ public class Animal {
                 + "    COALESCE(costo_flete, 0),                  COALESCE(total_alimento, 0),"
                 + "    COALESCE(costo_alimento, 0),                round(COALESCE(promedio_alimento, 0),2),"
                 + "    COALESCE(promedio_costo_alimento,0),        COALESCE(fecha_ultima_comida, '1900-01-01 00:00:00'),"
-                + "    round(COALESCE(ganancia_promedio, 0),2) \n ";
+                + "    round(COALESCE(ganancia_promedio, 0),2),     COALESCE(fecha_recepcion, '1900-01-01 00:00:00'), \n "
+                + "     COALESCE(peso_recepcion, 0)";
 
     }
 
@@ -255,6 +256,13 @@ public class Animal {
             Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
         }
         ganancia_promedio = manejadorBD.getValorDouble(0, 26);
+        try {
+            fecha_recepcion = formatoDateTime.parse(manejadorBD.getValorString(0, 27));
+        } catch (ParseException ex) {
+            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        peso_recepcion = manejadorBD.getValorDouble(0, 28);
+        
         
         proveedor.cargarPorId(id_proveedor);
 

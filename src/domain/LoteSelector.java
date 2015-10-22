@@ -21,4 +21,8 @@ public class LoteSelector  extends ComboBox{
         
         addArray(domain.Recepcion.cargarLotes());        
     }
+    
+    public void cargarTodos(){
+        addArray(domain.Recepcion.cargarLotesTodos());
+    }
 }

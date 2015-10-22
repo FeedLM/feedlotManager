@@ -1,4 +1,3 @@
-
 package domain;
 
 import static gui.Desktop.manejadorBD;
@@ -153,6 +152,23 @@ public class Recepcion {
         this.proveedor.cargarPorId(proveedor);
         this.origen.cargarPorId(origen);
 
+    }
+
+    static ArrayList cargarLotesTodos() {
+        ArrayList array = new ArrayList();
+
+        array.add("");
+        manejadorBD.consulta(""
+                + "SELECT \n"
+                + "    numero_lote\n"
+                + "FROM\n"
+                + "    recepcion\n");
+
+        for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+
+            array.add(manejadorBD.getValueAt(i, 0).toString());
+        }
+        return array;
     }
 
     static ArrayList cargarLotes() {

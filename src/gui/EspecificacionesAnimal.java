@@ -1130,8 +1130,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         animalDetalle.peso_actual = Double.parseDouble(tf_pesoBascula.getText());
         animalDetalle.temperatura = Double.parseDouble(tf_Temperatura.getText());
-        animalDetalle.peso_compra = animalDetalle.peso_actual;//Double.parseDouble(tf_PesoCompra.getDouble().toString());
+        animalDetalle.peso_compra = Double.parseDouble(tf_PesoCompra.getDouble().toString());
         animalDetalle.corral.cargarPorNombre(corralSelector.getSelectedItem().toString());
+        animalDetalle.fecha_recepcion = JDc_fechaRecepcion.getCalendar().getTime();
+        animalDetalle.peso_recepcion = Double.parseDouble(tf_pesoRecepcion.getDouble().toString());
 
         if (animalDetalle.peso_actual.equals(0.0)) {
 
@@ -1185,7 +1187,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         eid = tf_Eid.getText();
 
         if (eid.length() == 0) {
-
+        
             return;
         }
 
@@ -1223,7 +1225,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteSiniiga.setText(animalDetalle.arete_siniiga);
             tf_AreteCampaña.setText(animalDetalle.arete_campaña);
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
+            loteSelector1.addItem(animalDetalle.numero_lote);
             loteSelector1.setSelectedItem(animalDetalle.numero_lote);
+            JDc_fechaRecepcion.setDate(animalDetalle.fecha_recepcion);
+            tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
+            loteSelector1.setEnabled(false);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());
@@ -1350,7 +1356,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteSiniiga.setText(animalDetalle.arete_siniiga);
             tf_AreteCampaña.setText(animalDetalle.arete_campaña);
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
+            JDc_fechaRecepcion.setDate(animalDetalle.fecha_recepcion);
+            tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
+            loteSelector1.addItem(animalDetalle.numero_lote);
             loteSelector1.setSelectedItem(animalDetalle.numero_lote);
+            loteSelector1.setEnabled(false);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());
@@ -1590,52 +1600,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     }
 
     private void valoresPromedio() {
-
-        /*        manejadorBD.consulta("SELECT  COALESCE(ROUND((((SELECT Round(peso,2) \n"
-         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-         + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
-         + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
-         + "AND      D.id_animal	= '" + id_animal + "'\n"
-         + "ORDER BY fecha DESC LIMIT 1) - (SELECT Round(peso,2) \n"
-         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-         + "WHERE  (M.id_rancho		=   D.id_rancho AND M.id_movimiento =   D.id_movimiento AND M.id_concepto	=   D.id_concepto ) \n"
-         + "AND	  (M.id_concepto	=   R.con_pesaje AND M.id_rancho     =   r.id_rancho	) \n"
-         + "AND      D.id_animal	= '" + id_animal + "'\n"
-         + "ORDER BY fecha ASC LIMIT 1)) / (SELECT TIMESTAMPDIFF(DAY, (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
-         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-         + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
-         + "AND M.id_movimiento =   D.id_movimiento 	   \n"
-         + "AND M.id_concepto	=   D.id_concepto ) \n"
-         + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
-         + "AND M.id_rancho     =   r.id_rancho	) \n"
-         + "AND      D.id_animal	= '" + id_animal + "' \n"
-         + "ORDER BY fecha ASC LIMIT 1), (SELECT DATE_FORMAT(fecha, '%Y-%m-%d %T') \n"
-         + "FROM   movimiento M, detalle_movimiento D, rancho R \n"
-         + "WHERE  (    M.id_rancho		=   D.id_rancho 	   \n"
-         + "AND M.id_movimiento =   D.id_movimiento 	   \n"
-         + "AND M.id_concepto	=   D.id_concepto ) \n"
-         + "AND	  (    M.id_concepto	=   R.con_pesaje 	   \n"
-         + "AND M.id_rancho     =   r.id_rancho	) \n"
-         + "AND      D.id_animal	= '" + id_animal + "' \n"
-         + "ORDER BY fecha DESC LIMIT 1)))),2), 0)");
-         if (manejadorBD.getRowCount() > 0) {
-            
-         System.out.println("Peso 1 "+manejadorBD.getValorString(0, 0));
-            
-         tf_ganancia.setText(manejadorBD.getValorString(0, 0));
-         }
-         */
-//        manejadorBD.consulta(""
-//                + "SELECT   ROUND(COALESCE((MAX(peso) - MIN(peso)) / DATEDIFF(MAX(fecha), MIN(fecha)),0.00),2)  \n"
-//                + "FROM     movimiento m,   detalle_movimiento d, rancho r \n"
-//                + "WHERE    m.id_rancho	=   r.id_rancho\n"
-//                + "AND      m.id_concepto	=   r.con_pesaje\n"
-//                + "AND      (   m.id_rancho     =   d.id_rancho\n"
-//                + "         AND m.id_concepto   =   d.id_concepto\n"
-//                + "         AND m.id_movimiento =   d.id_movimiento\n "
-//                + "         AND d.id_animal     =   '" + id_animal + "')");
-//        
-//        if (manejadorBD.getRowCount() > 0) {
         tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
         this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
         this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + "%");
