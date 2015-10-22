@@ -1939,7 +1939,7 @@ BEGIN
             status)
 		SELECT
 			varIdAnimal,		varIdProveedor,	                varFechaCompra,		varfolio,
-			varNumeroLote,		varPesoOrigen / varAnimales,	varFechaRecepcion,	varPesoRecepcion / varAnimales
+			varNumeroLote,		varPesoOrigen / varAnimales,	varFechaRecepcion,	varPesoRecepcion / varAnimales,
 			varPorcentajeMerma, varCostoFlete / varAnimales,
             'A';
     
