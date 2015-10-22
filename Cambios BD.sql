@@ -1757,7 +1757,7 @@ begin
         where	numero_lote		=	new.numero_lote;
 
 		update	recepcion
-		set		total_alimento	=	total_alimento + new.total_alimento
+		set		total_alimento	=	coalesce(total_alimento,0.00) + new.total_alimento
 		where 	new.numero_lote = recepcion.numero_lote;
 
 
