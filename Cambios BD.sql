@@ -2019,6 +2019,11 @@ BEGIN
 						ganancia_promedio		=	varGananciaPromedio
 	where	id_animal	=	varidAnimal;
 
+	
+	--agregar peso de compra y peso de recepcion como registros de pesos
+	call movimientoPeso( varIdRancho, varIdAnimal, varFechaCompra, varPesoCompra);
+	call movimientoPeso( varIdRancho, varIdAnimal, varFechaRecepcion, varPesoRecepcion);
+	
 	-- disminuir el numero de animales en recepcion de animales
 	select	id_recepcion,	animales_pendientes
 	into	varIdRecepcion,	varAnimalesPendientes
