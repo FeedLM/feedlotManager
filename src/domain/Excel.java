@@ -7,10 +7,8 @@ package domain;
 
 import abstractt.Table;
 import static domain.Movimiento.cargarMovimientosEntrada;
-import domain.FormatoNumero;
 import static gui.Splash.formatoDate;
 import static gui.Splash.formatoDateTime;
-//import static gui.Login.gs_mensaje;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,25 +56,16 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.ui.ExtensionFileFilter;
 import com.csvreader.CsvReader;
 import static domain.CorralAnimal.cargarAnimalesCorralCerrado;
-//import static gui.Login.formatoDate;
-//import static gui.Login.formatoDateTime;
 import static domain.CorralAnimal.cargarAnimalesCorral_;
 import static domain.Movimiento.cargarMovimientosSalida;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
-import static gui.Splash.formatoDateTime_1;
 import static gui.Splash.formatoDateTime_11;
 import static gui.Splash.formatoDateTime_2;
-import static gui.Splash.formatoDateTime_21;
 import org.apache.poi.hssf.util.HSSFRegionUtil;
 import org.apache.poi.ss.usermodel.CellStyle;
-//import static gui.Splash.formatoDateTime_2;
 
-/**
- *
- * @author Developer GAGS
- */
 public class Excel {
 
     private Animal animal;
@@ -1452,7 +1441,7 @@ public class Excel {
         combinarRango("A3:E3");
         combinarRango("A7:E7");
         combinarRango("A9:B9");
-        combinarRango("A10:B10");
+        //combinarRango("A10:B10");
         combinarRango("C10:D10");
         combinarRango("A32:B32");
         combinarRango("D32:E32");
@@ -1466,8 +1455,9 @@ public class Excel {
         agregarValor(8, 0, "PESOS", styleCenter);
         agregarValor(9, 0, "Fecha");
         agregarValor(9, 1, "Peso");
-        relleno("A10:B10", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
-
+        relleno("A10", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+        relleno("B10", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
+        
         agregarValor(31, 0, "DATOS INFORMATIVOS", styleCenter);
         relleno("A32:B32", IndexedColors.DARK_RED.index, IndexedColors.WHITE.index);
 

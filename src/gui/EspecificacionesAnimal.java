@@ -24,7 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -1311,7 +1314,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         setVisible(true);
     }
-
+    
     public void leerAreteVisual() {
 
         String areteVisual;
@@ -1357,10 +1360,11 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             tf_AreteCampaña.setText(animalDetalle.arete_campaña);
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
             JDc_fechaRecepcion.setDate(animalDetalle.fecha_recepcion);
-            tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
             loteSelector1.addItem(animalDetalle.numero_lote);
             loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             loteSelector1.setEnabled(false);
+            ((JLabel)loteSelector1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+            tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());

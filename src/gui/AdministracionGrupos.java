@@ -748,7 +748,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
                     + "       animal.arete_campaña,     sexo.descripcion,\n"
                     + "       animal.fecha_compra,      animal.numero_lote,\n"
                     + "       animal.compra,            animal.peso_actual,\n"
-                    + "       animal.temperatura\n"
+                    + "       animal.peso_compra\n"
                     + "FROM   corral, corral_animal,\n"
                     + "       ( animal LEFT OUTER JOIN proveedor p ON animal.id_proveedor = p.id_proveedor )\n"
                     + "        LEFT OUTER JOIN sexo ON  animal.id_sexo  = sexo.id_sexo\n"
