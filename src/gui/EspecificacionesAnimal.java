@@ -804,18 +804,17 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private void btn_capturarPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capturarPesoActionPerformed
 
         tf_PesoActual.setDouble(tf_pesoBascula.getDouble());
+        if (!validacionCodigo) {
+            agregar_peso();
+        }
 
-        agregar_peso();
     }//GEN-LAST:event_btn_capturarPesoActionPerformed
 
     private void tf_EidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_EidActionPerformed
-
         leerEid();
     }//GEN-LAST:event_tf_EidActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-
     }//GEN-LAST:event_formWindowClosed
 
     private void tf_EidFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_EidFocusLost
@@ -927,7 +926,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         }
         JDc_fechaRecepcion.setDate(recepcion.fecha_recepcion);
         JDc_FechaCompra.setDate(recepcion.fecha_compra);
-
+        ((JLabel) loteSelector1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     }//GEN-LAST:event_loteSelector1ActionPerformed
 
     private boolean validacionCodigo;
@@ -1048,6 +1047,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             JOptionPane.showMessageDialog(this, "Error al agregar el peso del animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
         leerEid();
+        leerAreteVisual();
     }
 
     private void actualizar_animal() {
@@ -1190,7 +1190,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         eid = tf_Eid.getText();
 
         if (eid.length() == 0) {
-        
+            leerAreteVisual();
             return;
         }
 
@@ -1230,9 +1230,10 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             JDc_FechaCompra.setDate(animalDetalle.fecha_compra);
             loteSelector1.addItem(animalDetalle.numero_lote);
             loteSelector1.setSelectedItem(animalDetalle.numero_lote);
+            loteSelector1.setEnabled(false);
+            ((JLabel) loteSelector1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
             JDc_fechaRecepcion.setDate(animalDetalle.fecha_recepcion);
             tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
-            loteSelector1.setEnabled(false);
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
             tf_PesoActual.setText(animalDetalle.peso_actual.toString());
@@ -1314,7 +1315,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
         setVisible(true);
     }
-    
+
     public void leerAreteVisual() {
 
         String areteVisual;
@@ -1363,7 +1364,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             loteSelector1.addItem(animalDetalle.numero_lote);
             loteSelector1.setSelectedItem(animalDetalle.numero_lote);
             loteSelector1.setEnabled(false);
-            ((JLabel)loteSelector1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+            ((JLabel) loteSelector1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
             tf_pesoRecepcion.setText(animalDetalle.peso_recepcion.toString());
             tf_Compra.setText(animalDetalle.compra);
             proveedorSelector1.setSelectedItem(animalDetalle.proveedor.descripcion);
