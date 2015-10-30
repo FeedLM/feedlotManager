@@ -56,7 +56,7 @@ public class Table extends javax.swing.JTable {
         setSelectionBackground(new Color(195, 25, 25));
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setResizingAllowed(false);
-
+        
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseMoved(MouseEvent e) {
                 Point p = e.getPoint();
@@ -86,7 +86,12 @@ public class Table extends javax.swing.JTable {
             scrollpane.getViewport().setBackground(new Color(120, 118, 93));
         }
     }
-
+    
+    @Override
+    public boolean isCellEditable(int row, int column){
+        return false;
+    }
+    
     private Color[] colors;
 
     public void buscar(String valor, int columna, JScrollPane jScrollPane) {

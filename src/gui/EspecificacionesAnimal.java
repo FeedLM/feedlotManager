@@ -494,7 +494,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         tf_pesoRecepcion.setText("0.00");
         pn_Formulario.add(tf_pesoRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 20));
 
-        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 320, 490));
+        jPanel3.add(pn_Formulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 320, 490));
 
         pn_Grafica_Tabla.setBackground(new java.awt.Color(255, 255, 255));
         pn_Grafica_Tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -667,30 +667,36 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         pn_Peso.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 260, 70));
 
         btn_quitarPeso.setBackground(new java.awt.Color(64, 37, 4));
-        btn_quitarPeso.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        btn_quitarPeso.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btn_quitarPeso.setForeground(new java.awt.Color(230, 225, 190));
         btn_quitarPeso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel.png"))); // NOI18N
+        btn_quitarPeso.setText("Cancelar");
         btn_quitarPeso.setContentAreaFilled(false);
+        btn_quitarPeso.setIconTextGap(15);
         btn_quitarPeso.setOpaque(true);
         btn_quitarPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_quitarPesoActionPerformed(evt);
             }
         });
-        pn_Peso.add(btn_quitarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 35, 45, 30));
+        pn_Peso.add(btn_quitarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, 30));
 
         btn_capturarPeso.setBackground(new java.awt.Color(64, 37, 4));
-        btn_capturarPeso.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        btn_capturarPeso.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btn_capturarPeso.setForeground(new java.awt.Color(230, 225, 190));
         btn_capturarPeso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/accept_button.png"))); // NOI18N
+        btn_capturarPeso.setText("Agregar");
         btn_capturarPeso.setContentAreaFilled(false);
+        btn_capturarPeso.setIconTextGap(15);
         btn_capturarPeso.setOpaque(true);
         btn_capturarPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_capturarPesoActionPerformed(evt);
             }
         });
-        pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 45, 30));
+        pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 30));
 
-        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 611, 330, 80));
+        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, -1));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));

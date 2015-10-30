@@ -1,9 +1,6 @@
 package gui;
 
-import abstractt.Table;
 import domain.Corral;
-import domain.Excel;
-import domain.Grafica;
 import domain.IngresoAlimento;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
@@ -11,14 +8,7 @@ import static gui.Login.gs_mensaje;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import org.jfree.chart.JFreeChart;
 
 public class IngresoAlimentoCaptura extends javax.swing.JFrame {
 
@@ -26,7 +16,8 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
         //super(parent, modal);
         this.parent = parent;
         initComponents();
-
+        setLocationRelativeTo(null);
+        this.setResizable(false);
         Image i = null;
         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
         setIconImage(i);
@@ -110,6 +101,11 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 110, 22));
 
         t_costoUnitario.setText("0.00");
+        t_costoUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                t_costoUnitarioFocusLost(evt);
+            }
+        });
         t_costoUnitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 t_costoUnitarioActionPerformed(evt);
@@ -195,9 +191,13 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
     }
 
     private void t_costoUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_costoUnitarioActionPerformed
-       
+
         actualizarTotal();
     }//GEN-LAST:event_t_costoUnitarioActionPerformed
+
+    private void t_costoUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_costoUnitarioFocusLost
+        actualizarTotal();
+    }//GEN-LAST:event_t_costoUnitarioFocusLost
 
     private void actualizarTotal() {
 
@@ -208,10 +208,10 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
         alimento = t_alimentoIngresado.getDouble();
         costo_unitario = t_costoUnitario.getDouble();
         costo_total = alimento * costo_unitario;
-        
+
         this.t_costoTotal.setDouble(costo_total);
     }
-    
+
     Corral corral;
     String numero_lote;
     Frame parent;

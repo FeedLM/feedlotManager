@@ -20,6 +20,8 @@ public class AlimentoLotes extends javax.swing.JFrame {
      */
     public AlimentoLotes() {
         initComponents();
+        setLocationRelativeTo(null);
+        this.setResizable(false);
         loteSelector1.cargar();
         fondo1.cargar(this.getSize());
     }

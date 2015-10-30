@@ -14,8 +14,14 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import static gui.Splash.formatoDateTime;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -39,9 +45,18 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         t_recepcion.setTitulos(titulos);
         t_recepcion.cambiarTitulos();
         cargarTabla();
+
+        t_recepcion.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    ingresaAlimento();
+                }
+            }
+        });
+        
         setLocationRelativeTo(null);
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-
+        this.setResizable(false);
         fondo1.cargar(this.getSize());
     }
 
@@ -264,6 +279,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         guardar();
+        limpiar();
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void tf_numeroLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_numeroLoteActionPerformed
@@ -276,14 +292,14 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ingresoAlimentoActionPerformed
 
     public void guardar() {
-        
+
         if (tf_folio.equals("") || tf_numeroAnimales.equals("") || this.tf_numeroLote.equals("")) {
-            
+
             JOptionPane.showMessageDialog(this, "Verifique que los campos se llenaron correctamente.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!pideContraseña()) {
-        
+
             return;
         }
         recepcion = new Recepcion();
@@ -320,19 +336,30 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         manejadorBD.parametrosSP.agregarParametro(recepcion.costo_flete.toString(), "varCostoFlete", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(recepcion.devoluciones.toString(), "varDevoluciones", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(recepcion.causa_devolucion, "varCausaDevolucion", "STRING", "IN");
-        
+
         if (manejadorBD.ejecutarSP("{ call agregarRecepcion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
-        
+
             JOptionPane.showMessageDialog(this, "La compra se ha agregado correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
             cargarTabla();
+            limpiar();
         } else {
-            
-            JOptionPane.showMessageDialog(this, "Ocurrió un error con los campos, revise los parametros que esta mandando.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "Ocurrió un error con los campos. " + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void limpiar() {
+    private void ingresaAlimento() {
+        Integer fila = t_recepcion.getSelectedRow();
+        if(fila > 0){
+            lote = t_recepcion.getValueAt(fila, 6).toString();
+            IngresoAlimentoCaptura ingresoAlimento = new IngresoAlimentoCaptura(this, lote, null);
+            ingresoAlimento.setVisible(true);
+        }
         
+    }
+
+    private void limpiar() {
+
         this.tf_costoFlete.setText("$ 0.00");
         this.tf_folio.setText("");
         this.tf_limiteMerma.setText("0.00");
@@ -342,7 +369,8 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         this.calendar1.setDate(Calendar.getInstance().getTime());
         this.calendar2.setDate(Calendar.getInstance().getTime());
     }
-
+    
+    String lote;
     Estado estado;
     Proveedor proveedor;
     Recepcion recepcion;

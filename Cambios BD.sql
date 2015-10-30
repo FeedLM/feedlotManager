@@ -2190,3 +2190,47 @@ END$$
 
 DELIMITER ;
 
+-- 2015 - 10 - 29
+USE `feedlotmanager`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.recepcion_BEFORE_INSERT$$
+USE `feedlotmanager`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `recepcion_BEFORE_INSERT` 
+BEFORE INSERT ON `recepcion` 
+FOR EACH ROW
+begin
+DECLARE varConteo INT(10);
+    DECLARE	msg	CHAR(255);
+	
+	SELECT 
+    COUNT(*)
+INTO varConteo FROM
+    recepcion
+WHERE
+    folio = NEW.folio
+        AND animales_pendientes > 0;
+	
+    IF varConteo > 0 THEN    
+    
+		set msg = concat('El folio "', NEW.folio, '" ya esta capturado');
+        signal sqlstate '45000' set message_text = msg;         
+    END IF;
+    
+    
+SELECT 
+    COUNT(*)
+INTO varConteo FROM
+    recepcion
+WHERE
+    numero_lote = NEW.numero_lote
+        AND animales_pendientes > 0;
+	
+    IF varConteo > 0 THEN    
+    
+		set msg = concat('El numero_lote "', NEW.numero_lote, '" todavía tiene animales.');
+        signal sqlstate '45000' set message_text = msg;         
+    END IF;
+ end$$
+DELIMITER ;

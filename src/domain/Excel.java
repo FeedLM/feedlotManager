@@ -1916,24 +1916,16 @@ public class Excel {
 
     private void reporteCorralCerradoCrear() {
 
-//        Double total_kilos, peso_minimo, peso_maximo,
-//                peso_promedio, alimento_ingresado, peso_ganancia;
-
-        Integer fila_encabezado = 18;
-
-        //cargarLogo();
+        Integer fila_encabezado = 21;
         cargarLogo2(1, 0, 1.0);
-
         cargarLogo1(1, 11, 0.22);
 
         combinarRango("A1:M4");
-        //combinarRango("A2:M2");
-        //combinarRango("A3:M4");
 
         agregarValor(0, 0, "REPORTE DE CIERRE DE CORRAL", styleNameReport);
 
-        /**
-         * Tabla Datos informativos /*
+        /*
+         * Tabla Datos informativos 
          */
         Integer fila_tablas = 7;
 
