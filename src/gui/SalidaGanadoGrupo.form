@@ -200,7 +200,6 @@
                 </Component>
                 <Component class="abstractt.TextField" name="tf_pesoActual">
                   <Properties>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="0.0"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="12" style="0"/>
@@ -215,9 +214,6 @@
                 <Component class="abstractt.Boton" name="btn_salida">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Salida de Animales"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet" size="12" style="1"/>
-                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salidaActionPerformed"/>
@@ -231,9 +227,6 @@
                 <Component class="abstractt.Boton" name="btn_Historico">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Historico"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet" size="12" style="1"/>
-                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_HistoricoActionPerformed"/>

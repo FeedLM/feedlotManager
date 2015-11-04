@@ -2234,3 +2234,49 @@ WHERE
     END IF;
  end$$
 DELIMITER ;
+
+--2015-10-31
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_BUPD$$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `animal_BUPD`
+BEFORE UPDATE ON `animal`
+FOR EACH ROW
+BEGIN	
+
+	declare varFechaRecepcion datetime;
+    declare	varGananciaPromedio decimal(20,4);
+	
+	select	fecha_recepcion
+    into	varFechaRecepcion
+    from	recepcion r
+    where   r.numero_lote	=	new.numero_lote;
+
+	set 	new.promedio_alimento		=	new.total_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion),
+			new.promedio_costo_alimento	=	new.costo_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion);
+
+-- Ganancia promedio
+
+	SELECT	ROUND(COALESCE((MAX(peso) - new.peso_compra) / DATEDIFF(MAX(fecha), new.fecha_compra),0.00),2)
+    into	varGananciaPromedio
+	FROM	movimiento m, detalle_movimiento d, rancho r
+    WHERE	m.id_rancho	=   r.id_rancho
+    AND		m.id_concepto	=   r.con_pesaje
+    AND		(		m.id_rancho     =   d.id_rancho
+             AND	m.id_concepto   =   d.id_concepto
+             AND	m.id_movimiento =   d.id_movimiento
+			 AND	d.id_animal     =   new.id_animal );
+
+	set		new.ganancia_promedio	=	varGananciaPromedio;    
+
+END$$
+DELIMITER ;
+
+-- 2015-11-03 cambio en corral
+
+ALTER TABLE `feedlotmanager`.`corral` 
+ADD COLUMN `dias_corral` INT NULL DEFAULT NULL AFTER `num_animales`,
+ADD COLUMN `total_costo_flete` DECIMAL(20,4) NULL DEFAULT NULL AFTER `total_costo_medicina`,
+ADD COLUMN `fecha_inicio` DATETIME NULL DEFAULT NULL AFTER `total_costo_flete`,
+ADD COLUMN `conversion_alimenticia` DECIMAL(20,4) NULL DEFAULT NULL AFTER `promedio_alimento`;

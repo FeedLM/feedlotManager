@@ -249,7 +249,6 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         manejadorBD.parametrosSP = new ParametrosSP();
 
         manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
-        //manejadorBD.parametrosSP.agregarParametro(animal.id_animal.toString(), "varIdAnimal", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDelTexto.format(fecha), "varFechaSalida", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(idClaseMovimiento.toString(), "varIdClaseMovimiento", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(numeroPedido, "varNumeroPedido", "STRING", "IN");

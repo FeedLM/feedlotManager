@@ -5,6 +5,7 @@
  */
 package gui;
 
+import abstractt.Calendar;
 import abstractt.Table;
 import domain.Animal;
 import domain.Corral;
@@ -20,16 +21,21 @@ import domain.Sexo;
 import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
+import static gui.Splash.formatoDate;
+import static gui.Splash.formatoDateTime;
+import static gui.Splash.formatoDateTime_1;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.date;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -1094,30 +1100,27 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
                 return;
             }
             reporteCorral();
-            manejadorBD.parametrosSP = new ParametrosSP();
-            manejadorBD.parametrosSP.agregarParametro(corral.id_corral, "varIdCorral", "STRING", "IN");
-            manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
+            for (int i = 0; i < t_animales.getRowCount(); i++) {
+                manejadorBD.parametrosSP = new ParametrosSP();
+                manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(t_animales.getValueAt(i, 0).toString(), "varIdAnimal", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(formatoDateTime_1.format(new Date()), "varFechaSalida", "String", "varFechaSalida");
+                manejadorBD.parametrosSP.agregarParametro("2", "varIdClaseMovimiento", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro("", "varNumeroPedido", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro("", "varIdCliente", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(t_animales.getValueAt(i, 11).toString(), "varPesoActual", "DOUBLE", "IN");
+            }
+            if (manejadorBD.ejecutarSP("{ call movimientoSalida(?,?,?,?,?,?,?) }") == 0) {
+                manejadorBD.parametrosSP = new ParametrosSP();
+                manejadorBD.parametrosSP.agregarParametro(corral.id_corral, "varIdCorral", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
 
-            if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
-                if (manejadorBD.actualizacion(""
-                        + "UPDATE corral \n"
-                        + "SET \n"
-                        + "    total_kilos = " + corral.total_kilos + ",\n"
-                        + "    peso_ganancia = " + corral.peso_ganancia + ",\n"
-                        + "    num_animales = " + corral.numero_anmales + ",\n"
-                        + "    peso_minimo = " + corral.peso_minimo + ",\n"
-                        + "    peso_maximo = " + corral.peso_maximo + ",\n"
-                        + "    peso_promedio = " + corral.peso_promedio + "\n"
-                        + "WHERE\n"
-                        + "    id_corral = '" + corral.id_corral + "' AND id_rancho = '" + rancho.id_rancho + "'") == 0) {
+                if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
                     JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
                     this.cargarAnimalesCorral();
                 } else {
                     JOptionPane.showMessageDialog(this, "Ocurrio un error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-
-                JOptionPane.showMessageDialog(this, "Error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_cierreCorralActionPerformed
@@ -1139,29 +1142,27 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     }//GEN-LAST:event_sexoSelector1ActionPerformed
 
     private void btn_IngresoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresoAlimentoActionPerformed
-       
-        
-        
-        if( corral == null || corral.id_corral.equals("")){
-            
-            JOptionPane.showMessageDialog(this, "Seleccione un corral", gs_mensaje, JOptionPane.INFORMATION_MESSAGE); 
+
+        if (corral == null || corral.id_corral.equals("")) {
+
+            JOptionPane.showMessageDialog(this, "Seleccione un corral", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         if (ingresoAlimento != null) {
-            
+
             ingresoAlimento.dispose();
         }
-        
-        ingresoAlimento = new IngresoAlimentoCaptura(parent, "", this.corral);       
-        
+
+        ingresoAlimento = new IngresoAlimentoCaptura(parent, "", this.corral);
+
         ingresoAlimento.setVisible(true);
     }//GEN-LAST:event_btn_IngresoAlimentoActionPerformed
 
     private void cargarCorralPorSexo() {
-        
+
         if (!corralActivo) {
-            
+
             return;
         }
 
@@ -1285,7 +1286,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
     IngresoAlimentoCaptura ingresoAlimento;
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonesHoriz;
     private javax.swing.JPanel botonesVert;

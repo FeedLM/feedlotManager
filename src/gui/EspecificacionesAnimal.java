@@ -696,7 +696,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         });
         pn_Peso.add(btn_capturarPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 30));
 
-        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, -1));
+        jPanel3.add(pn_Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, 130));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -780,7 +780,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

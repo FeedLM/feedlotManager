@@ -108,10 +108,7 @@ public class PesoManual extends javax.swing.JFrame {
 
     private void bnt_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_AceptarActionPerformed
         etiqueta.setDouble(tf_peso.getDouble());
-        fecha_peso  =   this.selectorFecha1.getFecha();
-        this.setVisible(false);
-        tf_peso.setDouble(new Double(0.0));
-        this.selectorFecha1.setHoy();
+        fecha_peso  =   selectorFecha1.getFecha();
     }//GEN-LAST:event_bnt_AceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -130,8 +127,6 @@ public class PesoManual extends javax.swing.JFrame {
      * @return the fecha_peso
      */
     public Date getFecha_peso() {
-        
-       // System.out.println("PesoManual.getFecha: "+fecha_peso);
         return fecha_peso;
     }
 }

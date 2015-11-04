@@ -1949,9 +1949,9 @@ public class Excel {
         
         
         
-        agregarValor(fila_tablas + 1, 2, formatoDateTime.format(corral.fecha_cierre), styleCenter);
-        agregarValor(fila_tablas + 2, 2, corral.nombre, styleCenter);
-        agregarValor(fila_tablas + 3, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
+        agregarValor(fila_tablas + 1, 2, corral.nombre, styleCenter);
+        agregarValor(fila_tablas + 2, 2, formatoDate.format(corral.fecha_cierre), styleCenter);
+        agregarValor(fila_tablas + 3, 2, formatoDate.format(corral.fecha_cierre), styleRight);
         agregarValor(fila_tablas + 4, 2, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.total_kilos_inicial), styleRight);
         agregarValor(fila_tablas + 5, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
         agregarValor(fila_tablas + 6, 2, new FormatoNumero(corral.peso_ganancia.toString()).convierte(corral.peso_ganancia), styleRight);
