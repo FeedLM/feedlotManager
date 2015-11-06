@@ -94,7 +94,7 @@ public class CorralesCerrados extends javax.swing.JFrame {
     private void asignarValoresCorral() {
         t_alimentoIngresado.setText(corral.alimento_ingresado.toString());
         t_totalKilos.setText(corral.total_kilos.toString());
-        t_gananciaKilos.setText(corral.peso_ganancia.toString());
+        t_gananciaKilos.setText(corral.ganancia_promedio.toString());
         jtf_numAnimales.setText(corral.numero_anmales.toString());
         t_pesoMaximo.setText(corral.peso_maximo.toString());
         t_pesoMinimo.setText(corral.peso_minimo.toString());

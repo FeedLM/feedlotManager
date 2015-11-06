@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Corral;
 import domain.Estado;
 import domain.ParametrosSP;
 import domain.Proveedor;
@@ -350,9 +351,10 @@ public class CapturaRecepcion extends javax.swing.JFrame {
 
     private void ingresaAlimento() {
         Integer fila = t_recepcion.getSelectedRow();
-        if(fila > 0){
+        if(fila >= 0){
             lote = t_recepcion.getValueAt(fila, 6).toString();
-            IngresoAlimentoCaptura ingresoAlimento = new IngresoAlimentoCaptura(this, lote, null);
+            Corral corral = new Corral();
+            IngresoAlimentoCaptura ingresoAlimento = new IngresoAlimentoCaptura(this, lote, corral);
             ingresoAlimento.setVisible(true);
         }
         

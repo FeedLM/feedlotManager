@@ -1088,7 +1088,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private void reporteCorral() {
         Excel excel;
         excel = new Excel();
-        excel.reporteCorral(corral, Grafica);
+        excel.reporteCorralCerrado(corral, Grafica);
 
     }
     private void btn_cierreCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorralActionPerformed
@@ -1099,12 +1099,12 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             if (!pideContraseña()) {
                 return;
             }
-            reporteCorral();
+
             for (int i = 0; i < t_animales.getRowCount(); i++) {
                 manejadorBD.parametrosSP = new ParametrosSP();
                 manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro(t_animales.getValueAt(i, 0).toString(), "varIdAnimal", "STRING", "IN");
-                manejadorBD.parametrosSP.agregarParametro(formatoDateTime_1.format(new Date()), "varFechaSalida", "String", "varFechaSalida");
+                manejadorBD.parametrosSP.agregarParametro(formatoDateTime_1.format(new Date()), "varFechaSalida", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro("2", "varIdClaseMovimiento", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro("", "varNumeroPedido", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro("", "varIdCliente", "STRING", "IN");
@@ -1118,6 +1118,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
                 if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
                     JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
                     this.cargarAnimalesCorral();
+                    reporteCorral();
                 } else {
                     JOptionPane.showMessageDialog(this, "Ocurrio un error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 }

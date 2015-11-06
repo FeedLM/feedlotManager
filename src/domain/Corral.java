@@ -41,11 +41,18 @@ public class Corral {
     public String observaciones;
     public Double total_kilos_inicial;
     public Double total_costo_medicina;
-
+    
     public Double ganancia_precio_carne;
     public Double costo_alimento;
     public Double utilidad_s_gastos;
     public Date fecha_cierre;
+    public Integer dias_corral;
+    public Double total_costo_flete;
+    public Date fecha_inicio;
+    public Double conversion_alimenticia;
+    public Double ganancia_promedio;
+    public Double promedio_alimento;
+    public Double merma;
 
     //public CorralDatos corralDatos;
     public Corral() {
@@ -258,19 +265,24 @@ public class Corral {
         peso_maximo = manejadorBD.getValorDouble(0, 10);
         peso_promedio = manejadorBD.getValorDouble(0, 11);
         alimento_ingresado = manejadorBD.getValorDouble(0, 12);
-        peso_ganancia = manejadorBD.getValorDouble(0, 13);
+        ganancia_promedio = manejadorBD.getValorDouble(0, 13);
         observaciones = manejadorBD.getValorString(0, 14);
         total_kilos_inicial = manejadorBD.getValorDouble(0, 15);
         total_costo_medicina = manejadorBD.getValorDouble(0, 16);
-        
         fecha_cierre = formatoDateTime_1.parse(manejadorBD.getValorString(0, 17));
-
+        dias_corral = manejadorBD.getValorInt(0, 18);
+        total_costo_flete = manejadorBD.getValorDouble(0, 19);
+        fecha_inicio = formatoDateTime_1.parse(manejadorBD.getValorString(0, 20));
+        conversion_alimenticia = manejadorBD.getValorDouble(0, 21);
+        promedio_alimento = manejadorBD.getValorDouble(0, 22);
+        merma = manejadorBD.getValorDouble(0, 23);
+        
         sexo.cargarPorId(id_sexo);
 
         raza.cargarPorId(id_raza);
         // corralDatos.cargarPorId(id_corral);
 
-        calculosTotales();
+//        calculosTotales();
     }
 
     private void calculosTotales() {
@@ -431,9 +443,12 @@ public class Corral {
                 + "         IFNULL(id_raza,''),                 status,\n"
                 + "         COALESCE(total_kilos,0.0),          COALESCE(peso_minimo,0.0), \n"
                 + "         COALESCE(peso_maximo,0.0),          COALESCE(peso_promedio,0.0),\n"
-                + "         COALESCE(alimento_ingresado,0.0),   COALESCE(peso_ganancia,0.0), \n"
+                + "         COALESCE(alimento_ingresado,0.0),   COALESCE(ganancia_promedio,0.0), \n"
                 + "         IFNULL(observaciones,''),           COALESCE(total_kilos_iniciales,0.0),\n"
-                + "         COALESCE(total_costo_medicina,0.0), fecha_cierre \n"
+                + "         COALESCE(total_costo_medicina,0.0), fecha_cierre, \n"
+                + "         COALESCE(dias_corral,0),            COALESCE(total_costo_flete, 0.0), \n"
+                + "         fecha_inicio,                       COALESCE(conversion_alimenticia, 0.0), \n"
+                + "         COALESCE(promedio_alimento,0.0),                  COALESCE(merma, 0.0)"
                 + "FROM     corral \n"
                 + "WHERE    status = 'C' \n"
                 + "AND      id_corral = '" + id_corral + "' \n "

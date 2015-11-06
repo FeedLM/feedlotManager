@@ -2047,39 +2047,6 @@ BEGIN
 	end if;
 END
 
--- 2015-10-26
-USE `feedlotmanager`;
-DROP procedure IF EXISTS `cierreCorral`;
-
-DELIMITER $$
-USE `feedlotmanager`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cierreCorral`(
-varIdCorral CHAR(36), varIdRancho CHAR(36))
-BEGIN
-UPDATE animal a 
-SET 
-    status = 'V'
-WHERE
-    (SELECT 
-            ca.id_animal
-        FROM
-            corral_animal ca
-        WHERE
-            ca.id_corral = varIdCorral
-                AND a.id_animal = ca.id_animal
-                AND a.status = 'A') = a.id_animal;
-
-UPDATE corral c 
-SET 
-    status = 'C',
-    c.fecha_cierre = NOW()
-WHERE
-    c.id_corral = varIdCorral
-        AND c.id_rancho = varIdRancho;
-END$$
-
-DELIMITER ;
-
 -- 2015-10-26 SP animales por corral cerrado
 USE `feedlotmanager`;
 DROP procedure IF EXISTS `animalesPorCorralCerrado`;
@@ -2280,3 +2247,148 @@ ADD COLUMN `dias_corral` INT NULL DEFAULT NULL AFTER `num_animales`,
 ADD COLUMN `total_costo_flete` DECIMAL(20,4) NULL DEFAULT NULL AFTER `total_costo_medicina`,
 ADD COLUMN `fecha_inicio` DATETIME NULL DEFAULT NULL AFTER `total_costo_flete`,
 ADD COLUMN `conversion_alimenticia` DECIMAL(20,4) NULL DEFAULT NULL AFTER `promedio_alimento`;
+
+-- 2015-11-04   Cambios en el Cierre de Corral
+
+-- Agregar la merma 
+ALTER TABLE `feedlotmanager`.`corral` 
+ADD COLUMN `merma` DECIMAL(20,4) NULL DEFAULT NULL AFTER `conversion_alimenticia`;
+
+-- merma en corral cerrado
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `animalesPorCorralCerrado`(
+	varIdCorral CHAR(36)	)
+BEGIN
+	
+	UPDATE corral
+	SET num_animales =	(	SELECT	count(	*	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'V'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+        dias_corral		=	(	SELECT ROUND(AVG(DATEDIFF(m.fecha, a.fecha_ingreso))) 
+								FROM movimiento m
+									LEFT OUTER JOIN clase_movimiento c ON m.id_clase_movimiento = c.id_clase_movimiento, 
+									detalle_movimiento d, rancho r, animal a, corral_animal ca
+								WHERE    m.id_rancho = r.id_rancho
+									AND m.id_concepto = r.con_salida
+									AND m.id_rancho = d.id_rancho
+									AND m.id_movimiento = d.id_movimiento
+									AND m.id_concepto = d.id_concepto
+									AND d.id_animal = a.id_animal
+									AND d.id_animal = ca.id_animal
+									AND ca.id_corral = corral.id_corral
+									AND a.status = 'V'),
+		
+		total_kilos	=	(	SELECT	SUM(	peso_actual	) 
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'V'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_minimo	=	(	SELECT	MIN(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'V'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_maximo	=	(	SELECT	MAX(	peso_actual	)
+							FROM	animal, corral_animal
+							WHERE	STATUS					=	'V'
+							AND		corral_animal.id_corral	=	corral.id_corral
+							and 	corral_animal.id_animal	=	animal.id_animal),
+		
+		peso_promedio	=	(	SELECT	AVG(	peso_actual	)
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'V'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		peso_ganancia	=	(	SELECT	SUM(	peso_actual	) - SUM(	peso_compra) 
+								FROM	animal, corral_animal
+								WHERE	STATUS					=	'V'
+								AND		corral_animal.id_corral	=	corral.id_corral
+								and 	corral_animal.id_animal	=	animal.id_animal),
+
+		id_raza			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_raza
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_raza,	COUNT(DISTINCT id_raza) AS count, 
+											(	SELECT	id_raza	
+												FROM	raza
+												WHERE	descripcion = 'Mixto' ) mixto
+											FROM	animal a, corral_animal ca
+											WHERE	a.id_animal	=	ca.id_animal
+											AND  	id_corral	=	varIdCorral		)	a1	),                                                                                      
+		id_sexo			=	(	SELECT	CASE	WHEN a1.count = 1
+												THEN id_sexo
+												ELSE a1.mixto
+										END
+								FROM	(	SELECT	id_sexo,	COUNT(DISTINCT id_sexo) AS count, 
+											(	SELECT	id_sexo	
+												FROM	sexo
+												WHERE	descripcion = 'Mixto' ) mixto
+												FROM	animal a, corral_animal ca
+												WHERE	a.id_animal = ca.id_animal
+												AND		id_corral 	= varIdCorral	)	a1	),
+		
+        total_kilos_iniciales	=	(	SELECT	SUM(peso_compra)										
+										FROM    corral_animal c, animal a
+										WHERE   c.id_animal	=	a.id_animal
+										AND     c.id_corral	=	corral.id_corral),
+         
+		total_costo_medicina	=	(	SELECT  SUM( ma.dosis * rm.costo_promedio)
+										FROM 	corral_animal ca, medicina_animal ma, medicina m, rancho_medicina rm
+										WHERE 	ma.id_medicina	=	m.id_medicina
+                                        AND 	rm.id_medicina 	= 	m.id_medicina
+                                        AND		ca.id_animal	=	ma.id_animal
+										AND		ma.id_rancho	=	ca.id_rancho
+										AND 	rm.id_rancho	= 	corral.id_rancho
+                                        AND		ca.id_rancho	=	corral.id_rancho
+										AND		ca.id_corral	=	corral.id_corral	),
+                                        
+		total_costo_flete	=		(	SELECT	SUM(a.costo_flete) 
+										FROM	animal a,	corral_animal ca
+										WHERE	ca.id_animal = a.id_animal 	
+                                        AND 	ca.id_corral = corral.id_corral	),
+                                        
+       fecha_inicio			=		(	SELECT MIN(a.fecha_ingreso) 
+										FROM animal a, corral_animal ca
+										WHERE a.id_animal = ca.id_animal 
+                                        AND corral.id_corral = ca.id_corral 	),                                 
+                                        
+		ganancia_promedio	=	(	SELECT	AVG(	animal.ganancia_promedio		)
+									FROM	animal, corral_animal
+									WHERE	STATUS					=	'V'
+									AND		corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal),
+		
+        promedio_alimento	=	(	SELECT	AVG(	animal.promedio_alimento		)
+									FROM	animal, corral_animal
+									WHERE	corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal	),
+
+		alimento_ingresado	=	(	SELECT	sum(	animal.total_alimento		)
+									FROM	animal, corral_animal
+									WHERE	corral_animal.id_corral	=	corral.id_corral
+									and 	corral_animal.id_animal	=	animal.id_animal	),
+                                    
+		conversion_alimenticia	=	(	SELECT corral.ganancia_promedio / corral.promedio_alimento 	),
+                                        
+		merma				=		(	SELECT     AVG(a.porcentaje_merma)
+										FROM    animal a,    corral_animal ca
+										WHERE    a.id_animal = ca.id_animal
+											AND ca.id_corral = corral.id_corral	)
+		
+									
+	WHERE corral.id_corral	=	varIdCorral;    
+    
+    UPDATE	corral
+    SET		peso_ganancia		=	CASE WHEN peso_ganancia < 0 THEN 0 ELSE peso_ganancia END
+    WHERE	corral.id_corral	=	varIdCorral;
+END$$
+
+DELIMITER ;
