@@ -18,11 +18,14 @@ public class AlimentoLotes extends javax.swing.JFrame {
     /**
      * Creates new form AlimentoLotes
      */
-    public AlimentoLotes() {
+    public AlimentoLotes(String lote) {
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);
         loteSelector1.cargar();
+        if(!lote.equals("")){
+            loteSelector1.setSelectedItem(lote);
+        }
         fondo1.cargar(this.getSize());
     }
 

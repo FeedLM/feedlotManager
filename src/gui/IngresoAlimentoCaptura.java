@@ -173,8 +173,8 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
     private void agregar_alimento() {
 
         ingresoAlimento = new IngresoAlimento();
-        ingresoAlimento.carro = this.tf_carro.getText();
-        ingresoAlimento.corral = this.corral;
+        ingresoAlimento.carro = tf_carro.getText();
+        ingresoAlimento.corral = corral;
         ingresoAlimento.costo_total = this.t_costoTotal.getDouble();
         ingresoAlimento.costo_unitario = this.t_costoUnitario.getDouble();
         ingresoAlimento.fecha = this.c_fecha.getDate();
@@ -188,6 +188,7 @@ public class IngresoAlimentoCaptura extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Error al Agregar el Alimento " + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
+        this.dispose();
     }
 
     private void t_costoUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_costoUnitarioActionPerformed

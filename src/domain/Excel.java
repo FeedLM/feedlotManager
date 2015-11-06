@@ -2021,14 +2021,14 @@ public class Excel {
         //agregarValor(fila_encabezado, 2, "Corral");
         agregarValor(fila_encabezado, 3, ""); // Espacio
 
-        agregarValor(fila_encabezado, 4, "Compra", styleCenter);
+        agregarValor(fila_encabezado, 4, "Ingreso", styleCenter);
         agregarValor(fila_encabezado, 5, "ID Siniiga", styleCenter);
         agregarValor(fila_encabezado, 6, "ID Campaña", styleCenter);
 
         agregarValor(fila_encabezado, 7, "Sexo", styleCenter);
-        agregarValor(fila_encabezado, 8, "Ingreso", styleCenter);
+        agregarValor(fila_encabezado, 8, "Compra", styleCenter);
         agregarValor(fila_encabezado, 9, "# Lote", styleCenter);
-        agregarValor(fila_encabezado, 10, "Compra", styleCenter);
+        agregarValor(fila_encabezado, 10, "# Compra", styleCenter);
 
         agregarValor(fila_encabezado, 11, "Peso Actual (Kg)", styleCenter);
         agregarValor(fila_encabezado, 12, "Peso de Compra", styleCenter);

@@ -288,7 +288,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_numeroLoteActionPerformed
 
     private void btn_ingresoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoAlimentoActionPerformed
-        AlimentoLotes alimentoLote = new AlimentoLotes();
+        AlimentoLotes alimentoLote = new AlimentoLotes("");
         alimentoLote.setVisible(true);
     }//GEN-LAST:event_btn_ingresoAlimentoActionPerformed
 
@@ -352,10 +352,10 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     private void ingresaAlimento() {
         Integer fila = t_recepcion.getSelectedRow();
         if(fila >= 0){
-            lote = t_recepcion.getValueAt(fila, 6).toString();
-            Corral corral = new Corral();
-            IngresoAlimentoCaptura ingresoAlimento = new IngresoAlimentoCaptura(this, lote, corral);
-            ingresoAlimento.setVisible(true);
+            lote = t_recepcion.getValueAt(fila, 7).toString();
+            AlimentoLotes alimentoLotes = new AlimentoLotes(lote);
+            alimentoLotes.setVisible(true);
+            
         }
         
     }
@@ -366,6 +366,9 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         this.tf_folio.setText("");
         this.tf_limiteMerma.setText("0.00");
         this.tf_numeroAnimales.setText("0");
+        this.tf_numeroLote.setText("");
+        this.estadoSelector1.setSelectedItem("");
+        this.proveedorSelector1.setSelectedItem("");
         this.tf_pesoOrigen.setText("0.00");
         this.tf_pesoRecepcion.setText("0.00");
         this.calendar1.setDate(Calendar.getInstance().getTime());

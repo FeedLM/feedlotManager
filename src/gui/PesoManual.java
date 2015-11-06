@@ -109,6 +109,8 @@ public class PesoManual extends javax.swing.JFrame {
     private void bnt_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_AceptarActionPerformed
         etiqueta.setDouble(tf_peso.getDouble());
         fecha_peso  =   selectorFecha1.getFecha();
+        
+        this.dispose();
     }//GEN-LAST:event_bnt_AceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

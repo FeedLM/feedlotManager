@@ -2392,3 +2392,110 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+--2015-11-06 12:37
+DROP procedure IF EXISTS `agregarAnimal`;
+
+DELIMITER $$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarAnimal`(
+    varIdRancho		CHAR(36),		varIdCorral     	CHAR(36),		varIdProveedor	CHAR(36),		
+	varFechaCompra	DATETIME,		varCompra			CHAR(255),		varNumeroLote	CHAR(255),
+	varPesoCompra	DECIMAL(20,4),	varIdSexo			CHAR(36),		varFechaIngreso	DATETIME,
+	varAreteVisual	CHAR(255),		varAreteElectronico	CHAR(255),		varAreteSiniiga	CHAR(255),
+	varAreteCampaña	CHAR(255),		varPesoActual		DECIMAL(20,4),	varTemperatura	DECIMAL(20,4),
+	varEsSemental	CHAR(1),		varIdSemental		CHAR(36),		varIdRaza		CHAR(36),
+	varStatus		CHAR(1),		varIdCria			CHAR(36),		varEsVientre	CHAR(1))
+BEGIN
+    DECLARE varIdAnimal,	varIdRecepcion CHAR(36);
+	declare varPorcentajeMerma,		varCostoFlete,				varTotalAlimento,		varCostoAlimento,
+			varPromedioAlimento,	varPromedioCostoAlimento, varGananciaPromedio,		varPesoCompra,
+			varPesoRecepcion	DECIMAL(20,4);		
+
+	declare	varAnimalesPendientes int(10);
+
+	declare varFechaUltimaComida,varFechaRecepcion datetime;
+
+	SELECT UUID()
+	INTO varIdAnimal;
+
+	INSERT corral_animal
+    (   id_rancho,    id_corral,    id_animal)
+    SELECT
+        varIdRancho, varIdCorral, varIdAnimal;
+
+    INSERT animal
+    (	id_animal,		id_proveedor,		fecha_compra,	compra,
+		numero_lote,	peso_compra,		id_sexo,		fecha_ingreso,
+		arete_visual,	arete_electronico,	arete_siniiga,	arete_campaña,
+		peso_actual,	temperatura,		es_semental,	id_semental,
+		id_raza,		status,				es_vientre)
+    SELECT
+		varIdAnimal,	varIdProveedor,			varFechaCompra,		varCompra,
+		varNumeroLote,	varPesoCompra,			varIdSexo,			varFechaIngreso,
+		varAreteVisual,	varAreteElectronico,	varAreteSiniiga,	varAreteCampaña,
+		varPesoActual,	varTemperatura,			varEsSemental,		varIdSemental,		
+		varIdRaza,		varStatus,				varEsVientre;
+
+
+
+	update	cria 
+	set		id_animal	=	varIdAnimal
+	where	id_cria		=	varIdCria;
+
+	-- obtener datos del animal base
+	select	peso_compra,				fecha_recepcion,			peso_recepcion,			porcentaje_merma,
+			costo_flete,				total_alimento,				costo_alimento,			promedio_alimento,
+			promedio_costo_alimento,	fecha_ultima_comida,		ganancia_promedio
+	into	varPesoCompra,				varFechaRecepcion,			varPesoRecepcion,		varPorcentajeMerma,		
+			varCostoFlete,				varTotalAlimento,			varCostoAlimento,
+			varPromedioAlimento,		varPromedioCostoAlimento, 	varFechaUltimaComida,	varGananciaPromedio
+	from	animal
+	where 	numero_lote = varNumeroLote
+	and		not exists (	select	* 
+							from	corral_animal 
+							where	corral_animal.id_animal = animal.id_animal	);
+
+	update animal set	peso_compra				=	varPesoCompra,
+						fecha_recepcion			=	varFechaRecepcion,
+						peso_recepcion			=	varPesoRecepcion,
+						porcentaje_merma		=	varPorcentajeMerma,
+						costo_flete				=	varCostoFlete,				
+						total_alimento			=	varTotalAlimento,			
+						costo_alimento			=	varCostoAlimento,
+						promedio_alimento		=	varPromedioAlimento,	
+						promedio_costo_alimento	=	varPromedioCostoAlimento,	
+						fecha_ultima_comida		=	varFechaUltimaComida,
+						ganancia_promedio		=	varGananciaPromedio
+	where	id_animal	=	varidAnimal;
+
+	
+	-- agregar peso de compra y peso de recepcion como registros de pesos
+	call movimientoPeso( varIdRancho, varIdAnimal, varFechaCompra, varPesoCompra);
+	call movimientoPeso( varIdRancho, varIdAnimal, varFechaRecepcion, varPesoRecepcion);
+	call movimientoPeso( varIdRancho, varIdAnimal, varFechaIngreso, varPesoActual);
+	-- disminuir el numero de animales en recepcion de animales
+	select	id_recepcion,	animales_pendientes
+	into	varIdRecepcion,	varAnimalesPendientes
+	from	recepcion
+	where	animales_pendientes > 0
+	and 	numero_lote = varNumeroLote;
+	
+	update	recepcion
+	set		animales_pendientes = animales_pendientes - 1
+	where	id_recepcion = varIdRecepcion;
+
+	-- si quedaba un solo animal pendiente, se elimina el animal base
+	if varAnimalesPendientes = 1 then
+
+		delete from animal
+		where numero_lote = varNumeroLote
+		and		not exists (	select	* 
+							from	corral_animal 
+							where	corral_animal.id_animal = animal.id_animal	);
+
+	end if;
+END$$
+
+DELIMITER ;
+
