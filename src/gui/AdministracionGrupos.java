@@ -380,7 +380,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(95, 84, 88));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Total Kilos:");
+        jLabel11.setText("Total Kilos Ganado:");
         datosPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 110, 22));
 
         jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -1094,7 +1094,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private void btn_cierreCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorralActionPerformed
 
         int opcion;
-        opcion = JOptionPane.showConfirmDialog(this, "Desea hacer 'Cierre de Corral'?", gs_mensaje, JOptionPane.YES_NO_OPTION);
+        opcion = JOptionPane.showConfirmDialog(this, "¿Desea hacer 'Cierre de Corral'?", gs_mensaje, JOptionPane.YES_NO_OPTION);
         if (opcion == 0) {
             if (!pideContraseña()) {
                 return;

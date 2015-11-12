@@ -5,8 +5,6 @@
  */
 package gui;
 
-import abstractt.Table;
-import domain.ManejadorBD;
 import domain.Medicina;
 import static domain.Medicina.leerMedicina;
 import static domain.Medicina.leerMedicinaCodigo;
@@ -17,7 +15,6 @@ import static gui.Desktop.manejadorBD;
 import static gui.Desktop.rancho;
 import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -84,18 +81,18 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         if (fila >= 0) {
 
             medicina = new Medicina();
-            
+
             medicina.cargarPorId(t_medicinas.getValueAt(fila, 0).toString());
             /*
-            id_medicina = t_medicinas.getValueAt(fila, 0).toString();
-            codigo = Integer.parseInt(t_medicinas.getValueAt(fila, 1).toString());
-            nombre = t_medicinas.getValueAt(fila, 2).toString();
-            unidad = t_medicinas.getValueAt(fila, 3).toString();
-            costo = Double.parseDouble(t_medicinas.getValueAt(fila, 4).toString());
-            presentacion = Double.parseDouble(t_medicinas.getValueAt(fila, 5).toString());
-            costo_unitario = Double.parseDouble(t_medicinas.getValueAt(fila, 6).toString());
-            id_unidad = t_medicinas.getValueAt(fila, 7).toString();
-*/
+             id_medicina = t_medicinas.getValueAt(fila, 0).toString();
+             codigo = Integer.parseInt(t_medicinas.getValueAt(fila, 1).toString());
+             nombre = t_medicinas.getValueAt(fila, 2).toString();
+             unidad = t_medicinas.getValueAt(fila, 3).toString();
+             costo = Double.parseDouble(t_medicinas.getValueAt(fila, 4).toString());
+             presentacion = Double.parseDouble(t_medicinas.getValueAt(fila, 5).toString());
+             costo_unitario = Double.parseDouble(t_medicinas.getValueAt(fila, 6).toString());
+             id_unidad = t_medicinas.getValueAt(fila, 7).toString();
+             */
             tf_Codigo.setText(medicina.codigo.toString());
             tf_Nombre.setText(medicina.nombre);
             this.unidadSelector.setSelectedItem(medicina.unidadMedida.descripcion);
@@ -112,9 +109,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     }
 
     private void cargarMedicinas() {
-        
+
         leerMedicina(t_medicinas);
-        
 
     }
     /*Limpiar componentes de Tratamiento*/
@@ -202,7 +198,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         btn_aplicacionMasiva = new abstractt.Boton();
         etiqueta2 = new abstractt.Etiqueta();
         btn_comprar = new abstractt.Boton();
-        btn_actualizaMedicina = new abstractt.Boton();
         fondo1 = new abstractt.fondo();
         pn_tratamientos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -425,15 +420,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         });
         pn_medicamentos.add(btn_comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, 30));
 
-        btn_actualizaMedicina.setText("Actualización del Sistema de Medicamentos");
-        btn_actualizaMedicina.setEnabled(false);
-        btn_actualizaMedicina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_actualizaMedicinaActionPerformed(evt);
-            }
-        });
-        pn_medicamentos.add(btn_actualizaMedicina, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
-
         fondo1.setText("fondo1");
         pn_medicamentos.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -5, -1, -1));
 
@@ -508,9 +494,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
         tf_DosisTratamiento.setText("0.0");
         tf_DosisTratamiento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        tf_DosisTratamiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_DosisTratamientoActionPerformed(evt);
+        tf_DosisTratamiento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tf_DosisTratamientoFocusLost(evt);
             }
         });
         jPanel3.add(tf_DosisTratamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
@@ -680,7 +666,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
                 cargarMedicinasTratamiento();
 
                 JOptionPane.showMessageDialog(this, "Se Agrego el Tratamiento Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
-
+                limpiarTratamiento();
             } else {
 
                 JOptionPane.showMessageDialog(this, "Error al crear el Tratamiento\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
@@ -728,14 +714,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_CostoTratamientoActionPerformed
 
-    private void tf_DosisTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_DosisTratamientoActionPerformed
-
-        costoTratamiento = medicinaTratamiento.costo_promedio * this.tf_DosisTratamiento.getDouble();
-        //  costo = tf_Costo.obtenerValor();
-        presentacionTratamiento = this.tf_DosisTratamiento.getDouble();
-        tf_CostoTratamiento.setDouble(costoTratamiento);
-    }//GEN-LAST:event_tf_DosisTratamientoActionPerformed
-
     private void tratamientoSelectorCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tratamientoSelectorCodigoActionPerformed
 
         if (!cargandoTratamientoSelector) {
@@ -767,7 +745,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
                 this.tratamientoSelectorCodigo.setSelectedItem(tratamiento.codigo);
                 id_tratamiento = tratamiento.id_tratamiento;
             }
-            this.medicinaSelector.setSelectedItem("");
+            medicinaSelector.setSelectedItem("");
 
             cargarMedicinasTratamiento();
             cargandoTratamientoSelector = false;
@@ -776,9 +754,9 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
 
     private void medicinaSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicinaSelectorActionPerformed
 
-        medicinaTratamiento = this.medicinaSelector.getMedicnaNombre();
-
+        medicinaTratamiento = medicinaSelector.getMedicnaNombre();
         unidadSelectorTratamiento.setSelectedItem(medicinaTratamiento.unidadMedida.descripcion);
+        colocarCosto();
     }//GEN-LAST:event_medicinaSelectorActionPerformed
 
     private void btn_aplicacionMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aplicacionMasivaActionPerformed
@@ -860,8 +838,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
                 if (manejadorBD.ejecutarSP("{ call agregarMedicina(?,?,?,?,?) }") == 0) {
 
                     cargarMedicinas();
-
                     JOptionPane.showMessageDialog(this, "Se Agrego el Medicamento Correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                    limpiarMedicina();
 
                 } else {
 
@@ -928,11 +906,19 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         compras.setVisible(true);
     }//GEN-LAST:event_btn_comprarActionPerformed
 
-    private void btn_actualizaMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizaMedicinaActionPerformed
-        
-        medicinaSelector.cargar();
-       
-    }//GEN-LAST:event_btn_actualizaMedicinaActionPerformed
+    private void tf_DosisTratamientoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_DosisTratamientoFocusLost
+        colocarCosto();
+    }//GEN-LAST:event_tf_DosisTratamientoFocusLost
+
+    private void colocarCosto() {
+        try {
+            costoTratamiento = medicinaTratamiento.costo_promedio * this.tf_DosisTratamiento.getDouble();
+            presentacionTratamiento = this.tf_DosisTratamiento.getDouble();
+            tf_CostoTratamiento.setDouble(costoTratamiento);
+        } catch (Exception x) {
+            tf_CostoTratamiento.setDouble(0.0);
+        }
+    }
 
     private boolean validarCodigo() {
 
@@ -989,7 +975,6 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private Medicina medicina;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.Calendar UltimaCompra;
-    private abstractt.Boton btn_actualizaMedicina;
     private abstractt.Boton btn_actualizar;
     private abstractt.Boton btn_agregar;
     private abstractt.Boton btn_agregarMedicamento;

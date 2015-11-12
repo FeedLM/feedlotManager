@@ -855,11 +855,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void btn_pesoManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesoManualActionPerformed
         // TODO add your handling code here:
-        Date fecha;
-        pesoManual = new PesoManual(tf_pesoBascula);
+        pesoManual = new PesoManual(this, tf_pesoBascula);
         pesoManual.setVisible(true);
-        fecha = pesoManual.getFecha_peso();
-        fecha_peso.setTime(fecha);
     }//GEN-LAST:event_btn_pesoManualActionPerformed
 
     private void btn_HospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HospitalActionPerformed
@@ -1009,16 +1006,16 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void agregar_peso() {
 
-        Calendar fecha_actual = Calendar.getInstance();;
+//        Calendar fecha_actual = Calendar.getInstance();
         String tag_id;
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        fecha_peso.set(fecha_peso.getTime().getYear() + 1900,
-                fecha_peso.getTime().getMonth(),
-                fecha_peso.getTime().getDate(),
-                fecha_actual.getTime().getHours(),
-                fecha_actual.getTime().getMinutes(),
-                fecha_actual.getTime().getSeconds());
+//        fecha_peso.set(fecha_peso.getTime().getYear() + 1900,
+//                fecha_peso.getTime().getMonth(),
+//                fecha_peso.getTime().getDate(),
+//                fecha_actual.getTime().getHours(),
+//                fecha_actual.getTime().getMinutes(),
+//                fecha_actual.getTime().getSeconds());
 
         tag_id = tf_AreteVisual.getText();
         tf_PesoActual.setDouble(this.tf_pesoBascula.getDouble());
@@ -1505,7 +1502,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     }
 
-    Calendar fecha_peso;
+    public Calendar fecha_peso;
     public static Animal animalDetalle;
     public boolean nuevo;
     private PesoManual pesoManual;

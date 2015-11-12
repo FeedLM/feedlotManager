@@ -53,6 +53,7 @@ public class Corral {
     public Double ganancia_promedio;
     public Double promedio_alimento;
     public Double merma;
+    public Double medicina_promedio;
 
     //public CorralDatos corralDatos;
     public Corral() {
@@ -276,7 +277,7 @@ public class Corral {
         conversion_alimenticia = manejadorBD.getValorDouble(0, 21);
         promedio_alimento = manejadorBD.getValorDouble(0, 22);
         merma = manejadorBD.getValorDouble(0, 23);
-        
+        medicina_promedio = manejadorBD.getValorDouble(0, 24);
         sexo.cargarPorId(id_sexo);
 
         raza.cargarPorId(id_raza);
@@ -448,7 +449,8 @@ public class Corral {
                 + "         COALESCE(total_costo_medicina,0.0), fecha_cierre, \n"
                 + "         COALESCE(dias_corral,0),            COALESCE(total_costo_flete, 0.0), \n"
                 + "         fecha_inicio,                       COALESCE(conversion_alimenticia, 0.0), \n"
-                + "         COALESCE(promedio_alimento,0.0),                  COALESCE(merma, 0.0)"
+                + "         COALESCE(promedio_alimento,0.0),                  COALESCE(merma, 0.0), \n"
+                + "         COALESCE(medicina_promedio, 0.0) \n"
                 + "FROM     corral \n"
                 + "WHERE    status = 'C' \n"
                 + "AND      id_corral = '" + id_corral + "' \n "

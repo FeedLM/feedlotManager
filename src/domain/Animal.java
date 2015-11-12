@@ -970,14 +970,14 @@ public class Animal {
         manejadorBD.parametrosSP.agregarParametro(proveedor.id_proveedor, "varIdProveedor", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_compra), "varFechaCompra", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(compra, "varCompra", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(numero_lote.toString(), "varNumeroLote", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(numero_lote, "varNumeroLote", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso_compra.toString(), "varPesoCompra", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(sexo.id_sexo, "varIdSexo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime.format(fecha_ingreso), "varFechaIngreso", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_visual, "varAreteVisual", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_electronico, "varAreteElectronico", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(arete_siniiga, "varAreteSiniiga", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(arete_campaña.toString(), "varAreteCampaña", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(arete_campaña, "varAreteCampaña", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(peso_actual.toString(), "varPesoActual", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(temperatura.toString(), "varTemperatura", "DOUBLE", "IN");
 

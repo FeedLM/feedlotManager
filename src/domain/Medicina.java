@@ -341,6 +341,7 @@ public class Medicina {
                 + "       m.costo, u.descripcion "
                 + "FROM medicina m,  unidades_de_medida u "
                 + "WHERE m.id_unidad = u.id_unidad "
+                + "AND m.status = 'S'"
                 + "AND m.codigo =   " + codigo);
 
         if (manejadorBD.getRowCount() > 0) {

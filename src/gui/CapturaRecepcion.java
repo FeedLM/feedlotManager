@@ -54,7 +54,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         setLocationRelativeTo(null);
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
         this.setResizable(false);
@@ -169,7 +169,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         etiqueta3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta3.setText("Origen de Compra");
         jPanel2.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 20));
-        jPanel2.add(estadoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        jPanel2.add(estadoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 130, -1));
         jPanel2.add(tf_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 130, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -279,6 +279,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+
         guardar();
         limpiar();
     }//GEN-LAST:event_btn_guardarActionPerformed
@@ -321,6 +322,16 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         recepcion.numero_lote = this.tf_numeroLote.getText();
         recepcion.costo_flete = this.tf_costoFlete.obtenerValor();
 
+        //Verificando el porcentaje de merma aceptada
+        
+        if (((recepcion.peso_origen - recepcion.peso_recepcion)*100)/recepcion.peso_origen > recepcion.limite_merma) {
+            int opcion = JOptionPane.showConfirmDialog(this, "El límite de merma ha sido excedido, ¿Desea ajustar el peso de compra?"
+                    + "", gs_mensaje, JOptionPane.YES_NO_OPTION);
+            if (opcion == 0) {
+                recepcion.peso_origen = recepcion.peso_recepcion + ((recepcion.limite_merma * recepcion.peso_recepcion) / 100);
+            }
+        }
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(recepcion.proveedor.id_proveedor, "varIdProveedor", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(recepcion.origen.id_estado, "varIdOrigen", "STRING", "IN");
@@ -351,13 +362,13 @@ public class CapturaRecepcion extends javax.swing.JFrame {
 
     private void ingresaAlimento() {
         Integer fila = t_recepcion.getSelectedRow();
-        if(fila >= 0){
+        if (fila >= 0) {
             lote = t_recepcion.getValueAt(fila, 7).toString();
             AlimentoLotes alimentoLotes = new AlimentoLotes(lote);
             alimentoLotes.setVisible(true);
-            
+
         }
-        
+
     }
 
     private void limpiar() {
@@ -374,7 +385,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         this.calendar1.setDate(Calendar.getInstance().getTime());
         this.calendar2.setDate(Calendar.getInstance().getTime());
     }
-    
+
     String lote;
     Estado estado;
     Proveedor proveedor;
