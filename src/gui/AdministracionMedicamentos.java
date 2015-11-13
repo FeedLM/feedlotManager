@@ -138,6 +138,8 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private void cargarMedicinasTratamiento() {
 
         Tratamiento.leerMedicinaTratamiento(t_medicinasTratamientos, tratamiento);
+        
+        
     }
 
     /*Validar Código en tratamiento*/
