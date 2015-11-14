@@ -2837,3 +2837,41 @@ BEGIN
 
 END$$
 DELIMITER ;
+
+-- 2015-11-12
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_BUPD$$
+USE `feedlotmanager`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `animal_BUPD`
+BEFORE UPDATE ON `animal`
+FOR EACH ROW
+BEGIN	
+
+	declare varFechaRecepcion datetime;
+    declare	varGananciaPromedio decimal(20,4);
+	
+	select	fecha_recepcion
+    into	varFechaRecepcion
+    from	recepcion r
+    where   r.numero_lote	=	new.numero_lote;
+
+	set 	new.promedio_alimento		=	new.total_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion),
+			new.promedio_costo_alimento	=	new.costo_alimento	/	datediff(new.fecha_ultima_comida, varFechaRecepcion);
+
+-- Ganancia promedio
+
+	SELECT	ROUND((NEW.peso_actual - new.peso_compra) / DATEDIFF(MAX(fecha), DATE_SUB(new.fecha_compra, INTERVAL '1' DAY)),2)
+    into	varGananciaPromedio
+	FROM	movimiento m, detalle_movimiento d, rancho r
+    WHERE	m.id_rancho	=   r.id_rancho
+    AND		m.id_concepto	=   r.con_pesaje
+    AND		(		m.id_rancho     =   d.id_rancho
+             AND	m.id_concepto   =   d.id_concepto
+             AND	m.id_movimiento =   d.id_movimiento
+			 AND	d.id_animal     =   new.id_animal );
+
+	set		new.ganancia_promedio	=	varGananciaPromedio;    
+
+END$$
+DELIMITER ;
