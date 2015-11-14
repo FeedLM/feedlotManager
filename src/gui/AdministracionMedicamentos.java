@@ -242,6 +242,11 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
         jTabbedPane1.setForeground(new java.awt.Color(64, 37, 4));
         jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1000, 526));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         pn_medicamentos.setMinimumSize(new java.awt.Dimension(985, 580));
         pn_medicamentos.setOpaque(false);
@@ -909,6 +914,16 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     private void tf_DosisTratamientoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_DosisTratamientoFocusLost
         colocarCosto();
     }//GEN-LAST:event_tf_DosisTratamientoFocusLost
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+       
+        //cambio de tab
+        System.out.println("Tab: " + jTabbedPane1.getSelectedIndex());
+        
+        if ( jTabbedPane1.getSelectedIndex() == 1 ){
+            medicinaSelector.cargar();
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void colocarCosto() {
         try {

@@ -16,7 +16,7 @@ import static domain.Medicina.cargarMedicinas;
 public class MedicinaSelector extends ComboBox {
 
     private Medicina medicina;
-    
+
     public MedicinaSelector() {
 
     }
@@ -33,10 +33,19 @@ public class MedicinaSelector extends ComboBox {
 
     public Medicina getMedicnaNombre() {
 
+        String medicinaNombre;
+
         medicina = new Medicina();
 
-        medicina.cargarPorNombre(this.getSelectedItem().toString());
+        if (getSelectedItem() != null) {
 
+            medicinaNombre = this.getSelectedItem().toString();
+
+            if (medicinaNombre != null && !medicinaNombre.equals("")) {
+
+                medicina.cargarPorNombre(medicinaNombre);
+            }
+        }
         return medicina;
     }
 }
