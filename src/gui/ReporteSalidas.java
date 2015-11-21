@@ -52,7 +52,7 @@ public class ReporteSalidas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 280, -1));
+        jPanel1.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 280, -1));
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta1.setForeground(new java.awt.Color(230, 225, 195));
@@ -60,7 +60,7 @@ public class ReporteSalidas extends javax.swing.JFrame {
         etiqueta1.setText("Reporte de Salidas");
         etiqueta1.setFont(new java.awt.Font("Trebuchet", 1, 24)); // NOI18N
         etiqueta1.setOpaque(true);
-        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 60));
+        jPanel1.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 60));
 
         btn_generar.setText("Generar");
         btn_generar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +68,7 @@ public class ReporteSalidas extends javax.swing.JFrame {
                 btn_generarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 150, 150, 30));
+        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 150, 30));
 
         fondo1.setText("fondo1");
         jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -77,11 +77,11 @@ public class ReporteSalidas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
 
         pack();

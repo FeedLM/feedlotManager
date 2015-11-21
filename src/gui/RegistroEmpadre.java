@@ -179,7 +179,9 @@ public class RegistroEmpadre extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btn_RegistroEmpadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroEmpadreActionPerformed
-        
+        if(statusGestacional != null){
+            statusGestacional.dispose();
+        }
         statusGestacional = new StatusGestacional(animal);        
         statusGestacional.setVisible(true);       
     }//GEN-LAST:event_btn_RegistroEmpadreActionPerformed

@@ -11,10 +11,12 @@ import static domain.Corral.cargarCorrales;
 import domain.Excel;
 import static domain.Movimiento.cargarTraspasos;
 import static gui.Desktop.rancho;
+import static gui.Login.gs_mensaje;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -249,11 +251,11 @@ public class RegistroTrasladoGanado extends javax.swing.JInternalFrame {
         visualizar();
 
     }//GEN-LAST:event_btn_visualizarActionPerformed
-
+    /*
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        parent.setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
 
+    }//GEN-LAST:event_formWindowClosing
+*/
     private void jrb_entre_fechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_entre_fechasActionPerformed
         validarRadioButtons();
     }//GEN-LAST:event_jrb_entre_fechasActionPerformed
@@ -268,6 +270,10 @@ public class RegistroTrasladoGanado extends javax.swing.JInternalFrame {
     }
 
     private void visualizar() {
+
+        if (this.corralSelector1.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Falta seleccionar un corral.", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+        }
         tipo = 1;
         validarRadioButtons();
         if (jrb_todo.isSelected()) {

@@ -13,12 +13,14 @@ import domain.Excel;
 import static domain.Movimiento.cargarMedicinas;
 import static domain.Movimiento.cargarPesos;
 import static gui.Desktop.rancho;
+import static gui.Login.gs_mensaje;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
@@ -39,11 +41,12 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
 //        Image i = null;
 //        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
 //        setIconImage(i);
-        
+
         setClosable(true);
         this.pack();
-        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));        tagIdSelector.addArray(cargararete_visuals());
-        
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
+        tagIdSelector.addArray(cargararete_visuals());
+
         this.buttonGroup1.add(jrb_hoy);
         this.buttonGroup1.add(this.jrb_fecha);
         this.buttonGroup1.add(this.jrb_entre_fechas);
@@ -56,17 +59,18 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         corralSelector1.addArray(cargarCorrales());
         this.setTitle(this.getTitle() + " " + rancho.descripcion);
 
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension pantallaTamano = tk.getScreenSize();
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        Dimension pantallaTamano = tk.getScreenSize();
         setResizable(false);
-        setSize(pantallaTamano);
+//        setSize(pantallaTamano);
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        fondo1.cargar(pantallaTamano);
+        fondo1.cargar(this.size());
     }
 
     private void cargarTablas() {
         corral = new Corral();
         corral.cargarPorNombre(corralSelector1.getText(), rancho);
+
         cargarPesos(t_pesos, tipo, fecha_ini, fecha_fin, animal, corral);
         cargarMedicinas(t_medicinas, tipo, fecha_ini, fecha_fin, animal, corral);
 
@@ -75,11 +79,11 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
 
         btn_ReporteMedicamento.setEnabled(false);
         btn_ReportePesos.setEnabled(false);
-        
+
         if (t_pesos.getRowCount() > 0) {
             btn_ReportePesos.setEnabled(true);
         }
-        
+
         if (t_medicinas.getRowCount() > 0) {
             btn_ReporteMedicamento.setEnabled(true);
         }
@@ -128,7 +132,6 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         fondo1 = new abstractt.fondo();
 
         setTitle("Reporte de Sesiones");
-        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
@@ -294,11 +297,10 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         etiqueta3.setText("Reporte de Sesiones");
         etiqueta3.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta3.setOpaque(true);
-        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 80));
+        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1380, 80));
         jPanel1.add(corralSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 130, 20));
 
         etiqueta4.setText("Seleccionar Corral");
-        etiqueta4.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         jPanel1.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         fondo1.setText("fondo1");
@@ -308,9 +310,7 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +342,10 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
 
     private void visualizarDatos() {
 
-        // Integer tipo = 1;
+        if (this.corralSelector1.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado el Corral.", gs_mensaje, JOptionPane.ERROR_MESSAGE);
+
+        }
         tipo = 1;
         fecha_ini = new Date();
         fecha_fin = new Date();

@@ -32,7 +32,7 @@ public class Compras extends javax.swing.JDialog {
     public Compras(Desktop parent) {
         this.parent = parent;
         initComponents();
-        
+
         setLocationRelativeTo(null);
 //        this.setClosable(true);
 //        this.pack();
@@ -41,11 +41,11 @@ public class Compras extends javax.swing.JDialog {
         setTitle(this.getTitle() + " " + parent.rancho.descripcion);
         fondo1.cargar(jPanel1.getSize());
 
-        String titulos[] = {"Código", "Medicina", "Cantidad", "Presentacion","Precio Unitario", "Importe"};
+        String titulos[] = {"Código", "Medicina", "Cantidad", "Presentacion", "Precio Unitario", "Importe"};
 
         t_medicina.setTitulos(titulos);
         t_medicina.cambiarTitulos();
-        t_medicina.setFormato(new int[]{4, 0, 4, 2,2, 2});
+        t_medicina.setFormato(new int[]{4, 0, 4, 2, 2, 2});
         t_medicina.centrar();
 
         tf_factura.textFieldSoloNumerosYLetras();
@@ -312,13 +312,17 @@ public class Compras extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proveedorActionPerformed
-        
+        if (catalogoProveedor != null) {
+            catalogoProveedor.dispose();
+        }
         catalogoProveedor = new CatalogoProveedor(parent);
         catalogoProveedor.setVisible(true);
     }//GEN-LAST:event_btn_proveedorActionPerformed
 
     private void btn_medicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicamentosActionPerformed
-        
+        if (administracionMedicamentos != null) {
+            administracionMedicamentos.dispose();
+        }
         administracionMedicamentos = new AdministracionMedicamentos(parent);
         administracionMedicamentos.setVisible(true);
     }//GEN-LAST:event_btn_medicamentosActionPerformed
@@ -349,7 +353,7 @@ public class Compras extends javax.swing.JDialog {
         manejadorBD.parametrosSP.agregarParametro(dec.format(compra.total), "varTotal", "DOUBLE", "IN");
 
         if (manejadorBD.ejecutarSP("{ call agregarCompra(?,?,?,?,?,?,?,?) }") == 0) {
-            
+
             compra.cargarPorFacturaYOrden(compra.factura, compra.orden);
             agregarDetallesCompra();
             JOptionPane.showMessageDialog(this, "Proceso terminado con éxito.");
@@ -364,7 +368,7 @@ public class Compras extends javax.swing.JDialog {
         //valores STRING, INT, DOUBLE, DATETIME, CALENDAR
         for (int i = 0; i < t_medicina.getRowCount(); i++) {
             manejadorBD.parametrosSP = new ParametrosSP();
-            
+
             manejadorBD.parametrosSP.agregarParametro(compra.id_rancho, "varIdRancho", "STRING", "IN");
             manejadorBD.parametrosSP.agregarParametro(compra.id_compra, "varIdCompra", "STRING", "IN");
             medicina.cargarPorNombre(String.valueOf(t_medicina.getValueAt(i, 1)));
@@ -373,12 +377,12 @@ public class Compras extends javax.swing.JDialog {
             manejadorBD.parametrosSP.agregarParametro(String.valueOf(t_medicina.getValueAt(i, 3)), "varPresentacion", "INT", "IN");
             manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 4)), "varPrecioUnitario", "DOUBLE", "IN");
             manejadorBD.parametrosSP.agregarParametro(dec.format(t_medicina.getValueAt(i, 5)), "varImporte", "DOUBLE", "IN");
-            
+
             if (manejadorBD.ejecutarSP("{ call agregarDetalleCompra(?,?,?,?,?,?,?) }") == 0) {
-                
+
                 System.out.println("Agregado correctamente");
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "Error en el ingreso de producto", gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 manejadorBD.consulta("DELETE FROM compras "
                         + "WHERE factura = '" + compra.factura + "'"
@@ -450,7 +454,7 @@ public class Compras extends javax.swing.JDialog {
         total = 0.0;
 
         for (int i = 0; i < (t_medicina.getRowCount()); i++) {
-            
+
             subtotal += Double.parseDouble(String.valueOf(t_medicina.getValueAt(i, 5)));
         }
 

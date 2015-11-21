@@ -312,7 +312,6 @@ public class Desktop extends javax.swing.JFrame {
         }
 
         if (estacerrado(traslados)) {
-            // catalogos.setVisible(true);
             this.jDesktopPane1.add(traslados);
             Dimension desktopSize = jDesktopPane1.getSize();
             Dimension FrameSize = traslados.getSize();
@@ -323,13 +322,10 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_trasladoGanadoActionPerformed
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
-//        try {
-//            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "Ayuda.pdf");
-//        } catch (IOException e) {
-//            //e.printStackTrace();
-//            System.out.println("Sin ayuda existente...");
-//        }
-        CapturaRecepcion captura_recepcion = new CapturaRecepcion();
+        if (captura_recepcion != null) {
+            captura_recepcion.dispose();
+        }
+        captura_recepcion = new CapturaRecepcion();
         captura_recepcion.setVisible(true);
     }//GEN-LAST:event_btn_ayudaActionPerformed
 
@@ -378,6 +374,9 @@ public class Desktop extends javax.swing.JFrame {
 //            administracionGrupos.moveToFront();
 //            administracionGrupos.show();
 //    }
+        if (administracionGrupos != null) {
+            administracionGrupos.dispose();
+        }
         administracionGrupos = new AdministracionGrupos(this);
         administracionGrupos.setVisible(true);
     }//GEN-LAST:event_btn_administracionGruposActionPerformed
@@ -397,7 +396,7 @@ public class Desktop extends javax.swing.JFrame {
             visualizacionHospital.show();
         }
     }//GEN-LAST:event_btn_HospitalActionPerformed
-    
+
     private void btn_ReporteTrasladosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReporteTrasladosActionPerformed
         if (trasladoGanado == null) {
             trasladoGanado = new RegistroTrasladoGanado(this);
@@ -448,7 +447,7 @@ public class Desktop extends javax.swing.JFrame {
 
     private void btn_reporteSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reporteSesionesActionPerformed
         if (reporteSesiones == null) {
-        reporteSesiones = new ReporteSesiones(this);
+            reporteSesiones = new ReporteSesiones(this);
         }
 
         if (estacerrado(reporteSesiones)) {
@@ -464,8 +463,8 @@ public class Desktop extends javax.swing.JFrame {
 
     private void btn_administrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administrarActionPerformed
         seleccionarRancho = new SeleccionarRancho();
-        this.setVisible(false);
         seleccionarRancho.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_administrarActionPerformed
 
     private void btn_ingresoAnimalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoAnimalesActionPerformed
@@ -481,7 +480,7 @@ public class Desktop extends javax.swing.JFrame {
             administracionAnimales.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
             administracionAnimales.moveToFront();
             administracionAnimales.show();
-        }        
+        }
     }//GEN-LAST:event_btn_ingresoAnimalesActionPerformed
 
     public ManejadorBD getManejador() {
@@ -508,7 +507,7 @@ public class Desktop extends javax.swing.JFrame {
     public BusquedaAnimal busquedaAnimal;
     public CargarArchivoSesion cargarArchivoSesion;
     public EspecificacionesAnimal especificacionesAnimal;
-    //  public SeleccionarRancho    seleccionarRancho;
+    private CapturaRecepcion captura_recepcion;
     public SeleccionarRancho seleccionarRancho;
     private Catalogos catalogos;
     private VisualizacionHospital visualizacionHospital;

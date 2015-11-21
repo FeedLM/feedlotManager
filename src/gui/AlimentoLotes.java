@@ -23,7 +23,7 @@ public class AlimentoLotes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setResizable(false);
         loteSelector1.cargar();
-        if(!lote.equals("")){
+        if (!lote.equals("")) {
             loteSelector1.setSelectedItem(lote);
         }
         fondo1.cargar(this.getSize());
@@ -154,6 +154,9 @@ public class AlimentoLotes extends javax.swing.JFrame {
 
     private void btn_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoActionPerformed
         corral = new Corral();
+        if (ingresoAlimento != null) {
+            ingresoAlimento.dispose();
+        }
         ingresoAlimento = new IngresoAlimentoCaptura(this, recepcion.numero_lote, corral);
         ingresoAlimento.setVisible(true);
     }//GEN-LAST:event_btn_ingresoActionPerformed

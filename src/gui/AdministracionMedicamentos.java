@@ -767,8 +767,10 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_medicinaSelectorActionPerformed
 
     private void btn_aplicacionMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aplicacionMasivaActionPerformed
+        if(medicinaAnimalGrupo != null){
+            medicinaAnimalGrupo.dispose();
+        }
         medicinaAnimalGrupo = new MedicinasAnimalGrupo(parent);
-        this.setVisible(false);
         medicinaAnimalGrupo.setVisible(true);
     }//GEN-LAST:event_btn_aplicacionMasivaActionPerformed
 
@@ -909,6 +911,7 @@ public class AdministracionMedicamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btn_comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comprarActionPerformed
+        
         compras = new Compras(parent);
         compras.setVisible(true);
     }//GEN-LAST:event_btn_comprarActionPerformed

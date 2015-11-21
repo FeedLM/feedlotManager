@@ -289,7 +289,10 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_numeroLoteActionPerformed
 
     private void btn_ingresoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoAlimentoActionPerformed
-        AlimentoLotes alimentoLote = new AlimentoLotes("");
+        if (alimentoLote != null) {
+            alimentoLote.dispose();
+        }
+        alimentoLote = new AlimentoLotes("");
         alimentoLote.setVisible(true);
     }//GEN-LAST:event_btn_ingresoAlimentoActionPerformed
 
@@ -323,8 +326,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         recepcion.costo_flete = this.tf_costoFlete.obtenerValor();
 
         //Verificando el porcentaje de merma aceptada
-        
-        if (((recepcion.peso_origen - recepcion.peso_recepcion)*100)/recepcion.peso_origen > recepcion.limite_merma) {
+        if (((recepcion.peso_origen - recepcion.peso_recepcion) * 100) / recepcion.peso_origen > recepcion.limite_merma) {
             int opcion = JOptionPane.showConfirmDialog(this, "El límite de merma ha sido excedido, ¿Desea ajustar el peso de compra?"
                     + "", gs_mensaje, JOptionPane.YES_NO_OPTION);
             if (opcion == 0) {
@@ -364,7 +366,10 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         Integer fila = t_recepcion.getSelectedRow();
         if (fila >= 0) {
             lote = t_recepcion.getValueAt(fila, 7).toString();
-            AlimentoLotes alimentoLotes = new AlimentoLotes(lote);
+            if (alimentoLotes != null) {
+                alimentoLotes.dispose();
+            }
+            alimentoLotes = new AlimentoLotes(lote);
             alimentoLotes.setVisible(true);
 
         }
@@ -390,6 +395,8 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     Estado estado;
     Proveedor proveedor;
     Recepcion recepcion;
+    AlimentoLotes alimentoLotes;
+    AlimentoLotes alimentoLote;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_;
     private abstractt.Boton btn_guardar;

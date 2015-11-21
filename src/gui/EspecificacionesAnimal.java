@@ -849,8 +849,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void btn_BajasMuerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BajasMuerteActionPerformed
         // TODO add your handling code here:
-        bajasMuerte = new BajasMuerte(parent, animalDetalle);
-        bajasMuerte.setVisible(true);
+        if (animalDetalle != null) {
+            if (bajasMuerte != null) {
+                bajasMuerte.dispose();
+            }
+            bajasMuerte = new BajasMuerte(parent, animalDetalle);
+            bajasMuerte.setVisible(true);
+        }
     }//GEN-LAST:event_btn_BajasMuerteActionPerformed
 
     private void btn_pesoManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesoManualActionPerformed
@@ -861,13 +866,22 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void btn_HospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HospitalActionPerformed
         // TODO add your handling code here:
-        hospital = new Hospital(animalDetalle.id_animal);
-        hospital.setVisible(true);
+        if (animalDetalle != null) {
+            if (hospital != null) {
+                hospital.dispose();
+            }
+            hospital = new Hospital(animalDetalle.id_animal);
+            hospital.setVisible(true);
+        }
+
     }//GEN-LAST:event_btn_HospitalActionPerformed
 
     private void btn_medicinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicinasActionPerformed
         // TODO add your handling code here:
         if (animalDetalle != null) {
+            if (medicinasAnimal != null) {
+                medicinasAnimal.dispose();
+            }
             medicinasAnimal = new MedicinasAnimal(animalDetalle);
             medicinasAnimal.setVisible(true);
         }
@@ -1016,7 +1030,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 //                fecha_actual.getTime().getHours(),
 //                fecha_actual.getTime().getMinutes(),
 //                fecha_actual.getTime().getSeconds());
-
         tag_id = tf_AreteVisual.getText();
         tf_PesoActual.setDouble(this.tf_pesoBascula.getDouble());
 

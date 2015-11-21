@@ -43,7 +43,6 @@ public class SeleccionarRancho extends javax.swing.JFrame {
 
         plecaAdministrarFinca1.setLocation((pantallaTamano.width / 2) - (plecaAdministrarFinca1.getWidth() / 2), 0);
 
-        System.out.println("aqui");
         this.fondo1.cargar(pantallaTamano);
     }
 
@@ -183,7 +182,7 @@ public class SeleccionarRancho extends javax.swing.JFrame {
 
         }
 
-        setVisible(false);
+        this.dispose();
 
         desktop.setVisible(true);
         desktop.cargarTitulo();

@@ -37,7 +37,7 @@ public class Sementales extends javax.swing.JFrame {
 
         cargarPuertos();
 
-        stick = new SR232(puertoStick, 1, parent ,8);
+        stick = new SR232(puertoStick, 1, parent, 8);
 
         stick.setEID(tf_Eid);
 
@@ -52,11 +52,11 @@ public class Sementales extends javax.swing.JFrame {
         setIconImage(i);
 
         animalSelector.cargarTagsIdsSementales();
-        
+
         fondo1.cargar(getSize());
-        
+
         setResizable(false);
-        
+
         t_animales.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 JTable table = (JTable) me.getSource();
@@ -69,15 +69,15 @@ public class Sementales extends javax.swing.JFrame {
             }
         });
     }
-    
-     public void seleccionaAnimal(Integer fila) {
+
+    public void seleccionaAnimal(Integer fila) {
 
         int opcion;
 
         if (fila >= 0) {
-               this.animalSelector.setSelectedItem(this.t_animales.getValueAt(fila, 1).toString());
-           
-        } 
+            this.animalSelector.setSelectedItem(this.t_animales.getValueAt(fila, 1).toString());
+
+        }
     }
 
     public void cargarPuertos() {
@@ -373,8 +373,8 @@ public class Sementales extends javax.swing.JFrame {
 
     private void btn_emparejarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_emparejarActionPerformed
 
-         int fila;
-        
+        int fila;
+
         fila = t_animales.getSelectedRow();
 
         if (fila < 0) {
@@ -384,10 +384,11 @@ public class Sementales extends javax.swing.JFrame {
         }
 
         animal.cargarPorId(this.t_animales.getValueAt(fila, 0).toString());
-        
-        
-        stick.setSeguir(false);
 
+        stick.setSeguir(false);
+        if (emparejamiento != null) {
+            emparejamiento.dispose();
+        }
         emparejamiento = new Emparejamiento(parent, animal);
         emparejamiento.setVisible(true);
 

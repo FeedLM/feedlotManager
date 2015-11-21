@@ -312,6 +312,7 @@ public class CatalogoCliente extends javax.swing.JDialog {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 880, 240));
 
         btn_Nuevo.setText("Nuevo");
+        btn_Nuevo.setToolTipText("");
         btn_Nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_NuevoActionPerformed(evt);

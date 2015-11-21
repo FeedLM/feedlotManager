@@ -127,47 +127,55 @@ public class AdministracionAnimales extends javax.swing.JInternalFrame {
 
     private void btn_automaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_automaticoActionPerformed
         if (parent.especificacionesAnimal != null) {
-            
+
             parent.especificacionesAnimal.dispose();
         }
-        
+
         parent.especificacionesAnimal = new EspecificacionesAnimal(parent);
-        
+
         parent.especificacionesAnimal.cargarStick();
-        
+
         parent.especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_automaticoActionPerformed
 
     private void btn_manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_manualActionPerformed
-        
+
         if (parent.especificacionesAnimal != null) {
-            
+
             parent.especificacionesAnimal.dispose();
         }
-        
+
         parent.especificacionesAnimal = new EspecificacionesAnimal(parent);
 
         parent.especificacionesAnimal.setVisible(true);
     }//GEN-LAST:event_btn_manualActionPerformed
 
     private void btn_cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarArchivoActionPerformed
-        
+
         if (parent.cargarArchivoSesion != null) {
-            
+
             parent.cargarArchivoSesion.dispose();
         }
-        
+
         parent.cargarArchivoSesion = new CargarArchivoSesion(parent);
         parent.cargarArchivoSesion.setVisible(true);
     }//GEN-LAST:event_btn_cargarArchivoActionPerformed
 
     private void btn_partosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_partosActionPerformed
-        
+
+        if (partos != null) {
+            partos.dispose();
+        }
+
         partos = new PartosAbortos(parent);
         partos.setVisible(true);
     }//GEN-LAST:event_btn_partosActionPerformed
 
     private void btn_sementalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sementalesActionPerformed
+        if (sementales != null) {
+            sementales.dispose();
+        }
+
         sementales = new Sementales(parent);
         sementales.setVisible(true);
     }//GEN-LAST:event_btn_sementalesActionPerformed

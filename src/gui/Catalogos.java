@@ -33,11 +33,11 @@ public class Catalogos extends javax.swing.JInternalFrame {
         setClosable(true);
 
         this.pack();
-/*
-        Image i = null;
-        i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
-        setFrameIcon((Icon) i);
-  */      
+        /*
+         Image i = null;
+         i = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/logo tru-test.png"));
+         setFrameIcon((Icon) i);
+         */
         this.setFrameIcon(new ImageIcon(this.getClass().getResource("/resources/logo tru-test.png")));
 
         /*
@@ -138,24 +138,33 @@ public class Catalogos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
+        if (catalogoCliente != null) {
+            catalogoCliente.dispose();
+        }
         catalogoCliente = new CatalogoCliente(parent);
-        // this.setVisible(false);
         catalogoCliente.setVisible(true);
     }//GEN-LAST:event_btn_ClienteActionPerformed
 
     private void btn_ProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProveedorActionPerformed
+        if (catalogoProveedor != null) {
+            catalogoProveedor.dispose();
+        }
         catalogoProveedor = new CatalogoProveedor(parent);
-        // this.setVisible(false);
         catalogoProveedor.setVisible(true);
     }//GEN-LAST:event_btn_ProveedorActionPerformed
 
     private void btn_RazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RazasActionPerformed
+        if (catalogoRaza != null) {
+            catalogoRaza.dispose();
+        }
         catalogoRaza = new CatalogoRaza(parent);
-        // this.setVisible(false);
         catalogoRaza.setVisible(true);
     }//GEN-LAST:event_btn_RazasActionPerformed
 
     private void btn_MedicamentosTratamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MedicamentosTratamientosActionPerformed
+        if (administracionMedicamentos != null) {
+            administracionMedicamentos.dispose();
+        }
         administracionMedicamentos = new AdministracionMedicamentos(parent);
         administracionMedicamentos.setVisible(true);
     }//GEN-LAST:event_btn_MedicamentosTratamientosActionPerformed

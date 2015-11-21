@@ -953,6 +953,9 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     }//GEN-LAST:event_btn_EliminarActionPerformed
 
     private void btn_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_busquedaActionPerformed
+        if (busquedaAnimal != null) {
+            busquedaAnimal.dispose();
+        }
         busquedaAnimal = new BusquedaAnimal(parent);
 //        this.dispose();
         busquedaAnimal.setVisible(true);
@@ -1077,6 +1080,10 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
 
     private void btn_reporteEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reporteEntradasActionPerformed
 
+        if (reporteEntradas != null) {
+            reporteEntradas.dispose();
+        }
+
         reporteEntradas.setVisible(true);
 
     }//GEN-LAST:event_btn_reporteEntradasActionPerformed
@@ -1088,7 +1095,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private void reporteCorral() {
         Excel excel;
         excel = new Excel();
-        excel.reporteCorralCerrado(corral, Grafica);
+        excel.reporteCorral(corral, Grafica);
 
     }
     private void btn_cierreCorralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierreCorralActionPerformed
@@ -1099,7 +1106,8 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             if (!pideContraseña()) {
                 return;
             }
-
+            cargarAnimalesCorral();
+            cargarPesajesCorral();
             for (int i = 0; i < t_animales.getRowCount(); i++) {
                 manejadorBD.parametrosSP = new ParametrosSP();
                 manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
@@ -1109,7 +1117,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
                 manejadorBD.parametrosSP.agregarParametro("", "varNumeroPedido", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro("", "varIdCliente", "STRING", "IN");
                 manejadorBD.parametrosSP.agregarParametro(t_animales.getValueAt(i, 11).toString(), "varPesoActual", "DOUBLE", "IN");
-                if(manejadorBD.ejecutarSP("{ call movimientoSalida(?,?,?,?,?,?,?) }") != 0){
+                if (manejadorBD.ejecutarSP("{ call movimientoSalida(?,?,?,?,?,?,?) }") != 0) {
                     return;
                 }
             }
@@ -1118,9 +1126,9 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             manejadorBD.parametrosSP.agregarParametro(rancho.id_rancho, "varIdRancho", "STRING", "IN");
 
             if (manejadorBD.ejecutarSP("{ call cierreCorral(?,?) }") == 0) {
-                JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se cerro el corral correctamente, puede encontrar el corral en Historico de Corrales.", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
                 this.cargarAnimalesCorral();
-                reporteCorral();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Ocurrio un error al cerrar el corral", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             }
@@ -1129,7 +1137,10 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     }//GEN-LAST:event_btn_cierreCorralActionPerformed
 
     private void btn_historicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_historicoActionPerformed
-        CorralesCerrados corralesCerrados = new CorralesCerrados(this);
+        if (corralesCerrados != null) {
+            corralesCerrados.dispose();
+        }
+        corralesCerrados = new CorralesCerrados(this);
         corralesCerrados.setVisible(true);
     }//GEN-LAST:event_btn_historicoActionPerformed
 
@@ -1289,7 +1300,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
     private CargarArchivoSesion cargarArchivoSesion;
     Desktop parent;
     IngresoAlimentoCaptura ingresoAlimento;
-
+    CorralesCerrados corralesCerrados;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonesHoriz;
     private javax.swing.JPanel botonesVert;

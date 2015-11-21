@@ -528,6 +528,9 @@ public class Login extends javax.swing.JFrame {
         } else {
             usuario_activo = new Usuario();
             usuario_activo.cargarUsuario(nombre);
+            if(crearUsuario != null){
+                crearUsuario.dispose();
+            }
             crearUsuario = new CrearUsuario(this);
             crearUsuario.setVisible(true);
         }

@@ -261,8 +261,10 @@ public class BajasMuerte extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_IngresarActionPerformed
 
     private void btn_HistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HistoricoActionPerformed
+        if (visualizacionMuertes != null) {
+            visualizacionMuertes.dispose();
+        }
         visualizacionMuertes = new VisualizacionMuertes((Desktop) parent);
-        this.setVisible(false);
         visualizacionMuertes.setVisible(true);
     }//GEN-LAST:event_btn_HistoricoActionPerformed
 

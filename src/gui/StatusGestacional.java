@@ -147,9 +147,9 @@ public class StatusGestacional extends javax.swing.JFrame {
         jRB_Positivo.setOpaque(false);
         jPanel1.add(jRB_Positivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 300, -1));
 
-        btn_RegistroEmpadre.setText("Grabar");
+        btn_RegistroEmpadre.setText("Guardar");
         btn_RegistroEmpadre.setToolTipText("Estatus de Registro de Empadre Actual");
-        btn_RegistroEmpadre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btn_RegistroEmpadre.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         btn_RegistroEmpadre.setMaximumSize(new java.awt.Dimension(150, 30));
         btn_RegistroEmpadre.setMinimumSize(new java.awt.Dimension(150, 30));
         btn_RegistroEmpadre.setPreferredSize(new java.awt.Dimension(200, 30));

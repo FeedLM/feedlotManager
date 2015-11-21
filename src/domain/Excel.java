@@ -1774,12 +1774,12 @@ public class Excel {
         //agregarValor(fila_encabezado, 2, "Corral");
         agregarValor(fila_encabezado, 3, ""); // Espacio
 
-        agregarValor(fila_encabezado, 4, "Compra", styleCenter);
+        agregarValor(fila_encabezado, 4, "Ingresó", styleCenter);
         agregarValor(fila_encabezado, 5, "ID Siniiga", styleCenter);
         agregarValor(fila_encabezado, 6, "ID Campaña", styleCenter);
 
         agregarValor(fila_encabezado, 7, "Sexo", styleCenter);
-        agregarValor(fila_encabezado, 8, "Ingreso", styleCenter);
+        agregarValor(fila_encabezado, 8, "Fecha Compra", styleCenter);
         agregarValor(fila_encabezado, 9, "# Lote", styleCenter);
         agregarValor(fila_encabezado, 10, "Compra", styleCenter);
 
@@ -1957,6 +1957,7 @@ public class Excel {
         agregarValor(fila_tablas + 9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
         if (corral.total_kilos_inicial > corral.total_kilos) {
             relleno("C18", IndexedColors.RED.index, IndexedColors.WHITE.index);
+            relleno("H12", IndexedColors.RED.index, IndexedColors.WHITE.index);
         }
         agregarValor(fila_tablas + 10, 2, new FormatoNumero(corral.ganancia_promedio.toString()).convierte(corral.ganancia_promedio), styleRight);
         agregarValor(fila_tablas + 11, 2, new FormatoNumero(corral.peso_maximo.toString()).convierte(corral.peso_maximo), styleRight);
@@ -1994,13 +1995,10 @@ public class Excel {
         agregarValor(fila_tablas + 10, 4, "COSTO TOTAL DE TRANSPORTES", styleEtiquetaTabla);
         agregarValor(fila_tablas + 11, 4, "GASTOS DIRECTOS", styleEtiquetaTabla);
         agregarValor(fila_tablas + 12, 4, "GASTOS INDIRECTOS", styleEtiquetaTabla);
-//agregarValor(14, 3, "PESO PROMEDIO", styleEtiquetaTabla);
+
 
         agregarValor(fila_tablas + 1, 7, new FormatoNumero(corral.alimento_ingresado.toString()).convierte(corral.alimento_ingresado), styleRight);
         agregarValor(fila_tablas + 2, 7, new FormatoNumero(corral.promedio_alimento.toString()).convierte(corral.promedio_alimento), styleRight);
-        if (corral.total_kilos_inicial > corral.total_kilos) {
-            relleno("C18", IndexedColors.RED.index, IndexedColors.WHITE.index);
-        }
         agregarValor(fila_tablas + 3, 7, new FormatoNumero(corral.conversion_alimenticia.toString()).convierte(corral.conversion_alimenticia), styleRight);
         agregarValor(fila_tablas + 7, 7, new FormatoNumero(corral.merma.toString()).convierte(corral.merma), styleRight);
         agregarValor(fila_tablas + 8, 7, new FormatoNumero(corral.total_costo_medicina.toString()).convierte(corral.total_costo_medicina), styleRight);
