@@ -785,7 +785,7 @@ public class Movimiento {
                 + "	   AND M.id_movimiento =   D.id_movimiento "
                 + "	   AND M.id_concepto	=   D.id_concepto ) "
                 + "AND	  (    M.id_concepto	=   R.con_pesaje "
-                + "	   AND M.id_rancho     =   r.id_rancho	) "
+                + "	   AND M.id_rancho     =   R.id_rancho	) "
                 //   + "AND      M.id_rancho	= '" + rancho.id_rancho + "' "
                 + "AND      D.id_animal	= '" + id_animal + "' "
                 + "ORDER BY fecha DESC");
