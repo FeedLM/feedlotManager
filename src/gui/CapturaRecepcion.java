@@ -19,10 +19,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -173,7 +169,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
         jPanel2.add(tf_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 130, 20));
 
         etiqueta4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        etiqueta4.setText("Folio de Compra");
+        etiqueta4.setText("Factura de Compra");
         jPanel2.add(etiqueta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 120, 20));
         jPanel2.add(tf_numeroAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 130, 20));
 
@@ -281,7 +277,7 @@ public class CapturaRecepcion extends javax.swing.JFrame {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
         guardar();
-        limpiar();
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void tf_numeroLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_numeroLoteActionPerformed

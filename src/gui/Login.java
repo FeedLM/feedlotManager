@@ -48,7 +48,7 @@ public class Login extends javax.swing.JFrame {
     private Date fecha_limite;
     private Integer dias_vigencia;
    // public static SimpleDateFormat formatoDateTime;
-   // public static SimpleDateFormat formatoDate;
+    // public static SimpleDateFormat formatoDate;
     Cifrado cifrado;
 
     /**
@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
         setIconImage(i);
         // System.load("C:\\FeedLot\\libSerialPort.dll");
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel2.setOpaque(false);
         /*
@@ -326,8 +326,6 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuario.setText("admin");
         usuario.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,8 +357,6 @@ public class Login extends javax.swing.JFrame {
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 100, 30));
 
-        contraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        contraseña.setText("admin");
         contraseña.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,7 +374,6 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBounds(150, 130, 400, 200);
 
         btn_salir.setText("Salir");
-        btn_salir.setFont(new java.awt.Font("Trebuchet", 1, 12)); // NOI18N
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
@@ -505,7 +500,8 @@ public class Login extends javax.swing.JFrame {
         manejadorBD = new ManejadorBD(muestraSQL);
 
         try {
-            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/" + database, nombre, sContraseña);
+            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://gkconsulting.mx:3306/" + database, nombre, sContraseña);
+            //manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/" + database, nombre, sContraseña);
         } catch (ClassNotFoundException ex) {
             error = true;
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -528,7 +524,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             usuario_activo = new Usuario();
             usuario_activo.cargarUsuario(nombre);
-            if(crearUsuario != null){
+            if (crearUsuario != null) {
                 crearUsuario.dispose();
             }
             crearUsuario = new CrearUsuario(this);
@@ -540,7 +536,7 @@ public class Login extends javax.swing.JFrame {
 
         String nombre = usuario.getText();
         String sContraseña = contraseña.getText();
-        
+
         manejadorBD = new ManejadorBD(muestraSQL);
 
         try {

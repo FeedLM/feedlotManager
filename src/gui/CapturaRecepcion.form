@@ -266,7 +266,7 @@
             <Component class="abstractt.Etiqueta" name="etiqueta4">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Folio de Compra"/>
+                <Property name="text" type="java.lang.String" value="Factura de Compra"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -860,6 +860,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void btn_pesoManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesoManualActionPerformed
         // TODO add your handling code here:
+        if (pesoManual != null) {
+            pesoManual.dispose();
+        }
         pesoManual = new PesoManual(this, tf_pesoBascula);
         pesoManual.setVisible(true);
     }//GEN-LAST:event_btn_pesoManualActionPerformed
@@ -1623,6 +1626,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
     private void valoresPromedio() {
         tf_ganancia.setText(animalDetalle.ganancia_promedio.toString());
         this.tf_consumo.setText(animalDetalle.promedio_alimentacion.toString());
-        this.tf_merma.setText(animalDetalle.porcentaje_merma.toString() + "%");
+        this.tf_merma.setText(animalDetalle.porcentaje_merma.toString());
     }
 }

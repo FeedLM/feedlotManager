@@ -1953,7 +1953,7 @@ public class Excel {
         agregarValor(fila_tablas + 5, 2, new FormatoNumero(corral.numero_anmales.toString()).convierte(corral.numero_anmales), styleRight);
         agregarValor(fila_tablas + 6, 2, new FormatoNumero(corral.total_kilos_inicial.toString()).convierte(corral.total_kilos_inicial), styleRight);
         agregarValor(fila_tablas + 7, 2, new FormatoNumero(String.valueOf(corral.total_kilos_inicial / corral.numero_anmales)).convierte(corral.total_kilos_inicial / corral.numero_anmales), styleRight);
-        agregarValor(fila_tablas + 8, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.peso_promedio), styleRight);
+        agregarValor(fila_tablas + 8, 2, new FormatoNumero(corral.total_kilos.toString()).convierte(corral.total_kilos), styleRight);
         agregarValor(fila_tablas + 9, 2, new FormatoNumero(corral.peso_promedio.toString()).convierte(corral.peso_promedio), styleRight);
         if (corral.total_kilos_inicial > corral.total_kilos) {
             relleno("C18", IndexedColors.RED.index, IndexedColors.WHITE.index);
