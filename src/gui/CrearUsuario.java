@@ -36,6 +36,8 @@ public class CrearUsuario extends javax.swing.JFrame {
         estadoSelector1.cargar();
         fondo1.cargar(this.getSize());
         this.setResizable(false);
+        this.tf_correo.setPlaceholder("ejemplo@gmail.com");
+        this.tf_telefono.setPlaceholder("XXX-XXX-XXX-XXXX");
     }
 
     private void guardarUsuario() {
@@ -54,29 +56,25 @@ public class CrearUsuario extends javax.swing.JFrame {
             usuario.setFecha(this.selectorFecha1.getFecha().toString());
             try {
                 usuario.setTelefono(tf_telefono.getText());
-                if (this.tf_telefono.getText().length() == 10) {
-                    manejadorBD.parametrosSP = new ParametrosSP();
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getLog(), "varLog", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getPassword(), "varPassword", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getNombre(), "varNombre", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getApellido(), "varApellido", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getEstado().descripcion, "varId_estado", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getCiudad().descripcion, "varId_ciudad", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getCorreo(), "varCorreo", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getFecha(), "varFecha", "STRING", "IN");
-                    manejadorBD.parametrosSP.agregarParametro(usuario.getTelefono(), "varTelefono", "STRING", "IN");
-                    if (manejadorBD.ejecutarSP("{ call agregarUsuario(?,?,?,?,?,?,?,?,?) }") == 0) {
+                manejadorBD.parametrosSP = new ParametrosSP();
+                manejadorBD.parametrosSP.agregarParametro(usuario.getLog(), "varLog", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getPassword(), "varPassword", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getNombre(), "varNombre", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getApellido(), "varApellido", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getEstado().descripcion, "varId_estado", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getCiudad().descripcion, "varId_ciudad", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getCorreo(), "varCorreo", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getFecha(), "varFecha", "STRING", "IN");
+                manejadorBD.parametrosSP.agregarParametro(usuario.getTelefono(), "varTelefono", "STRING", "IN");
+                if (manejadorBD.ejecutarSP("{ call agregarUsuario(?,?,?,?,?,?,?,?,?) }") == 0) {
 
-                        JOptionPane.showMessageDialog(this, "Se creó el usuario" + usuario.getLog() + " correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
-                        this.dispose();
-                    } else {
-
-                        JOptionPane.showMessageDialog(this, "Error al crear el usuario " + usuario.getLog(), gs_mensaje, JOptionPane.ERROR_MESSAGE);
-                    }
-
+                    JOptionPane.showMessageDialog(this, "Se creó el usuario " + usuario.getLog() + " correctamente", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "El número de telefóno es muy corto");
+
+                    JOptionPane.showMessageDialog(this, "Error al crear el usuario " + usuario.getLog(), gs_mensaje, JOptionPane.ERROR_MESSAGE);
                 }
+
             } catch (Exception e) {
                 JOptionPane.showConfirmDialog(this, "Su número de telefóno esta equivocado", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             }
@@ -192,8 +190,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(estadoSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 180, 20));
         jPanel2.add(selectorFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
-
-        tf_telefono.setText("5556789123");
         jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 180, 20));
 
         jPanel3.setOpaque(false);
@@ -222,8 +218,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         etiqueta11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         etiqueta11.setText("Correo Electrónico: ");
         jPanel2.add(etiqueta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 150, 20));
-
-        tf_correo.setText("ejemplo@gmail.com");
         jPanel2.add(tf_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 180, 20));
         jPanel2.add(passwordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 180, 20));
         jPanel2.add(passwordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, 20));

@@ -213,7 +213,9 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         tablas.setOpaque(false);
         tablas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSplitPane1.setDividerLocation(600);
+        jSplitPane1.setDividerLocation(400);
+
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(452, 300));
 
         t_pesos.setForeground(new java.awt.Color(230, 225, 195));
         t_pesos.setModel(new javax.swing.table.DefaultTableModel(
@@ -241,7 +243,7 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
 
         jSplitPane1.setRightComponent(jScrollPane1);
 
-        tablas.add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1350, 400));
+        tablas.add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1200, 360));
 
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta1.setText("Pesos");
@@ -251,9 +253,9 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         etiqueta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiqueta2.setText("Medicinas");
         etiqueta2.setFont(new java.awt.Font("Trebuchet", 1, 14)); // NOI18N
-        tablas.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 750, 30));
+        tablas.add(etiqueta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 750, 30));
 
-        jPanel1.add(tablas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, -1));
+        jPanel1.add(tablas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 1240, -1));
 
         botones.setOpaque(false);
         botones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -289,7 +291,7 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         });
         botones.add(btn_ReporteMedicamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 200, 30));
 
-        jPanel1.add(botones, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 100, -1, -1));
+        jPanel1.add(botones, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, -1, -1));
 
         etiqueta3.setBackground(new java.awt.Color(95, 84, 88));
         etiqueta3.setForeground(new java.awt.Color(230, 225, 195));
@@ -297,7 +299,7 @@ public class ReporteSesiones extends javax.swing.JInternalFrame {
         etiqueta3.setText("Reporte de Sesiones");
         etiqueta3.setFont(new java.awt.Font("Trebuchet", 1, 48)); // NOI18N
         etiqueta3.setOpaque(true);
-        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1380, 80));
+        jPanel1.add(etiqueta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 80));
         jPanel1.add(corralSelector1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 130, 20));
 
         etiqueta4.setText("Seleccionar Corral");

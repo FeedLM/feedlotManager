@@ -20,5 +20,5 @@ public class FormatoControles {
     public static Color color4 = new Color(120, 118, 93);
     public static Font Fuente1 = new java.awt.Font("Trebuchet", Font.BOLD, 12);
     public static Font Fuente2 = new java.awt.Font("Trebuchet", Font.BOLD, 12);
-
+    public static Font Fuente3 = new java.awt.Font("Trebuchet", Font.ITALIC, 12);
 }

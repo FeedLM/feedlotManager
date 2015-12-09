@@ -38,17 +38,20 @@ public class Usuario {
         telefono = "";
     }
     
-    public void cargarUsuario(String alog) {
+    public void cargarUsuario(String n, String pw) {
 
         manejadorBD.consulta(""
                 + "SELECT id_usuario, password "
                 + "FROM usuario "
-                + "WHERE log = '" + alog + "'");
+                + "WHERE log = '" + n + "' AND password = '"  + pw + "'");
 
         if (manejadorBD.getRowCount() > 0) {
             
            id_usuario = manejadorBD.getValorString(0, 0);
            password   = manejadorBD.getValorString(0, 1);           
+        }else{
+            id_usuario = null;
+            password = null;
         }
     }    
     

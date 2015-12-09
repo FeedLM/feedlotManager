@@ -326,7 +326,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        usuario.setText("identals_test");
+        usuario.setText("admin");
         usuario.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +358,7 @@ public class Login extends javax.swing.JFrame {
         etiqueta1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jPanel2.add(etiqueta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 100, 30));
 
-        contraseña.setText("89egos0317");
+        contraseña.setText("admin");
         contraseña.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,9 +495,11 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
-    private void registrarse() {
-        String nombre = "root";
-        String sContraseña = "root";
+    private void entrar() {
+        String n = usuario.getText();
+        String pw = contraseña.getText();
+        String nombre = "identals_test";
+        String sContraseña = "89egos0317";
 
         manejadorBD = new ManejadorBD(muestraSQL);
 
@@ -520,59 +522,38 @@ public class Login extends javax.swing.JFrame {
         }
 
         if (error) {
-
             accesos++;
             JOptionPane.showMessageDialog(this, "Su usuario o contraseña no Corresponden");
         } else {
             usuario_activo = new Usuario();
-            usuario_activo.cargarUsuario(nombre);
-            if (crearUsuario != null) {
-                crearUsuario.dispose();
-            }
-            crearUsuario = new CrearUsuario(this);
-            crearUsuario.setVisible(true);
+            usuario_activo.cargarUsuario(n, pw);
         }
     }
 
-    private void acceder() {
-
-        String nombre = usuario.getText();
-        String sContraseña = contraseña.getText();
-
-        manejadorBD = new ManejadorBD(muestraSQL);
-
-        try {
-            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://gkconsulting.mx:3306/" + database, nombre, sContraseña);
-//            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/" + database, nombre, sContraseña);
-        } catch (ClassNotFoundException ex) {
-            error = true;
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            error = true;
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            error = true;
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-
-            error = true;
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (error) {
-
-            accesos++;
+    private void registrarse() {
+        entrar();
+        if (usuario_activo.id_usuario == null && usuario_activo.password == null) {
             JOptionPane.showMessageDialog(this, "Su usuario o contraseña no Corresponden");
-        } else {
-
-            usuario_activo = new Usuario();
-            usuario_activo.cargarUsuario(nombre);
-
-            selecionarRancho = new SeleccionarRancho();
-            setVisible(false);
-
-            selecionarRancho.setVisible(true);
+            return;
         }
+        if (crearUsuario != null) {
+            crearUsuario.dispose();
+        }
+        crearUsuario = new CrearUsuario(this);
+        crearUsuario.setVisible(true);
+
+    }
+
+    private void acceder() {
+        entrar();
+        if (usuario_activo.id_usuario == null && usuario_activo.password == null) {
+            JOptionPane.showMessageDialog(this, "Su usuario o contraseña no Corresponden");
+            return;
+        }
+        selecionarRancho = new SeleccionarRancho();
+        this.dispose();
+
+        selecionarRancho.setVisible(true);
 
         if (accesos == 3) {
 

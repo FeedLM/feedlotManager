@@ -9,18 +9,20 @@
 package abstractt;
 
 import domain.FormatoNumero;
-import static gui.Login.gs_mensaje;
-import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.StringTokenizer;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Administrator
  */
 public class TextField extends javax.swing.JTextField {
+
+    private String placeholder = "";
 
     /**
      * Creates a new instance of textField
@@ -61,30 +63,29 @@ public class TextField extends javax.swing.JTextField {
     }
 
     private void FocusGained(java.awt.event.FocusEvent evt) {
-
-      //  System.out.println("alimento ingresado 01");
+        //  System.out.println("alimento ingresado 01");
         if (isDouble) {
 
-         //  System.out.println("alimento ingresado 02");
+            //  System.out.println("alimento ingresado 02");
             this.setText(obtenerNumero(getText()));
         }
 
-    //  System.out.println("alimento ingresado 03");
+        //  System.out.println("alimento ingresado 03");
         seleccionarTexto();
     }
 
     private void FocusLost(java.awt.event.FocusEvent evt) {
 
-      // System.out.println("alimento ingresado 04");
+        // System.out.println("alimento ingresado 04");
         if (isDouble) {
 
-       //   System.out.println("alimento ingresado 05");
+            //   System.out.println("alimento ingresado 05");
             if (getText().equals("")) {
 
                 setText("0.0");
             }
 
-       //  System.out.println("alimento ingresado 06");
+            //  System.out.println("alimento ingresado 06");
             //this.setText(obtenerNumero(getText()));
         }
     }
@@ -265,4 +266,29 @@ public class TextField extends javax.swing.JTextField {
         }
         return numero;
     }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    @Override
+    public void paintComponent(final Graphics pG) {
+        super.paintComponent(pG);
+
+        if (placeholder.length() == 0 || getText().length() > 0) {
+            return;
+        }
+
+        final Graphics2D g = (Graphics2D) pG;
+        g.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(getDisabledTextColor());
+        g.drawString(placeholder, getInsets().left, pG.getFontMetrics().getMaxAscent() + getInsets().top);
+    }
+
+    public void setPlaceholder(final String s) {
+        placeholder = s;
+    }
+
 }
