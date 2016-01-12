@@ -29,10 +29,10 @@ public class Hospital extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         id_animal = aid_animal;
-        
-         this.setTitle(this.getTitle() + " " + rancho.descripcion);
-         
-         fondo1.cargar(this.getSize());
+
+        this.setTitle(this.getTitle() + " " + rancho.descripcion);
+
+        fondo1.cargar(this.getSize());
     }
 
     /**
@@ -127,7 +127,8 @@ public class Hospital extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarActionPerformed
-        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que desea ingresar a este animal al Hospital?", gs_mensaje, 1) == 0) {
+        String[] botones = {"Si", "No"};
+        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que desea ingresar a este animal al Hospital?", gs_mensaje, 1, botones) == 0) {
 
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

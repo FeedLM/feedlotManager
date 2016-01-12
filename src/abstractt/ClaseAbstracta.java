@@ -110,9 +110,7 @@ public class ClaseAbstracta {
   /**
    *
    */
-  public static int  dialogoConfirmacionSiNo(Object ventana,String Mensaje,String titulo, int s){
-    
-    Object[] botones = {"  Si  ", "  No  " };
+  public static int  dialogoConfirmacionSiNo(Object ventana,String Mensaje,String titulo, int s, String[] botones){
     
     return JOptionPane.showOptionDialog((Component) ventana, Mensaje, titulo,
             JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, botones, botones[s]);

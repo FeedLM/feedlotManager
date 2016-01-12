@@ -290,6 +290,11 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
         fondo1 = new abstractt.fondo();
 
         setTitle("Administración de Grupos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

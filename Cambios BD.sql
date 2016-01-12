@@ -3010,3 +3010,31 @@ BEGIN
 	WHERE corral.id_corral	=	varIdCorral;    
     
 END
+
+USE `feedlotmanager`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS feedlotmanager.animal_BINS$$
+USE `feedlotmanager`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `feedlotmanager`.`animal_BINS` 
+BEFORE INSERT ON `animal` 
+FOR EACH ROW
+begin
+DECLARE varConteo INT(10);
+    DECLARE	msg	CHAR(255);
+	
+	SELECT COUNT(*)
+	INTO varConteo 
+    FROM animal
+	WHERE arete_visual = NEW.arete_visual 
+    AND status = 'A';
+	
+    IF varConteo > 0 THEN    
+    
+		set msg = concat('El IDV "', NEW.arete_visual, '" ya esta capturado');
+        signal sqlstate '45000' set message_text = msg;         
+    END IF;
+	
+end    $$
+DELIMITER ;

@@ -231,8 +231,8 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay animales seleccionados", gs_mensaje, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
-        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que dar salida a los animales?, se dejarán de visualizar en corrales y otras pantallas", gs_mensaje, 1) == 1) {
+        String[] botones = {"Si", "No"};
+        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que dar salida a los animales?, se dejarán de visualizar en corrales y otras pantallas", gs_mensaje, 1, botones) == 1) {
 
             return;
         }
@@ -335,7 +335,6 @@ public class SalidaGanadoGrupo extends javax.swing.JInternalFrame {
         animal.cargarPorEid(this.tf_Eid.getText());
 
     }
-
 
     String puertoStick, puertoBascula;
     private SR232 stick;

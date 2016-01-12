@@ -335,9 +335,8 @@ public class SalidaGanado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarSalida() {
-
-        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que dar salida al animal?, se dejará de visualizar en corrales y otras pantallas", gs_mensaje, 1) == 1) {
-
+        String[] botones = {"Si", "No"};
+        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que dar salida al animal?, se dejará de visualizar en corrales y otras pantallas", gs_mensaje, 1, botones) == 1) {
             return;
         }
 

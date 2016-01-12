@@ -498,14 +498,16 @@ public class Login extends javax.swing.JFrame {
     private void entrar() {
         String n = usuario.getText();
         String pw = contraseña.getText();
-        String nombre = "identals_test";
-        String sContraseña = "89egos0317";
+//        String nombre = "identals_test";
+//        String sContraseña = "89egos0317";
+        String nombre = "root";
+        String sContraseña = "root";
 
         manejadorBD = new ManejadorBD(muestraSQL);
 
         try {
-            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://gkconsulting.mx:3306/" + database, nombre, sContraseña);
-            //manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/" + database, nombre, sContraseña);
+//            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://gkconsulting.mx:3306/" + database, nombre, sContraseña);
+            manejadorBD.conectar("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/" + database, nombre, sContraseña);
         } catch (ClassNotFoundException ex) {
             error = true;
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -523,7 +525,7 @@ public class Login extends javax.swing.JFrame {
 
         if (error) {
             accesos++;
-            JOptionPane.showMessageDialog(this, "Su usuario o contraseña no Corresponden");
+            JOptionPane.showMessageDialog(this, "Ocurrió un problema con la conexión");
         } else {
             usuario_activo = new Usuario();
             usuario_activo.cargarUsuario(n, pw);

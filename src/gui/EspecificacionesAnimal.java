@@ -248,7 +248,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(240, 220, 170));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pn_Formulario.setBackground(new java.awt.Color(255, 255, 255));
@@ -1023,16 +1023,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
 
     private void agregar_peso() {
 
-//        Calendar fecha_actual = Calendar.getInstance();
         String tag_id;
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-//        fecha_peso.set(fecha_peso.getTime().getYear() + 1900,
-//                fecha_peso.getTime().getMonth(),
-//                fecha_peso.getTime().getDate(),
-//                fecha_actual.getTime().getHours(),
-//                fecha_actual.getTime().getMinutes(),
-//                fecha_actual.getTime().getSeconds());
         tag_id = tf_AreteVisual.getText();
         tf_PesoActual.setDouble(this.tf_pesoBascula.getDouble());
 
@@ -1066,7 +1059,6 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             JOptionPane.showMessageDialog(this, "Error al agregar el peso del animal\n" + manejadorBD.errorSQL, gs_mensaje, JOptionPane.ERROR_MESSAGE);
         }
         leerEid();
-        leerAreteVisual();
     }
 
     private void actualizar_animal() {
@@ -1076,13 +1068,13 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         semental = new Animal();
 
         animalDetalle.arete_visual = tf_AreteVisual.getText();
+        animalDetalle.arete_electronico = this.tf_Eid.getText();
         animalDetalle.fecha_ingreso = JDc_FechaIngreso.getCalendar().getTime();
         animalDetalle.arete_siniiga = tf_AreteSiniiga.getText();
         animalDetalle.arete_campaña = tf_AreteCampaña.getText();
         animalDetalle.fecha_compra = JDc_FechaCompra.getCalendar().getTime();
         animalDetalle.numero_lote = loteSelector1.getSelectedItem().toString();
         animalDetalle.compra = tf_Compra.getText();
-
         animalDetalle.proveedor.cargarPorDescripcion(proveedorSelector1.getSelectedItem().toString());
         animalDetalle.proveedor.descripcion = proveedorSelector1.getSelectedItem().toString();
 
@@ -1307,9 +1299,8 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
             animalDetalle.cargarPorEidTodosRanchos(eid);
 
             if (animalDetalle.id_animal.equals("")) {
-
-                if (dialogoConfirmacionSiNo(this, "¿El animal no existe desea ingresarlo al sistema?", gs_mensaje, 1) == 0) {
-
+                String[] botones = {"Nuevo", "Emparejar"};
+                if (dialogoConfirmacionSiNo(this, "Este IDE no existe. ¿Desea ingresarlo al sistema como nuevo animal o emparejar con un animal sin IDE?", gs_mensaje, 1, botones) == 0) {
                     nuevo = true;
                     btn_agregar.setEnabled(true);
                     btn_actualizar.setEnabled(false);
@@ -1320,7 +1311,9 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                     calculaPorcentaje();
 
                 } else {
-
+                    String areteVisual = JOptionPane.showInputDialog(this, gs_mensaje);
+                    this.tf_AreteVisual.setText(areteVisual);
+                    this.leerAreteVisual();
                     nuevo = false;
                     return;
                 }
@@ -1430,18 +1423,16 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
                 this.jrb_esVientre.setSelected(true);
             }
         } else {
-
-            if (dialogoConfirmacionSiNo(this, "¿El animal no existe desea ingresarlo al sistema?", gs_mensaje, 1) == 0) {
-
+            String[] botones = {"Nuevo", "Emparejar"};
+            if (dialogoConfirmacionSiNo(this, "Este IDE no existe. \n"
+                    + "¿Desea ingresarlo al sistema como nuevo animal o emparejar con un animal sin IDE?", gs_mensaje, 1, botones) == 0) {
                 nuevo = true;
                 btn_agregar.setEnabled(true);
                 btn_actualizar.setEnabled(false);
                 corralSelector.setEnabled(true);
                 leerPesos(t_pesos, animalDetalle.id_animal);
                 graficar();
-
                 calculaPorcentaje();
-
             } else {
 
                 nuevo = false;
@@ -1511,7 +1502,7 @@ public class EspecificacionesAnimal extends javax.swing.JDialog {//JDialog { //
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension pantallaTamano = tk.getScreenSize();
 //        setSize(pantallaTamano); /*Dar tamaño máximo a la pantalla*/
-        fondo1.cargar(pantallaTamano);
+//        fondo1.cargar(pantallaTamano);
 //        jPanel1.setLocation((pantallaTamano.width / 2) - (jPanel1.getWidth() / 2), (pantallaTamano.height / 2) - (jPanel1.getHeight() / 2));
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false); /*Boton de minimizar*/

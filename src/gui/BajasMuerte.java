@@ -228,8 +228,8 @@ public class BajasMuerte extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha seleccionado Animal ", gs_mensaje, JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que desea dar de baja a este animal?, se dejará de visualizar en corrales y otras pantallas", gs_mensaje, 1) == 0) {
+        String[] botones = {"Si", "No"};
+        if (dialogoConfirmacionSiNo(this, "¿Esta Seguro que desea dar de baja a este animal?, se dejará de visualizar en corrales y otras pantallas", gs_mensaje, 1, botones) == 0) {
 
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

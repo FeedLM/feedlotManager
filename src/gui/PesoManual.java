@@ -6,8 +6,6 @@
 package gui;
 
 import abstractt.TextField;
-import abstractt.fondo;
-import java.awt.Frame;
 import java.util.Date;
 
 /**
@@ -65,7 +63,7 @@ public class PesoManual extends javax.swing.JFrame {
         setTitle("Peso Manual");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(240, 220, 170));
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
