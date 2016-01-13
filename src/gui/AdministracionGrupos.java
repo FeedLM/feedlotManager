@@ -296,7 +296,7 @@ public class AdministracionGrupos extends javax.swing.JFrame { // {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBackground(new java.awt.Color(240, 220, 170));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         etiqueta1.setBackground(new java.awt.Color(95, 84, 88));
